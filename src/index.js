@@ -11,7 +11,7 @@ import Home from './pages/Home';
 import Live from './pages/Live';
 import Historical from './pages/Historical';
 import Metrics from './pages/Metrics';
-import Hosts from './pages/Hosts';
+import Monitors from './pages/Monitors';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
@@ -27,7 +27,7 @@ const App = () => (
                     <Route path="/live" component={Live} />
                     <Route path="/historical" component={Historical} />
                     <Route path="/metrics" component={Metrics} />
-                    <Route path="/hosts" component={Hosts} />
+                    <Route path="/monitors" component={Monitors} />
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/sign-up" component={SignUp} />
                     <Route component={NotFound} />

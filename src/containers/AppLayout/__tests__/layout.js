@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import AppLayout from './index.js';
-import initStore from '../../initStore';
+import AppLayout from '../index.js';
+import initStore from '../../../initStore';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -17,5 +17,3 @@ it('renders without crashing', () => {
     ), div);
     ReactDOM.unmountComponentAtNode(div);
 });
-
-

@@ -1,5 +1,7 @@
-# Development
+# resmon-guiclient
+Repository for a guiclient component, which is part of resmon product.
 
+## Development
 - install npm
 - install yarn globally: `npm install --global yarn`
 - run `yarn` to install dependencies
@@ -7,8 +9,7 @@
 - run `yarn start` to start dev server (with watch)
 - you may want to install react and [redux](https://github.com/zalmoxisus/redux-devtools-extension) plugins for browsers
 
-# Structure overview
-
+## Structure overview
 - `/src/components` contains pure react components (without redux integration)
 - `/src/containers` contains react components which are connected to redux
 - `/src/pages` contains page-level react components
@@ -17,8 +18,7 @@
 - `/src/api.js` constains functions making api calls and returning promise-like object
 - `/src/index.js` entry file
 
-# CI
-
+## CI
 - install npm
 - install yarn globally: `npm install --global yarn`
 - run `yarn` to install dependencies
