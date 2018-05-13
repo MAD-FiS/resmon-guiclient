@@ -1,0 +1,82 @@
+.chart-container {
+    display: flex;
+
+    .chart-container-main {
+        flex: 3;
+        overflow: hidden;
+        position: relative;
+
+        .chart-corner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 10;
+            display: flex;
+            align-items: stretch;
+
+            .chart-time-range {
+                
+            }
+
+            .chart-delete-button {
+                padding: 0 8px;
+                line-height: 4ex;
+            }
+        }   
+    }
+
+    .chart-container-side {
+        flex: 1;
+        margin-left: 20px;
+
+        .chart-legend {
+            margin-bottom: 40px;
+
+            .metric-header {
+                display: flex;
+                align-items: center;
+                padding-bottom: 8px;
+                border-bottom: solid 1px #ccc;
+
+                .metric-name {
+                    flex: 1;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .metric-selector {
+                    width: 50%;
+                }
+            }
+
+            .series-dot {
+                width: 0.5em;
+                height: 0.5em;
+                border-radius: 50%;
+                margin: 0.5em 0.75em 0.5em 0.25em;
+            }
+
+            .hosts-adder {
+                display: flex;
+                align-items: stretch;
+                border-top: solid 1px #ccc;
+                padding-top: 8px;
+
+                .hosts-selector {
+                    flex: 1;
+                }
+
+                .add-button {
+                    padding: 0 8px;
+                    line-height: 4ex;
+                }
+            }
+        }
+    }
+
+    &.indeterminate {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
