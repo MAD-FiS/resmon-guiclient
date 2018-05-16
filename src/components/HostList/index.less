@@ -1,0 +1,78 @@
+.host-list {
+
+    tr > * {
+        vertical-align: top;
+    }
+
+    .highlight {
+        color: #0099ff;
+        font-weight: bold;
+    }
+
+    .ant-collapse {
+        background: none;
+        margin-top: -1px;
+        margin-bottom: -1px;
+
+        .ant-collapse-item {
+            border: none;
+
+            .ant-collapse-header {
+                padding: 0 0 0 20px;
+
+                .arrow {
+                    line-height: 22px;
+                    left: 0;
+                }
+            }
+
+            .ant-collapse-content {
+                padding: 0;
+
+                .ant-collapse-content-box {
+                    padding-bottom: 0;
+
+                    .ant-list-item {
+                        border: none;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .ant-tag-wrapper {
+        margin-top: -1px;
+        margin-bottom: -1px;
+    }
+
+    .metadata-filter-select,
+    .metric-filter-select,
+    .hostname-filter-search {
+        background: #fff;
+        padding: 8px 0 0 8px;
+        border: solid 1px #bbb;
+        border-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0 3px 30px;
+
+        & > * {
+            margin-bottom: 8px;
+            margin-right: 8px;
+        }
+
+        & > .ant-select {
+            min-width: 150px;
+        }
+
+        & > .ant-input {
+            width: auto;
+        }
+    }
+}
+
+.metric-add-form {
+
+    .ant-input-number {
+        width: 100%;
+    }
+}

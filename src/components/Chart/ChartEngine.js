@@ -139,7 +139,6 @@ class ChartEngine extends React.Component {
                             if (this.point.index !== this.series.data.length - 1) {
                                 return null;
                             }
-                            console.log(this);
                             return `
                                 <span style="color: ${this.color};">${this.series.name}</span><br />
                                 <strong style="color: ${this.color};">${Highcharts.numberFormat(this.y, this.series.tooltipOptions.valueDecimals)}${this.series.tooltipOptions.valueSuffix}</strong>

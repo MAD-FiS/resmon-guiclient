@@ -20,13 +20,13 @@ const AppLayout = ({ children, location, auth, signOut }) => (
                     onClick={(item) => item.key === 'sign-out' && signOut()}
                 >
                     {auth && <Menu.Item key="/live">
-                        <Link to="/live">Pomiary on-line</Link>
+                        <Link to="/live">Pomiary na żywo</Link>
                     </Menu.Item>}
                     {auth && <Menu.Item key="/historical">
                         <Link to="/historical">Pomiary historyczne</Link>
                     </Menu.Item>}
                     {auth && <Menu.Item key="/metrics">
-                        <Link to="/metrics">Metryki</Link>
+                        <Link to="/metrics">Hosty i Metryki</Link>
                     </Menu.Item>}
                     {auth && <Menu.Item key="/monitors">
                         <Link to="/monitors">Monitory</Link>

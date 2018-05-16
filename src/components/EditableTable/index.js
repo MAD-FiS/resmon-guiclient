@@ -104,8 +104,6 @@ class EditableTable extends Component
         dataSource[rowIndex].__editMode = false;
         for(const colId in dataSource[rowIndex]) {
             if(dataSource[rowIndex].hasOwnProperty(colId) && colId !== '__editMode' && colId !== 'key' && colId !== '__loading') {
-                console.log(colId);
-                console.log(dataSource[rowIndex][colId]);
                 dataSource[rowIndex][colId].value = dataSource[rowIndex][colId].__oldValue;
             }
         }
