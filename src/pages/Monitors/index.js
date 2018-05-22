@@ -1,10 +1,10 @@
 import React from 'react';
-import EditableTableContainer from '../../components/EditableTable/usage/TableContainer';
+import MonitorsTable from '../../containers/MonitorsTable';
 
 const Monitors = () => (
     <div className="full-page">
         <h1>Monitory</h1>
-        <EditableTableContainer />
+        <MonitorsTable />
     </div>
 );
 

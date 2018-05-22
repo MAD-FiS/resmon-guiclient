@@ -1,13 +1,13 @@
 import { push } from 'react-router-redux';
-import { SIGN_IN_FAILURE, RESTORE_SESSION, SIGN_IN_SUCCESS, SIGN_OUT } from '../actions/auth';
+import { SIGN_IN_FAILURE, RESTORE_SESSION, SIGN_IN_SUCCESS, SIGN_UP_SUCCESS, SIGN_OUT } from '../actions/auth';
 import { getAuthCredentials, getAuthServer } from '../reducers';
 import * as api from '../api';
 
-const STORAGE_CREDENTIALS_KEY = 'credentials';
+const STORAGE_CREDENTIALS_KEY = 'CREDENTIALS';
 
 export default store => next => action => {
 
-    if (action.type === SIGN_IN_SUCCESS) {
+    if (action.type === SIGN_IN_SUCCESS || action.type === SIGN_UP_SUCCESS) {
         const { remember, ...userData } = action.credentials;
         if (remember) {
             localStorage.setItem(STORAGE_CREDENTIALS_KEY, JSON.stringify(userData));
@@ -63,6 +63,8 @@ export default store => next => action => {
 
     }
 
-    return next(action);
+    if (action.type !== RESTORE_SESSION) {
+        return next(action);
+    }
 
 }

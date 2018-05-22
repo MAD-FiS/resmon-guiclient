@@ -4,6 +4,9 @@ import * as api from '../api';
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_FAILURE = 'SIGN_IN_FAILURE';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
+export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST';
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
 export const SIGN_OUT = 'SIGN_OUT';
 export const CHANGE_AUTH_SERVER = 'CHANGE_AUTH_SERVER';
 export const RESTORE_SESSION = 'RESTORE_SESSION';
@@ -35,4 +38,15 @@ export const signIn = (credentials) => (dispatch, getState) => {
     );
 }
 
-
+export const signUp = (credentials) => (dispatch, getState) => {
+    dispatch({ type: SIGN_UP_REQUEST });
+    const authServer = getAuthServer(getState());
+    api.signUp(authServer, credentials).then(
+        (token) => {
+            dispatch({ type: SIGN_UP_SUCCESS, token, credentials })
+        },
+        ({ code, error }) => {
+            dispatch({ type: SIGN_UP_FAILURE, code, error });
+        }
+    );
+}

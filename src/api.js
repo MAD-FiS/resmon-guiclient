@@ -13,3 +13,11 @@ export const signIn = (server, payload) => fetch(`${server}/login`, {
     },
     method: 'POST'
 }).then(jsonOrThrow, apiError);
+
+export const signUp = (server, payload) => fetch(`${server}/registration`, {
+    body: JSON.stringify(payload),
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    method: 'POST'
+}).then(jsonOrThrow, apiError);

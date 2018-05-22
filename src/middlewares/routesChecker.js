@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import { SIGN_IN_SUCCESS, SIGN_OUT, restoreSession } from '../actions/auth';
+import { SIGN_IN_SUCCESS, SIGN_UP_SUCCESS, SIGN_OUT, restoreSession } from '../actions/auth';
 import { getLocation, isAuthTokenSet } from '../reducers';
 import { routesAndAuthRequired } from '../routes';
 
@@ -7,14 +7,14 @@ export default store => next => action => {
 
     const isLocationChange = action.type === '@@router/LOCATION_CHANGE';
 
-    if (isLocationChange || action.type === SIGN_IN_SUCCESS || action.type === SIGN_OUT) {
+    if (isLocationChange || action.type === SIGN_IN_SUCCESS || action.type === SIGN_UP_SUCCESS || action.type === SIGN_OUT) {
 
         const state = store.getState();
 
         const nextLocation = isLocationChange ? action.payload : getLocation(state);
         const routeAuthRequired = (routesAndAuthRequired[nextLocation.pathname] || {}).auth;
 
-        const authorized = isLocationChange ? isAuthTokenSet(state) : (action.type === SIGN_IN_SUCCESS);
+        const authorized = isLocationChange ? isAuthTokenSet(state) : (action.type === SIGN_IN_SUCCESS || action.type === SIGN_UP_SUCCESS);
 
         if (routeAuthRequired === false && authorized === true) {
             if (isLocationChange) {

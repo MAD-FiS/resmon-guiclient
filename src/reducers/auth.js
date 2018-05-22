@@ -1,15 +1,22 @@
 import { combineReducers } from 'redux';
+import { getSavedAuthServer } from '../middlewares/globalsStorage';
 import {
     SIGN_IN_REQUEST,
     SIGN_IN_FAILURE,
     SIGN_IN_SUCCESS,
+    SIGN_UP_REQUEST,
+    SIGN_UP_FAILURE,
+    SIGN_UP_SUCCESS,
     SIGN_OUT,
     CHANGE_AUTH_SERVER
 } from '../actions/auth';
 
+const defaultAuthServer = getSavedAuthServer();
+
 const token = (state = null, action) => {
     switch (action.type) {
         case SIGN_IN_SUCCESS:
+        case SIGN_UP_SUCCESS:
             return action.token;
         case SIGN_OUT:
             return null;
@@ -21,19 +28,22 @@ const token = (state = null, action) => {
 const tokenRequested = (state = false, action) => {
     switch (action.type) {
         case SIGN_IN_REQUEST:
+        case SIGN_UP_REQUEST:
             return true;
         case SIGN_IN_SUCCESS:
+        case SIGN_UP_SUCCESS:
         case SIGN_IN_FAILURE:
+        case SIGN_UP_FAILURE:
             return false;
         default:
             return state;
     }
 };
 
-const server = (state = window.DEFAULT_AUTH_SERVER, action) => {
+const server = (state = defaultAuthServer, action) => {
     switch (action.type) {
         case CHANGE_AUTH_SERVER:
-            return action.server || window.DEFAULT_AUTH_SERVER;
+            return action.server || defaultAuthServer;
         default:
             return state;
     }
@@ -42,6 +52,7 @@ const server = (state = window.DEFAULT_AUTH_SERVER, action) => {
 const credentials = (state = null, action) => {
     switch (action.type) {
         case SIGN_IN_SUCCESS:
+        case SIGN_UP_SUCCESS:
             return { username: action.credentials.username, password: action.credentials.password };
         case SIGN_OUT:
             return null;

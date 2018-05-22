@@ -1,5 +1,5 @@
 import Notification from '../components/Notification';
-import { SIGN_IN_SUCCESS, SIGN_OUT } from '../actions/auth';
+import { SIGN_IN_SUCCESS, SIGN_UP_SUCCESS, SIGN_OUT } from '../actions/auth';
 
 const errorToMsg = (code, error) => {
     switch (code) {
@@ -28,6 +28,10 @@ export default store => next => action => {
 
     else if (action.type === SIGN_IN_SUCCESS) {
         Notification.success('Zostałeś zalogowany poprawnie');
+    }
+
+    else if (action.type === SIGN_UP_SUCCESS) {
+        Notification.success('Rejestracja przebiegła pomyślnie');
     }
 
     else if (action.type === SIGN_OUT) {
