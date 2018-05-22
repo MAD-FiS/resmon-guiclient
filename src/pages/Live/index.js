@@ -2,10 +2,10 @@ import React from 'react';
 import LiveChartWrapper from '../../components/Chart/usage/LiveChartWrapper';
 
 const Live = () => (
-    <React.Fragment>
+    <div className="full-page">
         <h1>Pomiary na żywo</h1>
         <LiveChartWrapper />
-    </React.Fragment>
+    </div>
 );
 
 export default Live;

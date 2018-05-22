@@ -6,6 +6,6 @@ import AppLayout from '../index.js';
 Enzyme.configure({adapter: new Adapter()});
 
 it('contains Res-Mon title', () => {
-    const layout = shallow(<AppLayout location={{ pathname: 'test-pathname' }} />);
+    const layout = shallow(<AppLayout location={{ pathname: 'test-pathname' }}>Junk</AppLayout>);
     expect(layout.find('.title').children().text()).toEqual('Res-Mon');
 });

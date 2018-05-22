@@ -2,10 +2,10 @@ import React from 'react';
 import EditableTableContainer from '../../components/EditableTable/usage/TableContainer';
 
 const Monitors = () => (
-    <React.Fragment>
+    <div className="full-page">
         <h1>Monitory</h1>
         <EditableTableContainer />
-    </React.Fragment>
+    </div>
 );
 
 export default Monitors;

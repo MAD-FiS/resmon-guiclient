@@ -2,10 +2,10 @@ import React from 'react';
 import HostListContainer from '../../components/HostList/usage/TableContainer';
 
 const Metrics = () => (
-    <React.Fragment>
+    <div className="full-page">
         <h1>Hosty i Metryki</h1>
         <HostListContainer />
-    </React.Fragment>
+    </div>
 );
 
 export default Metrics;

@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
-import { getLocation, getAuth } from '../../reducers';
-import * as authActions from '../../actions/auth';
+import { getLocation, isAuthTokenSet } from '../../reducers';
+import { signOut } from '../../actions/auth';
 import AppLayout from '../../components/AppLayout'
 
 const mapStateToProps = (state) => ({
     location: getLocation(state),
-    auth: getAuth(state)
+    auth: isAuthTokenSet(state)
 })
 
 const mapDispatchToProps = {
-    signOut: authActions.signOut
+    signOut
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppLayout);

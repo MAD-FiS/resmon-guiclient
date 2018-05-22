@@ -11,7 +11,9 @@ it('renders without crashing', () => {
     ReactDOM.render((
         <Provider store={store}>
             <ConnectedRouter history={history}>
-                <AppLayout />
+                <AppLayout>
+                    <p>Junk</p>
+                </AppLayout>
             </ConnectedRouter>
         </Provider>
     ), div);

@@ -7,6 +7,7 @@ Repository for a guiclient component, which is part of resmon product.
 - run `yarn` to install dependencies
 - run `yarn test` to test (with watch)
 - run `yarn start` to start dev server (with watch)
+- run `yarn run-test-servers` to start fake auth server _(localhost:3001)_ and monitor _(localhost:3002)_
 - you may want to install react and [redux](https://github.com/zalmoxisus/redux-devtools-extension) plugins for browsers
 
 ## Structure overview

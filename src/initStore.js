@@ -4,6 +4,11 @@ import { routerMiddleware } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
 import reducer from './reducers';
 
+import home from './middlewares/home';
+import notifications from './middlewares/notifications';
+import sessionManager from './middlewares/sessionManager';
+import routesChecker from './middlewares/routesChecker';
+
 export default (initialState) => {
     const history = createHistory();
     const routerMid = routerMiddleware(history);
@@ -13,7 +18,7 @@ export default (initialState) => {
             reducer,
             initialState,
             composeEnhancers(
-                applyMiddleware(reduxThunk, routerMid)
+                applyMiddleware(home, sessionManager, routesChecker, notifications, reduxThunk, routerMid)
             )
         ),
         history

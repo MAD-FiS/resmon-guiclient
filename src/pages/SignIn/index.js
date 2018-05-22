@@ -1,15 +1,13 @@
 import React from 'react';
-import { Button } from 'antd';
-import { connect } from 'react-redux';
-import * as authActions from '../../actions/auth';
+import LoginForm from '../../containers/LoginForm';
+import AuthServer from '../../containers/AuthServer';
 
-const SignIn = ({ dispatch }) => (
-    <div>
-        <p>SignIn page</p>
-        <Button onClick={() => dispatch(
-            authActions.signIn({ testParam: 'test_value' })
-        )}>Zaloguj się</Button>
+const SignIn = () => (
+    <div className="centered-page">
+        <h1>Panel logowania</h1>
+        <LoginForm />
+        <AuthServer />
     </div>
 );
 
-export default connect()(SignIn);
+export default SignIn;

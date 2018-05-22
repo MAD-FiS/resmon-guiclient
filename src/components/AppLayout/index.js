@@ -42,7 +42,7 @@ const AppLayout = ({ children, location, auth, signOut }) => (
             </Sider>
             <Layout className="app-content-wrapper">
                 <Content className="app-content">
-                    {children}
+                    {React.cloneElement(children, { location })}
                 </Content>
                 <Footer className="app-footer">
                     &copy; <a href="https://github.com/MAD-FiS">MAD-Team</a> (

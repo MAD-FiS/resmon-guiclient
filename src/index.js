@@ -6,14 +6,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import registerServiceWorker from './registerServiceWorker';
 import AppLayout from './containers/AppLayout';
 import initStore from './initStore';
-
-import Home from './pages/Home';
-import Live from './pages/Live';
-import Historical from './pages/Historical';
-import Metrics from './pages/Metrics';
-import Monitors from './pages/Monitors';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import { routes } from './routes';
 import NotFound from './pages/NotFound';
 
 const { store, history } = initStore();
@@ -23,13 +16,7 @@ const App = () => (
         <ConnectedRouter history={history}>
             <AppLayout>
                 <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/live" component={Live} />
-                    <Route path="/historical" component={Historical} />
-                    <Route path="/metrics" component={Metrics} />
-                    <Route path="/monitors" component={Monitors} />
-                    <Route path="/sign-in" component={SignIn} />
-                    <Route path="/sign-up" component={SignUp} />
+                    {routes}
                     <Route component={NotFound} />
                 </Switch>
             </AppLayout>

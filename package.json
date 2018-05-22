@@ -7,12 +7,15 @@
     "babel-plugin-import": "^1.7.0",
     "chai": "^4.1.2",
     "chai-enzyme": "^0.8.0",
+    "cors": "^2.8.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "express": "^4.16.3",
     "highcharts": "^6.1.0",
     "history": "^4.7.2",
     "moment": "^2.22.1",
     "react": "^16.3.2",
+    "react-app-rewire-define-plugin": "^1.0.0",
     "react-app-rewire-less": "^2.1.1",
     "react-app-rewired": "^1.5.0",
     "react-dom": "^16.3.2",
@@ -27,6 +30,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "run-test-servers": "node ./test-servers/index.js",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "test:nowatch": "CI=true ENV=production react-app-rewired test --env=jsdom",
@@ -34,6 +38,7 @@
     "eject": "react-app-rewired eject"
   },
   "jest": {
+    "setupFiles": ["./setup-jest.js"],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
       "!<rootDir>/node_modules/"
