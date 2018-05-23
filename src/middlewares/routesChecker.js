@@ -1,15 +1,14 @@
 import { push } from 'react-router-redux';
-import { SIGN_IN_SUCCESS, SIGN_UP_SUCCESS, SIGN_OUT, restoreSession } from '../actions/auth';
+import { SIGN_IN_SUCCESS, SIGN_UP_SUCCESS, SIGN_OUT, restoreSession, signOut } from '../actions/auth';
 import { getLocation, isAuthTokenSet } from '../reducers';
 import { routesAndAuthRequired } from '../routes';
 
 export default store => next => action => {
 
     const isLocationChange = action.type === '@@router/LOCATION_CHANGE';
+    const state = store.getState();
 
     if (isLocationChange || action.type === SIGN_IN_SUCCESS || action.type === SIGN_UP_SUCCESS || action.type === SIGN_OUT) {
-
-        const state = store.getState();
 
         const nextLocation = isLocationChange ? action.payload : getLocation(state);
         const routeAuthRequired = (routesAndAuthRequired[nextLocation.pathname] || {}).auth;
@@ -34,9 +33,12 @@ export default store => next => action => {
             
             if (isLocationChange) {
                 // jak ktos chce routowac tam gdzie nie powinien - przywracanie sesji itd
-                const result = next(action);
-                setTimeout(() => store.dispatch(restoreSession()));
-                return result;
+                store.dispatch(restoreSession());
+                const restored = isAuthTokenSet(store.getState());
+                if (!restored) {
+                    action.payload.pathname = '/';
+                }
+                return next(action);
             }
             else {
                 // normalne wylogowanie sie
@@ -46,6 +48,10 @@ export default store => next => action => {
             }
         }
 
+    }
+
+    else if (action.code === 401 && isAuthTokenSet(state)) {
+        store.dispatch(signOut());
     }
 
     return next(action);

@@ -18,14 +18,6 @@ module.exports = {
                 {
                     address: 'http://localhost:3004',
                     description: 'Test server #3'
-                },
-                {
-                    address: 'http://localhost:3005',
-                    description: 'Test server #4'
-                },
-                {
-                    address: 'http://localhost:3006',
-                    description: 'Test server #5'
                 }
             ])
         });

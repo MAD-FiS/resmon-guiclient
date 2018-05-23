@@ -1,5 +1,8 @@
 import React from 'react';
+import { Icon } from 'antd';
 import EditableTable from '../EditableTable';
+import strToColor from '../../utils/strToColor';
+import './index.less';
 
 const columns = [
     {
@@ -8,6 +11,7 @@ const columns = [
         editable: true,
         sortable: true,
         width: '30%',
+        prefixRender: (field) => <Icon className="monitor-icon" type="database" style={{ color: strToColor(field.value) }} />
     },
     {
         name: "Opis",
@@ -34,6 +38,7 @@ const columns = [
 
 const MonitorsTable = ({ changeMonitorAddress, changeMonitorDescription, changeMonitor, addMonitor, removeMonitor, ...props }) => (
     <EditableTable
+        className="monitors-table"
         columns={columns}
         onChangeCell={(rowId, colId, value) => {
             const address = props.dataSource[rowId].address;

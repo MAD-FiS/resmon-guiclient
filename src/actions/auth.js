@@ -29,8 +29,8 @@ export const signIn = (credentials) => (dispatch, getState) => {
     const authServer = getAuthServer(getState());
     const { remember, ...userData } = credentials;
     api.signIn(authServer, userData).then(
-        (token) => {
-            dispatch({ type: SIGN_IN_SUCCESS, token, credentials })
+        (payload) => {
+            dispatch({ type: SIGN_IN_SUCCESS, payload, credentials })
         },
         ({ code, error }) => {
             dispatch({ type: SIGN_IN_FAILURE, code, error });
@@ -42,8 +42,8 @@ export const signUp = (credentials) => (dispatch, getState) => {
     dispatch({ type: SIGN_UP_REQUEST });
     const authServer = getAuthServer(getState());
     api.signUp(authServer, credentials).then(
-        (token) => {
-            dispatch({ type: SIGN_UP_SUCCESS, token, credentials })
+        (payload) => {
+            dispatch({ type: SIGN_UP_SUCCESS, payload, credentials })
         },
         ({ code, error }) => {
             dispatch({ type: SIGN_UP_FAILURE, code, error });

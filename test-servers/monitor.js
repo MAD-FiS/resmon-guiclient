@@ -1,16 +1,17 @@
 const express = require('express');
 const getUserByToken = require('./auth').getUserByToken;
 
-const getMonitor = () => {
+const getMonitor = (initHosts) => {
 
     const app = express();
+    let hosts = initHosts;
 
     // CORS middleware
 
     app.all('*', (req, res, next) => {
         res.set({
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type'
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization'
         });
         next();
     });
@@ -35,7 +36,7 @@ const getMonitor = () => {
         next();
     });
 
-    app.get('/', (req, res) => res.send('ok, ' + req.user));
+    app.get('/hosts', (req, res) => res.send(hosts));
 
     return app;
 

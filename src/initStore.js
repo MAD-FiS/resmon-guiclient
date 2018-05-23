@@ -6,9 +6,9 @@ import reducer from './reducers';
 
 import home from './middlewares/home';
 import notifications from './middlewares/notifications';
-import sessionManager from './middlewares/sessionManager';
 import routesChecker from './middlewares/routesChecker';
 import globalsStorage from './middlewares/globalsStorage';
+import hostsProvider from './middlewares/hostsProvider';
 
 export default (initialState) => {
     const history = createHistory();
@@ -19,7 +19,7 @@ export default (initialState) => {
             reducer,
             initialState,
             composeEnhancers(
-                applyMiddleware(home, sessionManager, routesChecker, globalsStorage, notifications, reduxThunk, routerMid)
+                applyMiddleware(routesChecker, home, notifications, globalsStorage, hostsProvider, reduxThunk, routerMid)
             )
         ),
         history

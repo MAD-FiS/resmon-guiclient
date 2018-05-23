@@ -24,7 +24,7 @@ app.use(express.json());
 app.all('*', (req, res, next) => {
     res.set({
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type'
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
     });
     next();
 });

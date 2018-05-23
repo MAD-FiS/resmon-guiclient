@@ -89,7 +89,11 @@ class HostList extends React.Component
             render: (metrics, host) => <MetricCell onShowModal={this.showModal} onRemove={this.props.onRemoveMetric} host={host}/>,
         }];
 
-        const hosts = this.props.hosts.map(host=> {host.key=host.hostname;host.displayName=host.hostname;return host});
+        const hosts = this.props.hosts.map(host => ({
+            ...host,
+            key: host.hostname,
+            displayName: host.hostname
+        }));
 
         return (
             <div className="host-list">

@@ -122,7 +122,7 @@ class EditableTable extends Component
 
     render() {
         return (
-            <div className="editable-table">
+            <div className={`editable-table ${this.props.className || ''}`}>
                 <ModalAdd buttonText="Dodaj monitor" columns={this.props.columns} onAdd={this.onAddRow} />
                 <Table size="middle" bordered rowSelection={this.rowSelection} dataSource={this.state.dataSource} columns={columnTransformer(this.props.columns, this.onHandleChange, this.onSaveCell, this.onEditStart, this.onEditCancel, this.onSaveRow, this.onEditRowStart, this.onEditRowCancel, this.props.onDeleteRow)} />
             </div>

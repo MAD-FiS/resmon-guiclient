@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router';
-import withAuth from './hoc/AuthRouteWrapper';
 
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -37,5 +36,5 @@ export const routesAndAuthRequired = {
 };
 
 export const routes = Object.entries(routesAndAuthRequired).map(([ path, obj ]) => (
-    <Route key={path} path={path} component={obj.auth ? withAuth(obj.component) : obj.component} />
+    <Route key={path} path={path} component={obj.component} />
 ));

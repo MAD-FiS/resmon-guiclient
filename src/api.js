@@ -21,3 +21,9 @@ export const signUp = (server, payload) => fetch(`${server}/registration`, {
     },
     method: 'POST'
 }).then(jsonOrThrow, apiError);
+
+export const getHosts = (server, token) => fetch(`${server}/hosts`, {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+}).then(jsonOrThrow, apiError);

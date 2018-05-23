@@ -42,13 +42,14 @@ const columnTransformer = (inputColumns, onHandleChange = () => (null), onSaveCe
                 title: column.name,
                 dataIndex: column.id,
                 render: (value, record) => (
-                        <EditableCell editable={column.editable && !record.__editMode} loading={value.__loading || record.__loading} rowId={record.key}
-                                      colId={value.__name} onHandleChange={onHandleChange} onSave={onSaveCell}
-                                      onEditStart={onEditCellStart} onEditCancel={onEditCellCancel}
-                                      value={value.value} editMode={value.__editMode || record.__editMode}
-                                      __name={value.__name}
-                        />
-                    ),
+                    <EditableCell prefix={column.prefixRender ? column.prefixRender(value, record, column) : null}
+                                    editable={column.editable && !record.__editMode} loading={value.__loading || record.__loading} rowId={record.key}
+                                    colId={value.__name} onHandleChange={onHandleChange} onSave={onSaveCell}
+                                    onEditStart={onEditCellStart} onEditCancel={onEditCellCancel}
+                                    value={value.value} editMode={value.__editMode || record.__editMode}
+                                    __name={value.__name}
+                    />
+                ),
             }
         }
         if (column.sortable === true) {

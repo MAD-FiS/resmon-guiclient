@@ -3,8 +3,9 @@ import React from 'react'
 import InputWrapper from './InputWrapper';
 import TextWrapper from './TextWrapper';
 
-const EditableCell = ({editMode, loading, value, editable, rowId, colId, onHandleChange, onSave, onEditStart, onEditCancel}) => (
+const EditableCell = ({prefix, editMode, loading, value, editable, rowId, colId, onHandleChange, onSave, onEditStart, onEditCancel}) => (
     <div className={`editable-cell ${loading ? 'loading' : ''}`}>
+        {prefix}
         {
             editMode ?
                 <InputWrapper value={value} editable={editable} rowId={rowId} colId={colId} onHandleChange={onHandleChange} onSave={onSave} onEditCancel={onEditCancel}/>

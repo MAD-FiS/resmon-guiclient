@@ -8,7 +8,8 @@ import {
     SIGN_UP_FAILURE,
     SIGN_UP_SUCCESS,
     SIGN_OUT,
-    CHANGE_AUTH_SERVER
+    CHANGE_AUTH_SERVER,
+    RESTORE_SESSION
 } from '../actions/auth';
 
 const defaultAuthServer = getSavedAuthServer();
@@ -17,6 +18,8 @@ const token = (state = null, action) => {
     switch (action.type) {
         case SIGN_IN_SUCCESS:
         case SIGN_UP_SUCCESS:
+            return action.payload.token;
+        case RESTORE_SESSION:
             return action.token;
         case SIGN_OUT:
             return null;
@@ -49,21 +52,9 @@ const server = (state = defaultAuthServer, action) => {
     }
 };
 
-const credentials = (state = null, action) => {
-    switch (action.type) {
-        case SIGN_IN_SUCCESS:
-        case SIGN_UP_SUCCESS:
-            return { username: action.credentials.username, password: action.credentials.password };
-        case SIGN_OUT:
-            return null;
-        default:
-            return state;
-    }
-}
-
-export default combineReducers({ token, tokenRequested, credentials, server });
+export default combineReducers({ token, tokenRequested, server });
 
 export const isAuthTokenSet = (state) => Boolean(state.token);
-export const getAuthCredentials = (state) => state.credentials;
 export const getAuthTokenRequested = (state) => state.tokenRequested;
 export const getAuthServer = (state) => state.server;
+export const getAuthToken = (state) => state.token;

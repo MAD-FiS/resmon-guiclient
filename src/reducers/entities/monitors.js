@@ -1,18 +1,18 @@
-import { combineReducers } from 'redux';
 import { getSavedMonitors } from '../../middlewares/globalsStorage';
-import {
-    CHANGE_MONITOR_ADDRESS,
-    CHANGE_MONITOR_DESCRIPTION,
-    CHANGE_MONITOR,
-    ADD_MONITOR,
-    REMOVE_MONITOR
-} from '../../actions/monitors';
+import { CHANGE_MONITOR_ADDRESS, CHANGE_MONITOR_DESCRIPTION, CHANGE_MONITOR, ADD_MONITOR, REMOVE_MONITOR } from '../../actions/monitors';
+import { GET_HOSTS_REQUEST, GET_HOSTS_SUCCESS, GET_HOSTS_FAILURE } from '../../actions/hosts';
+import { SIGN_OUT } from '../../actions/auth';
 
 const savedMonitors = getSavedMonitors();
-const defaultById = savedMonitors.reduce((c, m) => ({ ...c, [m.address]: m }), {});
-const defaultAllIds = savedMonitors.map(m => m.address);
+const defaultById = savedMonitors.reduce((c, m) => ({
+    ...c, [m.address]: {
+        ...m,
+        hostsIndeterminated: false,
+        hosts: null
+    }
+}), {});
 
-const byId = (state = defaultById, action) => {
+export default (state = defaultById, action) => {
     switch (action.type) {
         case CHANGE_MONITOR_ADDRESS:
             const { [action.address]: targetMonitor, ...restMonitors } = state;
@@ -35,64 +35,68 @@ const byId = (state = defaultById, action) => {
             const { [action.address]: targetMonitorAll, ...restMonitorsAll } = state;
             return {
                 ...restMonitorsAll,
-                [action.payload.address]: action.payload
+                [action.payload.address]: {
+                    ...action.payload,
+                    hostsIndeterminated: false,
+                    hosts: null
+                }
             };
         case ADD_MONITOR:
-            const { [action.payload.address]: existingMonitor, ...restMonitorsAdd } = state;
             return {
-                ...restMonitorsAdd,
-                [action.payload.address]: action.payload
+                ...state,
+                [action.payload.address]: {
+                    ...action.payload,
+                    hostsIndeterminated: false,
+                    hosts: null
+                }
             };
         case REMOVE_MONITOR:
             const { [action.address]: monitorToRemove, ...monitorsNotToRemove } = state;
             return monitorsNotToRemove;
+        case GET_HOSTS_REQUEST:
+            return {
+                ...state,
+                [action.monitor]: {
+                    ...state[action.monitor],
+                    hostsIndeterminated: true
+                }
+            };
+        case GET_HOSTS_SUCCESS:
+            return {
+                ...state,
+                [action.monitor]: {
+                    ...state[action.monitor],
+                    hostsIndeterminated: false,
+                    hosts: action.payload.result
+                }
+            };
+        case GET_HOSTS_FAILURE:
+            return {
+                ...state,
+                [action.monitor]: {
+                    ...state[action.monitor],
+                    hostsIndeterminated: false,
+                    hosts: null
+                }
+            };
+        case SIGN_OUT:
+            return Object.entries(state)
+                .reduce((c, [key, obj]) => ({
+                    ...c,
+                    [key]: {
+                        ...obj,
+                        hostsIndeterminated: false,
+                        hosts: null
+                    }
+                }), {});
         default:
             return state;
     }
 }
 
-const allIds = (state = defaultAllIds, action) => {
-    switch (action.type) {
-        case CHANGE_MONITOR_ADDRESS:
-            const i = state.indexOf(action.address);
-            return [
-                ...state.slice(0, i),
-                action.newAddress,
-                ...state.slice(i + 1)
-            ];
-        case CHANGE_MONITOR:
-            const iAll = state.indexOf(action.address);
-            return [
-                ...state.slice(0, iAll),
-                action.payload.address,
-                ...state.slice(iAll + 1)
-            ];
-        case ADD_MONITOR:
-            const iAdd = state.indexOf(action.payload.address);
-            if (iAdd !== -1) {
-                return [
-                    ...state.slice(0, iAdd),
-                    ...state.slice(iAdd + 1),
-                    action.payload.address
-                ];
-            }
-            else {
-                return [
-                    ...state,
-                    action.payload.address
-                ];
-            }
-        case REMOVE_MONITOR:
-            const iRemove = state.indexOf(action.address);
-            return [
-                ...state.slice(0, iRemove),
-                ...state.slice(iRemove + 1)
-            ];
-        default:
-            return state;
-    }
-}
-
-export default combineReducers({ byId, allIds });
-
-export const getArray = (state) => state.allIds.map(id => state.byId[id]);
+export const getArray = (state) => Object.values(state)
+    .map(({ address, description }) => ({ address, description }))
+    .sort((a, b) => a.address.localeCompare(b.address));
+export const getById = (state, address) => state[address];
+export const getAddresses = (state) => Object.keys(state);
+export const getHostsInvalidated = (state) => Object.values(state).some(m => m.hostsIndeterminated);
