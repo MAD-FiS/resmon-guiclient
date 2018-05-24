@@ -15,3 +15,4 @@ export const getMonitorsHostsInvalidated = (state) => fromMonitors.getHostsInval
 export const getHostsArray = (state) => denormalize(Object.keys(state.hosts), [schema.host], state);
 
 export const getMetricsArray = (state) => fromMetrics.getArray(state.metrics);
+export const getMetricsAll = (state) => fromMetrics.getAll(state.metrics);

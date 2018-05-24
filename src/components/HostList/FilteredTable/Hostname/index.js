@@ -25,8 +25,7 @@ export class Hostname extends React.Component
         if(this.props.dataSource !== nextProps.dataSource) {
             this.setState({
                 dataSource: this.applyFilters(nextProps.dataSource)
-            });
-            this.onSearch();
+            }, this.onSearch);
         }
     }
 

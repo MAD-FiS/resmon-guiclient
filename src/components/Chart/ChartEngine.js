@@ -20,7 +20,7 @@ Highcharts.setOptions({
 const mapData = (data, withDataLabel) => {
     if (withDataLabel) {
         return data.map(({ time, value }, i) => ({
-            x: moment(time).valueOf(),
+            x: moment(time + 'Z').valueOf(),
             y: value
         }));
     } else {
@@ -40,7 +40,7 @@ class ChartEngine extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.metric1LastUpdate !== prevProps.metric1LastUpdate) {
+        if (this.props.metric1LastUpdate && this.props.metric1LastUpdate !== prevProps.metric1LastUpdate) {
             this.addPoints();
         }
         else {
@@ -61,7 +61,7 @@ class ChartEngine extends React.Component {
                 points: metric1Measurements[host].slice(-metric1LastUpdate[host])
             }))
             .forEach(({ host, points }) => {
-                let series = this.chart.get(`${metric1Info.name}:${host}`);
+                let series = this.chart.get(`${metric1Info.id}:${host}`);
                 points.forEach(({ time, value }) => {
                     series.removePoint(0, false);
                     series.addPoint({
@@ -81,9 +81,9 @@ class ChartEngine extends React.Component {
         } = this.props;
         let yAxis = [
             {
-                id: metric1Info.name,
+                id: metric1Info.id,
                 title: {
-                    text: metric1Info.name
+                    text: metric1Info.id
                 },
                 labels: {
                     format: '{value}' + metric1Info.unit
@@ -92,20 +92,20 @@ class ChartEngine extends React.Component {
             }
         ];
         let series = Object.entries(metric1Measurements).map(([ host, data ]) => ({
-            name: `${metric1Info.name}, ${host}`,
-            id: `${metric1Info.name}:${host}`,
+            name: `${metric1Info.id}, ${host}`,
+            id: `${metric1Info.id}:${host}`,
             data: mapData(data, withDataLabel),
             color: strToColor(host),
-            yAxis: metric1Info.name,
+            yAxis: metric1Info.id,
             tooltip: {
                 valueSuffix: metric1Info.unit
             }
         }));
         if (metric2Measurements && Object.keys(metric2Measurements).length > 0) {
             yAxis.push({
-                id: metric2Info.name,
+                id: metric2Info.id,
                 title: {
-                    text: metric2Info.name
+                    text: metric2Info.id
                 },
                 labels: {
                     format: '{value}' + metric2Info.unit
@@ -114,11 +114,11 @@ class ChartEngine extends React.Component {
                 opposite: true
             });
             series = series.concat(Object.entries(metric2Measurements || []).map(([ host, data ]) => ({
-                name: `${metric2Info.name}, ${host}`,
-                id: `${metric2Info.name}:${host}`,
+                name: `${metric2Info.id}, ${host}`,
+                id: `${metric2Info.id}:${host}`,
                 data: mapData(data, withDataLabel),
                 color: strToColor(host),
-                yAxis: metric2Info.name,
+                yAxis: metric2Info.id,
                 tooltip: {
                     valueSuffix: metric2Info.unit
                 },

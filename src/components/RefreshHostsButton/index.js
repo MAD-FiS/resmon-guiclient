@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 import './index.less';
 
 const RefreshHostsButton = ({ invalidated, refresh }) => <Button
@@ -7,6 +7,6 @@ const RefreshHostsButton = ({ invalidated, refresh }) => <Button
     className="refresh-hosts-button"
     disabled={invalidated}
     onClick={refresh}
->Odśwież listę hostów</Button>
+><Icon type="reload" />Odśwież listę hostów</Button>
 
 export default RefreshHostsButton;

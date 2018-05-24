@@ -1,120 +1,113 @@
 import React from 'react';
 import moment from 'moment';
 import { LiveChart } from '../index';
-import { getData, metrices } from './utils';
 
 class LiveChartWrapper extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        const metricName = 'CPU';
-        const metricHostsSelected = [
-            'host2.agh.edu.pl',
-            'host5.agh.edu.pl'
-        ];
         this.updateTime = moment().format();
         this.state = {
             indeterminate: false,
-            metrices: Object.keys(metrices),
-            metricInfo: Object.assign({
-                name: metricName
-            }, metrices[metricName]),
-            metricHostsSelected: metricHostsSelected,
-            metricMeasurements: getData(moment().subtract(5, 'minutes').format(), this.updateTime, metricName, metricHostsSelected),
+            metricMeasurements: {},
             lastUpdate: null
         };
     }
 
+    clearTick() {
+        this.timeout && clearInterval(this.timeout);
+    }
+
+    loadPart() {
+        this.props.getData(
+            this.updateTime,
+            undefined,
+            this.props.metricName,
+            this.props.metricHostsSelected
+        ).then(data => {
+            const concated = data.reduce((c, d) => c.concat(d), []);
+            if (concated.map(d => d.data.length).reduce((c, l) => c + l, 0)) {
+                this.updateTime = moment().format();
+                const processed = concated.reduce((c, d) => ({
+                    ...c,
+                    [d.hostname]: d.data
+                }), {});
+                this.setState({
+                    metricMeasurements: this.props.metricHostsSelected.reduce((c, host) => ({
+                        ...c,
+                        [host]: [
+                            ...this.state.metricMeasurements[host],
+                            ...processed[host]
+                        ]
+                    }), {}),
+                    lastUpdate: Object.entries(processed).reduce((c, [ host, d ]) => ({
+                        ...c,
+                        [host]: d.length
+                    }), {})
+                });
+            }
+        });
+    }
+
+    loadFull() {
+        if (this.props.metricHostsSelected.length) {
+            this.setState({ indeterminate: true });
+            this.props.getData(
+                moment().subtract(1, 'hours').format(),
+                undefined,
+                this.props.metricName,
+                this.props.metricHostsSelected
+            ).then(data => {
+                this.updateTime = moment().format();
+                this.setState({
+                    indeterminate: false,
+                    metricMeasurements: data.reduce((c, d) => c.concat(d), []).reduce((c, d) => ({
+                        ...c,
+                        [d.hostname]: d.data
+                    }), {}),
+                    lastUpdate: null
+                });
+                this.clearTick();
+                this.timeout = setInterval(() => this.loadPart(), 5 * 1000);
+            });
+        }
+        else {
+            this.setState({
+                indeterminate: false,
+                lastUpdate: null,
+                metricMeasurements: {}
+            });
+            this.updateTime = moment().format();
+        }
+    }
+
     componentDidMount() {
-        this.setUpdates();
+        this.loadFull();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (
+            this.props.metricHostsSelected !== prevProps.metricHostsSelected
+            || this.props.metricName !== prevProps.metricName
+        ) {
+            this.loadFull();
+        }
     }
 
     componentWillUnmount() {
-        this.clearTimeouts();
-    }
-
-    clearTimeouts() {
-        if (this.updateTimeout) {
-            clearTimeout(this.updateTimeout);
-        }
-        if (this.dataTimeout) {
-            clearTimeout(this.dataTimeout);
-        }
-    }
-
-    setUpdates() {
-        this.updateTimeout = setTimeout(() => {
-            const prevTime = this.updateTime;
-            this.updateTime = moment().format();
-            const newPoints = getData(prevTime, this.updateTime, this.state.metricInfo.name, this.state.metricHostsSelected);
-            const metricMeasurements = this.state.metricHostsSelected.reduce((cumm, host) => Object.assign({
-                [host]: [ ...this.state.metricMeasurements[host], ...newPoints[host] ]
-            }, cumm), {});
-            const lastUpdate = this.state.metricHostsSelected.reduce((cumm, host) => Object.assign({
-                [host]: newPoints[host].length
-            }, cumm), {});
-            this.setState({
-                metricMeasurements,
-                lastUpdate
-            }, this.setUpdates);
-        }, 5000);
-    }
-
-    loadData() {
-        this.clearTimeouts();
-        this.dataTimeout = setTimeout(() => {
-            this.setState({
-                indeterminate: false,
-                metricMeasurements: getData(
-                    moment().subtract(5, 'minutes').format(),
-                    moment().format(),
-                    this.state.metricInfo.name,
-                    this.state.metricHostsSelected
-                )
-            }, this.setUpdates);
-        }, 1500);
-    }
-
-    onMetricChanged = (metric) => {
-        this.clearTimeouts();
-        this.setState({
-            indeterminate: true,
-            metricInfo: Object.assign({
-                name: metric
-            }, metrices[metric]),
-            metricHostsSelected: []
-        }, this.loadData);
-    }
-
-    onChartClosed = () => {
-        alert('Closed!');
-    }
-
-    onHostAdded = (host) => {
-        this.clearTimeouts();
-        this.setState({
-            indeterminate: true,
-            metricHostsSelected: [ ...this.state.metricHostsSelected, host ]
-        }, this.loadData);
-    }
-
-    onHostDismissed = (host) => {
-        const list = this.state.metricHostsSelected;
-        const pos = list.indexOf(host);
-        this.clearTimeouts();
-        this.setState({
-            indeterminate: true,
-            metricHostsSelected: [ ...list.slice(0, pos), ...list.slice(pos + 1) ]
-        }, this.loadData);
+        this.clearTick();
     }
 
     render() {
         return <LiveChart
             {...this.state}
-            onMetricChanged={this.onMetricChanged}
-            onChartClosed={this.onChartClosed}
-            onHostAdded={this.onHostAdded}
-            onHostDismissed={this.onHostDismissed}
+            metrices={Object.keys(this.props.metrices)}
+            metricInfo={this.props.metrices[this.props.metricName]}
+            metricHostsSelected={this.props.metricHostsSelected}
+            onMetricChanged={this.props.onMetricChanged}
+            onChartClosed={this.props.onChartClosed}
+            onHostAdded={this.props.onHostAdded}
+            onHostDismissed={this.props.onHostDismissed}
         />
     }
 

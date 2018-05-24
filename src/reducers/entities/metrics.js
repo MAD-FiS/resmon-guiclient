@@ -43,3 +43,4 @@ export default (state = {}, action) => {
 }
 
 export const getArray = (state) => Object.values(state).sort((a, b) => a.id.localeCompare(b.id));
+export const getAll = (state) => state;

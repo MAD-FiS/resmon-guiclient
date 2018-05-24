@@ -32,7 +32,6 @@ const RegisterForm = ({ form, indeterminate, signUp }) => (
             {form.getFieldDecorator('password2', {
                 rules: [{ validator: (rule, password2, callback) => {
                     const password = form.getFieldValue('password');
-                    console.log(password, password2);
                     if (password2 && password === password2) {
                         callback();
                     }

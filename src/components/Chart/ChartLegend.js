@@ -81,12 +81,12 @@ class HostsAdder extends React.PureComponent {
 
 const ChartLegend = ({ necessary, label, metrices, metricInfo, hostsSelected, onMetricChanged, onHostAdded, onHostDismissed }) => (
     <div className="chart-legend">
-        <MetricHeader allowClear={!necessary} label={label} value={metricInfo ? metricInfo.name : undefined} onChange={onMetricChanged} metrices={metrices} />
+        <MetricHeader allowClear={!necessary} label={label} value={metricInfo ? metricInfo.id : undefined} onChange={onMetricChanged} metrices={metrices} />
         {necessary || metricInfo ?
-            <HostsSelector all={metricInfo.hosts} selected={hostsSelected} onDismiss={onHostDismissed} />
+            <HostsSelector all={metricInfo.hosts.map(h => h.host)} selected={hostsSelected} onDismiss={onHostDismissed} />
         : null}
         {necessary || metricInfo ?
-            <HostsAdder all={metricInfo.hosts} selected={hostsSelected} onSubmit={onHostAdded} />
+            <HostsAdder all={metricInfo.hosts.map(h => h.host)} selected={hostsSelected} onSubmit={onHostAdded} />
         : null}
     </div>
 );
