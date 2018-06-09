@@ -4,8 +4,9 @@ import { Tag, Icon } from 'antd';
 import SingleMetric from './SingleMetric';
 
 const MetricCell = ({host, onShowModal, onRemove}) => {
+    const invalidatedClass = host.metricsInvalidated === true ? ' metrics-invalidated' : '';
     return (
-        <div className="ant-tag-wrapper">
+        <div className={`ant-tag-wrapper${invalidatedClass}`}>
             {
                 host.metrics.map(metric => <SingleMetric hostname={host.hostname} key={metric.id} metric={metric} onRemove={onRemove} found={host.found}/>)
             }
