@@ -11,6 +11,7 @@ const columns = [
         editable: true,
         sortable: true,
         width: '30%',
+        required: true,
         prefixRender: (field) => <Icon className="monitor-icon" type="database" style={{ color: strToColor(field.value) }} />
     },
     {
@@ -18,6 +19,7 @@ const columns = [
         id: "description",
         editable: true,
         sortable: true,
+        required: true,
         width: '50%',
     },
     {

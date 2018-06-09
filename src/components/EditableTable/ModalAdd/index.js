@@ -11,12 +11,15 @@ class ModalAdd extends Component
             visible: false
         };
         this.columnNames = {};
+        this.required = {};
         for (const column of this.props.columns) {
             if (column.type !== 'menu') {
                 this.state.row[column.id] = '';
                 this.columnNames[column.id] = column.name;
+                this.required[column.id] = column.required;
             }
         }
+        this.form = null;
     };
 
     showModal = () => {
@@ -32,11 +35,18 @@ class ModalAdd extends Component
     };
 
     addRow = () => {
-        this.props.onAdd(Object.assign({}, this.state.row));
-        this.setState({
-            row: this._getEmptyRow(),
-            visible: false
-        });
+        if(this.form !== null) {
+            this.form.validateFields((err, values) => {
+                if (!err) {
+                    this.props.onAdd(Object.assign({}, this.state.row));
+                    this.setState({
+                        row: this._getEmptyRow(),
+                        visible: false
+                    });
+                    this.form.setFieldsValue(this._getEmptyRow());
+                }
+            });
+        }
     };
 
     onChange = (columnId, value) => {
@@ -53,6 +63,10 @@ class ModalAdd extends Component
         return newRow;
     }
 
+    setFormRef = (form) => {
+        this.form = form;
+    };
+
     render() {
         return (
             <div className="form-add">
@@ -65,7 +79,7 @@ class ModalAdd extends Component
                     okText="Dodaj"
                     cancelText="Anuluj"
                 >
-                    <FormAdd row={this.state.row} columnNames={this.columnNames} onChange={this.onChange}/>
+                    <FormAdd row={this.state.row} columnNames={this.columnNames} required={this.required} onChange={this.onChange} setFormRef={this.setFormRef} />
                 </Modal>
             </div>
         );

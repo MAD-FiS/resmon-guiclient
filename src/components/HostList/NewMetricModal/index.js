@@ -8,10 +8,12 @@ class NewMetricModal extends React.Component
     constructor(props) {
         super(props);
         this.state = {
+            validated: true,
             loading: false,
             newMetric: this.getNewMetricValues(),
             baseMetrics: this.getBaseMetrics(props)
-        }
+        };
+        this.form = null;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -75,10 +77,21 @@ class NewMetricModal extends React.Component
     };
 
     addMetric = () => {
-        this.props.onAddMetric(this.props.host.hostname, this.state.newMetric);
-        this.setState({
-            loading: true
-        });
+        if(this.form !== null) {
+            this.form.validateFields((err, values) => {
+                if (!err) {
+                    this.props.onAddMetric(this.props.host.hostname, this.state.newMetric);
+                    this.setState({
+                        loading: true
+                    });
+                    this.form.setFieldsValue(this.getNewMetricValues());
+                }
+            });
+        }
+    };
+
+    setFormRef = (form) => {
+        this.form = form;
     };
 
     render() {
@@ -93,7 +106,7 @@ class NewMetricModal extends React.Component
                     cancelText="Anuluj"
                     confirmLoading={this.state.loading}
                 >
-                    <MetricForm host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric} onChange={this.onChange} onClear={this.onClear} />
+                    <MetricForm host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric} setFormRef={this.setFormRef} onChange={this.onChange} onClear={this.onClear} />
                 </Modal>
             );
         }
