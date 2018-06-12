@@ -3,6 +3,12 @@ import React from 'react';
 import { Tag, Icon } from 'antd';
 import SingleMetric from './SingleMetric';
 
+/**
+ * This component displays single metric cell in host list table
+ * @reactProps {!object} host - data of single host
+ * @reactProps {!function} onShowModal - method executed when "new complex metric" modal should be shown
+ * @reactProps {!function} onRemove - method executed when complex metric should be removed
+ */
 const MetricCell = ({host, onShowModal, onRemove}) => {
     const invalidatedClass = host.metricsInvalidated === true ? ' metrics-invalidated' : '';
     return (

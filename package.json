@@ -30,6 +30,7 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
+    "doc": "esdoc -c esdoc.json",
     "start": "react-app-rewired start",
     "run-test-servers": "node ./test-servers/index.js",
     "build": "react-app-rewired build",
@@ -57,5 +58,12 @@
     "coverageReporters": [
       "text"
     ]
+  },
+  "devDependencies": {
+    "esdoc": "^1.1.0",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+    "esdoc-jsx-plugin": "^1.0.0",
+    "esdoc-react-plugin": "^1.0.1",
+    "esdoc-standard-plugin": "^1.0.0"
   }
 }
