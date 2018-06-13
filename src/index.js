@@ -1,28 +1,22 @@
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Switch } from 'react-router';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import registerServiceWorker from './registerServiceWorker';
+import { ConnectedRouter } from 'connected-react-router';
+import createStore from './createStore';
+import { getSavedState } from './localStorage';
 import AppLayout from './containers/AppLayout';
-import initStore from './initStore';
-import { routes } from './routes';
-import NotFound from './pages/NotFound';
+import { getRoutes } from './routes';
 
-const { store, history } = initStore();
+const { store, history } = createStore(getSavedState());
 
-const App = () => (
+ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <AppLayout>
-                <Switch>
-                    {routes}
-                    <Route component={NotFound} />
-                </Switch>
+                {getRoutes()}
             </AppLayout>
         </ConnectedRouter>
-    </Provider>
+    </Provider>,
+    document.getElementById('root')
 );
-
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();

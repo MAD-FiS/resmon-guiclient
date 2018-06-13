@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
-import * as authActions from '../../actions/auth';
-import { getAuthTokenRequested } from '../../reducers';
+import * as actions from '../../actions/sync';
+import { getTokenRequested } from '../../reducers';
 import RegisterForm from '../../components/RegisterForm';
 
 const mapStateToProps = (state) => ({
-    indeterminate: getAuthTokenRequested(state)
-})
+    indeterminate: getTokenRequested(state)
+});
 
 const mapDispatchToProps = {
-    signUp: authActions.signUp
+    signUp: actions.signUpRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);

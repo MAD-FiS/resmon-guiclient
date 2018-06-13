@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import pl_PL from 'antd/lib/locale-provider/pl_PL';
 import 'moment/locale/pl';
 import './layout.less';
+import { LIVE_ROUTE, HISTORICAL_ROUTE, MONITORS_ROUTE, HOSTS_ROUTE,
+    LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../routes';
 
 const { Sider, Content, Footer } = Layout;
 
@@ -19,23 +21,23 @@ const AppLayout = ({ children, location, auth, signOut }) => (
                     selectedKeys={[ location.pathname ]}
                     onClick={(item) => item.key === 'sign-out' && signOut()}
                 >
-                    {auth && <Menu.Item key="/live">
-                        <Link to="/live">Pomiary na żywo</Link>
+                    {auth && <Menu.Item key={LIVE_ROUTE}>
+                        <Link to={LIVE_ROUTE}>Pomiary na żywo</Link>
                     </Menu.Item>}
-                    {auth && <Menu.Item key="/historical">
-                        <Link to="/historical">Pomiary historyczne</Link>
+                    {auth && <Menu.Item key={HISTORICAL_ROUTE}>
+                        <Link to={HISTORICAL_ROUTE}>Pomiary historyczne</Link>
                     </Menu.Item>}
-                    {auth && <Menu.Item key="/metrics">
-                        <Link to="/metrics">Hosty i Metryki</Link>
+                    {auth && <Menu.Item key={HOSTS_ROUTE}>
+                        <Link to={HOSTS_ROUTE}>Hosty i Metryki</Link>
                     </Menu.Item>}
-                    {auth && <Menu.Item key="/monitors">
-                        <Link to="/monitors">Monitory</Link>
+                    {auth && <Menu.Item key={MONITORS_ROUTE}>
+                        <Link to={MONITORS_ROUTE}>Monitory</Link>
                     </Menu.Item>}
-                    {!auth && <Menu.Item key="/sign-in">
-                        <Link to="/sign-in">Logowanie</Link>
+                    {!auth && <Menu.Item key={LOGIN_ROUTE}>
+                        <Link to={LOGIN_ROUTE}>Logowanie</Link>
                     </Menu.Item>}
-                    {!auth && <Menu.Item key="/sign-up">
-                        <Link to="/sign-up">Rejestracja</Link>
+                    {!auth && <Menu.Item key={REGISTRATION_ROUTE}>
+                        <Link to={REGISTRATION_ROUTE}>Rejestracja</Link>
                     </Menu.Item>}
                     {auth && <Menu.Item key="sign-out">Wyloguj się</Menu.Item>}
                 </Menu>

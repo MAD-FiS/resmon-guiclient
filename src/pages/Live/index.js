@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeLiveChart, changeMetricLiveChart, addHostLiveChart, removeHostLiveChart, getData } from '../../actions/liveCharts';
+import * as actions from '../../actions/sync';
 import { getLiveChartsArray, getMetricsAll } from '../../reducers';
 import AddLiveChart from '../../containers/AddLiveChart';
 import LiveChart from '../../components/Chart/usage/LiveChartWrapper';
 
-const Live = ({ liveCharts, removeLiveChart, changeMetricLiveChart, addHostLiveChart, removeHostLiveChart, metrices, getData }) => (
+const Live = ({ removeLiveChart, changeMetricLiveChart, addHostLiveChart, removeHostLiveChart, metrics, liveCharts }) => (
     <div className="full-page">
         <h1>Pomiary na żywo</h1>
         <AddLiveChart />
@@ -16,8 +16,7 @@ const Live = ({ liveCharts, removeLiveChart, changeMetricLiveChart, addHostLiveC
                 onMetricChanged={metric => changeMetricLiveChart(c.id, metric)}
                 onHostAdded={host => addHostLiveChart(c.id, host)}
                 onHostDismissed={host => removeHostLiveChart(c.id, host)}
-                metrices={metrices}
-                getData={getData}
+                metrices={metrics}
                 {...c}
             />
         ))}
@@ -26,15 +25,14 @@ const Live = ({ liveCharts, removeLiveChart, changeMetricLiveChart, addHostLiveC
 
 const mapStateToProps = (state) => ({
     liveCharts: getLiveChartsArray(state),
-    metrices: getMetricsAll(state)
+    metrics: getMetricsAll(state)
 });
 
 const mapDispatchToProps = {
-    removeLiveChart,
-    changeMetricLiveChart,
-    addHostLiveChart,
-    removeHostLiveChart,
-    getData
+    removeLiveChart: actions.removeLiveChart,
+    changeMetricLiveChart: actions.setLiveChartMetric,
+    addHostLiveChart: actions.addLiveChartHost,
+    removeHostLiveChart: actions.removeLiveChartHost
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Live);

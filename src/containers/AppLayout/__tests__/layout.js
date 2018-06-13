@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import AppLayout from '../index.js';
-import initStore from '../../../initStore';
+import initStore from '../../../createStore';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
-    const { store, history } = initStore({ router: { location: { pathname: 'test-pathname' }}});
+    const { store, history } = initStore();
     ReactDOM.render((
         <Provider store={store}>
             <ConnectedRouter history={history}>

@@ -1,40 +1,79 @@
 import React from 'react';
-import { Route } from 'react-router';
-
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import Live from './pages/Live';
+import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router';
 import Historical from './pages/Historical';
+import Live from './pages/Live';
 import Metrics from './pages/Metrics';
 import Monitors from './pages/Monitors';
+import NotFound from './pages/NotFound';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import { getToken } from './reducers';
 
-export const routesAndAuthRequired = {
-    '/live': {
-        auth: true,
+export const LIVE_ROUTE = '/live';
+export const HISTORICAL_ROUTE = '/historical';
+export const MONITORS_ROUTE = '/monitors';
+export const HOSTS_ROUTE = '/hosts';
+export const LOGIN_ROUTE = '/login';
+export const REGISTRATION_ROUTE = '/registration';
+
+export const routes = {
+    [LIVE_ROUTE]: {
+        tokenRequired: true,
         component: Live
     },
-    '/historical': {
-        auth: true,
+    [HISTORICAL_ROUTE]: {
+        tokenRequired: true,
         component: Historical
     },
-    '/metrics': {
-        auth: true,
-        component: Metrics
-    },
-    '/monitors': {
-        auth: true,
+    [MONITORS_ROUTE]: {
+        tokenRequired: true,
         component: Monitors
     },
-    '/sign-in': {
-        auth: false,
+    [HOSTS_ROUTE]: {
+        tokenRequired: true,
+        component: Metrics
+    },
+    [LOGIN_ROUTE]: {
+        tokenRequired: false,
         component: SignIn
     },
-    '/sign-up': {
-        auth: false,
+    [REGISTRATION_ROUTE]: {
+        tokenRequired: false,
         component: SignUp
     }
 };
 
-export const routes = Object.entries(routesAndAuthRequired).map(([ path, obj ]) => (
-    <Route key={path} path={path} component={obj.component} />
-));
+export const isRouteDefined = route => Boolean(routes[route]);
+
+export const getDefaultRouteByToken = token => token ? LIVE_ROUTE : LOGIN_ROUTE;
+
+export const isTokenRequired = route => routes[route].tokenRequired;
+
+const mapStateToProps = state => ({
+    token: getToken(state)
+});
+
+const mapDispatchToProps = {};
+
+const wrapWithAuth = tokenRequired => Component => connect(mapStateToProps, mapDispatchToProps)(
+
+    function WithAuth({ token, ...rest }) {
+        if (Boolean(tokenRequired) === Boolean(token)) {
+            return React.createElement(Component, rest);
+        }
+        else {
+            return null;
+        }
+    }
+
+);
+
+export const getRoutes = () => (
+    <Switch>
+        {Object.entries(routes).map(([ path, r ]) => (
+            <Route key={path} path={path} component={wrapWithAuth(r.tokenRequired)(r.component)} />
+        ))}
+        <Route component={NotFound} />
+    </Switch>
+);

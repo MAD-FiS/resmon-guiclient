@@ -1,60 +1,44 @@
 import { combineReducers } from 'redux';
-import { getSavedAuthServer } from '../middlewares/globalsStorage';
-import {
-    SIGN_IN_REQUEST,
-    SIGN_IN_FAILURE,
-    SIGN_IN_SUCCESS,
-    SIGN_UP_REQUEST,
-    SIGN_UP_FAILURE,
-    SIGN_UP_SUCCESS,
-    SIGN_OUT,
-    CHANGE_AUTH_SERVER,
-    RESTORE_SESSION
-} from '../actions/auth';
+import * as types from '../actions/types';
 
-const defaultAuthServer = getSavedAuthServer();
+export const getAuthServer = state => state.authServer;
+export const getToken = state => state.token;
+export const getTokenRequested = state => state.tokenRequested;
 
 const token = (state = null, action) => {
     switch (action.type) {
-        case SIGN_IN_SUCCESS:
-        case SIGN_UP_SUCCESS:
-            return action.payload.token;
-        case RESTORE_SESSION:
-            return action.token;
-        case SIGN_OUT:
+        case types.SIGN_IN_SUCCESS:
+        case types.SIGN_UP_SUCCESS:
+            return action.payload.access_token;
+        case types.REMOVE_TOKEN:
             return null;
         default:
             return state;
     }
-}
+};
 
 const tokenRequested = (state = false, action) => {
     switch (action.type) {
-        case SIGN_IN_REQUEST:
-        case SIGN_UP_REQUEST:
+        case types.SIGN_IN_REQUEST:
+        case types.SIGN_UP_REQUEST:
             return true;
-        case SIGN_IN_SUCCESS:
-        case SIGN_UP_SUCCESS:
-        case SIGN_IN_FAILURE:
-        case SIGN_UP_FAILURE:
+        case types.SIGN_IN_SUCCESS:
+        case types.SIGN_UP_SUCCESS:
+        case types.SIGN_IN_FAILURE:
+        case types.SIGN_UP_FAILURE:
             return false;
         default:
             return state;
     }
 };
 
-const server = (state = defaultAuthServer, action) => {
+const authServer = (state = DEFAULT_AUTH_SERVER, action) => {
     switch (action.type) {
-        case CHANGE_AUTH_SERVER:
-            return action.server || defaultAuthServer;
+        case types.CHANGE_AUTH_SERVER:
+            return action.payload.address || DEFAULT_AUTH_SERVER;
         default:
             return state;
     }
 };
 
-export default combineReducers({ token, tokenRequested, server });
-
-export const isAuthTokenSet = (state) => Boolean(state.token);
-export const getAuthTokenRequested = (state) => state.tokenRequested;
-export const getAuthServer = (state) => state.server;
-export const getAuthToken = (state) => state.token;
+export default combineReducers({ token, tokenRequested, authServer });
