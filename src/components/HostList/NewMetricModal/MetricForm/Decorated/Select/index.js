@@ -3,10 +3,11 @@ import { Select as OriginalSelect } from 'antd';
 
 export class Select extends React.PureComponent {
     render() {
-        const {id, searchable, disabled, options, onChange} = this.props;
+        const {id, searchable, disabled, options, onChange, value, myValue, ...rest} = this.props; // eslint-disable-line no-unused-vars
         return (
             <OriginalSelect
-                {...this.props}
+                {...rest}
+                value={myValue || undefined}
                 showSearch={searchable}
                 disabled={disabled}
                 onChange={!disabled ? (v) => onChange(id, v) : () => null}

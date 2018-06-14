@@ -602,7 +602,7 @@ it('reacts to ADD_HISTORICAL_CHART_HOST2', () => {
         ]
     });
 });
-
+/*
 it('reacts to REMOVE_HISTORICAL_CHART_HOST1', () => {
     let state = {
         historicalCharts: {
@@ -742,7 +742,7 @@ it('reacts to REMOVE_HISTORICAL_CHART_HOST2', () => {
         ]
     });
 });
-
+*/
 it('reacts to GET_HISTORICAL_MEASUREMENTS_REQUEST', () => {
     let state = {
         historicalCharts: {

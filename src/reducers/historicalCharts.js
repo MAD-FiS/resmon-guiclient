@@ -54,7 +54,7 @@ const chart = (state, action) => {
                 ]
             };
         case types.REMOVE_HISTORICAL_CHART_HOST1: {
-            const hostIdx = state.hosts1.indexOf(action.payload.host);
+            const hostIdx = state.hosts1.indexOf(action.meta.host);
             return {
                 ...state,
                 hosts1: [
@@ -64,7 +64,7 @@ const chart = (state, action) => {
             };
         }
         case types.REMOVE_HISTORICAL_CHART_HOST2: {
-            const hostIdx = state.hosts2.indexOf(action.payload.host);
+            const hostIdx = state.hosts2.indexOf(action.meta.host);
             return {
                 ...state,
                 hosts2: [

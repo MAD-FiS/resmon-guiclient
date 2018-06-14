@@ -115,6 +115,7 @@ export const addComplexMetricRequest = (payload, host) => ({
 
 export const addComplexMetricSuccess = (payload, host) => ({
     type: types.ADD_COMPLEX_METRIC_SUCCESS,
+    payload,
     meta: {
         host
     }

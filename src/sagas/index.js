@@ -7,6 +7,7 @@ import * as apiSagas from './api';
 import * as storageSagas from './localStorage';
 import { getToken, getPathname, getLiveChartsAllIds, getMonitorsAddresses } from '../reducers';
 import { getDefaultRouteByToken, isRouteDefined, isTokenRequired, LIVE_ROUTE } from '../routes';
+import Notification from '../components/Notification';
 
 function* dealWithNewLocation(pathname) {
     const isTokenSet = Boolean(yield select(getToken));
@@ -119,6 +120,7 @@ function* loginWatcher() {
     let worker;
     if (token) {
         worker = yield fork(authSiteWatcher);
+        yield call(Notification.success, 'Sesja została przywrócona');
     }
     while (true) {
         const { type } = yield take([
@@ -131,6 +133,10 @@ function* loginWatcher() {
         }
         if (type !== types.REMOVE_TOKEN) {
             worker = yield fork(authSiteWatcher);
+            yield call(Notification.success, 'Zostałeś zalogowany pomyślnie');
+        }
+        else {
+            yield call(Notification.success, 'Zostałeś wylogowany pomyślnie');
         }
     }
 }
@@ -182,6 +188,15 @@ function* authSiteWatcher() {
     yield put(actions.getHosts());
 }
 
+function* errorThrower() {
+    while (true) {
+        const action = yield take('*');
+        if (action.error) {
+            yield call(Notification.error, action.payload.message + (status ? ' (Kod ' + status + ')' : ''));
+        }
+    }
+}
+
 export default function* root() {
     yield all([
         takeEvery(types.SIGN_UP_REQUEST, apiSagas.signUp),
@@ -190,6 +205,7 @@ export default function* root() {
         takeLatest(types.REMOVE_TOKEN, storageSagas.tokenEraser),
         takeLatest(types.CHANGE_AUTH_SERVER, storageSagas.authServerSaver),
         fork(watchForLocationChange),
-        fork(loginWatcher)
+        fork(loginWatcher),
+        fork(errorThrower)
     ]);
 }

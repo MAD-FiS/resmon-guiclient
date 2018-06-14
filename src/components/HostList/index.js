@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import NewMetricModal from './NewMetricModal';
 import MetadataCell from './MetadataCell';
 import MetricCell from './MetricCell';
+import MonitorIcon from '../MonitorIcon';
 
 import {Hostname as HostnameFiltered} from './FilteredTable/Hostname';
 import {Metrics as MetricsFiltered} from './FilteredTable/Metrics';
@@ -56,7 +57,7 @@ class HostList extends React.Component
         const base = {}, complex = {};
         hosts.forEach((host) => {
             host.metrics.forEach((metric) => {
-                if(metric.parent_id === null) {
+                if(metric.interval === null) {
                     base[metric.id] = metric.id;
                 } else {
                     complex[metric.id] = metric.id;
@@ -75,6 +76,7 @@ class HostList extends React.Component
             dataIndex: 'displayName',
             key: 'hostname',
             width: '26%',
+            render: (hostname, host) => <span><MonitorIcon>{host.monitor}</MonitorIcon> {hostname}</span>
         }, {
             title: 'Metadane',
             dataIndex: 'metadata',

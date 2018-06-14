@@ -1,7 +1,6 @@
 import React from 'react';
-import { Icon } from 'antd';
 import EditableTable from '../EditableTable';
-import strToColor from '../../utils/strToColor';
+import MonitorIcon from '../MonitorIcon';
 import './index.less';
 
 const columns = [
@@ -12,7 +11,7 @@ const columns = [
         sortable: true,
         width: '30%',
         required: true,
-        prefixRender: field => <Icon className="monitor-icon" type="database" style={{ color: strToColor(field.value) }} /> // eslint-disable-line react/display-name
+        prefixRender: field => <MonitorIcon>{field.value}</MonitorIcon> // eslint-disable-line react/display-name
     },
     {
         name: 'Opis',

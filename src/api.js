@@ -43,7 +43,7 @@ export const getHosts = (server, token) => apiCall(`${server}/hosts`, {
     }
 });
 
-export const postComplexMetric = (server, token, host, payload) => apiCall(`${server}/metrics/${host}/metrics`, {
+export const postComplexMetric = (server, token, host, payload) => apiCall(`${server}/hosts/${host}/metrics`, {
     body: JSON.stringify(payload),
     headers: {
         'Content-Type': 'application/json',
@@ -52,21 +52,15 @@ export const postComplexMetric = (server, token, host, payload) => apiCall(`${se
     method: 'POST'
 });
 
-export const deleteComplexMetric = (server, token, host, id) => apiCall(`${server}/metrics/${host}/metrics/${id}`, {
+export const deleteComplexMetric = (server, token, host, id) => apiCall(`${server}/hosts/${host}/metrics/${id}`, {
     headers: {
         'Authorization': `Bearer ${token}`
     },
     method: 'DELETE'
 });
 
-export const getMeasurements = (server, token, query) => {
-    query.q = query.q.replace(/,hostname:\/.+\//, '');
-    return apiCall(`${server}/measurements?${qs.stringify(query)}`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    }).then(measurements => measurements.map(m => ({
-        ...m,
-        data: m.data.map(({ time, value }) => ({ time: time + 'Z', value }))
-    })));
-};
+export const getMeasurements = (server, token, query) => apiCall(`${server}/measurements?${qs.stringify(query)}`, {
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+});

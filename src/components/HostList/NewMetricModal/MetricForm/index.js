@@ -7,7 +7,7 @@ import { Select as DecoratedSelect } from './Decorated/Select';
 
 const { TextArea } = Input;
 
-const MetricForm = ({form, host, metrics, onChange, onClear, setFormRef}) => {
+const MetricForm = ({form, host, metrics, newMetric, onChange, onClear, setFormRef}) => {
     setFormRef(form);
     if(host !== null) {
         return(
@@ -21,7 +21,7 @@ const MetricForm = ({form, host, metrics, onChange, onClear, setFormRef}) => {
                     {form.getFieldDecorator('parent_id', {
                         rules: [{ required: true, message: 'Metryka bazowa musi zostać wybrana' }],
                     })(
-                        <DecoratedSelect id="parent_id" icon="bulb" help="Bazowa metryka dla obecnie tworzonej" options={metrics} onChange={onChange} onClear={onClear} />
+                        <DecoratedSelect id="parent_id" icon="bulb" help="Bazowa metryka dla obecnie tworzonej" options={metrics} myValue={newMetric.parent_id} onChange={onChange} onClear={onClear} />
                     )}
                 </FormItem>
                 <FormItem label="Opis metryki">
@@ -35,14 +35,14 @@ const MetricForm = ({form, host, metrics, onChange, onClear, setFormRef}) => {
                     {form.getFieldDecorator('moving_window_duration', {
                         rules: [{ required: true, message: 'Proszę podać szerokość okna czasowego' }],
                     })(
-                        <InputNumber id="moving_window_duration" help="Szerokość okna czasowego" onChange={onChange} onClear={onClear} min={1} />
+                        <InputNumber id="moving_window_duration" help="Szerokość okna czasowego" onChange={(value) => onChange('moving_window_duration', value)} onClear={onClear} min={1} />
                     )}
                 </FormItem>
                 <FormItem label="Częstotliwość">
                     {form.getFieldDecorator('interval', {
                         rules: [{ required: true, message: 'Proszę podać częstotliwość' }],
                     })(
-                        <InputNumber id="interval" help="Częstotliwość" onChange={onChange} onClear={onClear} min={1} />
+                        <InputNumber id="interval" help="Częstotliwość" onChange={(value) => onChange('interval', value)} onClear={onClear} min={1} />
                     )}
                 </FormItem>
             </Form>

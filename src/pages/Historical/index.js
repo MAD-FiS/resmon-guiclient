@@ -20,8 +20,8 @@ const Live = ({
                 onMetric2Changed={(metric) => setHistoricalChartMetric2({ metric }, c.id)}
                 onHostAddedToMetric1={host => addHistoricalChartHost1({ host }, c.id)}
                 onHostAddedToMetric2={host => addHistoricalChartHost2({ host }, c.id)}
-                onHostDismissedFromMetric1={host => removeHistoricalChartHost1({ host }, c.id)}
-                onHostDismissedFromMetric2={host => removeHistoricalChartHost2({ host }, c.id)}
+                onHostDismissedFromMetric1={host => removeHistoricalChartHost1(c.id, host)}
+                onHostDismissedFromMetric2={host => removeHistoricalChartHost2(c.id, host)}
                 onRangeChanged={(start, end) => setHistoricalChartRange({ start, end }, c.id)}
                 onChartClosed={() => removeHistoricalChart(c.id)}
                 metrics={metrics}

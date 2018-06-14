@@ -29,7 +29,6 @@ class NewMetricModal extends React.Component
         return {
             description: '',
             parent_id: null,
-            unit: '',
             moving_window_duration: '',
             interval: ''
         };

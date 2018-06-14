@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, List, Icon } from 'antd';
+import { Select, List, Icon, Tooltip } from 'antd';
 import strToColor from '../../utils/strToColor';
 
 const { Option } = Select;
@@ -10,7 +10,7 @@ const MetricHeader = ({ allowClear, label, value, onChange, metrics }) => (
         <Select
             showSearch={true}
             allowClear={allowClear}
-            value={value}
+            value={value || undefined}
             onChange={onChange}
             placeholder="Wybierz metrykę"
             className="metric-selector"
@@ -24,14 +24,17 @@ const HostsSelector = ({ selected, onDismiss }) => (
     <List
         size="small"
         dataSource={selected}
-        renderItem={host => (
+        renderItem={({ hostname, metricDescription }) => (
             <List.Item
                 actions={[
-                    <a key="close" onClick={onDismiss.bind(this, host)}><Icon type="close" /></a>
+                    <a key="close" onClick={onDismiss.bind(this, hostname)}><Icon type="close" /></a>
                 ]}
             >
-                <div className="series-dot" style={{ backgroundColor: strToColor(host) }}></div>
-                {host}
+                <div className="series-dot" style={{ backgroundColor: strToColor(hostname) }}></div>
+                {hostname}
+                <Tooltip title={'Opis powiązanej metryki: ' + metricDescription}>
+                    <Icon className="metric-hint" type="question-circle" />
+                </Tooltip>
             </List.Item>
         )}
     />
@@ -83,7 +86,7 @@ const ChartLegend = ({ necessary, label, metrics, metric, hosts, onMetricChanged
     <div className="chart-legend">
         <MetricHeader allowClear={!necessary} label={label} value={metric} onChange={onMetricChanged} metrics={Object.keys(metrics)} />
         {necessary || metric ?
-            <HostsSelector selected={hosts} onDismiss={onHostDismissed} />
+            <HostsSelector selected={hosts.map(hostname => ({ hostname, metricDescription: metrics[metric][hostname].description }))} onDismiss={onHostDismissed} />
             : null}
         {necessary || metric ?
             <HostsAdder all={Object.keys(metrics[metric])} selected={hosts} onSubmit={onHostAdded} />
