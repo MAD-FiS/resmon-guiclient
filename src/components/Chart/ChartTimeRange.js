@@ -13,6 +13,6 @@ const ChartTimeRange = ({ from, to, onChange }) => (
             onOk={([ from, to ]) => onChange(from.format(), to.format())}
         />
     </div>
-)
+);
 
 export default ChartTimeRange;

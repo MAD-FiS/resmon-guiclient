@@ -16,7 +16,7 @@ class NewMetricModal extends React.Component
         this.form = null;
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if(this.props.host !== nextProps.host) {
             this.setState({
                 baseMetrics: this.getBaseMetrics(nextProps),
@@ -78,7 +78,7 @@ class NewMetricModal extends React.Component
 
     addMetric = () => {
         if(this.form !== null) {
-            this.form.validateFields((err, values) => {
+            this.form.validateFields(err => {
                 if (!err) {
                     this.props.onAddMetric(this.props.host.hostname, this.state.newMetric);
                     this.setState({
@@ -96,20 +96,20 @@ class NewMetricModal extends React.Component
 
     render() {
         const {host} = this.props;
-            return (
-                <Modal
-                    title="Nowa metryka złożona"
-                    visible={this.props.host !== null}
-                    onOk={this.addMetric}
-                    onCancel={this.clearModal}
-                    okText="Dodaj metrykę"
-                    cancelText="Anuluj"
-                    confirmLoading={this.state.loading}
-                >
-                    <MetricForm host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric} setFormRef={this.setFormRef} onChange={this.onChange} onClear={this.onClear} />
-                </Modal>
-            );
-        }
+        return (
+            <Modal
+                title="Nowa metryka złożona"
+                visible={this.props.host !== null}
+                onOk={this.addMetric}
+                onCancel={this.clearModal}
+                okText="Dodaj metrykę"
+                cancelText="Anuluj"
+                confirmLoading={this.state.loading}
+            >
+                <MetricForm host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric} setFormRef={this.setFormRef} onChange={this.onChange} onClear={this.onClear} />
+            </Modal>
+        );
+    }
 }
 
 export default NewMetricModal;

@@ -108,7 +108,7 @@ class LiveChartWrapper extends React.PureComponent {
             onChartClosed={this.props.onChartClosed}
             onHostAdded={this.props.onHostAdded}
             onHostDismissed={this.props.onHostDismissed}
-        />
+        />;
     }
 
 }

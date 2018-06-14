@@ -1,6 +1,6 @@
 import React from 'react';
 import EditableCell from '../EditableTable/EditableCell';
-import './index.less'
+import './index.less';
 
 class AuthServer extends React.PureComponent {
 
@@ -10,9 +10,10 @@ class AuthServer extends React.PureComponent {
             editMode: false,
             authServer: this.props.authServer
         };
+        this.rootRef = React.createRef();
     }
 
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         if (this.props.authServer !== newProps.authServer) {
             this.setState({ authServer: newProps.authServer });
         }
@@ -20,7 +21,7 @@ class AuthServer extends React.PureComponent {
 
     componentDidUpdate(prevProps, prevState) {
         if (this.state.editMode && !prevState.editMode) {
-            this.refs.root.getElementsByTagName('input')[0].focus();
+            this.rootRef.current.root.getElementsByTagName('input')[0].focus();
         }
     }
 
@@ -44,7 +45,7 @@ class AuthServer extends React.PureComponent {
     render() {
         const { authServer, editMode } = this.state;
         return (
-            <div className="auth-server" ref="root">
+            <div className="auth-server" ref={this.rootRef}>
                 <span>Server autoryzacyjny:&nbsp;</span>
                 <EditableCell
                     value={authServer}

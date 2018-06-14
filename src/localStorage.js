@@ -21,6 +21,7 @@ export const getMonitors = () => {
             if (Object.keys(converted) === 0) {
                 return undefined;
             }
+            return converted;
         }
         catch (error) {} // eslint-disable-line no-empty
     }
@@ -40,7 +41,7 @@ export const saveToken = token => {
 };
 
 export const clearToken = () => {
-    localStorage.clear(TOKEN_KEY);
+    localStorage.removeItem(TOKEN_KEY);
 };
 
 export const getSavedState = () => ({

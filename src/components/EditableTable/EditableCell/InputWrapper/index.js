@@ -7,7 +7,7 @@ const InputWrapper = ({value, editable, rowId, colId, onHandleChange, onSave, on
             value={value}
             className="text-wrapper-value"
             onChange={(e) => onHandleChange(rowId, colId, e.target.value)}
-            onPressEnter={(e) => editable ? onSave(rowId, colId) : null}
+            onPressEnter={() => editable ? onSave(rowId, colId) : null}
         />
         {
             editable ?
@@ -15,12 +15,12 @@ const InputWrapper = ({value, editable, rowId, colId, onHandleChange, onSave, on
                     <Icon
                         type="check"
                         className="editable-cell-icon-check"
-                        onClick={(e) => onSave(rowId, colId)}
+                        onClick={() => onSave(rowId, colId)}
                     />
                     <Icon
                         type="close"
                         className="editable-cell-icon-cancel"
-                        onClick={(e) => onEditCancel(rowId, colId)}
+                        onClick={() => onEditCancel(rowId, colId)}
                     />
                 </React.Fragment>
                 : ''

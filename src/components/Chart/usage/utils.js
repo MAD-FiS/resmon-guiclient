@@ -68,13 +68,13 @@ const steps = 60 * 60 * 24 / 5;
 const getSeriesDayTemplate = () => {
     const startVal = 20 * Math.random() + 3;
     let val = startVal;
-    const data = Array.from({ length: steps }).map((_, i) => {
+    const data = Array.from({ length: steps }).map(() => {
         val += (Math.random() - 0.5);
         return val;
     });
     const diff = val - startVal;
     return data.map((value, i) => value - (diff * i / steps));
-}
+};
 
 const seriesTemplates = Object.entries(metrices).reduce((metricCumm, [ metric, metricData ]) => {
     return Object.assign({
@@ -94,7 +94,7 @@ export const getData = (from, to, metric, hosts) => {
         const template = seriesTemplates[metric][host];
         let momIter = moment(momStart);
         let templateIdx = Math.floor(momIter.unix() / 5);
-        const measurements = Array.from({ length: diff5min }).map((_, i) => {
+        const measurements = Array.from({ length: diff5min }).map(() => {
             momIter = momIter.add(5, 'seconds');
             templateIdx = (templateIdx + 1) % steps;
             return {
@@ -106,6 +106,4 @@ export const getData = (from, to, metric, hosts) => {
             [host]: measurements
         }, cumm);
     }, {});
-}
-
-
+};

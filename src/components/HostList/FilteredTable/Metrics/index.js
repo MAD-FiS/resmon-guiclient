@@ -16,7 +16,7 @@ export class Metrics extends React.Component
         dataSource: this.props.dataSource
     });
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if(this.props.dataSource !== nextProps.dataSource) {
             this.setState({
                 dataSource: this.applyFilters(nextProps.dataSource, this.state.selected)

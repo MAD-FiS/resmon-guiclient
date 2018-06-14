@@ -37,6 +37,8 @@ export const SET_MONITOR_DESCRIPTION = 'SET_MONITOR_DESCRIPTION';
 export const REMOVE_MONITOR = 'REMOVE_MONITOR';
 // meta: { monitor }
 
+export const GET_HOSTS = 'GET_HOSTS';
+
 export const GET_HOSTS_REQUEST = 'GET_HOSTS_REQUEST';
 // meta: { monitor }
 

@@ -9,7 +9,7 @@ const RegisterForm = ({ form, indeterminate, signUp }) => (
         e.preventDefault();
         form.validateFields((err, values) => {
             if (!err) {
-                const { password2, ...credentials } = values;
+                const { password2, ...credentials } = values; // eslint-disable-line no-unused-vars
                 signUp(credentials);
             }
         });

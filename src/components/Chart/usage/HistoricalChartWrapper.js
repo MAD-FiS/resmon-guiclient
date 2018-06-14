@@ -136,7 +136,7 @@ class HistoricalChartWrapper extends React.PureComponent {
             onHostDismissedFromMetric1={this.onHostDismissedFromMetric1}
             onHostDismissedFromMetric2={this.onHostDismissedFromMetric2}
             onRangeChanged={this.onRangeChanged}
-        />
+        />;
     }
 
 }

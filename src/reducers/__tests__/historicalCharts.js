@@ -298,7 +298,7 @@ it('reacts to SET_HISTORICAL_CHART_METRIC1', () => {
             },
             [chart2.id]: {
                 ...chart2,
-                hosts1: hosts3,
+                hosts1: [],
                 hosts2: null,
                 invalidated: false,
                 measurements1: chart2Measurements,

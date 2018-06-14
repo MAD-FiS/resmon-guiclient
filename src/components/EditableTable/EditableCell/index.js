@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 import InputWrapper from './InputWrapper';
 import TextWrapper from './TextWrapper';

@@ -17,10 +17,12 @@ Highcharts.setOptions({
     }
 });
 
+const metricGeneral = metric => metric[Object.keys(metric)[0]];
+
 const mapData = (data, withDataLabel) => {
     if (withDataLabel) {
-        return data.map(({ time, value }, i) => ({
-            x: moment(time + 'Z').valueOf(),
+        return data.map(({ time, value }) => ({
+            x: moment(time).valueOf(),
             y: value
         }));
     } else {
@@ -30,9 +32,9 @@ const mapData = (data, withDataLabel) => {
 
 class ChartEngine extends React.Component {
 
-    shouldComponentUpdate(nextProps) {
-        return this.props.metric1Measurements !== nextProps.metric1Measurements
-            || this.props.metric2Measurements !== nextProps.metric2Measurements;
+    constructor(props) {
+        super(props);
+        this.chartRef = React.createRef();
     }
 
     componentDidMount() {
@@ -40,10 +42,10 @@ class ChartEngine extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.metric1LastUpdate && this.props.metric1LastUpdate !== prevProps.metric1LastUpdate) {
-            this.addPoints();
-        }
-        else {
+        if (
+            this.props.metric1Measurements !== prevProps.metric1Measurements
+            || this.props.metric1Measurements !== prevProps.metric2Measurements
+        ) {
             this.destroyChart();
             this.createChart();
         }
@@ -53,7 +55,7 @@ class ChartEngine extends React.Component {
         this.destroyChart();
     }
 
-    addPoints() {
+    /*addPoints() {
         const { metric1Info, metric1LastUpdate, metric1Measurements, metric1HostsSelected } = this.props;
         metric1HostsSelected
             .map(host => ({
@@ -71,68 +73,65 @@ class ChartEngine extends React.Component {
                 });
             });
         this.chart.redraw(true);
-    }
+    }*/
 
     createChart() {
         const {
-            metric1Info, metric1Measurements,
-            metric2Info, metric2Measurements,
+            metric1, metric1Measurements,
+            metric2, metric2Measurements,
             navigatorDisabled, withDataLabel
         } = this.props;
+        const metric1General = metricGeneral(metric1);
         let yAxis = [
             {
-                id: metric1Info.id,
+                id: metric1General.id,
                 title: {
-                    text: metric1Info.id
+                    text: metric1General.id
                 },
                 labels: {
-                    format: '{value}' + metric1Info.unit
+                    format: '{value}' + metric1General.unit
                 },
                 opposite: false
             }
         ];
         let series = Object.entries(metric1Measurements).map(([ host, data ]) => ({
-            name: `${metric1Info.id}, ${host}`,
-            id: `${metric1Info.id}:${host}`,
+            name: `${metric1General.id}, ${host}`,
+            id: `${metric1General.id}:${host}`,
             data: mapData(data, withDataLabel),
             color: strToColor(host),
-            yAxis: metric1Info.id,
+            yAxis: metric1General.id,
             tooltip: {
-                valueSuffix: metric1Info.unit
+                valueSuffix: metric1General.unit
             }
         }));
         if (metric2Measurements && Object.keys(metric2Measurements).length > 0) {
+            const metric2General = metricGeneral(metric2);
             yAxis.push({
-                id: metric2Info.id,
+                id: metric2General.id,
                 title: {
-                    text: metric2Info.id
+                    text: metric2General.id
                 },
                 labels: {
-                    format: '{value}' + metric2Info.unit
+                    format: '{value}' + metric2General.unit
                 },
                 gridLineWidth: 0,
                 opposite: true
             });
             series = series.concat(Object.entries(metric2Measurements || []).map(([ host, data ]) => ({
-                name: `${metric2Info.id}, ${host}`,
-                id: `${metric2Info.id}:${host}`,
+                name: `${metric2General.id}, ${host}`,
+                id: `${metric2General.id}:${host}`,
                 data: mapData(data, withDataLabel),
                 color: strToColor(host),
-                yAxis: metric2Info.id,
+                yAxis: metric2General.id,
                 tooltip: {
-                    valueSuffix: metric2Info.unit
+                    valueSuffix: metric2General.unit
                 },
                 dashStyle: 'Dash'
             })));
         }
-        this.chart = Highcharts.stockChart(this.refs.chart, {
+        this.chart = Highcharts.stockChart(this.chartRef.current, {
             series,
             plotOptions: {
-                /*line: {
-                    dataGrouping: {
-                        enabled: false
-                    }
-                }*/
                 series: {
                     dataLabels: {
                         formatter: function() {
@@ -183,7 +182,7 @@ class ChartEngine extends React.Component {
     }
 
     render() {
-        return <div className="chart" ref="chart"></div>;
+        return <div className="chart" ref={this.chartRef}></div>;
     }
 
 }

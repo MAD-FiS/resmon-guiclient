@@ -17,7 +17,7 @@ export class Metadata extends React.Component
         dataSource: this.props.dataSource
     });
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if(this.props.dataSource !== nextProps.dataSource) {
             this.setState({
                 dataSource: this.applyFilters(nextProps.dataSource, this.state.type, this.state.value)
@@ -50,11 +50,11 @@ export class Metadata extends React.Component
             newMetadata[matchedIndex] = {
                 ...newMetadata[matchedIndex],
                 name: <span className="highlight">
-                          {newMetadata[matchedIndex].name}
-                        </span>,
+                    {newMetadata[matchedIndex].name}
+                </span>,
                 value: <span className="highlight">
-                          {newMetadata[matchedIndex].value}
-                        </span>
+                    {newMetadata[matchedIndex].value}
+                </span>
             };
             return {
                 ...host,

@@ -1,6 +1,6 @@
 import React from 'react';
 import EditableTable from '../index';
-import {fakeColumns, fakeData} from "./fakeData";
+import {fakeColumns, fakeData} from './fakeData';
 
 class TableContainer extends React.Component
 {
@@ -50,7 +50,7 @@ class TableContainer extends React.Component
     render() {
         return (
             <EditableTable dataSource={this.state.dataSource} columns={fakeColumns} onChangeRow={this.changeRow} onChangeCell={this.changeCell} onAddRow={this.addRow} onDeleteRow={this.deleteRow} />
-        )
+        );
     }
 }
 

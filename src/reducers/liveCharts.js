@@ -17,6 +17,7 @@ const chart = (state, action) => {
         case types.SET_LIVE_CHART_METRIC:
             return {
                 ...state,
+                hosts: [],
                 metric: action.payload.metric
             };
         case types.ADD_LIVE_CHART_HOST:

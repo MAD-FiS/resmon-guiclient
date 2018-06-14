@@ -13,7 +13,7 @@ export class Select extends React.PureComponent {
             >
                 {
                     options.map(option => {
-                        return <OriginalSelect.Option key={option.value} value={option.value}>{option.name}</OriginalSelect.Option>
+                        return <OriginalSelect.Option key={option.value} value={option.value}>{option.name}</OriginalSelect.Option>;
                     })
                 }
             </OriginalSelect>

@@ -10,6 +10,7 @@ module.exports = {
         "plugin:react/recommended",
         "plugin:jest/recommended"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -50,7 +51,8 @@ module.exports = {
         "jsx/uses-factory": [1, {"pragma": "JSX"}],
         //"jsx/factory-in-scope": [1, {"pragma": "JSX"}],
         "jsx/mark-used-vars": 1,
-        "jsx/no-undef": 1
+        "jsx/no-undef": 1,
+        "react/prop-types": 0
     },
     "globals": {
         'DEFAULT_AUTH_SERVER': true,

@@ -13,8 +13,8 @@ export default class Notification
 {
     static success(description) {
         notification.success({
-            message: "Sukces",
-            placement: "bottomLeft",
+            message: 'Sukces',
+            placement: 'bottomLeft',
             duration: 3,
             description
         });
@@ -22,8 +22,8 @@ export default class Notification
 
     static info(description) {
         notification.info({
-            message: "Informacja",
-            placement: "bottomLeft",
+            message: 'Informacja',
+            placement: 'bottomLeft',
             duration: 3,
             description
         });
@@ -31,8 +31,8 @@ export default class Notification
 
     static warning(description) {
         notification.warning({
-            message: "Ostrzeżenie",
-            placement: "bottomLeft",
+            message: 'Ostrzeżenie',
+            placement: 'bottomLeft',
             duration: 3,
             description
         });
@@ -40,8 +40,8 @@ export default class Notification
 
     static error(description) {
         notification.error({
-            message: "Błąd",
-            placement: "bottomLeft",
+            message: 'Błąd',
+            placement: 'bottomLeft',
             duration: 3,
             description
         });

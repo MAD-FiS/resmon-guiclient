@@ -49,7 +49,7 @@ class MetadataFilter extends React.Component
         return (
             <div className="metadata-filter-select" onClick={e => e.stopPropagation()}>
                 <Select
-                    showSearch
+                    showSearch={true}
                     placeholder="Wybierz metadane"
                     optionFilterProp="children"
                     onChange={this.onChangeType}

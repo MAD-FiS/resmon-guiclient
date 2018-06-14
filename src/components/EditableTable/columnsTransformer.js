@@ -24,11 +24,12 @@ const sorterDecorator = (inputColumn, originalColumn) => {
 const menuTransformer = (inputColumn, onSaveRow, onEditRowStart, onEditRowCancel, onDeleteRow) => {
     return {
         title: inputColumn.name,
-        render: (value, record) => {
+        render: (value, record) => { // eslint-disable-line react/display-name
             return (
                 <Menu menuButtons={inputColumn.buttons} loading={record.__loading} editable={record.__editMode} record={record} onSaveRow={onSaveRow}
-                      onEditRowStart={onEditRowStart} onEditRowCancel={onEditRowCancel} onDeleteRow={onDeleteRow}/>
-            )},
+                    onEditRowStart={onEditRowStart} onEditRowCancel={onEditRowCancel} onDeleteRow={onDeleteRow}/>
+            );
+        },
     };
 };
 
@@ -41,16 +42,16 @@ const columnTransformer = (inputColumns, onHandleChange = () => (null), onSaveCe
             newColumn = {
                 title: column.name,
                 dataIndex: column.id,
-                render: (value, record) => (
+                render: (value, record) => ( // eslint-disable-line react/display-name
                     <EditableCell prefix={column.prefixRender ? column.prefixRender(value, record, column) : null}
-                                    editable={column.editable && !record.__editMode} loading={value.__loading || record.__loading} rowId={record.key}
-                                    colId={value.__name} onHandleChange={onHandleChange} onSave={onSaveCell}
-                                    onEditStart={onEditCellStart} onEditCancel={onEditCellCancel}
-                                    value={value.value} editMode={value.__editMode || record.__editMode}
-                                    __name={value.__name}
+                        editable={column.editable && !record.__editMode} loading={value.__loading || record.__loading} rowId={record.key}
+                        colId={value.__name} onHandleChange={onHandleChange} onSave={onSaveCell}
+                        onEditStart={onEditCellStart} onEditCancel={onEditCellCancel}
+                        value={value.value} editMode={value.__editMode || record.__editMode}
+                        __name={value.__name}
                     />
                 ),
-            }
+            };
         }
         if (column.sortable === true) {
             newColumn = sorterDecorator(newColumn, column);

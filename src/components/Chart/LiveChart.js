@@ -4,38 +4,35 @@ import ChartLegend from './ChartLegend';
 import ChartDeleteButton from './ChartDeleteButton';
 
 const LiveChart = ({
-    metricInfo, metricMeasurements, metricHostsSelected,
-    metrices, indeterminate, lastUpdate,
-    onMetricChanged, onHostDismissed, onHostAdded,
-    onChartClosed
+    onChartClosed, onHostAdded, onHostDismissed, onMetricChanged,
+    hosts, invalidated, measurements, metric, metrics
 }) => (
-    <div className={`chart-container ${indeterminate ? 'indeterminate' : ''}`}>
+    <div className={`chart-container ${invalidated ? 'indeterminate' : ''}`}>
         <div className="chart-container-main">
             <div className="chart-corner">
                 <ChartDeleteButton onDelete={onChartClosed} />
             </div>
             <ChartEngine
-                metric1Info={metricInfo}
-                metric1Measurements={metricMeasurements}
-                metric1LastUpdate={lastUpdate}
-                metric1HostsSelected={metricHostsSelected}
+                metric1={metrics[metric]}
+                metric1Measurements={measurements}
+                metric1Hosts={hosts}
                 navigatorDisabled={true}
                 withDataLabel={true}
             />
         </div>
         <div className="chart-container-side">
             <ChartLegend
-                necessary
+                necessary={true}
                 label="Metryka"
-                metrices={metrices}
-                metricInfo={metricInfo}
-                hostsSelected={metricHostsSelected}
+                metrics={metrics}
+                metric={metric}
+                hosts={hosts}
                 onMetricChanged={onMetricChanged}
                 onHostAdded={onHostAdded}
                 onHostDismissed={onHostDismissed}
             />
         </div>
     </div>
-)
+);
 
 export default LiveChart;

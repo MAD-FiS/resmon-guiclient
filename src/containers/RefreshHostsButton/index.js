@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    refresh: actions.getHostsRequest
+    refresh: actions.getHosts
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RefreshHostsButton);

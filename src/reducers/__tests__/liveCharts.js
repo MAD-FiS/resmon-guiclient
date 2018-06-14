@@ -167,7 +167,7 @@ it('reacts to SET_LIVE_CHART_METRIC', () => {
             [chart1Payload.id]: {
                 ...chart1Payload,
                 metric: 'test3_metric',
-                hosts: hosts1Payload,
+                hosts: [],
                 invalidated: false,
                 measurements: {}
             },
@@ -175,7 +175,7 @@ it('reacts to SET_LIVE_CHART_METRIC', () => {
                 ...chart2Payload,
                 hosts: hosts2Payload,
                 invalidated: false,
-                measurements: {}
+                measurements: {},
             }
         },
         allIds: [

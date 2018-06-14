@@ -1,6 +1,6 @@
 import React from 'react';
 import HostList from '../index';
-import {fakeData} from "./fakeData";
+import {fakeData} from './fakeData';
 
 class TableContainer extends React.Component
 {
@@ -14,13 +14,12 @@ class TableContainer extends React.Component
     addMetric = (hostname, metric) => {
         const dataSource = this.state.dataSource.slice().map(data => {
             if(data.hostname === hostname) {
-                metric.id = Math.floor(Math.random()*1000)
+                metric.id = Math.floor(Math.random()*1000);
                 data.metrics.push(metric);
             }
             return data;
         });
         setTimeout(() => {
-            console.log(dataSource);
             this.setState({
                 dataSource
             });
@@ -28,7 +27,6 @@ class TableContainer extends React.Component
     };
 
     removeMetric = (hostname, metric_id) => {
-        console.log(hostname, metric_id);
         const dataSource = this.state.dataSource.slice().map(data => {
             if(data.hostname === hostname) {
                 const foundIndex = data.metrics.findIndex(metric => metric.id === metric_id);
@@ -39,7 +37,6 @@ class TableContainer extends React.Component
             return data;
         });
         setTimeout(() => {
-            console.log(dataSource);
             this.setState({
                 dataSource
             });
@@ -85,7 +82,7 @@ class TableContainer extends React.Component
     render() {
         return (
             <HostList hosts={fakeData} onAddMetric={this.addMetric} onRemoveMetric={this.removeMetric}/>
-        )
+        );
     }
 }
 

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import * as types from '../actions/types';
 
 export const getHistoricalChartById = (state, id) => state.byId[id];
+export const getHistoricalChartsArray = state => state.allIds.map(id => state.byId[id]);
 
 const chart = (state, action) => {
     switch (action.type) {
@@ -26,6 +27,7 @@ const chart = (state, action) => {
         case types.SET_HISTORICAL_CHART_METRIC1:
             return {
                 ...state,
+                hosts1: [],
                 metric1: action.payload.metric
             };
         case types.SET_HISTORICAL_CHART_METRIC2:

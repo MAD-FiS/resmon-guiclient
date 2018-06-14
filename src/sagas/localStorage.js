@@ -5,8 +5,8 @@ import * as storage from '../localStorage';
 
 export function* tokenSaver({ payload }) {
     if (payload.remember) {
-        const { resultPayload } = yield take(types.SIGN_IN_SUCCESS);
-        yield call(storage.saveToken, resultPayload.access_token);
+        const action = yield take(types.SIGN_IN_SUCCESS);
+        yield call(storage.saveToken, action.payload.access_token);
     }
 }
 
@@ -15,7 +15,7 @@ export function* tokenEraser() {
 }
 
 export function* monitorsSaver() {
-    const monitors = select(convertMonitorsFromObj);
+    const monitors = yield select(convertMonitorsFromObj);
     yield call(storage.updateMonitors, monitors);
 }
 

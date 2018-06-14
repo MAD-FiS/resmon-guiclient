@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import FormAdd from './FormAdd';
 import { Button, Modal } from 'antd';
 
@@ -20,7 +20,7 @@ class ModalAdd extends Component
             }
         }
         this.form = null;
-    };
+    }
 
     showModal = () => {
         this.setState({
@@ -36,7 +36,7 @@ class ModalAdd extends Component
 
     addRow = () => {
         if(this.form !== null) {
-            this.form.validateFields((err, values) => {
+            this.form.validateFields((err) => {
                 if (!err) {
                     this.props.onAdd(Object.assign({}, this.state.row));
                     this.setState({

@@ -8,12 +8,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    changeMonitorAddress: actions.setMonitorAddress,
-    changeMonitorDescription: actions.setMonitorDescription,
-    changeMonitor: (payload, monitor) => {
-        actions.setMonitorDescription(payload, monitor);
-        actions.setMonitorAddress(payload, monitor);
-    },
+    changeMonitorAddress: (monitor, address) => actions.setMonitorAddress({ address }, monitor),
+    changeMonitorDescription: (monitor, description) => actions.setMonitorDescription({ description }, monitor),
     addMonitor: actions.addMonitor,
     removeMonitor: actions.removeMonitor
 };

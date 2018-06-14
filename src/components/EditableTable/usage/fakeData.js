@@ -1,40 +1,40 @@
 export const fakeData = [
     {
-        col1: "195.254.125.41",
-        col2: "Wydział FiIS"
+        col1: '195.254.125.41',
+        col2: 'Wydział FiIS'
     },
     {
-        col1: "25.245.120.65",
-        col2: "Katedra Informatyki"
+        col1: '25.245.120.65',
+        col2: 'Katedra Informatyki'
     },
 ];
 
 export const fakeColumns = [
     {
-        name: "Adres",
-        id: "col1",
+        name: 'Adres',
+        id: 'col1',
         editable: true,
         sortable: true,
         width: '40%',
     },
     {
-        name: "Opis",
-        id: "col2",
+        name: 'Opis',
+        id: 'col2',
         editable: true,
         sortable: true,
         width: '40%',
     },
     {
-        name: "Menu",
-        type: "menu",
+        name: 'Menu',
+        type: 'menu',
         buttons: [
             {
-                name: "Edytuj",
-                type: "edit",
+                name: 'Edytuj',
+                type: 'edit',
             },
             {
-                name: "Usuń",
-                type: "delete",
+                name: 'Usuń',
+                type: 'delete',
             },
         ]
     }

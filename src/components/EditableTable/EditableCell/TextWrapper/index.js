@@ -9,7 +9,7 @@ const TextWrapper = ({value, editable, rowId, colId, onEditStart}) => (
                 <Icon
                     type="edit"
                     className="editable-cell-icon"
-                    onClick={(e) => onEditStart(rowId, colId)}
+                    onClick={() => onEditStart(rowId, colId)}
                 /> : ''
         }
     </React.Fragment>

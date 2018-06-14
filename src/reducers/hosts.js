@@ -1,7 +1,7 @@
 import * as types from '../actions/types';
 
 export const getMonitorByHost = (state, host) => state[host] ? state[host].monitor : null;
-export const getHostsArray = state => Object.values(state);
+export const getHostsArray = state => Object.values(state).map(h => ({ ...h, metrics: Object.values(h.metrics) }));
 
 export const getMetricsAll = state => Array.from(Object.values(state).reduce((set, h) => {
     Object.keys(h.metrics).forEach(m => set.add(m));
@@ -15,7 +15,7 @@ export const getMetrics = state => {
             if (!built[metric.id]) {
                 built[metric.id] = {};
             }
-            built[metric.id][host] = metric;
+            built[metric.id][host.hostname] = metric;
         }
     }
     return built;

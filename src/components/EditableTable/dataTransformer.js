@@ -18,7 +18,7 @@ class dataTransformer
                     __loading: false,
                     __name: cell,
                     value: row[cell]
-                }
+                };
             }
             outputRow.key = key++;
             outputData.push(outputRow);

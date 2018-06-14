@@ -4,7 +4,7 @@ import HostList from '../../components/HostList';
 
 const mapStateToProps = (state) => ({
     hosts: getHostsArray(state)
-})
+});
 
 const mapDispatchToProps = {};
 

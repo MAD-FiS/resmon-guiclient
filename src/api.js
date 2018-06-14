@@ -60,7 +60,7 @@ export const deleteComplexMetric = (server, token, host, id) => apiCall(`${serve
 });
 
 export const getMeasurements = (server, token, query) => {
-    query.q = query.q.replace(/hostname/g, 'NAME');
+    query.q = query.q.replace(/,hostname:\/.+\//, '');
     return apiCall(`${server}/measurements?${qs.stringify(query)}`, {
         headers: {
             'Authorization': `Bearer ${token}`

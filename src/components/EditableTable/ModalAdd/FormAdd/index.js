@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input } from 'antd';
 
-const FormAdd = ({form, row, columnNames, required, onChange, setFormRef}) => {
+const FormAdd = ({form, columnNames, required, onChange, setFormRef}) => {
     setFormRef(form);
     let inputs = [];
     Object.entries(columnNames).forEach(([columnId, columnName]) => {

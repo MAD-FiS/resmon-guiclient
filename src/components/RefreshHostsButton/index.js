@@ -7,6 +7,6 @@ const RefreshHostsButton = ({ invalidated, refresh }) => <Button
     className="refresh-hosts-button"
     disabled={invalidated}
     onClick={refresh}
-><Icon type="reload" />Odśwież listę hostów</Button>
+><Icon type="reload" />Odśwież listę hostów</Button>;
 
 export default RefreshHostsButton;

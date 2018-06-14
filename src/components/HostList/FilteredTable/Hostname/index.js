@@ -21,7 +21,7 @@ export class Hostname extends React.Component
         });
     };
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if(this.props.dataSource !== nextProps.dataSource) {
             this.setState({
                 dataSource: this.applyFilters(nextProps.dataSource)
@@ -55,10 +55,10 @@ export class Hostname extends React.Component
                 key: host.hostname,
                 displayName: (
                     <span>
-                          {host.hostname.split(reg).map((text, i) => (
-                              i > 0 ? [<span key="1" className="highlight">{match[0]}</span>, text] : text
-                          ))}
-                        </span>
+                        {host.hostname.split(reg).map((text, i) => (
+                            i > 0 ? [<span key="1" className="highlight">{match[0]}</span>, text] : text
+                        ))}
+                    </span>
                 ),
             };
         }).filter(host => !!host);

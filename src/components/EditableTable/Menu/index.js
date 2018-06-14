@@ -29,7 +29,7 @@ const Menu = ({loading, menuButtons, record, editable, onSaveRow, onEditRowStart
         <div className={`editable-menu-cell ${loading ? 'loading' : ''}`}>
             {buttonsArray}
         </div>
-    )
+    );
 };
 
 export default Menu;

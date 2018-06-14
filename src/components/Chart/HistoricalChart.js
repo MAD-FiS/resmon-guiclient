@@ -5,9 +5,9 @@ import ChartTimeRange from './ChartTimeRange';
 import ChartDeleteButton from './ChartDeleteButton';
 
 const HistoricalChart = ({
-    metric1Info, metric1Measurements, metric1HostsSelected,
-    metric2Info, metric2Measurements, metric2HostsSelected,
-    metrices, indeterminate, rangeFrom, rangeTo,
+    metric1, measurements1, hosts1,
+    metric2, measurements2, hosts2,
+    metrics, indeterminate, start, end,
     onMetric1Changed, onHostDismissedFromMetric1, onHostAddedToMetric1,
     onMetric2Changed, onHostDismissedFromMetric2, onHostAddedToMetric2,
     onRangeChanged, onChartClosed
@@ -15,38 +15,38 @@ const HistoricalChart = ({
     <div className={`chart-container ${indeterminate ? 'indeterminate' : ''}`}>
         <div className="chart-container-main">
             <div className="chart-corner">
-                <ChartTimeRange from={rangeFrom} to={rangeTo} onChange={onRangeChanged} />
+                <ChartTimeRange from={start} to={end} onChange={onRangeChanged} />
                 <ChartDeleteButton onDelete={onChartClosed} />
             </div>
             <ChartEngine
-                metric1Info={metric1Info}
-                metric1Measurements={metric1Measurements}
-                metric2Info={metric2Info}
-                metric2Measurements={metric2Measurements}
+                metric1={metrics[metric1]}
+                metric1Measurements={measurements1}
+                metric2={metrics[metric2]}
+                metric2Measurements={measurements2}
             />
         </div>
         <div className="chart-container-side">
             <ChartLegend
-                necessary
+                necessary={true}
                 label="Metryka podstawowa"
-                metrices={metrices}
-                metricInfo={metric1Info}
-                hostsSelected={metric1HostsSelected}
+                metrics={metrics}
+                metric={metric1}
+                hostsSelected={hosts1}
                 onMetricChanged={onMetric1Changed}
                 onHostAdded={onHostAddedToMetric1}
                 onHostDismissed={onHostDismissedFromMetric1}
             />
             <ChartLegend
                 label="Metryka dodatkowa"
-                metrices={metrices}
-                metricInfo={metric2Info}
-                hostsSelected={metric2HostsSelected}
+                metrics={metrics}
+                metric={metric2}
+                hostsSelected={hosts2}
                 onMetricChanged={onMetric2Changed}
                 onHostAdded={onHostAddedToMetric2}
                 onHostDismissed={onHostDismissedFromMetric2}
             />
         </div>
     </div>
-)
+);
 
 export default HistoricalChart;

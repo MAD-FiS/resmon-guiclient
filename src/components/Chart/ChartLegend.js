@@ -4,30 +4,30 @@ import strToColor from '../../utils/strToColor';
 
 const { Option } = Select;
 
-const MetricHeader = ({ allowClear, label, value, onChange, metrices }) => (
+const MetricHeader = ({ allowClear, label, value, onChange, metrics }) => (
     <div className="metric-header">
         <strong className="metric-name">{label}:</strong>
         <Select
-            showSearch
+            showSearch={true}
             allowClear={allowClear}
             value={value}
             onChange={onChange}
             placeholder="Wybierz metrykę"
             className="metric-selector"
         >
-            {metrices.map(m => <Option key={m} value={m}>{m}</Option>)}
+            {metrics.map(m => <Option key={m} value={m}>{m}</Option>)}
         </Select>
     </div>
 );
 
-const HostsSelector = ({ all, selected, onDismiss }) => (
+const HostsSelector = ({ selected, onDismiss }) => (
     <List
         size="small"
         dataSource={selected}
         renderItem={host => (
             <List.Item
                 actions={[
-                    <a onClick={onDismiss.bind(this, host)}><Icon type="close" /></a>
+                    <a key="close" onClick={onDismiss.bind(this, host)}><Icon type="close" /></a>
                 ]}
             >
                 <div className="series-dot" style={{ backgroundColor: strToColor(host) }}></div>
@@ -41,7 +41,7 @@ class HostsAdder extends React.PureComponent {
 
     state = {};
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (
             this.state.value
             && (
@@ -69,7 +69,7 @@ class HostsAdder extends React.PureComponent {
         const dropdownValues = all.filter(h => selected.indexOf(h) === -1);
         return (
             <div className="hosts-adder">
-                <Select showSearch allowClear placeholder="Wybierz host" value={value} onChange={this.onValueChange} className="hosts-selector">
+                <Select showSearch={true} allowClear placeholder="Wybierz host" value={value} onChange={this.onValueChange} className="hosts-selector">
                     {dropdownValues.map(h => <Option key={h} value={h}>{h}</Option>)}
                 </Select>
                 <a className="add-button" onClick={this.onSubmit}><Icon type="plus" /></a>
@@ -79,15 +79,15 @@ class HostsAdder extends React.PureComponent {
 
 }
 
-const ChartLegend = ({ necessary, label, metrices, metricInfo, hostsSelected, onMetricChanged, onHostAdded, onHostDismissed }) => (
+const ChartLegend = ({ necessary, label, metrics, metric, hosts, onMetricChanged, onHostAdded, onHostDismissed }) => (
     <div className="chart-legend">
-        <MetricHeader allowClear={!necessary} label={label} value={metricInfo ? metricInfo.id : undefined} onChange={onMetricChanged} metrices={metrices} />
-        {necessary || metricInfo ?
-            <HostsSelector all={metricInfo.hosts.map(h => h.host)} selected={hostsSelected} onDismiss={onHostDismissed} />
-        : null}
-        {necessary || metricInfo ?
-            <HostsAdder all={metricInfo.hosts.map(h => h.host)} selected={hostsSelected} onSubmit={onHostAdded} />
-        : null}
+        <MetricHeader allowClear={!necessary} label={label} value={metric} onChange={onMetricChanged} metrics={Object.keys(metrics)} />
+        {necessary || metric ?
+            <HostsSelector selected={hosts} onDismiss={onHostDismissed} />
+            : null}
+        {necessary || metric ?
+            <HostsAdder all={Object.keys(metrics[metric])} selected={hosts} onSubmit={onHostAdded} />
+            : null}
     </div>
 );
 

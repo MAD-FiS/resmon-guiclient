@@ -34,14 +34,15 @@ function* watchForLocationChange() {
     const startLocation = yield select(getPathname);
     let task = yield fork(dealWithNewLocation, startLocation);
     while (true) {
-        const { payload } = yield take([
+        const action = yield take([
             '@@router/LOCATION_CHANGE',
             types.SIGN_IN_SUCCESS,
             types.SIGN_UP_SUCCESS,
             types.REMOVE_TOKEN
         ]);
         yield cancel(task);
-        task = yield fork(dealWithNewLocation, payload.location.pathname);
+        const newLocation = action.type === '@@router/LOCATION_CHANGE' ? action.payload.location.pathname : '/';
+        task = yield fork(dealWithNewLocation, newLocation);
     }
 }
 
@@ -165,27 +166,28 @@ function* authSiteWatcher() {
     yield all([
         fork(watchForLiveChartContext),
         fork(watchForHistoricalChartUpdates),
-        fork(getAllHosts),
+        takeEvery(types.GET_HOSTS, getAllHosts),
         takeEvery(types.ADD_COMPLEX_METRIC_REQUEST, apiSagas.addComplexMetric),
         takeEvery(types.REMOVE_COMPLEX_METRIC_REQUEST, apiSagas.removeComplexMetric),
         takeEvery(types.GET_HOSTS_REQUEST, apiSagas.getHosts),
         takeEvery(types.GET_LIVE_MEASUREMENTS_REQUEST, apiSagas.getLiveChartMeasurements),
         takeEvery(types.GET_HISTORICAL_MEASUREMENTS_REQUEST, apiSagas.getHistoricalChartMeasurements),
-        takeLatest(types.SIGN_IN_REQUEST, storageSagas.tokenSaver),
-        takeLatest(types.REMOVE_TOKEN, storageSagas.tokenEraser),
         takeLatest([
             types.ADD_MONITOR,
             types.SET_MONITOR_ADDRESS,
             types.SET_MONITOR_DESCRIPTION,
             types.REMOVE_MONITOR
-        ], storageSagas.monitorsSaver)
+        ], storageSagas.monitorsSaver),
     ]);
+    yield put(actions.getHosts());
 }
 
 export default function* root() {
     yield all([
         takeEvery(types.SIGN_UP_REQUEST, apiSagas.signUp),
         takeEvery(types.SIGN_IN_REQUEST, apiSagas.signIn),
+        takeLatest(types.SIGN_IN_REQUEST, storageSagas.tokenSaver),
+        takeLatest(types.REMOVE_TOKEN, storageSagas.tokenEraser),
         takeLatest(types.CHANGE_AUTH_SERVER, storageSagas.authServerSaver),
         fork(watchForLocationChange),
         fork(loginWatcher)

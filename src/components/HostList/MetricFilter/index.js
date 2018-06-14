@@ -47,10 +47,10 @@ class MetricFilter extends React.Component
                     value={this.state.selected}
                 >
                     <OptGroup label="bazowe">
-                        {Object.entries(metrics.base).map(([id, metric]) => <Option key={metric}>{metric}</Option>)}
+                        {Object.values(metrics.base).map(metric => <Option key={metric}>{metric}</Option>)}
                     </OptGroup>
                     <OptGroup label="złożone">
-                        {Object.entries(metrics.complex).map(([id, metric]) => <Option key={metric}>{metric}</Option>)}
+                        {Object.values(metrics.complex).map(metric => <Option key={metric}>{metric}</Option>)}
                     </OptGroup>
                 </Select>
                 <Button type="primary" onClick={this.onSelect}>Wybierz</Button>

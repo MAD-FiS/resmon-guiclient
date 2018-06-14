@@ -75,6 +75,10 @@ export const removeMonitor = (monitor) => ({
     }
 });
 
+export const getHosts = () => ({
+    type: types.GET_HOSTS
+});
+
 export const getHostsRequest = (monitor) => ({
     type: types.GET_HOSTS_REQUEST,
     meta: {
@@ -184,7 +188,7 @@ export const addLiveChartHost = (payload, id) => ({
 });
 
 export const removeLiveChartHost = (id, host) => ({
-    type: types.ADD_LIVE_CHART_HOST,
+    type: types.REMOVE_LIVE_CHART_HOST,
     meta: {
         id,
         host

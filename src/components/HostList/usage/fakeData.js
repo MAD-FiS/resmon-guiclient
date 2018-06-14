@@ -1,16 +1,16 @@
 export const fakeData = [
     {
-        hostname: "www.host1.fis.pl",
+        hostname: 'www.host1.fis.pl',
         metadata: [
             {
                 id: 'OS',
-                name: "Os Version",
-                value: "Ubuntu 12.2"
+                name: 'Os Version',
+                value: 'Ubuntu 12.2'
             },
             {
                 id: 'MAX_RAM',
-                name: "Max RAM",
-                value: "12 GB"
+                name: 'Max RAM',
+                value: '12 GB'
             }
         ],
         metrics: [
@@ -46,20 +46,20 @@ export const fakeData = [
         ]
     },
     {
-        hostname: "www.host2.fis.pl",
+        hostname: 'www.host2.fis.pl',
         metadata: [
             {
                 id: 'OS',
-                name: "Os Version",
-                value: "Ubuntu 12.2"
+                name: 'Os Version',
+                value: 'Ubuntu 12.2'
             }, {
                 id: 'MAX_RAM',
-                name: "Max RAM",
-                value: "12 GB"
+                name: 'Max RAM',
+                value: '12 GB'
             }, {
                 id: 'DISC_USG',
-                name: "Disc usage",
-                value: "38%"
+                name: 'Disc usage',
+                value: '38%'
             }
         ],
         metrics: [

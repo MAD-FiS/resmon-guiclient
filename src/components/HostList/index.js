@@ -4,9 +4,9 @@ import NewMetricModal from './NewMetricModal';
 import MetadataCell from './MetadataCell';
 import MetricCell from './MetricCell';
 
-import {Hostname as HostnameFiltered} from "./FilteredTable/Hostname";
-import {Metrics as MetricsFiltered} from "./FilteredTable/Metrics";
-import {Metadata as MetadataFiltered} from "./FilteredTable/Metadata";
+import {Hostname as HostnameFiltered} from './FilteredTable/Hostname';
+import {Metrics as MetricsFiltered} from './FilteredTable/Metrics';
+import {Metadata as MetadataFiltered} from './FilteredTable/Metadata';
 
 import './index.less';
 
@@ -21,7 +21,7 @@ class HostList extends React.Component
         hostToAddMetric: null
     });
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if(this.props !== nextProps) {
             this.setState(this.getInitialState());
         }
@@ -32,14 +32,14 @@ class HostList extends React.Component
         if(typeof hostToAddMetric !== 'undefined') {
             this.setState({
                 hostToAddMetric
-            })
+            });
         }
     };
 
     closeModal = () => {
         this.setState({
             hostToAddMetric: null
-        })
+        });
     };
 
     allMetadata = (hosts) => {
@@ -80,7 +80,7 @@ class HostList extends React.Component
             dataIndex: 'metadata',
             key: 'metadata',
             width: '37%',
-            render: (metadata, host) => <MetadataCell metadata={metadata}/>,
+            render: (metadata) => <MetadataCell metadata={metadata}/>,
         }, {
             title: 'Metryki',
             dataIndex: 'metrics',
@@ -101,7 +101,7 @@ class HostList extends React.Component
                 <HostnameFiltered dataSource={hosts} columns={columns}>
                     <MetricsFiltered metrics={this.allMetrics(this.props.hosts)}>
                         <MetadataFiltered metadata={this.allMetadata(this.props.hosts)}>
-                            <Table size="middle" bordered />
+                            <Table size="middle" bordered={true} />
                         </MetadataFiltered>
                     </MetricsFiltered>
                 </HostnameFiltered>

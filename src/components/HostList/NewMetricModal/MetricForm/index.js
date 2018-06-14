@@ -7,7 +7,7 @@ import { Select as DecoratedSelect } from './Decorated/Select';
 
 const { TextArea } = Input;
 
-const MetricForm = ({form, host, metrics, onChange, onClear, setFormRef, newMetric}) => {
+const MetricForm = ({form, host, metrics, onChange, onClear, setFormRef}) => {
     setFormRef(form);
     if(host !== null) {
         return(
