@@ -72,7 +72,10 @@ class HostsAdder extends React.PureComponent {
         const dropdownValues = all.filter(h => selected.indexOf(h) === -1);
         return (
             <div className="hosts-adder">
-                <Select showSearch={true} allowClear placeholder="Wybierz host" value={value} onChange={this.onValueChange} className="hosts-selector">
+                <Select
+                    showSearch={true} allowClear placeholder="Wybierz host"
+                    value={value} onChange={this.onValueChange} className="hosts-selector"
+                >
                     {dropdownValues.map(h => <Option key={h} value={h}>{h}</Option>)}
                 </Select>
                 <a className="add-button" onClick={this.onSubmit}><Icon type="plus" /></a>
@@ -84,9 +87,18 @@ class HostsAdder extends React.PureComponent {
 
 const ChartLegend = ({ necessary, label, metrics, metric, hosts, onMetricChanged, onHostAdded, onHostDismissed }) => (
     <div className="chart-legend">
-        <MetricHeader allowClear={!necessary} label={label} value={metric} onChange={onMetricChanged} metrics={Object.keys(metrics)} />
+        <MetricHeader
+            allowClear={!necessary} label={label} value={metric}
+            onChange={onMetricChanged} metrics={Object.keys(metrics)}
+        />
         {necessary || metric ?
-            <HostsSelector selected={hosts.map(hostname => ({ hostname, metricDescription: metrics[metric][hostname].description }))} onDismiss={onHostDismissed} />
+            <HostsSelector
+                selected={hosts.map(hostname => ({
+                    hostname,
+                    metricDescription: metrics[metric][hostname].description
+                }))}
+                onDismiss={onHostDismissed}
+            />
             : null}
         {necessary || metric ?
             <HostsAdder all={Object.keys(metrics[metric])} selected={hosts} onSubmit={onHostAdded} />

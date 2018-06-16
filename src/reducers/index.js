@@ -24,7 +24,9 @@ export const getLiveChartById = (state, id) => fromLiveCharts.getLiveChartById(s
 export const getLiveChartsAllIds = state => fromLiveCharts.getLiveChartsAllIds(state.liveCharts);
 export const getLiveChartsArray = state => fromLiveCharts.getLiveChartsArray(state.liveCharts);
 
-export const getHistoricalChartById = (state, id) => fromHistoricalCharts.getHistoricalChartById(state.historicalCharts, id);
+export const getHistoricalChartById = (state, id) => (
+    fromHistoricalCharts.getHistoricalChartById(state.historicalCharts, id)
+);
 export const getHistoricalChartsArray = state => fromHistoricalCharts.getHistoricalChartsArray(state.historicalCharts);
 
 export const getPathname = state => state.router.location.pathname;

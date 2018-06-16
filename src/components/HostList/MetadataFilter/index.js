@@ -54,11 +54,18 @@ class MetadataFilter extends React.Component
                     optionFilterProp="children"
                     onChange={this.onChangeType}
                     value={this.state.type}
-                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                    filterOption={(input, option) => (
+                        option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                    )}
                 >
-                    {Object.entries(metadata).map(([id, singleMetadata]) => <Option key={id}>{singleMetadata.name}</Option>)}
+                    {Object.entries(metadata).map(([id, singleMetadata]) => (
+                        <Option key={id}>{singleMetadata.name}</Option>
+                    ))}
                 </Select>
-                <Input onChange={(e) => this.onChangeValue(e.target.value)} onPressEnter={this.onSelect} placeholder="Podaj szukaną wartość" />
+                <Input
+                    onChange={(e) => this.onChangeValue(e.target.value)}
+                    onPressEnter={this.onSelect} placeholder="Podaj szukaną wartość"
+                />
                 <Button type="primary" onClick={this.onSelect}>Wybierz</Button>
                 {
                     this.props.filtered ? <Button type="default" onClick={this.onClear}>Wyczyść</Button> : null

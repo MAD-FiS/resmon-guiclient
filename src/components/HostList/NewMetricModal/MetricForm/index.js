@@ -13,7 +13,10 @@ const MetricForm = ({form, host, metrics, newMetric, onChange, onClear, setFormR
         return(
             <Form className="metric-add-form">
                 <FormItem label="Nazwa hosta">
-                    <DecoratedInput id="hostname" disabled={true} icon="desktop" value={host.hostname} help="Adres hosta">
+                    <DecoratedInput
+                        id="hostname" disabled={true} icon="desktop"
+                        value={host.hostname} help="Adres hosta"
+                    >
                         <Input />
                     </DecoratedInput>
                 </FormItem>
@@ -21,7 +24,11 @@ const MetricForm = ({form, host, metrics, newMetric, onChange, onClear, setFormR
                     {form.getFieldDecorator('parent_id', {
                         rules: [{ required: true, message: 'Metryka bazowa musi zostać wybrana' }],
                     })(
-                        <DecoratedSelect id="parent_id" icon="bulb" help="Bazowa metryka dla obecnie tworzonej" options={metrics} myValue={newMetric.parent_id} onChange={onChange} onClear={onClear} />
+                        <DecoratedSelect
+                            id="parent_id" icon="bulb" help="Bazowa metryka dla obecnie tworzonej"
+                            options={metrics} myValue={newMetric.parent_id}
+                            onChange={onChange} onClear={onClear}
+                        />
                     )}
                 </FormItem>
                 <FormItem label="Opis metryki">
@@ -35,14 +42,22 @@ const MetricForm = ({form, host, metrics, newMetric, onChange, onClear, setFormR
                     {form.getFieldDecorator('moving_window_duration', {
                         rules: [{ required: true, message: 'Proszę podać szerokość okna czasowego' }],
                     })(
-                        <InputNumber id="moving_window_duration" help="Szerokość okna czasowego" onChange={(value) => onChange('moving_window_duration', value)} onClear={onClear} min={1} />
+                        <InputNumber
+                            id="moving_window_duration" help="Szerokość okna czasowego"
+                            onChange={(value) => onChange('moving_window_duration', value)}
+                            onClear={onClear} min={1}
+                        />
                     )}
                 </FormItem>
                 <FormItem label="Częstotliwość">
                     {form.getFieldDecorator('interval', {
                         rules: [{ required: true, message: 'Proszę podać częstotliwość' }],
                     })(
-                        <InputNumber id="interval" help="Częstotliwość" onChange={(value) => onChange('interval', value)} onClear={onClear} min={1} />
+                        <InputNumber
+                            id="interval" help="Częstotliwość"
+                            onChange={(value) => onChange('interval', value)}
+                            onClear={onClear} min={1}
+                        />
                     )}
                 </FormItem>
             </Form>

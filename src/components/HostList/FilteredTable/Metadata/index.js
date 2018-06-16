@@ -42,7 +42,9 @@ export class Metadata extends React.Component
         }
         const reg = new RegExp(value, 'gi');
         return dataSource.map((host) => {
-            const matchedIndex = host.metadata.findIndex(singleMetadata => singleMetadata.id === type && singleMetadata.value.match(reg));
+            const matchedIndex = host.metadata.findIndex(singleMetadata => (
+                singleMetadata.id === type && singleMetadata.value.match(reg)
+            ));
             if (matchedIndex < 0) {
                 return null;
             }
@@ -87,8 +89,14 @@ export class Metadata extends React.Component
             if(column.key === 'metadata') {
                 return {
                     ...column,
-                    filterDropdown: <MetadataFilter metadata={this.props.metadata} filtered={this.state.filtered} onSelect={this.onSelect} onClear={this.onClearSelect} onDismiss={this.onDismiss} />,
-                    filterIcon: <Icon onClick={e => !this.state.visible && e.stopPropagation()} type="tag-o" style={{ color: this.state.filtered ? '#84e985' : '#aaa' }} />,
+                    filterDropdown: <MetadataFilter
+                        metadata={this.props.metadata} filtered={this.state.filtered} onSelect={this.onSelect}
+                        onClear={this.onClearSelect} onDismiss={this.onDismiss}
+                    />,
+                    filterIcon: <Icon
+                        onClick={e => !this.state.visible && e.stopPropagation()} type="tag-o"
+                        style={{ color: this.state.filtered ? '#84e985' : '#aaa' }}
+                    />,
                     filterDropdownVisible: this.state.visible,
                     onFilterDropdownVisibleChange: (visible) => {
                         if (visible) {

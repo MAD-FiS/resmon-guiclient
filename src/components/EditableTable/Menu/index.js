@@ -11,7 +11,10 @@ const Menu = ({loading, menuButtons, record, editable, onSaveRow, onEditRowStart
                 return (
                     <React.Fragment key={++key}>
                         {i ? <Divider type="vertical" /> : null}
-                        <Edit record={record} text={button.name} editable={editable} onSaveRow={onSaveRow} onEditRowStart={onEditRowStart} onEditRowCancel={onEditRowCancel} />
+                        <Edit
+                            record={record} text={button.name} editable={editable} onSaveRow={onSaveRow}
+                            onEditRowStart={onEditRowStart} onEditRowCancel={onEditRowCancel}
+                        />
                     </React.Fragment>
                 );
             case 'delete':

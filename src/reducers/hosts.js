@@ -87,7 +87,10 @@ const host = (state, action) => {
                 metricsInvalidated: false
             };
         case types.REMOVE_COMPLEX_METRIC_SUCCESS: {
-            const { [action.meta.id]: metricToRemove, ...metricsToLeave } = state.metrics; // eslint-disable-line no-unused-vars
+            const {
+                [action.meta.id]: metricToRemove, // eslint-disable-line no-unused-vars
+                ...metricsToLeave
+            } = state.metrics;
             return {
                 ...state,
                 metricsInvalidated: false,

@@ -17,14 +17,18 @@ const LoginForm = ({ form, indeterminate, signIn }) => (
             {form.getFieldDecorator('username', {
                 rules: [{ required: true, message: 'Nazwa użytkownika musi zostać podana' }],
             })(
-                <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Nazwa użytkownika" />
+                <Input prefix={
+                    <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                } placeholder="Nazwa użytkownika" />
             )}
         </FormItem>
         <FormItem>
             {form.getFieldDecorator('password', {
                 rules: [{ required: true, message: 'Hasło musi zostać podane' }],
             })(
-                <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Hasło" />
+                <Input prefix={
+                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                } type="password" placeholder="Hasło" />
             )}
         </FormItem>
         <FormItem>

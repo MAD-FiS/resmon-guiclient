@@ -59,7 +59,10 @@ const HistoricalChart = ({
         <div className="chart-container-main">
             <div className="chart-corner">
                 <ChartTimeRange from={start} to={end} onChange={onRangeChanged} />
-                <a className="chart-csv-button" onClick={() => exportToCsv(metric1, metric2, measurements1, measurements2)}>
+                <a
+                    className="chart-csv-button"
+                    onClick={() => exportToCsv(metric1, metric2, measurements1, measurements2)}
+                >
                     <Icon type="export" />
                 </a>
                 <ChartDeleteButton onDelete={onChartClosed} />

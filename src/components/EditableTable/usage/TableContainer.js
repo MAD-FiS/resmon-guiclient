@@ -49,7 +49,10 @@ class TableContainer extends React.Component
 
     render() {
         return (
-            <EditableTable dataSource={this.state.dataSource} columns={fakeColumns} onChangeRow={this.changeRow} onChangeCell={this.changeCell} onAddRow={this.addRow} onDeleteRow={this.deleteRow} />
+            <EditableTable
+                dataSource={this.state.dataSource} columns={fakeColumns} onChangeRow={this.changeRow}
+                onChangeCell={this.changeCell} onAddRow={this.addRow} onDeleteRow={this.deleteRow}
+            />
         );
     }
 }

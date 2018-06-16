@@ -55,7 +55,9 @@ class MetricFilter extends React.Component
                 </Select>
                 <Button type="primary" onClick={this.onSelect}>Wybierz</Button>
                 {
-                    this.state.selected.length > 0 ? <Button type="default" onClick={this.onClear}>Wyczyść</Button> : null
+                    this.state.selected.length > 0 ? <Button
+                        type="default" onClick={this.onClear}
+                    >Wyczyść</Button> : null
                 }
             </div>
         );

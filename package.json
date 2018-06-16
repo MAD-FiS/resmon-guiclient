@@ -6,9 +6,10 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
+    "build:separate-js": "webpack --config webpack.separate-js.prod.js",
     "test": "jest",
     "doc": "esdoc -c esdoc.json",
-    "lint-check": "eslint src/"
+    "lint-check": "eslint src/ *.js && lesshint src/ --config .lesshint.js --reporter lesshint-reporter-stylisher"
   },
   "author": "",
   "license": "ISC",
@@ -57,6 +58,8 @@
     "jest": "^23.0.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
+    "lesshint": "^5.1.0",
+    "lesshint-reporter-stylisher": "^1.0.0",
     "regenerator-runtime": "^0.11.1",
     "style-loader": "^0.21.0",
     "uglifyjs-webpack-plugin": "^1.2.5",

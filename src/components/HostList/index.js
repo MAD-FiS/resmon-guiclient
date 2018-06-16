@@ -88,7 +88,9 @@ class HostList extends React.Component
             dataIndex: 'metrics',
             key: 'metrics',
             width: '37%',
-            render: (metrics, host) => <MetricCell onShowModal={this.showModal} onRemove={this.props.onRemoveMetric} host={host}/>,
+            render: (metrics, host) => <MetricCell
+                onShowModal={this.showModal} onRemove={this.props.onRemoveMetric} host={host}
+            />,
         }];
 
         const hosts = this.props.hosts.map(host => ({
@@ -99,7 +101,9 @@ class HostList extends React.Component
 
         return (
             <div className="host-list">
-                <NewMetricModal host={this.state.hostToAddMetric} onAddMetric={this.props.onAddMetric} onClose={this.closeModal}/>
+                <NewMetricModal
+                    host={this.state.hostToAddMetric} onAddMetric={this.props.onAddMetric} onClose={this.closeModal}
+                />
                 <HostnameFiltered dataSource={hosts} columns={columns}>
                     <MetricsFiltered metrics={this.allMetrics(this.props.hosts)}>
                         <MetadataFiltered metadata={this.allMetadata(this.props.hosts)}>

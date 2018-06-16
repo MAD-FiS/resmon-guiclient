@@ -3,7 +3,10 @@ import { Select as OriginalSelect } from 'antd';
 
 export class Select extends React.PureComponent {
     render() {
-        const {id, searchable, disabled, options, onChange, value, myValue, ...rest} = this.props; // eslint-disable-line no-unused-vars
+        const {
+            id, searchable, disabled, options,
+            onChange, value, myValue, ...rest // eslint-disable-line no-unused-vars
+        } = this.props;
         return (
             <OriginalSelect
                 {...rest}
@@ -14,7 +17,9 @@ export class Select extends React.PureComponent {
             >
                 {
                     options.map(option => {
-                        return <OriginalSelect.Option key={option.value} value={option.value}>{option.name}</OriginalSelect.Option>;
+                        return <OriginalSelect.Option
+                            key={option.value} value={option.value}
+                        >{option.name}</OriginalSelect.Option>;
                     })
                 }
             </OriginalSelect>

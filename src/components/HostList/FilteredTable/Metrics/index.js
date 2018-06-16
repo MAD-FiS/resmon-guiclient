@@ -38,7 +38,9 @@ export class Metrics extends React.Component
             return dataSource;
         }
         return dataSource.map((host) => {
-            const matchedIndex = host.metrics.findIndex(metric => selected.some(oneSelected => oneSelected === metric.id));
+            const matchedIndex = host.metrics.findIndex(metric => (
+                selected.some(oneSelected => oneSelected === metric.id)
+            ));
             if (matchedIndex < 0) {
                 return null;
             }
@@ -75,8 +77,14 @@ export class Metrics extends React.Component
             if(column.key === 'metrics') {
                 return {
                     ...column,
-                    filterDropdown: <MetricFilter metrics={this.props.metrics} onSelect={this.onSelect} onClear={this.onClearSelect} onDismiss={this.onDismiss} />,
-                    filterIcon: <Icon onClick={e => !this.state.visible && e.stopPropagation()} type="tag-o" style={{ color: this.state.filtered ? '#84e985' : '#aaa' }} />,
+                    filterDropdown: <MetricFilter
+                        metrics={this.props.metrics} onSelect={this.onSelect}
+                        onClear={this.onClearSelect} onDismiss={this.onDismiss}
+                    />,
+                    filterIcon: <Icon
+                        onClick={e => !this.state.visible && e.stopPropagation()} type="tag-o"
+                        style={{ color: this.state.filtered ? '#84e985' : '#aaa' }}
+                    />,
                     filterDropdownVisible: this.state.visible,
                     onFilterDropdownVisibleChange: (visible) => {
                         if (visible) {

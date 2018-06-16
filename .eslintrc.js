@@ -31,6 +31,14 @@ module.exports = {
                 "SwitchCase": 1
             }
         ],
+        "max-len": [
+            "error", 120
+        ],
+        "eol-last": [
+            "error",
+            "always"
+        ],
+        "no-trailing-spaces": "error",
         "linebreak-style": [
             "error",
             "unix"
@@ -56,6 +64,7 @@ module.exports = {
     },
     "globals": {
         'DEFAULT_AUTH_SERVER': true,
-        'DEFAULT_MONITORS': true
+        'DEFAULT_MONITORS': true,
+        'process': true
     }
 };

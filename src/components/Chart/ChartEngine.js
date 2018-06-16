@@ -8,7 +8,10 @@ HighchartsBoost(Highcharts);
 
 Highcharts.setOptions({
     lang: {
-        months: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
+        months: [
+            'Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec',
+            'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'
+        ],
         shortMonths: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
         weekdays: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota']
     },
@@ -138,9 +141,14 @@ class ChartEngine extends React.Component {
                             if (this.point.index !== this.series.data.length - 1) {
                                 return null;
                             }
+                            const nrFormatted = Highcharts.numberFormat(
+                                this.y,
+                                this.series.tooltipOptions.valueDecimals
+                            );
+                            const suffix = this.series.tooltipOptions.valueSuffix;
                             return `
                                 <span style="color: ${this.color};">${this.series.name}</span><br />
-                                <strong style="color: ${this.color};">${Highcharts.numberFormat(this.y, this.series.tooltipOptions.valueDecimals)}${this.series.tooltipOptions.valueSuffix}</strong>
+                                <strong style="color: ${this.color};">${nrFormatted}${suffix}</strong>
                             `;
                         },
                         enabled: withDataLabel

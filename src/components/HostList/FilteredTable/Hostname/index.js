@@ -94,7 +94,9 @@ export class Hostname extends React.Component
                             />
                             <Button type="primary" onClick={this.onSearch}>Szukaj</Button>
                             {
-                                this.state.filtered && this.state.searchQuery !== '' ? <Button type="default" onClick={this.onClearSearch}>Wyczyść</Button> : null
+                                this.state.filtered && this.state.searchQuery !== '' ? <Button
+                                    type="default" onClick={this.onClearSearch}
+                                >Wyczyść</Button> : null
                             }
                         </div>
                     ),

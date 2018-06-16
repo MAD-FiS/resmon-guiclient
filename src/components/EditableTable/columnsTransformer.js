@@ -26,14 +26,22 @@ const menuTransformer = (inputColumn, onSaveRow, onEditRowStart, onEditRowCancel
         title: inputColumn.name,
         render: (value, record) => { // eslint-disable-line react/display-name
             return (
-                <Menu menuButtons={inputColumn.buttons} loading={record.__loading} editable={record.__editMode} record={record} onSaveRow={onSaveRow}
-                    onEditRowStart={onEditRowStart} onEditRowCancel={onEditRowCancel} onDeleteRow={onDeleteRow}/>
+                <Menu
+                    menuButtons={inputColumn.buttons} loading={record.__loading}
+                    editable={record.__editMode} record={record} onSaveRow={onSaveRow}
+                    onEditRowStart={onEditRowStart} onEditRowCancel={onEditRowCancel}
+                    onDeleteRow={onDeleteRow}
+                />
             );
         },
     };
 };
 
-const columnTransformer = (inputColumns, onHandleChange = () => (null), onSaveCell = () => (null), onEditCellStart = () => (null), onEditCellCancel = () => (null), onSaveRow = () => (null), onEditRowStart = () => (null), onEditRowCancel = () => (null), onDeleteRow = () => (null)) => {
+const columnTransformer = (
+    inputColumns, onHandleChange = () => (null), onSaveCell = () => (null), onEditCellStart = () => (null),
+    onEditCellCancel = () => (null), onSaveRow = () => (null), onEditRowStart = () => (null),
+    onEditRowCancel = () => (null), onDeleteRow = () => (null)
+) => {
     let outputColumns = [], newColumn;
     for (const column of inputColumns) {
         if (column.type === 'menu') {
@@ -44,7 +52,8 @@ const columnTransformer = (inputColumns, onHandleChange = () => (null), onSaveCe
                 dataIndex: column.id,
                 render: (value, record) => ( // eslint-disable-line react/display-name
                     <EditableCell prefix={column.prefixRender ? column.prefixRender(value, record, column) : null}
-                        editable={column.editable && !record.__editMode} loading={value.__loading || record.__loading} rowId={record.key}
+                        editable={column.editable && !record.__editMode}
+                        loading={value.__loading || record.__loading} rowId={record.key}
                         colId={value.__name} onHandleChange={onHandleChange} onSave={onSaveCell}
                         onEditStart={onEditCellStart} onEditCancel={onEditCellCancel}
                         value={value.value} editMode={value.__editMode || record.__editMode}

@@ -105,7 +105,10 @@ class NewMetricModal extends React.Component
                 cancelText="Anuluj"
                 confirmLoading={this.state.loading}
             >
-                <MetricForm host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric} setFormRef={this.setFormRef} onChange={this.onChange} onClear={this.onClear} />
+                <MetricForm
+                    host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric}
+                    setFormRef={this.setFormRef} onChange={this.onChange} onClear={this.onClear}
+                />
             </Modal>
         );
     }

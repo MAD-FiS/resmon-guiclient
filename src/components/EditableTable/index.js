@@ -89,7 +89,9 @@ class EditableTable extends Component
         let dataSource = this.state.dataSource.slice();
         dataSource[rowIndex].__editMode = true;
         for(const colId in dataSource[rowIndex]) {
-            if(dataSource[rowIndex].hasOwnProperty(colId) && colId !== '__editMode' && colId !== 'key' && colId !== '__loading') {
+            if(dataSource[rowIndex].hasOwnProperty(colId) && colId !== '__editMode'
+                && colId !== 'key' && colId !== '__loading'
+            ) {
                 dataSource[rowIndex][colId].__oldValue = dataSource[rowIndex][colId].value;
             }
         }
@@ -103,7 +105,9 @@ class EditableTable extends Component
         let dataSource = this.state.dataSource.slice();
         dataSource[rowIndex].__editMode = false;
         for(const colId in dataSource[rowIndex]) {
-            if(dataSource[rowIndex].hasOwnProperty(colId) && colId !== '__editMode' && colId !== 'key' && colId !== '__loading') {
+            if(dataSource[rowIndex].hasOwnProperty(colId) && colId !== '__editMode'
+                && colId !== 'key' && colId !== '__loading'
+            ) {
                 dataSource[rowIndex][colId].value = dataSource[rowIndex][colId].__oldValue;
             }
         }
@@ -124,7 +128,13 @@ class EditableTable extends Component
         return (
             <div className={`editable-table ${this.props.className || ''}`}>
                 <ModalAdd buttonText="Dodaj monitor" columns={this.props.columns} onAdd={this.onAddRow} />
-                <Table size="middle" bordered={true} rowSelection={this.rowSelection} dataSource={this.state.dataSource} columns={columnTransformer(this.props.columns, this.onHandleChange, this.onSaveCell, this.onEditStart, this.onEditCancel, this.onSaveRow, this.onEditRowStart, this.onEditRowCancel, this.props.onDeleteRow)} />
+                <Table
+                    size="middle" bordered={true} rowSelection={this.rowSelection} dataSource={this.state.dataSource}
+                    columns={columnTransformer(
+                        this.props.columns, this.onHandleChange, this.onSaveCell, this.onEditStart, this.onEditCancel,
+                        this.onSaveRow, this.onEditRowStart, this.onEditRowCancel, this.props.onDeleteRow
+                    )}
+                />
             </div>
         );
     }

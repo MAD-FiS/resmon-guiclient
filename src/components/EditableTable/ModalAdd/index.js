@@ -79,7 +79,10 @@ class ModalAdd extends Component
                     okText="Dodaj"
                     cancelText="Anuluj"
                 >
-                    <FormAdd row={this.state.row} columnNames={this.columnNames} required={this.required} onChange={this.onChange} setFormRef={this.setFormRef} />
+                    <FormAdd
+                        row={this.state.row} columnNames={this.columnNames} required={this.required}
+                        onChange={this.onChange} setFormRef={this.setFormRef}
+                    />
                 </Modal>
             </div>
         );

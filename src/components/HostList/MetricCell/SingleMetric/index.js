@@ -22,5 +22,5 @@ const SingleMetric = ({hostname, metric, onRemove, found}) => {
 
 export default SingleMetric;
 
-//{/*removable && metric.removable ?*/} 
+//{/*removable && metric.removable ?*/}
 //{/* : null */}
