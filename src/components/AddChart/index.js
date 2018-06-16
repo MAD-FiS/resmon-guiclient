@@ -22,7 +22,7 @@ class AddChart extends React.PureComponent {
         const { value } = this.state;
         return (
             <div className="add-chart">
-                <Select className="add-chart-select" placeholder="Wybierz metrykę" allowClear={true} value={value} onChange={this.onChange}>
+                <Select className="add-chart-select" placeholder="Wybierz metrykę" allowClear={true} showSearch={true} value={value} onChange={this.onChange}>
                     {metrics.map(metric => (
                         <Select.Option key={metric} value={metric}>{metric}</Select.Option>
                     ))}

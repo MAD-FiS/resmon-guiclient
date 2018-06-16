@@ -7,7 +7,7 @@ const LiveChart = ({
     onChartClosed, onHostAdded, onHostDismissed, onMetricChanged,
     hosts, invalidated, measurements, metric, metrics
 }) => (
-    <div className={`chart-container ${invalidated ? 'indeterminate' : ''}`}>
+    <div className="chart-container">
         <div className="chart-container-main">
             <div className="chart-corner">
                 <ChartDeleteButton onDelete={onChartClosed} />
@@ -18,6 +18,7 @@ const LiveChart = ({
                 metric1Hosts={hosts}
                 navigatorDisabled={true}
                 withDataLabel={true}
+                invalidated={invalidated}
             />
         </div>
         <div className="chart-container-side">

@@ -602,7 +602,7 @@ it('reacts to ADD_HISTORICAL_CHART_HOST2', () => {
         ]
     });
 });
-/*
+
 it('reacts to REMOVE_HISTORICAL_CHART_HOST1', () => {
     let state = {
         historicalCharts: {
@@ -636,11 +636,9 @@ it('reacts to REMOVE_HISTORICAL_CHART_HOST1', () => {
     };
     state = reducer(state, {
         type: types.REMOVE_HISTORICAL_CHART_HOST1,
-        payload: {
-            host: 'host1a'
-        },
         meta: {
             id: chart1.id,
+            host: 'host1a'
         }
     });
     expect(state.historicalCharts).toEqual({
@@ -706,11 +704,9 @@ it('reacts to REMOVE_HISTORICAL_CHART_HOST2', () => {
     };
     state = reducer(state, {
         type: types.REMOVE_HISTORICAL_CHART_HOST2,
-        payload: {
-            host: 'host1b'
-        },
         meta: {
             id: chart1.id,
+            host: 'host1b'
         }
     });
     expect(state.historicalCharts).toEqual({
@@ -742,7 +738,7 @@ it('reacts to REMOVE_HISTORICAL_CHART_HOST2', () => {
         ]
     });
 });
-*/
+
 it('reacts to GET_HISTORICAL_MEASUREMENTS_REQUEST', () => {
     let state = {
         historicalCharts: {

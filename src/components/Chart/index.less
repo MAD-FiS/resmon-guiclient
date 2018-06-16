@@ -19,7 +19,16 @@
                 padding: 0 8px;
                 line-height: 4ex;
             }
-        }   
+        }
+        
+        .chart {
+            transition: opacity 0.2s;
+            
+            &.indeterminate {
+                opacity: 0.5;
+                pointer-events: none;
+            }
+        }
     }
 
     .chart-container-side {
@@ -76,10 +85,5 @@
                 }
             }
         }
-    }
-
-    &.indeterminate {
-        opacity: 0.5;
-        pointer-events: none;
     }
 }

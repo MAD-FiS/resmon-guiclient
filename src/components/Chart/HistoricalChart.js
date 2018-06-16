@@ -20,19 +20,27 @@ const exportToCsv = (metric1, metric2, measurements1, measurements2) => {
     }
     const arr2d = bySecond.map(() => Array.from({ length: labels.length }));
     const bySecondToIndex = bySecond.reduce((c, v, i) => Object.assign({ [v]: i }, c), {});
-    const labelsToIndex = labels.reduce((c, v, i) => Object.assign({ [v]: i + 1 }, c), {});
+    const labelsToIndex = labels.reduce((c, v, i) => Object.assign({ [v]: i }, c), {});
     for (let i = 0; i < arr2d.length; ++i) {
         arr2d[i][0] = moment.unix(bySecond[i]).toISOString();
     }
     for (const host of Object.keys(measurements1)) {
-        for (const point of Object.keys(measurements1[host])) {
+        for (const point of Object.values(measurements1[host])) {
             arr2d[bySecondToIndex[moment(point.time).unix()]][labelsToIndex[metric1 + ':' + host]] = point.value;
+        }
+    }
+    if (measurements2) {
+        for (const host of Object.keys(measurements2)) {
+            for (const point of Object.values(measurements2[host])) {
+                arr2d[bySecondToIndex[moment(point.time).unix()]][labelsToIndex[metric2 + ':' + host]] = point.value;
+            }
         }
     }
     const toExport = [ labels, ...arr2d ];
     const str = toExport.map(v => v.join(',')).join('\r\n');
     const exportLink = document.createElement('a');
     exportLink.setAttribute('href', 'data:text/csv;base64,' + window.btoa(str));
+    exportLink.setAttribute('download', 'historical_' + metric1 + (metric2 ? '_' + metric2 : '') + '.csv');
     exportLink.appendChild(document.createTextNode('test.csv'));
     document.getElementsByTagName('body')[0].appendChild(exportLink);
     exportLink.click();
@@ -47,7 +55,7 @@ const HistoricalChart = ({
     onMetric2Changed, onHostDismissedFromMetric2, onHostAddedToMetric2,
     onRangeChanged, onChartClosed
 }) => (
-    <div className={`chart-container ${indeterminate ? 'indeterminate' : ''}`}>
+    <div className="chart-container">
         <div className="chart-container-main">
             <div className="chart-corner">
                 <ChartTimeRange from={start} to={end} onChange={onRangeChanged} />
@@ -61,6 +69,7 @@ const HistoricalChart = ({
                 metric1Measurements={measurements1}
                 metric2={metrics[metric2]}
                 metric2Measurements={measurements2}
+                indeterminate={indeterminate}
             />
         </div>
         <div className="chart-container-side">

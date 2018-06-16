@@ -1,8 +1,5 @@
 const webpack = require('webpack');
 
-console.log();
-console.log();
-
 module.exports = {
     module: {
         rules: [

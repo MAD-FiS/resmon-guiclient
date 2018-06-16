@@ -182,7 +182,7 @@ class ChartEngine extends React.Component {
     }
 
     render() {
-        return <div className="chart" ref={this.chartRef}></div>;
+        return <div className={`chart ${this.props.invalidated ? 'indeterminate' : ''}`} ref={this.chartRef}></div>;
     }
 
 }

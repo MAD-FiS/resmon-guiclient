@@ -21,7 +21,7 @@ class AuthServer extends React.PureComponent {
 
     componentDidUpdate(prevProps, prevState) {
         if (this.state.editMode && !prevState.editMode) {
-            this.rootRef.current.root.getElementsByTagName('input')[0].focus();
+            this.rootRef.current.getElementsByTagName('input')[0].focus();
         }
     }
 
@@ -38,7 +38,7 @@ class AuthServer extends React.PureComponent {
     }
 
     onSave = () => {
-        this.props.changeAuthServer(this.state.authServer);
+        this.props.changeAuthServer({ address: this.state.authServer });
         this.setState({ editMode: false });
     }
 
