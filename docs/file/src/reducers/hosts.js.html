@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/reducers/hosts.js | react-antd-app</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deleteComplexMetric">deleteComplexMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHosts">getHosts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMeasurements">getMeasurements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-login">login</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-postComplexMetric">postComplexMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-registration">registration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createStore">createStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-clearToken">clearToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitors">getMonitors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getSavedState">getSavedState</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getToken">getToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-saveToken">saveToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-updateAuthServer">updateAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-updateMonitors">updateMonitors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getDefaultRouteByToken">getDefaultRouteByToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getRoutes">getRoutes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isRouteDefined">isRouteDefined</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isTokenRequired">isTokenRequired</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getCurrentTime">getCurrentTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getStartTimeForLiveCharts">getStartTimeForLiveCharts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HISTORICAL_ROUTE">HISTORICAL_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HOSTS_ROUTE">HOSTS_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LIVE_ROUTE">LIVE_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOGIN_ROUTE">LOGIN_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MONITORS_ROUTE">MONITORS_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REGISTRATION_ROUTE">REGISTRATION_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-routes">routes</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#actions">actions</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addComplexMetricFailure">addComplexMetricFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addComplexMetricRequest">addComplexMetricRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addComplexMetricSuccess">addComplexMetricSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addHistoricalChart">addHistoricalChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addHistoricalChartHost1">addHistoricalChartHost1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addHistoricalChartHost2">addHistoricalChartHost2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addLiveChart">addLiveChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addLiveChartHost">addLiveChartHost</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addMonitor">addMonitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-changeAuthServer">changeAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-changeRoutingContext">changeRoutingContext</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalMeasurementsFailure">getHistoricalMeasurementsFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalMeasurementsRequest">getHistoricalMeasurementsRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalMeasurementsSuccess">getHistoricalMeasurementsSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHosts">getHosts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsFailure">getHostsFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsRequest">getHostsRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsSuccess">getHostsSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveMeasurementsFailure">getLiveMeasurementsFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveMeasurementsRequest">getLiveMeasurementsRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveMeasurementsSuccess">getLiveMeasurementsSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeComplexMetricFailure">removeComplexMetricFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeComplexMetricRequest">removeComplexMetricRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeComplexMetricSucces">removeComplexMetricSucces</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeHistoricalChart">removeHistoricalChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeHistoricalChartHost1">removeHistoricalChartHost1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeHistoricalChartHost2">removeHistoricalChartHost2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeLiveChart">removeLiveChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeLiveChartHost">removeLiveChartHost</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeMonitor">removeMonitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeToken">removeToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setHistoricalChartMetric1">setHistoricalChartMetric1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setHistoricalChartMetric2">setHistoricalChartMetric2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setHistoricalChartRange">setHistoricalChartRange</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setLiveChartMetric">setLiveChartMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setMonitorAddress">setMonitorAddress</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setMonitorDescription">setMonitorDescription</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signInFailure">signInFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signInRequest">signInRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signInSuccess">signInSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signUpFailure">signUpFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signUpRequest">signUpRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signUpSuccess">signUpSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_FAILURE">ADD_COMPLEX_METRIC_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_REQUEST">ADD_COMPLEX_METRIC_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_SUCCESS">ADD_COMPLEX_METRIC_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART">ADD_HISTORICAL_CHART</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART_HOST1">ADD_HISTORICAL_CHART_HOST1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART_HOST2">ADD_HISTORICAL_CHART_HOST2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_LIVE_CHART">ADD_LIVE_CHART</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_LIVE_CHART_HOST">ADD_LIVE_CHART_HOST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_MONITOR">ADD_MONITOR</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CHANGE_AUTH_SERVER">CHANGE_AUTH_SERVER</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CHANGE_ROUTING_CONTEXT">CHANGE_ROUTING_CONTEXT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_FAILURE">GET_HISTORICAL_MEASUREMENTS_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_REQUEST">GET_HISTORICAL_MEASUREMENTS_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_SUCCESS">GET_HISTORICAL_MEASUREMENTS_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HOSTS">GET_HOSTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HOSTS_FAILURE">GET_HOSTS_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HOSTS_REQUEST">GET_HOSTS_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HOSTS_SUCCESS">GET_HOSTS_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_FAILURE">GET_LIVE_MEASUREMENTS_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_REQUEST">GET_LIVE_MEASUREMENTS_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_SUCCESS">GET_LIVE_MEASUREMENTS_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_FAILURE">REMOVE_COMPLEX_METRIC_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_REQUEST">REMOVE_COMPLEX_METRIC_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_SUCCESS">REMOVE_COMPLEX_METRIC_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART">REMOVE_HISTORICAL_CHART</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART_HOST1">REMOVE_HISTORICAL_CHART_HOST1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART_HOST2">REMOVE_HISTORICAL_CHART_HOST2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_LIVE_CHART">REMOVE_LIVE_CHART</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_LIVE_CHART_HOST">REMOVE_LIVE_CHART_HOST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_MONITOR">REMOVE_MONITOR</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_TOKEN">REMOVE_TOKEN</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_METRIC1">SET_HISTORICAL_CHART_METRIC1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_METRIC2">SET_HISTORICAL_CHART_METRIC2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_RANGE">SET_HISTORICAL_CHART_RANGE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_LIVE_CHART_METRIC">SET_LIVE_CHART_METRIC</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_MONITOR_ADDRESS">SET_MONITOR_ADDRESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_MONITOR_DESCRIPTION">SET_MONITOR_DESCRIPTION</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_IN_FAILURE">SIGN_IN_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_IN_REQUEST">SIGN_IN_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_IN_SUCCESS">SIGN_IN_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_UP_FAILURE">SIGN_UP_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_UP_REQUEST">SIGN_UP_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_UP_SUCCESS">SIGN_UP_SUCCESS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-addchart">components/AddChart</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/AddChart/index.js~AddChart.html">AddChart</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-applayout">components/AppLayout</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AppLayout">AppLayout</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-authserver">components/AuthServer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/AuthServer/index.js~AuthServer.html">AuthServer</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-chart">components/Chart</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Chart/ChartEngine.js~ChartEngine.html">ChartEngine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ChartDeleteButton">ChartDeleteButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ChartLegend">ChartLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ChartTimeRange">ChartTimeRange</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-HistoricalChart">HistoricalChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-LiveChart">LiveChart</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-chart-usage">components/Chart/usage</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Chart/usage/HistoricalChartWrapper.js~HistoricalChartWrapper.html">HistoricalChartWrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Chart/usage/LiveChartWrapper.js~LiveChartWrapper.html">LiveChartWrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getData">getData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-metrices">metrices</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable">components/EditableTable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EditableTable/dataTransformer.js~dataTransformer.html">dataTransformer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EditableTable/index.js~EditableTable.html">EditableTable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-columnTransformer">columnTransformer</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-editablecell">components/EditableTable/EditableCell</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-EditableCell">EditableCell</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-editablecell-inputwrapper">components/EditableTable/EditableCell/InputWrapper</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-InputWrapper">InputWrapper</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-editablecell-textwrapper">components/EditableTable/EditableCell/TextWrapper</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TextWrapper">TextWrapper</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-menu">components/EditableTable/Menu</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Menu">Menu</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-menu-delete">components/EditableTable/Menu/Delete</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Delete">Delete</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-menu-edit">components/EditableTable/Menu/Edit</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Edit">Edit</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-modaladd">components/EditableTable/ModalAdd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EditableTable/ModalAdd/index.js~ModalAdd.html">ModalAdd</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-modaladd-formadd">components/EditableTable/ModalAdd/FormAdd</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedFormAdd">WrappedFormAdd</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-usage">components/EditableTable/usage</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EditableTable/usage/TableContainer.js~TableContainer.html">TableContainer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fakeColumns">fakeColumns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fakeData">fakeData</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist">components/HostList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/index.js~HostList.html">HostList</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-filteredtable-hostname">components/HostList/FilteredTable/Hostname</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/FilteredTable/Hostname/index.js~Hostname.html">Hostname</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-filteredtable-metadata">components/HostList/FilteredTable/Metadata</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/FilteredTable/Metadata/index.js~Metadata.html">Metadata</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-filteredtable-metrics">components/HostList/FilteredTable/Metrics</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/FilteredTable/Metrics/index.js~Metrics.html">Metrics</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metadatacell">components/HostList/MetadataCell</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MetadataCell">MetadataCell</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metadatafilter">components/HostList/MetadataFilter</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/MetadataFilter/index.js~MetadataFilter.html">MetadataFilter</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metriccell">components/HostList/MetricCell</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MetricCell">MetricCell</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metriccell-singlemetric">components/HostList/MetricCell/SingleMetric</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SingleMetric">SingleMetric</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metriccell-singlemetric-metricinfo">components/HostList/MetricCell/SingleMetric/MetricInfo</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MetricInfo">MetricInfo</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metriccell-singlemetric-removemetric">components/HostList/MetricCell/SingleMetric/RemoveMetric</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RemoveMetric">RemoveMetric</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metricfilter">components/HostList/MetricFilter</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/MetricFilter/index.js~MetricFilter.html">MetricFilter</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal">components/HostList/NewMetricModal</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/NewMetricModal/index.js~NewMetricModal.html">NewMetricModal</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal-metricform">components/HostList/NewMetricModal/MetricForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedMetricForm">WrappedMetricForm</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal-metricform-decorated-input">components/HostList/NewMetricModal/MetricForm/Decorated/Input</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/NewMetricModal/MetricForm/Decorated/Input/index.js~Input.html">Input</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal-metricform-decorated-select">components/HostList/NewMetricModal/MetricForm/Decorated/Select</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/NewMetricModal/MetricForm/Decorated/Select/index.js~Select.html">Select</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal-metricform-formitem">components/HostList/NewMetricModal/MetricForm/FormItem</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-FormItem">FormItem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-usage">components/HostList/usage</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/usage/TableContainer.js~TableContainer.html">TableContainer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fakeColumns">fakeColumns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fakeData">fakeData</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-loginform">components/LoginForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedLoginForm">WrappedLoginForm</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-monitoricon">components/MonitorIcon</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MonitorIcon">MonitorIcon</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-monitorstable">components/MonitorsTable</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MonitorsTable">MonitorsTable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-notification">components/Notification</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Notification/index.js~Notification.html">Notification</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-refreshhostsbutton">components/RefreshHostsButton</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RefreshHostsButton">RefreshHostsButton</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-registerform">components/RegisterForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedRegisterForm">WrappedRegisterForm</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-metrics">pages/Metrics</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Metrics">Metrics</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-monitors">pages/Monitors</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Monitors">Monitors</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-notfound">pages/NotFound</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-NotFound">NotFound</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-signin">pages/SignIn</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SignIn">SignIn</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-signup">pages/SignUp</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SignUp">SignUp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#reducers">reducers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getToken">getToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getTokenRequested">getTokenRequested</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartById">getHistoricalChartById</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartsArray">getHistoricalChartsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsArray">getHostsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMetrics">getMetrics</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMetricsAll">getMetricsAll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorByHost">getMonitorByHost</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hosts">hosts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertMonitorsFromObj">convertMonitorsFromObj</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartById">getHistoricalChartById</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartsArray">getHistoricalChartsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartsByMonitors">getHistoricalChartsByMonitors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsArray">getHostsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartById">getLiveChartById</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartByMonitors">getLiveChartByMonitors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartLastTime">getLiveChartLastTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartsAllIds">getLiveChartsAllIds</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartsArray">getLiveChartsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLocation">getLocation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMetrics">getMetrics</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMetricsAll">getMetricsAll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorByHost">getMonitorByHost</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsAddresses">getMonitorsAddresses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsArray">getMonitorsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsHostsInvalidated">getMonitorsHostsInvalidated</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getPathname">getPathname</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getToken">getToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getTokenRequested">getTokenRequested</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartById">getLiveChartById</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartsAllIds">getLiveChartsAllIds</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartsArray">getLiveChartsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertMonitorsFromObj">convertMonitorsFromObj</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertMonitorsToObj">convertMonitorsToObj</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsAddresses">getMonitorsAddresses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsArray">getMonitorsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsHostsInvalidated">getMonitorsHostsInvalidated</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-monitors">monitors</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sagas">sagas</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addComplexMetric">addComplexMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartMeasurements">getHistoricalChartMeasurements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartMeasurementsForSingleMonitor">getHistoricalChartMeasurementsForSingleMonitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHosts">getHosts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartMeasurements">getLiveChartMeasurements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartMeasurementsForSingleMonitor">getLiveChartMeasurementsForSingleMonitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeComplexMetric">removeComplexMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signIn">signIn</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signUp">signUp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-root">root</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-authServerSaver">authServerSaver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-monitorsSaver">monitorsSaver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-tokenEraser">tokenEraser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-tokenSaver">tokenSaver</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-strToColor">strToColor</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/reducers/hosts.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import * as types from &apos;../actions/types&apos;;
+
+export const getMonitorByHost = (state, host) =&gt; state[host] ? state[host].monitor : null;
+export const getHostsArray = state =&gt; Object.values(state).map(h =&gt; ({ ...h, metrics: Object.values(h.metrics) }));
+
+export const getMetricsAll = state =&gt; Array.from(Object.values(state).reduce((set, h) =&gt; {
+    Object.keys(h.metrics).forEach(m =&gt; set.add(m));
+    return set;
+}, new Set()));
+
+export const getMetrics = state =&gt; {
+    const built = {};
+    for (const host of Object.values(state)) {
+        for (const metric of Object.values(host.metrics)) {
+            if (!built[metric.id]) {
+                built[metric.id] = {};
+            }
+            built[metric.id][host.hostname] = metric;
+        }
+    }
+    return built;
+};
+
+const extractHosts = (state, monitor) =&gt; Object.entries(state)
+    .reduce(
+        (c, [ key, obj ]) =&gt; {
+            const type = obj.monitor === monitor ? &apos;found&apos; : &apos;rest&apos;;
+            return {
+                ...c,
+                [type]: {
+                    ...c[type],
+                    [key]: obj
+                }
+            };
+        },
+        {
+            found: {},
+            rest: {}
+        }
+    );
+
+const setMonitor = (state, monitor) =&gt; Object.entries(state)
+    .map(([ key, obj ]) =&gt; [ key, { ...obj, monitor } ])
+    .reduce((c, [ key, obj ]) =&gt; ({ ...c, [key]: obj }), {});
+
+const convertMetric = state =&gt; {
+    const { hosts, ...rest } = state; // eslint-disable-line no-unused-vars
+    return rest;
+};
+
+const normalize = state =&gt; state.reduce((c, obj) =&gt; ({
+    ...c,
+    [obj.hostname]: {
+        ...obj,
+        metrics: obj.metrics.reduce((d, metric) =&gt; ({
+            ...d,
+            [metric.id]: convertMetric(metric)
+        }), {}),
+        metricsInvalidated: false
+    }
+}), {});
+
+const host = (state, action) =&gt; {
+    switch (action.type) {
+        case types.ADD_COMPLEX_METRIC_REQUEST:
+        case types.REMOVE_COMPLEX_METRIC_REQUEST:
+            return {
+                ...state,
+                metricsInvalidated: true
+            };
+        case types.ADD_COMPLEX_METRIC_SUCCESS:
+            return {
+                ...state,
+                metricsInvalidated: false,
+                metrics: {
+                    ...state.metrics,
+                    [action.payload.id]: {
+                        ...action.payload,
+                        removable: true
+                    }
+                }
+            };
+        case types.ADD_COMPLEX_METRIC_FAILURE:
+        case types.REMOVE_COMPLEX_METRIC_FAILURE:
+            return {
+                ...state,
+                metricsInvalidated: false
+            };
+        case types.REMOVE_COMPLEX_METRIC_SUCCESS: {
+            const {
+                [action.meta.id]: metricToRemove, // eslint-disable-line no-unused-vars
+                ...metricsToLeave
+            } = state.metrics;
+            return {
+                ...state,
+                metricsInvalidated: false,
+                metrics: metricsToLeave
+            };
+        }
+        default:
+            return state;
+    }
+};
+
+export default (state = {}, action) =&gt; {
+    switch (action.type) {
+        case types.GET_HOSTS_SUCCESS:
+            return {
+                ...extractHosts(state, action.meta.monitor).rest,
+                ...setMonitor(normalize(action.payload), action.meta.monitor)
+            };
+        case types.SET_MONITOR_ADDRESS: {
+            const hostsExtracted = extractHosts(state, action.meta.monitor);
+            return {
+                ...hostsExtracted.rest,
+                ...setMonitor(hostsExtracted.found, action.payload.address)
+            };
+        }
+        case types.REMOVE_MONITOR:
+            return extractHosts(state, action.meta.monitor).rest;
+        case types.REMOVE_TOKEN:
+            return {};
+        case types.ADD_COMPLEX_METRIC_REQUEST:
+        case types.ADD_COMPLEX_METRIC_SUCCESS:
+        case types.ADD_COMPLEX_METRIC_FAILURE:
+        case types.REMOVE_COMPLEX_METRIC_REQUEST:
+        case types.REMOVE_COMPLEX_METRIC_SUCCESS:
+        case types.REMOVE_COMPLEX_METRIC_FAILURE: {
+            const { [action.meta.host]: target, ...rest } = state;
+            return {
+                ...rest,
+                [action.meta.host]: host(target, action)
+            };
+        }
+        default:
+            return state;
+    }
+};
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="">
+  <title data-ice="title">Source | react-antd-app</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-deleteComplexMetric">deleteComplexMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHosts">getHosts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMeasurements">getMeasurements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-login">login</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-postComplexMetric">postComplexMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-registration">registration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-createStore">createStore</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-clearToken">clearToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitors">getMonitors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getSavedState">getSavedState</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getToken">getToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-saveToken">saveToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-updateAuthServer">updateAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-updateMonitors">updateMonitors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getDefaultRouteByToken">getDefaultRouteByToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getRoutes">getRoutes</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isRouteDefined">isRouteDefined</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-isTokenRequired">isTokenRequired</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getCurrentTime">getCurrentTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getStartTimeForLiveCharts">getStartTimeForLiveCharts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HISTORICAL_ROUTE">HISTORICAL_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HOSTS_ROUTE">HOSTS_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LIVE_ROUTE">LIVE_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LOGIN_ROUTE">LOGIN_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-MONITORS_ROUTE">MONITORS_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REGISTRATION_ROUTE">REGISTRATION_ROUTE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-routes">routes</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#actions">actions</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addComplexMetricFailure">addComplexMetricFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addComplexMetricRequest">addComplexMetricRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addComplexMetricSuccess">addComplexMetricSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addHistoricalChart">addHistoricalChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addHistoricalChartHost1">addHistoricalChartHost1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addHistoricalChartHost2">addHistoricalChartHost2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addLiveChart">addLiveChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addLiveChartHost">addLiveChartHost</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addMonitor">addMonitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-changeAuthServer">changeAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-changeRoutingContext">changeRoutingContext</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalMeasurementsFailure">getHistoricalMeasurementsFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalMeasurementsRequest">getHistoricalMeasurementsRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalMeasurementsSuccess">getHistoricalMeasurementsSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHosts">getHosts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsFailure">getHostsFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsRequest">getHostsRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsSuccess">getHostsSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveMeasurementsFailure">getLiveMeasurementsFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveMeasurementsRequest">getLiveMeasurementsRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveMeasurementsSuccess">getLiveMeasurementsSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeComplexMetricFailure">removeComplexMetricFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeComplexMetricRequest">removeComplexMetricRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeComplexMetricSucces">removeComplexMetricSucces</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeHistoricalChart">removeHistoricalChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeHistoricalChartHost1">removeHistoricalChartHost1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeHistoricalChartHost2">removeHistoricalChartHost2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeLiveChart">removeLiveChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeLiveChartHost">removeLiveChartHost</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeMonitor">removeMonitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeToken">removeToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setHistoricalChartMetric1">setHistoricalChartMetric1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setHistoricalChartMetric2">setHistoricalChartMetric2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setHistoricalChartRange">setHistoricalChartRange</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setLiveChartMetric">setLiveChartMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setMonitorAddress">setMonitorAddress</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-setMonitorDescription">setMonitorDescription</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signInFailure">signInFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signInRequest">signInRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signInSuccess">signInSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signUpFailure">signUpFailure</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signUpRequest">signUpRequest</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signUpSuccess">signUpSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_FAILURE">ADD_COMPLEX_METRIC_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_REQUEST">ADD_COMPLEX_METRIC_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_SUCCESS">ADD_COMPLEX_METRIC_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART">ADD_HISTORICAL_CHART</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART_HOST1">ADD_HISTORICAL_CHART_HOST1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART_HOST2">ADD_HISTORICAL_CHART_HOST2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_LIVE_CHART">ADD_LIVE_CHART</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_LIVE_CHART_HOST">ADD_LIVE_CHART_HOST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ADD_MONITOR">ADD_MONITOR</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CHANGE_AUTH_SERVER">CHANGE_AUTH_SERVER</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CHANGE_ROUTING_CONTEXT">CHANGE_ROUTING_CONTEXT</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_FAILURE">GET_HISTORICAL_MEASUREMENTS_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_REQUEST">GET_HISTORICAL_MEASUREMENTS_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_SUCCESS">GET_HISTORICAL_MEASUREMENTS_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HOSTS">GET_HOSTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HOSTS_FAILURE">GET_HOSTS_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HOSTS_REQUEST">GET_HOSTS_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_HOSTS_SUCCESS">GET_HOSTS_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_FAILURE">GET_LIVE_MEASUREMENTS_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_REQUEST">GET_LIVE_MEASUREMENTS_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_SUCCESS">GET_LIVE_MEASUREMENTS_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_FAILURE">REMOVE_COMPLEX_METRIC_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_REQUEST">REMOVE_COMPLEX_METRIC_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_SUCCESS">REMOVE_COMPLEX_METRIC_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART">REMOVE_HISTORICAL_CHART</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART_HOST1">REMOVE_HISTORICAL_CHART_HOST1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART_HOST2">REMOVE_HISTORICAL_CHART_HOST2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_LIVE_CHART">REMOVE_LIVE_CHART</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_LIVE_CHART_HOST">REMOVE_LIVE_CHART_HOST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_MONITOR">REMOVE_MONITOR</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-REMOVE_TOKEN">REMOVE_TOKEN</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_METRIC1">SET_HISTORICAL_CHART_METRIC1</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_METRIC2">SET_HISTORICAL_CHART_METRIC2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_RANGE">SET_HISTORICAL_CHART_RANGE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_LIVE_CHART_METRIC">SET_LIVE_CHART_METRIC</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_MONITOR_ADDRESS">SET_MONITOR_ADDRESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SET_MONITOR_DESCRIPTION">SET_MONITOR_DESCRIPTION</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_IN_FAILURE">SIGN_IN_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_IN_REQUEST">SIGN_IN_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_IN_SUCCESS">SIGN_IN_SUCCESS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_UP_FAILURE">SIGN_UP_FAILURE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_UP_REQUEST">SIGN_UP_REQUEST</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SIGN_UP_SUCCESS">SIGN_UP_SUCCESS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-addchart">components/AddChart</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/AddChart/index.js~AddChart.html">AddChart</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-applayout">components/AppLayout</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AppLayout">AppLayout</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-authserver">components/AuthServer</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/AuthServer/index.js~AuthServer.html">AuthServer</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-chart">components/Chart</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Chart/ChartEngine.js~ChartEngine.html">ChartEngine</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ChartDeleteButton">ChartDeleteButton</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ChartLegend">ChartLegend</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ChartTimeRange">ChartTimeRange</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-HistoricalChart">HistoricalChart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-LiveChart">LiveChart</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-chart-usage">components/Chart/usage</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Chart/usage/HistoricalChartWrapper.js~HistoricalChartWrapper.html">HistoricalChartWrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Chart/usage/LiveChartWrapper.js~LiveChartWrapper.html">LiveChartWrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getData">getData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-metrices">metrices</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable">components/EditableTable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EditableTable/dataTransformer.js~dataTransformer.html">dataTransformer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EditableTable/index.js~EditableTable.html">EditableTable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-columnTransformer">columnTransformer</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-editablecell">components/EditableTable/EditableCell</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-EditableCell">EditableCell</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-editablecell-inputwrapper">components/EditableTable/EditableCell/InputWrapper</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-InputWrapper">InputWrapper</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-editablecell-textwrapper">components/EditableTable/EditableCell/TextWrapper</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-TextWrapper">TextWrapper</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-menu">components/EditableTable/Menu</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Menu">Menu</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-menu-delete">components/EditableTable/Menu/Delete</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Delete">Delete</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-menu-edit">components/EditableTable/Menu/Edit</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Edit">Edit</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-modaladd">components/EditableTable/ModalAdd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EditableTable/ModalAdd/index.js~ModalAdd.html">ModalAdd</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-modaladd-formadd">components/EditableTable/ModalAdd/FormAdd</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedFormAdd">WrappedFormAdd</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-editabletable-usage">components/EditableTable/usage</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/EditableTable/usage/TableContainer.js~TableContainer.html">TableContainer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fakeColumns">fakeColumns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fakeData">fakeData</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist">components/HostList</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/index.js~HostList.html">HostList</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-filteredtable-hostname">components/HostList/FilteredTable/Hostname</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/FilteredTable/Hostname/index.js~Hostname.html">Hostname</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-filteredtable-metadata">components/HostList/FilteredTable/Metadata</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/FilteredTable/Metadata/index.js~Metadata.html">Metadata</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-filteredtable-metrics">components/HostList/FilteredTable/Metrics</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/FilteredTable/Metrics/index.js~Metrics.html">Metrics</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metadatacell">components/HostList/MetadataCell</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MetadataCell">MetadataCell</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metadatafilter">components/HostList/MetadataFilter</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/MetadataFilter/index.js~MetadataFilter.html">MetadataFilter</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metriccell">components/HostList/MetricCell</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MetricCell">MetricCell</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metriccell-singlemetric">components/HostList/MetricCell/SingleMetric</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SingleMetric">SingleMetric</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metriccell-singlemetric-metricinfo">components/HostList/MetricCell/SingleMetric/MetricInfo</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MetricInfo">MetricInfo</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metriccell-singlemetric-removemetric">components/HostList/MetricCell/SingleMetric/RemoveMetric</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RemoveMetric">RemoveMetric</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-metricfilter">components/HostList/MetricFilter</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/MetricFilter/index.js~MetricFilter.html">MetricFilter</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal">components/HostList/NewMetricModal</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/NewMetricModal/index.js~NewMetricModal.html">NewMetricModal</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal-metricform">components/HostList/NewMetricModal/MetricForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedMetricForm">WrappedMetricForm</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal-metricform-decorated-input">components/HostList/NewMetricModal/MetricForm/Decorated/Input</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/NewMetricModal/MetricForm/Decorated/Input/index.js~Input.html">Input</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal-metricform-decorated-select">components/HostList/NewMetricModal/MetricForm/Decorated/Select</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/NewMetricModal/MetricForm/Decorated/Select/index.js~Select.html">Select</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-newmetricmodal-metricform-formitem">components/HostList/NewMetricModal/MetricForm/FormItem</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-FormItem">FormItem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-hostlist-usage">components/HostList/usage</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/HostList/usage/TableContainer.js~TableContainer.html">TableContainer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fakeColumns">fakeColumns</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fakeData">fakeData</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-loginform">components/LoginForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedLoginForm">WrappedLoginForm</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-monitoricon">components/MonitorIcon</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MonitorIcon">MonitorIcon</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-monitorstable">components/MonitorsTable</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MonitorsTable">MonitorsTable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-notification">components/Notification</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Notification/index.js~Notification.html">Notification</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-refreshhostsbutton">components/RefreshHostsButton</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RefreshHostsButton">RefreshHostsButton</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-registerform">components/RegisterForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedRegisterForm">WrappedRegisterForm</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-metrics">pages/Metrics</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Metrics">Metrics</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-monitors">pages/Monitors</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Monitors">Monitors</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-notfound">pages/NotFound</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-NotFound">NotFound</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-signin">pages/SignIn</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SignIn">SignIn</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#pages-signup">pages/SignUp</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-SignUp">SignUp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#reducers">reducers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getToken">getToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getTokenRequested">getTokenRequested</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartById">getHistoricalChartById</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartsArray">getHistoricalChartsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsArray">getHostsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMetrics">getMetrics</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMetricsAll">getMetricsAll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorByHost">getMonitorByHost</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-hosts">hosts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertMonitorsFromObj">convertMonitorsFromObj</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartById">getHistoricalChartById</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartsArray">getHistoricalChartsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartsByMonitors">getHistoricalChartsByMonitors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHostsArray">getHostsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartById">getLiveChartById</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartByMonitors">getLiveChartByMonitors</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartLastTime">getLiveChartLastTime</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartsAllIds">getLiveChartsAllIds</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartsArray">getLiveChartsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLocation">getLocation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMetrics">getMetrics</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMetricsAll">getMetricsAll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorByHost">getMonitorByHost</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsAddresses">getMonitorsAddresses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsArray">getMonitorsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsHostsInvalidated">getMonitorsHostsInvalidated</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getPathname">getPathname</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getToken">getToken</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getTokenRequested">getTokenRequested</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartById">getLiveChartById</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartsAllIds">getLiveChartsAllIds</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartsArray">getLiveChartsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertMonitorsFromObj">convertMonitorsFromObj</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-convertMonitorsToObj">convertMonitorsToObj</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsAddresses">getMonitorsAddresses</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsArray">getMonitorsArray</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getMonitorsHostsInvalidated">getMonitorsHostsInvalidated</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-monitors">monitors</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sagas">sagas</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-addComplexMetric">addComplexMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartMeasurements">getHistoricalChartMeasurements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHistoricalChartMeasurementsForSingleMonitor">getHistoricalChartMeasurementsForSingleMonitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getHosts">getHosts</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartMeasurements">getLiveChartMeasurements</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getLiveChartMeasurementsForSingleMonitor">getLiveChartMeasurementsForSingleMonitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-removeComplexMetric">removeComplexMetric</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signIn">signIn</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-signUp">signUp</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-root">root</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-authServerSaver">authServerSaver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-monitorsSaver">monitorsSaver</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-tokenEraser">tokenEraser</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-tokenSaver">tokenSaver</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#utils">utils</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-strToColor">strToColor</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">1/520</span></h1>
+
+<table class="files-summary" data-ice="files" data-use-coverage="true">
+  <thead>
+    <tr>
+      <td>File</td>
+      <td>Identifier</td>
+      <td class="coverage">Document</td>
+      <td style="display: none;">Size</td>
+      <td style="display: none;">Lines</td>
+      <td style="display: none;">Updated</td>
+    </tr>
+  </thead>
+  <tbody>
+    
+  <tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/actions/sync.js.html#errorLines=108,116,12,124,133,141,149,160,168,17,175,183,191,199,207,215,227,23,237,244,252,260,268,276,28,284,292,300,307,315,327,33,39,43,50,55,63,7,71,78,82,89,97">src/actions/sync.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-addComplexMetricFailure">addComplexMetricFailure</a></span>
+<span><a href="function/index.html#static-function-addComplexMetricRequest">addComplexMetricRequest</a></span>
+<span><a href="function/index.html#static-function-addComplexMetricSuccess">addComplexMetricSuccess</a></span>
+<span><a href="function/index.html#static-function-addHistoricalChart">addHistoricalChart</a></span>
+<span><a href="function/index.html#static-function-addHistoricalChartHost1">addHistoricalChartHost1</a></span>
+<span><a href="function/index.html#static-function-addHistoricalChartHost2">addHistoricalChartHost2</a></span>
+<span><a href="function/index.html#static-function-addLiveChart">addLiveChart</a></span>
+<span><a href="function/index.html#static-function-addLiveChartHost">addLiveChartHost</a></span>
+<span><a href="function/index.html#static-function-addMonitor">addMonitor</a></span>
+<span><a href="function/index.html#static-function-changeAuthServer">changeAuthServer</a></span>
+<span><a href="function/index.html#static-function-changeRoutingContext">changeRoutingContext</a></span>
+<span><a href="function/index.html#static-function-getHistoricalMeasurementsFailure">getHistoricalMeasurementsFailure</a></span>
+<span><a href="function/index.html#static-function-getHistoricalMeasurementsRequest">getHistoricalMeasurementsRequest</a></span>
+<span><a href="function/index.html#static-function-getHistoricalMeasurementsSuccess">getHistoricalMeasurementsSuccess</a></span>
+<span><a href="function/index.html#static-function-getHosts">getHosts</a></span>
+<span><a href="function/index.html#static-function-getHostsFailure">getHostsFailure</a></span>
+<span><a href="function/index.html#static-function-getHostsRequest">getHostsRequest</a></span>
+<span><a href="function/index.html#static-function-getHostsSuccess">getHostsSuccess</a></span>
+<span><a href="function/index.html#static-function-getLiveMeasurementsFailure">getLiveMeasurementsFailure</a></span>
+<span><a href="function/index.html#static-function-getLiveMeasurementsRequest">getLiveMeasurementsRequest</a></span>
+<span><a href="function/index.html#static-function-getLiveMeasurementsSuccess">getLiveMeasurementsSuccess</a></span>
+<span><a href="function/index.html#static-function-removeComplexMetricFailure">removeComplexMetricFailure</a></span>
+<span><a href="function/index.html#static-function-removeComplexMetricRequest">removeComplexMetricRequest</a></span>
+<span><a href="function/index.html#static-function-removeComplexMetricSucces">removeComplexMetricSucces</a></span>
+<span><a href="function/index.html#static-function-removeHistoricalChart">removeHistoricalChart</a></span>
+<span><a href="function/index.html#static-function-removeHistoricalChartHost1">removeHistoricalChartHost1</a></span>
+<span><a href="function/index.html#static-function-removeHistoricalChartHost2">removeHistoricalChartHost2</a></span>
+<span><a href="function/index.html#static-function-removeLiveChart">removeLiveChart</a></span>
+<span><a href="function/index.html#static-function-removeLiveChartHost">removeLiveChartHost</a></span>
+<span><a href="function/index.html#static-function-removeMonitor">removeMonitor</a></span>
+<span><a href="function/index.html#static-function-removeToken">removeToken</a></span>
+<span><a href="function/index.html#static-function-setHistoricalChartMetric1">setHistoricalChartMetric1</a></span>
+<span><a href="function/index.html#static-function-setHistoricalChartMetric2">setHistoricalChartMetric2</a></span>
+<span><a href="function/index.html#static-function-setHistoricalChartRange">setHistoricalChartRange</a></span>
+<span><a href="function/index.html#static-function-setLiveChartMetric">setLiveChartMetric</a></span>
+<span><a href="function/index.html#static-function-setMonitorAddress">setMonitorAddress</a></span>
+<span><a href="function/index.html#static-function-setMonitorDescription">setMonitorDescription</a></span>
+<span><a href="function/index.html#static-function-signInFailure">signInFailure</a></span>
+<span><a href="function/index.html#static-function-signInRequest">signInRequest</a></span>
+<span><a href="function/index.html#static-function-signInSuccess">signInSuccess</a></span>
+<span><a href="function/index.html#static-function-signUpFailure">signUpFailure</a></span>
+<span><a href="function/index.html#static-function-signUpRequest">signUpRequest</a></span>
+<span><a href="function/index.html#static-function-signUpSuccess">signUpSuccess</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/43</span></td>
+      <td style="display: none;" data-ice="size">6556 byte</td>
+      <td style="display: none;" data-ice="lines">330</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/actions/types.js.html#errorLines=102,105,108,111,114,117,12,120,123,126,129,132,137,15,18,21,23,28,3,31,34,37,40,42,45,48,53,56,59,6,62,65,68,73,76,79,82,85,88,9,91,94,99">src/actions/types.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_FAILURE">ADD_COMPLEX_METRIC_FAILURE</a></span>
+<span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_REQUEST">ADD_COMPLEX_METRIC_REQUEST</a></span>
+<span><a href="variable/index.html#static-variable-ADD_COMPLEX_METRIC_SUCCESS">ADD_COMPLEX_METRIC_SUCCESS</a></span>
+<span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART">ADD_HISTORICAL_CHART</a></span>
+<span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART_HOST1">ADD_HISTORICAL_CHART_HOST1</a></span>
+<span><a href="variable/index.html#static-variable-ADD_HISTORICAL_CHART_HOST2">ADD_HISTORICAL_CHART_HOST2</a></span>
+<span><a href="variable/index.html#static-variable-ADD_LIVE_CHART">ADD_LIVE_CHART</a></span>
+<span><a href="variable/index.html#static-variable-ADD_LIVE_CHART_HOST">ADD_LIVE_CHART_HOST</a></span>
+<span><a href="variable/index.html#static-variable-ADD_MONITOR">ADD_MONITOR</a></span>
+<span><a href="variable/index.html#static-variable-CHANGE_AUTH_SERVER">CHANGE_AUTH_SERVER</a></span>
+<span><a href="variable/index.html#static-variable-CHANGE_ROUTING_CONTEXT">CHANGE_ROUTING_CONTEXT</a></span>
+<span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_FAILURE">GET_HISTORICAL_MEASUREMENTS_FAILURE</a></span>
+<span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_REQUEST">GET_HISTORICAL_MEASUREMENTS_REQUEST</a></span>
+<span><a href="variable/index.html#static-variable-GET_HISTORICAL_MEASUREMENTS_SUCCESS">GET_HISTORICAL_MEASUREMENTS_SUCCESS</a></span>
+<span><a href="variable/index.html#static-variable-GET_HOSTS">GET_HOSTS</a></span>
+<span><a href="variable/index.html#static-variable-GET_HOSTS_FAILURE">GET_HOSTS_FAILURE</a></span>
+<span><a href="variable/index.html#static-variable-GET_HOSTS_REQUEST">GET_HOSTS_REQUEST</a></span>
+<span><a href="variable/index.html#static-variable-GET_HOSTS_SUCCESS">GET_HOSTS_SUCCESS</a></span>
+<span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_FAILURE">GET_LIVE_MEASUREMENTS_FAILURE</a></span>
+<span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_REQUEST">GET_LIVE_MEASUREMENTS_REQUEST</a></span>
+<span><a href="variable/index.html#static-variable-GET_LIVE_MEASUREMENTS_SUCCESS">GET_LIVE_MEASUREMENTS_SUCCESS</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_FAILURE">REMOVE_COMPLEX_METRIC_FAILURE</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_REQUEST">REMOVE_COMPLEX_METRIC_REQUEST</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_COMPLEX_METRIC_SUCCESS">REMOVE_COMPLEX_METRIC_SUCCESS</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART">REMOVE_HISTORICAL_CHART</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART_HOST1">REMOVE_HISTORICAL_CHART_HOST1</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_HISTORICAL_CHART_HOST2">REMOVE_HISTORICAL_CHART_HOST2</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_LIVE_CHART">REMOVE_LIVE_CHART</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_LIVE_CHART_HOST">REMOVE_LIVE_CHART_HOST</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_MONITOR">REMOVE_MONITOR</a></span>
+<span><a href="variable/index.html#static-variable-REMOVE_TOKEN">REMOVE_TOKEN</a></span>
+<span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_METRIC1">SET_HISTORICAL_CHART_METRIC1</a></span>
+<span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_METRIC2">SET_HISTORICAL_CHART_METRIC2</a></span>
+<span><a href="variable/index.html#static-variable-SET_HISTORICAL_CHART_RANGE">SET_HISTORICAL_CHART_RANGE</a></span>
+<span><a href="variable/index.html#static-variable-SET_LIVE_CHART_METRIC">SET_LIVE_CHART_METRIC</a></span>
+<span><a href="variable/index.html#static-variable-SET_MONITOR_ADDRESS">SET_MONITOR_ADDRESS</a></span>
+<span><a href="variable/index.html#static-variable-SET_MONITOR_DESCRIPTION">SET_MONITOR_DESCRIPTION</a></span>
+<span><a href="variable/index.html#static-variable-SIGN_IN_FAILURE">SIGN_IN_FAILURE</a></span>
+<span><a href="variable/index.html#static-variable-SIGN_IN_REQUEST">SIGN_IN_REQUEST</a></span>
+<span><a href="variable/index.html#static-variable-SIGN_IN_SUCCESS">SIGN_IN_SUCCESS</a></span>
+<span><a href="variable/index.html#static-variable-SIGN_UP_FAILURE">SIGN_UP_FAILURE</a></span>
+<span><a href="variable/index.html#static-variable-SIGN_UP_REQUEST">SIGN_UP_REQUEST</a></span>
+<span><a href="variable/index.html#static-variable-SIGN_UP_SUCCESS">SIGN_UP_SUCCESS</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/43</span></td>
+      <td style="display: none;" data-ice="size">4824 byte</td>
+      <td style="display: none;" data-ice="lines">138</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/api.js.html#errorLines=22,3,30,40,46,55,62">src/api.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-deleteComplexMetric">deleteComplexMetric</a></span>
+<span><a href="function/index.html#static-function-getHosts">getHosts</a></span>
+<span><a href="function/index.html#static-function-getMeasurements">getMeasurements</a></span>
+<span><a href="function/index.html#static-function-login">login</a></span>
+<span><a href="function/index.html#static-function-postComplexMetric">postComplexMetric</a></span>
+<span><a href="function/index.html#static-function-registration">registration</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/7</span></td>
+      <td style="display: none;" data-ice="size">1936 byte</td>
+      <td style="display: none;" data-ice="lines">66</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/AddChart/index.js.html#errorLines=11,15,20,5,7">src/components/AddChart/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/AddChart/index.js~AddChart.html">AddChart</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/5</span></td>
+      <td style="display: none;" data-ice="size">1201 byte</td>
+      <td style="display: none;" data-ice="lines">43</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/AppLayout/__tests__/layout.js.html">src/components/AppLayout/__tests__/layout.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">310 byte</td>
+      <td style="display: none;" data-ice="lines">8</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/AppLayout/index.js.html#errorLines=10,12">src/components/AppLayout/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-AppLayout">AppLayout</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">3250 byte</td>
+      <td style="display: none;" data-ice="lines">67</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/AuthServer/index.js.html#errorLines=13,16,22,28,32,36,40,45,5,7,9">src/components/AuthServer/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/AuthServer/index.js~AuthServer.html">AuthServer</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">1811 byte</td>
+      <td style="display: none;" data-ice="lines">65</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/ChartDeleteButton.js.html#errorLines=4">src/components/Chart/ChartDeleteButton.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-ChartDeleteButton">ChartDeleteButton</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">381 byte</td>
+      <td style="display: none;" data-ice="lines">12</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/ChartEngine.js.html#errorLines=135,181,184,192,23,25,36,38,40,43,47,57,81">src/components/Chart/ChartEngine.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/Chart/ChartEngine.js~ChartEngine.html">ChartEngine</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/13</span></td>
+      <td style="display: none;" data-ice="size">6492 byte</td>
+      <td style="display: none;" data-ice="lines">198</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/ChartLegend.js.html#errorLines=23,43,45,47,5,59,63,69,7,88">src/components/Chart/ChartLegend.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-ChartLegend">ChartLegend</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/10</span></td>
+      <td style="display: none;" data-ice="size">3513 byte</td>
+      <td style="display: none;" data-ice="lines">109</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/ChartTimeRange.js.html#errorLines=5,7">src/components/Chart/ChartTimeRange.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-ChartTimeRange">ChartTimeRange</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">531 byte</td>
+      <td style="display: none;" data-ice="lines">18</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/HistoricalChart.js.html#errorLines=50,9">src/components/Chart/HistoricalChart.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-HistoricalChart">HistoricalChart</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">4321 byte</td>
+      <td style="display: none;" data-ice="lines">102</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/LiveChart.js.html#errorLines=6">src/components/Chart/LiveChart.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-LiveChart">LiveChart</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">1273 byte</td>
+      <td style="display: none;" data-ice="lines">39</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/index.js.html">src/components/Chart/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">140 byte</td>
+      <td style="display: none;" data-ice="lines">4</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/usage/HistoricalChartWrapper.js.html#errorLines=102,111,120,128,17,33,37,43,45,6,64,74,8,84,88,95">src/components/Chart/usage/HistoricalChartWrapper.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/Chart/usage/HistoricalChartWrapper.js~HistoricalChartWrapper.html">HistoricalChartWrapper</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/16</span></td>
+      <td style="display: none;" data-ice="size">4466 byte</td>
+      <td style="display: none;" data-ice="lines">144</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/usage/LiveChartWrapper.js.html#errorLines=10,101,17,18,21,5,52,7,84,88,9,97">src/components/Chart/usage/LiveChartWrapper.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/Chart/usage/LiveChartWrapper.js~LiveChartWrapper.html">LiveChartWrapper</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/12</span></td>
+      <td style="display: none;" data-ice="size">3622 byte</td>
+      <td style="display: none;" data-ice="lines">116</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Chart/usage/utils.js.html#errorLines=3,66,68,79,89">src/components/Chart/usage/utils.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-getData">getData</a></span>
+<span><a href="variable/index.html#static-variable-metrices">metrices</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/5</span></td>
+      <td style="display: none;" data-ice="size">2844 byte</td>
+      <td style="display: none;" data-ice="lines">109</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/EditableCell/InputWrapper/index.js.html#errorLines=4">src/components/EditableTable/EditableCell/InputWrapper/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-InputWrapper">InputWrapper</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">1033 byte</td>
+      <td style="display: none;" data-ice="lines">32</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/EditableCell/TextWrapper/index.js.html#errorLines=4">src/components/EditableTable/EditableCell/TextWrapper/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-TextWrapper">TextWrapper</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">513 byte</td>
+      <td style="display: none;" data-ice="lines">18</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/EditableCell/index.js.html#errorLines=6">src/components/EditableTable/EditableCell/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-EditableCell">EditableCell</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">858 byte</td>
+      <td style="display: none;" data-ice="lines">29</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/Menu/Delete/index.js.html#errorLines=4">src/components/EditableTable/Menu/Delete/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-Delete">Delete</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">302 byte</td>
+      <td style="display: none;" data-ice="lines">10</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/Menu/Edit/index.js.html#errorLines=4">src/components/EditableTable/Menu/Edit/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-Edit">Edit</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">716 byte</td>
+      <td style="display: none;" data-ice="lines">20</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/Menu/index.js.html#errorLines=6">src/components/EditableTable/Menu/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-Menu">Menu</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">1368 byte</td>
+      <td style="display: none;" data-ice="lines">38</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/ModalAdd/FormAdd/index.js.html#errorLines=25,4">src/components/EditableTable/ModalAdd/FormAdd/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-WrappedFormAdd">WrappedFormAdd</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">836 byte</td>
+      <td style="display: none;" data-ice="lines">26</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/ModalAdd/index.js.html#errorLines=13,14,22,25,31,37,5,52,60,66,7,70,9">src/components/EditableTable/ModalAdd/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/EditableTable/ModalAdd/index.js~ModalAdd.html">ModalAdd</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/13</span></td>
+      <td style="display: none;" data-ice="size">2513 byte</td>
+      <td style="display: none;" data-ice="lines">92</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/columnsTransformer.js.html#errorLines=24,40,5">src/components/EditableTable/columnsTransformer.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-columnTransformer">columnTransformer</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/3</span></td>
+      <td style="display: none;" data-ice="size">2874 byte</td>
+      <td style="display: none;" data-ice="lines">73</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/dataTransformer.js.html#errorLines=1,11,29,3">src/components/EditableTable/dataTransformer.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/EditableTable/dataTransformer.js~dataTransformer.html">dataTransformer</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/4</span></td>
+      <td style="display: none;" data-ice="size">1116 byte</td>
+      <td style="display: none;" data-ice="lines">40</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/index.js.html#errorLines=10,103,119,12,123,127,14,19,28,37,41,54,64,74,87">src/components/EditableTable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/EditableTable/index.js~EditableTable.html">EditableTable</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/15</span></td>
+      <td style="display: none;" data-ice="size">4875 byte</td>
+      <td style="display: none;" data-ice="lines">143</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/usage/TableContainer.js.html#errorLines=14,24,34,42,5,50,7,9">src/components/EditableTable/usage/TableContainer.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/EditableTable/usage/TableContainer.js~TableContainer.html">TableContainer</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/8</span></td>
+      <td style="display: none;" data-ice="size">1501 byte</td>
+      <td style="display: none;" data-ice="lines">60</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/EditableTable/usage/fakeData.js.html#errorLines=1,12">src/components/EditableTable/usage/fakeData.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-fakeColumns">fakeColumns</a></span>
+<span><a href="variable/index.html#static-variable-fakeData">fakeData</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">1146 byte</td>
+      <td style="display: none;" data-ice="lines">58</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/FilteredTable/Hostname/index.js.html#errorLines=11,18,24,32,4,41,6,67,71,8,80">src/components/HostList/FilteredTable/Hostname/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/FilteredTable/Hostname/index.js~Hostname.html">Hostname</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">4111 byte</td>
+      <td style="display: none;" data-ice="lines">118</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/FilteredTable/Metadata/index.js.html#errorLines=12,20,28,38,5,68,7,72,78,87,9">src/components/HostList/FilteredTable/Metadata/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/FilteredTable/Metadata/index.js~Metadata.html">Metadata</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">3734 byte</td>
+      <td style="display: none;" data-ice="lines">114</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/FilteredTable/Metrics/index.js.html#errorLines=12,19,27,36,5,56,60,66,7,75,9">src/components/HostList/FilteredTable/Metrics/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/FilteredTable/Metrics/index.js~Metrics.html">Metrics</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">3215 byte</td>
+      <td style="display: none;" data-ice="lines">102</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/MetadataCell/index.js.html#errorLines=4,6">src/components/HostList/MetadataCell/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-MetadataCell">MetadataCell</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">677 byte</td>
+      <td style="display: none;" data-ice="lines">22</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/MetadataFilter/index.js.html#errorLines=15,21,27,3,35,39,43,47,5,7,9">src/components/HostList/MetadataFilter/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/MetadataFilter/index.js~MetadataFilter.html">MetadataFilter</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">2212 byte</td>
+      <td style="display: none;" data-ice="lines">78</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/MetricCell/SingleMetric/MetricInfo/index.js.html#errorLines=4">src/components/HostList/MetricCell/SingleMetric/MetricInfo/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-MetricInfo">MetricInfo</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">904 byte</td>
+      <td style="display: none;" data-ice="lines">29</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/MetricCell/SingleMetric/RemoveMetric/index.js.html#errorLines=4">src/components/HostList/MetricCell/SingleMetric/RemoveMetric/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-RemoveMetric">RemoveMetric</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">358 byte</td>
+      <td style="display: none;" data-ice="lines">13</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/MetricCell/SingleMetric/index.js.html#errorLines=7">src/components/HostList/MetricCell/SingleMetric/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-SingleMetric">SingleMetric</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">775 byte</td>
+      <td style="display: none;" data-ice="lines">26</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/MetricCell/index.js.html">src/components/HostList/MetricCell/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-MetricCell">MetricCell</a></span></td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">1/1</span></td>
+      <td style="display: none;" data-ice="size">1189 byte</td>
+      <td style="display: none;" data-ice="lines">32</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/MetricFilter/index.js.html#errorLines=14,20,27,3,31,35,39,5,7,9">src/components/HostList/MetricFilter/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/MetricFilter/index.js~MetricFilter.html">MetricFilter</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/10</span></td>
+      <td style="display: none;" data-ice="size">1909 byte</td>
+      <td style="display: none;" data-ice="lines">67</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/NewMetricModal/MetricForm/Decorated/Input/index.js.html#errorLines=4,5">src/components/HostList/NewMetricModal/MetricForm/Decorated/Input/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/NewMetricModal/MetricForm/Decorated/Input/index.js~Input.html">Input</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">1036 byte</td>
+      <td style="display: none;" data-ice="lines">24</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/NewMetricModal/MetricForm/Decorated/Select/index.js.html#errorLines=4,5">src/components/HostList/NewMetricModal/MetricForm/Decorated/Select/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/NewMetricModal/MetricForm/Decorated/Select/index.js~Select.html">Select</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">932 byte</td>
+      <td style="display: none;" data-ice="lines">28</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/NewMetricModal/MetricForm/FormItem/index.js.html#errorLines=4">src/components/HostList/NewMetricModal/MetricForm/FormItem/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-FormItem">FormItem</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">302 byte</td>
+      <td style="display: none;" data-ice="lines">12</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/NewMetricModal/MetricForm/index.js.html#errorLines=10,70,8">src/components/HostList/NewMetricModal/MetricForm/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-WrappedMetricForm">WrappedMetricForm</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/3</span></td>
+      <td style="display: none;" data-ice="size">3110 byte</td>
+      <td style="display: none;" data-ice="lines">71</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/NewMetricModal/index.js.html#errorLines=10,16,19,28,37,55,6,63,71,78,8,92,96">src/components/HostList/NewMetricModal/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/NewMetricModal/index.js~NewMetricModal.html">NewMetricModal</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/13</span></td>
+      <td style="display: none;" data-ice="size">3216 byte</td>
+      <td style="display: none;" data-ice="lines">117</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/index.js.html#errorLines=14,16,18,21,25,31,40,46,56,73">src/components/HostList/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/index.js~HostList.html">HostList</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/10</span></td>
+      <td style="display: none;" data-ice="size">3577 byte</td>
+      <td style="display: none;" data-ice="lines">119</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/usage/TableContainer.js.html#errorLines=14,29,46,5,56,66,7,74,82,9">src/components/HostList/usage/TableContainer.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/HostList/usage/TableContainer.js~TableContainer.html">TableContainer</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/10</span></td>
+      <td style="display: none;" data-ice="size">2322 byte</td>
+      <td style="display: none;" data-ice="lines">89</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/HostList/usage/fakeData.js.html#errorLines=1,85">src/components/HostList/usage/fakeData.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-fakeColumns">fakeColumns</a></span>
+<span><a href="variable/index.html#static-variable-fakeData">fakeData</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">2681 byte</td>
+      <td style="display: none;" data-ice="lines">104</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/LoginForm/index.js.html#errorLines=48,5,7">src/components/LoginForm/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-WrappedLoginForm">WrappedLoginForm</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/3</span></td>
+      <td style="display: none;" data-ice="size">1694 byte</td>
+      <td style="display: none;" data-ice="lines">50</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/MonitorIcon/index.js.html#errorLines=5">src/components/MonitorIcon/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-MonitorIcon">MonitorIcon</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">331 byte</td>
+      <td style="display: none;" data-ice="lines">11</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/MonitorsTable/index.js.html#errorLines=40,6">src/components/MonitorsTable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-MonitorsTable">MonitorsTable</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">1872 byte</td>
+      <td style="display: none;" data-ice="lines">67</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/Notification/index.js.html#errorLines=12,14,23,32,41">src/components/Notification/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/components/Notification/index.js~Notification.html">Notification</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/5</span></td>
+      <td style="display: none;" data-ice="size">1076 byte</td>
+      <td style="display: none;" data-ice="lines">49</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/RefreshHostsButton/index.js.html#errorLines=5">src/components/RefreshHostsButton/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-RefreshHostsButton">RefreshHostsButton</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">352 byte</td>
+      <td style="display: none;" data-ice="lines">12</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/components/RegisterForm/index.js.html#errorLines=5,60,7">src/components/RegisterForm/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-WrappedRegisterForm">WrappedRegisterForm</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/3</span></td>
+      <td style="display: none;" data-ice="size">2307 byte</td>
+      <td style="display: none;" data-ice="lines">62</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/AddHistoricalChart/index.js.html#errorLines=10,6">src/containers/AddHistoricalChart/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">404 byte</td>
+      <td style="display: none;" data-ice="lines">14</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/AddLiveChart/index.js.html#errorLines=10,6">src/containers/AddLiveChart/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">398 byte</td>
+      <td style="display: none;" data-ice="lines">14</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/AppLayout/__tests__/layout.js.html">src/containers/AppLayout/__tests__/layout.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">675 byte</td>
+      <td style="display: none;" data-ice="lines">21</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/AppLayout/index.js.html#errorLines=11,6">src/containers/AppLayout/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">436 byte</td>
+      <td style="display: none;" data-ice="lines">15</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/AuthServer/index.js.html#errorLines=10,6">src/containers/AuthServer/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">422 byte</td>
+      <td style="display: none;" data-ice="lines">14</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/HostList/index.js.html#errorLines=10,6">src/containers/HostList/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">527 byte</td>
+      <td style="display: none;" data-ice="lines">15</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/LoginForm/index.js.html#errorLines=10,6">src/containers/LoginForm/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">417 byte</td>
+      <td style="display: none;" data-ice="lines">14</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/MonitorsTable/index.js.html#errorLines=10,6">src/containers/MonitorsTable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">677 byte</td>
+      <td style="display: none;" data-ice="lines">17</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/RefreshHostsButton/index.js.html#errorLines=10,6">src/containers/RefreshHostsButton/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">458 byte</td>
+      <td style="display: none;" data-ice="lines">14</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/containers/RegisterForm/index.js.html#errorLines=10,6">src/containers/RegisterForm/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">426 byte</td>
+      <td style="display: none;" data-ice="lines">14</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/createStore.js.html#errorLines=8">src/createStore.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-createStore">createStore</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">844 byte</td>
+      <td style="display: none;" data-ice="lines">24</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/index.js.html#errorLines=11">src/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">670 byte</td>
+      <td style="display: none;" data-ice="lines">22</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/localStorage.js.html#errorLines=11,15,3,31,35,39,4,43,47,5,7">src/localStorage.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-clearToken">clearToken</a></span>
+<span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span>
+<span><a href="function/index.html#static-function-getMonitors">getMonitors</a></span>
+<span><a href="function/index.html#static-function-getSavedState">getSavedState</a></span>
+<span><a href="function/index.html#static-function-getToken">getToken</a></span>
+<span><a href="function/index.html#static-function-saveToken">saveToken</a></span>
+<span><a href="function/index.html#static-function-updateAuthServer">updateAuthServer</a></span>
+<span><a href="function/index.html#static-function-updateMonitors">updateMonitors</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">1411 byte</td>
+      <td style="display: none;" data-ice="lines">53</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/pages/Historical/index.js.html#errorLines=34,39,8">src/pages/Historical/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/3</span></td>
+      <td style="display: none;" data-ice="size">2286 byte</td>
+      <td style="display: none;" data-ice="lines">50</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/pages/Live/index.js.html#errorLines=26,31,8">src/pages/Live/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/3</span></td>
+      <td style="display: none;" data-ice="size">1370 byte</td>
+      <td style="display: none;" data-ice="lines">38</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/pages/Metrics/index.js.html#errorLines=5">src/pages/Metrics/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-Metrics">Metrics</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">328 byte</td>
+      <td style="display: none;" data-ice="lines">13</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/pages/Monitors/index.js.html#errorLines=4">src/pages/Monitors/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-Monitors">Monitors</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">237 byte</td>
+      <td style="display: none;" data-ice="lines">11</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/pages/NotFound/index.js.html#errorLines=3">src/pages/NotFound/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-NotFound">NotFound</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">164 byte</td>
+      <td style="display: none;" data-ice="lines">9</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/pages/SignIn/index.js.html#errorLines=5">src/pages/SignIn/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-SignIn">SignIn</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">309 byte</td>
+      <td style="display: none;" data-ice="lines">13</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/pages/SignUp/index.js.html#errorLines=5">src/pages/SignUp/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-SignUp">SignUp</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
+      <td style="display: none;" data-ice="size">320 byte</td>
+      <td style="display: none;" data-ice="lines">13</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/__tests__/auth.js.html">src/reducers/__tests__/auth.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">3118 byte</td>
+      <td style="display: none;" data-ice="lines">130</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/__tests__/historicalCharts.js.html#errorLines=11,17,22,28,33,5,56,57,58,59">src/reducers/__tests__/historicalCharts.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/10</span></td>
+      <td style="display: none;" data-ice="size">23829 byte</td>
+      <td style="display: none;" data-ice="lines">878</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/__tests__/hosts.js.html#errorLines=104,109,12,25,38,4,51,64,73,83,93">src/reducers/__tests__/hosts.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">10704 byte</td>
+      <td style="display: none;" data-ice="lines">434</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/__tests__/index.js.html">src/reducers/__tests__/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">466 byte</td>
+      <td style="display: none;" data-ice="lines">22</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/__tests__/liveCharts.js.html#errorLines=14,19,24,4,9">src/reducers/__tests__/liveCharts.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/5</span></td>
+      <td style="display: none;" data-ice="size">10893 byte</td>
+      <td style="display: none;" data-ice="lines">432</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/__tests__/monitors.js.html#errorLines=4,9">src/reducers/__tests__/monitors.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">6378 byte</td>
+      <td style="display: none;" data-ice="lines">256</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/auth.js.html#errorLines=20,35,4,5,6,8">src/reducers/auth.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span>
+<span><a href="function/index.html#static-function-getToken">getToken</a></span>
+<span><a href="function/index.html#static-function-getTokenRequested">getTokenRequested</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/6</span></td>
+      <td style="display: none;" data-ice="size">1269 byte</td>
+      <td style="display: none;" data-ice="lines">44</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/historicalCharts.js.html#errorLines=121,4,5,7,92">src/reducers/historicalCharts.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-getHistoricalChartById">getHistoricalChartById</a></span>
+<span><a href="function/index.html#static-function-getHistoricalChartsArray">getHistoricalChartsArray</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/5</span></td>
+      <td style="display: none;" data-ice="size">4514 byte</td>
+      <td style="display: none;" data-ice="lines">140</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/hosts.js.html#errorLines=105,11,24,3,4,42,46,51,6,63">src/reducers/hosts.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-getHostsArray">getHostsArray</a></span>
+<span><a href="function/index.html#static-function-getMetrics">getMetrics</a></span>
+<span><a href="function/index.html#static-function-getMetricsAll">getMetricsAll</a></span>
+<span><a href="function/index.html#static-function-getMonitorByHost">getMonitorByHost</a></span>
+<span><a href="function/index.html#static-function-hosts">hosts</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/10</span></td>
+      <td style="display: none;" data-ice="size">4343 byte</td>
+      <td style="display: none;" data-ice="lines">138</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/index.js.html#errorLines=10,11,13,14,15,16,18,19,20,21,23,24,25,27,30,32,33,35,53,78,9">src/reducers/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-convertMonitorsFromObj">convertMonitorsFromObj</a></span>
+<span><a href="function/index.html#static-function-getAuthServer">getAuthServer</a></span>
+<span><a href="function/index.html#static-function-getHistoricalChartById">getHistoricalChartById</a></span>
+<span><a href="function/index.html#static-function-getHistoricalChartsArray">getHistoricalChartsArray</a></span>
+<span><a href="function/index.html#static-function-getHistoricalChartsByMonitors">getHistoricalChartsByMonitors</a></span>
+<span><a href="function/index.html#static-function-getHostsArray">getHostsArray</a></span>
+<span><a href="function/index.html#static-function-getLiveChartById">getLiveChartById</a></span>
+<span><a href="function/index.html#static-function-getLiveChartByMonitors">getLiveChartByMonitors</a></span>
+<span><a href="function/index.html#static-function-getLiveChartLastTime">getLiveChartLastTime</a></span>
+<span><a href="function/index.html#static-function-getLiveChartsAllIds">getLiveChartsAllIds</a></span>
+<span><a href="function/index.html#static-function-getLiveChartsArray">getLiveChartsArray</a></span>
+<span><a href="function/index.html#static-function-getLocation">getLocation</a></span>
+<span><a href="function/index.html#static-function-getMetrics">getMetrics</a></span>
+<span><a href="function/index.html#static-function-getMetricsAll">getMetricsAll</a></span>
+<span><a href="function/index.html#static-function-getMonitorByHost">getMonitorByHost</a></span>
+<span><a href="function/index.html#static-function-getMonitorsAddresses">getMonitorsAddresses</a></span>
+<span><a href="function/index.html#static-function-getMonitorsArray">getMonitorsArray</a></span>
+<span><a href="function/index.html#static-function-getMonitorsHostsInvalidated">getMonitorsHostsInvalidated</a></span>
+<span><a href="function/index.html#static-function-getPathname">getPathname</a></span>
+<span><a href="function/index.html#static-function-getToken">getToken</a></span>
+<span><a href="function/index.html#static-function-getTokenRequested">getTokenRequested</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/21</span></td>
+      <td style="display: none;" data-ice="size">4064 byte</td>
+      <td style="display: none;" data-ice="lines">91</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/liveCharts.js.html#errorLines=4,5,57,6,8,84">src/reducers/liveCharts.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-getLiveChartById">getLiveChartById</a></span>
+<span><a href="function/index.html#static-function-getLiveChartsAllIds">getLiveChartsAllIds</a></span>
+<span><a href="function/index.html#static-function-getLiveChartsArray">getLiveChartsArray</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/6</span></td>
+      <td style="display: none;" data-ice="size">3167 byte</td>
+      <td style="display: none;" data-ice="lines">105</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/reducers/monitors.js.html#errorLines=18,21,22,23,25,27,3,61">src/reducers/monitors.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-convertMonitorsFromObj">convertMonitorsFromObj</a></span>
+<span><a href="function/index.html#static-function-convertMonitorsToObj">convertMonitorsToObj</a></span>
+<span><a href="function/index.html#static-function-getMonitorsAddresses">getMonitorsAddresses</a></span>
+<span><a href="function/index.html#static-function-getMonitorsArray">getMonitorsArray</a></span>
+<span><a href="function/index.html#static-function-getMonitorsHostsInvalidated">getMonitorsHostsInvalidated</a></span>
+<span><a href="function/index.html#static-function-monitors">monitors</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/8</span></td>
+      <td style="display: none;" data-ice="size">2919 byte</td>
+      <td style="display: none;" data-ice="lines">95</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/routes.js.html#errorLines=13,14,15,16,17,18,20,47,49,51,53,57,59,72">src/routes.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-HISTORICAL_ROUTE">HISTORICAL_ROUTE</a></span>
+<span><a href="variable/index.html#static-variable-HOSTS_ROUTE">HOSTS_ROUTE</a></span>
+<span><a href="variable/index.html#static-variable-LIVE_ROUTE">LIVE_ROUTE</a></span>
+<span><a href="variable/index.html#static-variable-LOGIN_ROUTE">LOGIN_ROUTE</a></span>
+<span><a href="variable/index.html#static-variable-MONITORS_ROUTE">MONITORS_ROUTE</a></span>
+<span><a href="variable/index.html#static-variable-REGISTRATION_ROUTE">REGISTRATION_ROUTE</a></span>
+<span><a href="function/index.html#static-function-getDefaultRouteByToken">getDefaultRouteByToken</a></span>
+<span><a href="function/index.html#static-function-getRoutes">getRoutes</a></span>
+<span><a href="function/index.html#static-function-isRouteDefined">isRouteDefined</a></span>
+<span><a href="function/index.html#static-function-isTokenRequired">isTokenRequired</a></span>
+<span><a href="variable/index.html#static-variable-routes">routes</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/14</span></td>
+      <td style="display: none;" data-ice="size">2134 byte</td>
+      <td style="display: none;" data-ice="lines">79</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/sagas/api.js.html#errorLines=10,135,155,21,32,44,56,67,87">src/sagas/api.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-addComplexMetric">addComplexMetric</a></span>
+<span><a href="function/index.html#static-function-getHistoricalChartMeasurements">getHistoricalChartMeasurements</a></span>
+<span><a href="function/index.html#static-function-getHistoricalChartMeasurementsForSingleMonitor">getHistoricalChartMeasurementsForSingleMonitor</a></span>
+<span><a href="function/index.html#static-function-getHosts">getHosts</a></span>
+<span><a href="function/index.html#static-function-getLiveChartMeasurements">getLiveChartMeasurements</a></span>
+<span><a href="function/index.html#static-function-getLiveChartMeasurementsForSingleMonitor">getLiveChartMeasurementsForSingleMonitor</a></span>
+<span><a href="function/index.html#static-function-removeComplexMetric">removeComplexMetric</a></span>
+<span><a href="function/index.html#static-function-signIn">signIn</a></span>
+<span><a href="function/index.html#static-function-signUp">signUp</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/9</span></td>
+      <td style="display: none;" data-ice="size">7063 byte</td>
+      <td style="display: none;" data-ice="lines">191</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/sagas/index.js.html#errorLines=100,117,12,144,149,171,191,200,33,50,61">src/sagas/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-root">root</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">7461 byte</td>
+      <td style="display: none;" data-ice="lines">211</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/sagas/localStorage.js.html#errorLines=13,17,22,6">src/sagas/localStorage.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-authServerSaver">authServerSaver</a></span>
+<span><a href="function/index.html#static-function-monitorsSaver">monitorsSaver</a></span>
+<span><a href="function/index.html#static-function-tokenEraser">tokenEraser</a></span>
+<span><a href="function/index.html#static-function-tokenSaver">tokenSaver</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/4</span></td>
+      <td style="display: none;" data-ice="size">733 byte</td>
+      <td style="display: none;" data-ice="lines">24</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/setupTests.js.html#errorLines=12,16,20,24,6,8,9">src/setupTests.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/7</span></td>
+      <td style="display: none;" data-ice="size">490 byte</td>
+      <td style="display: none;" data-ice="lines">30</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/times.js.html#errorLines=3,4">src/times.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-getCurrentTime">getCurrentTime</a></span>
+<span><a href="function/index.html#static-function-getStartTimeForLiveCharts">getStartTimeForLiveCharts</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
+      <td style="display: none;" data-ice="size">185 byte</td>
+      <td style="display: none;" data-ice="lines">4</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/utils/strToColor.js.html#errorLines=1,17,6">src/utils/strToColor.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-strToColor">strToColor</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/3</span></td>
+      <td style="display: none;" data-ice="size">500 byte</td>
+      <td style="display: none;" data-ice="lines">17</td>
+      <td style="display: none;" data-ice="updated">2018-06-07 21:25:31 (UTC)</td>
+    </tr>
+</tbody>
+</table>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
