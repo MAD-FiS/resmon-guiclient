@@ -26,5 +26,5 @@ Repository for a guiclient component, which is part of resmon product.
 - run `yarn test` to test
 - run `yarn lint-check` to start dev server (with watch)
 - run `yarn build` to build GUI client to `/dist` folder - in result we'll have `.htaccess` config file fo apache2 and `index.html` fo browsers
-- run `AUTH_SERVER=bleh1 MONITORS=[{\"address\":\"aaa\",\"description\":\"bbb\"}] yarn build` to build with different aut hserver or monitor list 
+- run `AUTH_SERVER=bleh1 MONITORS=[{\"address\":\"aaa\",\"description\":\"bbb\"}] yarn build` to build with different auth server or monitor list 
 - run `yarn doc` to generate docs in `/docs`

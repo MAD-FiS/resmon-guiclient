@@ -4,12 +4,13 @@ import * as actions from '../../actions/sync';
 import { getLiveChartsArray, getMetrics } from '../../reducers';
 import AddLiveChart from '../../containers/AddLiveChart';
 import { LiveChart } from '../../components/Chart';
+import NoCharts from '../../components/NoCharts';
 
 const Live = ({ removeLiveChart, setLiveChartMetric, addLiveChartHost, removeLiveChartHost, metrics, charts }) => (
     <div className="full-page">
         <h1>Pomiary na żywo</h1>
         <AddLiveChart />
-        {charts.map(c => (
+        {charts.length ? charts.map(c => (
             <LiveChart
                 key={c.id}
                 onChartClosed={() => removeLiveChart(c.id)}
@@ -19,7 +20,7 @@ const Live = ({ removeLiveChart, setLiveChartMetric, addLiveChartHost, removeLiv
                 metrics={metrics}
                 {...c}
             />
-        ))}
+        )) : <NoCharts />}
     </div>
 );
 
