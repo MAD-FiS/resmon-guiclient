@@ -200,28 +200,33 @@ function* errorThrower() {
     while (true) {
         const action = yield take('*');
         if (action.error) {
-            if (!action.payload.status) {
-                if (action.type === types.SIGN_IN_FAILURE || action.type === types.SIGN_UP_FAILURE) {
-                    yield call(Notification.error, 'Serwer autoryzacyjny jest niedostępny');
-                    continue;
-                }
-                else if (action.meta.monitor) {
-                    yield call(Notification.error, 'Monitor ' + action.meta.monitor + ' jest niedostępny');
-                    continue;
-                }
+            if (
+                !action.payload.status &&
+                (action.type === types.SIGN_IN_FAILURE || action.type === types.SIGN_UP_FAILURE)
+            ) {
+                yield call(Notification.error, 'Serwer autoryzacyjny jest niedostępny');
+                continue;
             }
-            else {
-                switch (action.payload.status) {
-                    case 422:
-                    case 401:
-                        yield call(
-                            Notification.error,
-                            'Nie udało się pobrać zasobów, gdyż dane uwierzytelniające są błędne (monitor: ' +
-                            action.meta.monitor +
-                            ')'
-                        );
-                        continue;
-                }
+            if (!action.payload.status && action.meta && action.meta.monitor) {
+                yield call(Notification.error, 'Monitor ' + action.meta.monitor + ' jest niedostępny');
+                continue;
+            }
+            if (action.payload.status === 422 && action.meta && action.meta.monitor) {
+                yield call(
+                    Notification.error,
+                    'Nie udało się pobrać zasobów, gdyż dane uwierzytelniające są błędne (monitor: ' +
+                    action.meta.monitor +
+                    ')'
+                );
+                continue;
+            }
+            if (action.type === types.SIGN_IN_FAILURE && action.payload.status === 401) {
+                yield call(Notification.error, 'Błędny login lub hasło!');
+                continue;
+            }
+            if (action.type === types.SIGN_UP_FAILURE && action.payload.status === 409) {
+                yield call(Notification.error, 'Użytkownik o podanym adresie email juz istnieje!');
+                continue;
             }
             yield call(Notification.error, action.payload.message + (status ? ' (Kod ' + status + ')' : ''));
         }
