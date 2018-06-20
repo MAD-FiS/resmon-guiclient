@@ -285,7 +285,8 @@
 <li>run <code>yarn</code> to install dependencies</li>
 <li>run <code>yarn test</code> to test</li>
 <li>run <code>yarn lint-check</code> to start dev server (with watch)</li>
-<li>run <code>yarn build</code> to build GUI client to <code>/dist</code> folder - in result we&apos;ll have <code>.htaccess</code> config file fo apache2 and <code>index.html</code> fo browsers</li>
+<li>run <code>yarn build</code> to build GUI client to <code>/dist</code> folder - in result we&apos;ll have <code>.htaccess</code> config file fo apache2 and <code>index.html</code> for browsers</li>
+<li>run <code>yarn build:separate-js</code> to build GUI client to <code>/dist</code> folder including javascript bundle as separate file - in result we&apos;ll have <code>.htaccess</code> config file for apache2, <code>index.html</code> fo browsers and <code>main.js</code> as javascript application script connected to html file</li>
 <li>run <code>AUTH_SERVER=bleh1 MONITORS=[{\&quot;address\&quot;:\&quot;aaa\&quot;,\&quot;description\&quot;:\&quot;bbb\&quot;}] yarn build</code> to build with different auth server or monitor list </li>
 <li>run <code>yarn doc</code> to generate docs in <code>/docs</code></li>
 </ul>
