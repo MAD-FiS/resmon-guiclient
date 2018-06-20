@@ -1,5 +1,30 @@
 # resmon-guiclient
-Repository for a guiclient component, which is part of resmon product.
+
+Repository for a GUI client component, which is part of ResMon software. It is destinated to web browsers and need to be served by any valid web server such as webpack-dev-server, apache2, nginx and so on...
+
+It is designed to work along monitors (at least one) with authorization server. All of mentioned addresses could be built into distribution package. Also these values could be changed by users in the client and stored in browser local storage.
+
+## Installation
+
+You can download the latest version of guiclient (or previous if you want) as a release in github service.
+
+The package contains 2 files:
+- `index.html` - main file with GUI application,
+- `.htaccess` - configuration file for apache2 web server.
+
+We assume Apache2 web server is already installed on the machine. You need to create new apache vhost with overriding access (for `.htaccess` file) to serve GUI in order to server GUI correctly. An example configuration is listed below:
+
+```
+<VirtualHost resmon.tbajorek.pl:80>
+    ServerAdmin [enter desired server admin email here]
+    ServerName [enter desired domain here]
+    ServerAlias www.[enter desired domain here]
+    DocumentRoot [enter folder path containing files from release]
+    <Directory "[enter folder path containing files from release]">
+        AllowOverride All
+    </Directory>
+</VirtualHost>
+```
 
 ## Development
 - install npm

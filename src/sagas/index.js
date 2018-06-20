@@ -168,6 +168,10 @@ function* watchForHistoricalChartUpdates() {
     }
 }
 
+function* triggerHostsUpdate() {
+    yield put(actions.getHosts());
+}
+
 function* authSiteWatcher() {
     yield all([
         fork(watchForLiveChartContext),
@@ -184,6 +188,10 @@ function* authSiteWatcher() {
             types.SET_MONITOR_DESCRIPTION,
             types.REMOVE_MONITOR
         ], storageSagas.monitorsSaver),
+        takeEvery([
+            types.ADD_MONITOR,
+            types.SET_MONITOR_ADDRESS
+        ], triggerHostsUpdate)
     ]);
     yield put(actions.getHosts());
 }
