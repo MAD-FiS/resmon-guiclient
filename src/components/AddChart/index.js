@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Select } from 'antd';
+import { Button, Select, Icon } from 'antd';
 import './index.less';
 
 class AddChart extends React.PureComponent {
@@ -33,7 +33,10 @@ class AddChart extends React.PureComponent {
                 <Button
                     className="add-chart-button" type="primary"
                     onClick={this.onButtonClick} disabled={!value}
-                >Dodaj wykres</Button>
+                >
+                    <Icon type="plus" />
+                    Dodaj wykres
+                </Button>
             </div>
         );
     }

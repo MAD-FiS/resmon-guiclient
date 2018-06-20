@@ -5,22 +5,19 @@ import MetricInfo from './MetricInfo';
 import RemoveMetric from './RemoveMetric';
 
 const SingleMetric = ({hostname, metric, onRemove, found}) => {
-    //const removable = metric.interval !== null;
+    const removable = metric.parent_id !== null;
     return (<Tooltip placement="bottom" title={<MetricInfo metric={metric}/>}>
         <Tag
-            color={found ? 'red' : (metric.interval === null ? '#87d068' : '#2db7f5')}
-        >{metric.id}
-            {
-                <RemoveMetric onConfirm={(e) => {
-                    e.preventDefault();
-                    onRemove(hostname, metric.id);
-                }}/>
-            }
+            className="single-metric"
+            color={found ? 'red' : (metric.parent_id === null ? '#87d068' : '#2db7f5')}
+        >
+            {metric.id}
+            {removable && metric.removable ? <RemoveMetric onConfirm={(e) => {
+                e.preventDefault();
+                onRemove(hostname, metric.id);
+            }}/> : null}
         </Tag>
     </Tooltip>);
 };
 
 export default SingleMetric;
-
-//{/*removable && metric.removable ?*/}
-//{/* : null */}

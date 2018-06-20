@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormAdd from './FormAdd';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Icon } from 'antd';
 
 class ModalAdd extends Component
 {
@@ -70,7 +70,10 @@ class ModalAdd extends Component
     render() {
         return (
             <div className="form-add">
-                <Button className="editable-add-btn" onClick={this.showModal}>{this.props.buttonText}</Button>
+                <Button type="primary" className="editable-add-btn" onClick={this.showModal}>
+                    <Icon type="plus" />
+                    {this.props.buttonText}
+                </Button>
                 <Modal
                     title="Dodaj nowy"
                     visible={this.state.visible}

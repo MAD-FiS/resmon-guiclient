@@ -57,7 +57,7 @@ class HostList extends React.Component
         const base = {}, complex = {};
         hosts.forEach((host) => {
             host.metrics.forEach((metric) => {
-                if(metric.interval === null) {
+                if(metric.parent_id === null) {
                     base[metric.id] = metric.id;
                 } else {
                     complex[metric.id] = metric.id;

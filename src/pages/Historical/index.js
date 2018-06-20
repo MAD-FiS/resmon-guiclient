@@ -4,6 +4,7 @@ import * as actions from '../../actions/sync';
 import { getHistoricalChartsArray, getMetrics } from '../../reducers';
 import AddHistoricalChart from '../../containers/AddHistoricalChart';
 import { HistoricalChart } from '../../components/Chart';
+import NoCharts from '../../components/NoCharts';
 
 const Live = ({
     addHistoricalChartHost1, addHistoricalChartHost2, removeHistoricalChartHost1,
@@ -13,7 +14,7 @@ const Live = ({
     <div className="full-page">
         <h1>Pomiary historyczne</h1>
         <AddHistoricalChart />
-        {charts.map(c => (
+        {charts.length ? charts.map(c => (
             <HistoricalChart
                 key={c.id}
                 onMetric1Changed={(metric) => setHistoricalChartMetric1({ metric }, c.id)}
@@ -27,7 +28,7 @@ const Live = ({
                 metrics={metrics}
                 {...c}
             />
-        ))}
+        )) : <NoCharts />}
     </div>
 );
 
