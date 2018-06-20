@@ -120,7 +120,7 @@ function* loginWatcher() {
     let worker;
     if (token) {
         worker = yield fork(authSiteWatcher);
-        yield call(Notification.success, 'Sesja została przywrócona');
+        yield call(Notification.info, 'Zostałeś zalogowany przy pomocy zapisanych danych uwierzytelniających');
     }
     while (true) {
         const { type } = yield take([
@@ -168,6 +168,10 @@ function* watchForHistoricalChartUpdates() {
     }
 }
 
+function* triggerHostsUpdate() {
+    yield put(actions.getHosts());
+}
+
 function* authSiteWatcher() {
     yield all([
         fork(watchForLiveChartContext),
@@ -184,6 +188,10 @@ function* authSiteWatcher() {
             types.SET_MONITOR_DESCRIPTION,
             types.REMOVE_MONITOR
         ], storageSagas.monitorsSaver),
+        takeEvery([
+            types.ADD_MONITOR,
+            types.SET_MONITOR_ADDRESS
+        ], triggerHostsUpdate)
     ]);
     yield put(actions.getHosts());
 }
@@ -192,6 +200,29 @@ function* errorThrower() {
     while (true) {
         const action = yield take('*');
         if (action.error) {
+            if (!action.payload.status) {
+                if (action.type === types.SIGN_IN_FAILURE || action.type === types.SIGN_UP_FAILURE) {
+                    yield call(Notification.error, 'Serwer autoryzacyjny jest niedostępny');
+                    continue;
+                }
+                else if (action.meta.monitor) {
+                    yield call(Notification.error, 'Monitor ' + action.meta.monitor + ' jest niedostępny');
+                    continue;
+                }
+            }
+            else {
+                switch (action.payload.status) {
+                    case 422:
+                    case 401:
+                        yield call(
+                            Notification.error,
+                            'Nie udało się pobrać zasobów, gdyż dane uwierzytelniające są błędne (monitor: ' +
+                            action.meta.monitor +
+                            ')'
+                        );
+                        continue;
+                }
+            }
             yield call(Notification.error, action.payload.message + (status ? ' (Kod ' + status + ')' : ''));
         }
     }
