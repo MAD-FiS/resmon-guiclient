@@ -360,6 +360,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "react-antd-app/src/components/nocharts/index.js~nocharts",
+    "function/index.html#static-function-NoCharts",
+    "<span>NoCharts</span> <span class=\"search-result-import-path\">react-antd-app/src/components/NoCharts/index.js</span>",
+    "function"
+  ],
+  [
     "react-antd-app/src/pages/notfound/index.js~notfound",
     "function/index.html#static-function-NotFound",
     "<span>NotFound</span> <span class=\"search-result-import-path\">react-antd-app/src/pages/NotFound/index.js</span>",
@@ -2931,6 +2937,12 @@ window.esdocSearchIndex = [
     "src/components/monitorstable/index.js",
     "file/src/components/MonitorsTable/index.js.html",
     "src/components/MonitorsTable/index.js",
+    "file"
+  ],
+  [
+    "src/components/nocharts/index.js",
+    "file/src/components/NoCharts/index.js.html",
+    "src/components/NoCharts/index.js",
     "file"
   ],
   [

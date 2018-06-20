@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">src/containers/AddHistoricalChart/index.js | react-antd-app</title>
+  <title data-ice="title">src/components/NoCharts/index.js | react-antd-app</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -260,21 +260,21 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/containers/AddHistoricalChart/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { connect } from &apos;react-redux&apos;;
-import { getMetricsAll } from &apos;../../reducers&apos;;
-import * as actions from &apos;../../actions/sync&apos;;
-import AddChart from &apos;../../components/AddChart&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">src/components/NoCharts/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import { Icon } from &apos;antd&apos;;
+import &apos;./index.less&apos;;
 
-const mapStateToProps = (state) =&gt; ({
-    metrics: getMetricsAll(state)
-});
+const NoCharts = () =&gt; (
+    &lt;div className=&quot;no-charts&quot;&gt;
+        &lt;div className=&quot;no-charts-inner&quot;&gt;
+            &lt;Icon className=&quot;no-charts-icon&quot; type=&quot;line-chart&quot; /&gt;
+            &lt;p&gt;Brak wykres&#xF3;w&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+);
 
-const mapDispatchToProps = {
-    onAdd: actions.addHistoricalChart
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddChart);
+export default NoCharts;
 </code></pre>
 
 </div>

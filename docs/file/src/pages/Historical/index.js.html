@@ -192,6 +192,7 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-loginform">components/LoginForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedLoginForm">WrappedLoginForm</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-monitoricon">components/MonitorIcon</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MonitorIcon">MonitorIcon</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-monitorstable">components/MonitorsTable</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MonitorsTable">MonitorsTable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-nocharts">components/NoCharts</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-NoCharts">NoCharts</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-notification">components/Notification</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Notification/index.js~Notification.html">Notification</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-refreshhostsbutton">components/RefreshHostsButton</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RefreshHostsButton">RefreshHostsButton</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-registerform">components/RegisterForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedRegisterForm">WrappedRegisterForm</a></span></span></li>
@@ -266,6 +267,7 @@ import * as actions from &apos;../../actions/sync&apos;;
 import { getHistoricalChartsArray, getMetrics } from &apos;../../reducers&apos;;
 import AddHistoricalChart from &apos;../../containers/AddHistoricalChart&apos;;
 import { HistoricalChart } from &apos;../../components/Chart&apos;;
+import NoCharts from &apos;../../components/NoCharts&apos;;
 
 const Live = ({
     addHistoricalChartHost1, addHistoricalChartHost2, removeHistoricalChartHost1,
@@ -275,7 +277,7 @@ const Live = ({
     &lt;div className=&quot;full-page&quot;&gt;
         &lt;h1&gt;Pomiary historyczne&lt;/h1&gt;
         &lt;AddHistoricalChart /&gt;
-        {charts.map(c =&gt; (
+        {charts.length ? charts.map(c =&gt; (
             &lt;HistoricalChart
                 key={c.id}
                 onMetric1Changed={(metric) =&gt; setHistoricalChartMetric1({ metric }, c.id)}
@@ -289,7 +291,7 @@ const Live = ({
                 metrics={metrics}
                 {...c}
             /&gt;
-        ))}
+        )) : &lt;NoCharts /&gt;}
     &lt;/div&gt;
 );
 
