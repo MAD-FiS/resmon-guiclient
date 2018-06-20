@@ -13102,7 +13102,7 @@
     "__docId__": 638,
     "kind": "file",
     "name": "src/sagas/index.js",
-    "content": "import { all, fork, select, put, cancel, takeEvery, takeLatest, take, call } from 'redux-saga/effects';\nimport { delay } from 'redux-saga';\nimport { push } from 'connected-react-router';\nimport * as types from '../actions/types';\nimport * as actions from '../actions/sync';\nimport * as apiSagas from './api';\nimport * as storageSagas from './localStorage';\nimport { getToken, getPathname, getLiveChartsAllIds, getMonitorsAddresses } from '../reducers';\nimport { getDefaultRouteByToken, isRouteDefined, isTokenRequired, LIVE_ROUTE } from '../routes';\nimport Notification from '../components/Notification';\n\nfunction* dealWithNewLocation(pathname) {\n    const isTokenSet = Boolean(yield select(getToken));\n    if (pathname === '/') {\n        const newPathname = yield call(getDefaultRouteByToken, isTokenSet);\n        yield put(push(newPathname));\n    }\n    else if (yield call(isRouteDefined, pathname)) {\n        const tokenRequired = yield call(isTokenRequired, pathname);\n        if (tokenRequired === isTokenSet) {\n            yield put(actions.changeRoutingContext({ pathname }));\n        }\n        else {\n            const newPathname = yield call(getDefaultRouteByToken, isTokenSet);\n            yield put(push(newPathname));\n        }\n    }\n    else {\n        yield put(actions.changeRoutingContext({ pathname }));\n    }\n}\n\nfunction* watchForLocationChange() {\n    yield delay(0);\n    const startLocation = yield select(getPathname);\n    let task = yield fork(dealWithNewLocation, startLocation);\n    while (true) {\n        const action = yield take([\n            '@@router/LOCATION_CHANGE',\n            types.SIGN_IN_SUCCESS,\n            types.SIGN_UP_SUCCESS,\n            types.REMOVE_TOKEN\n        ]);\n        yield cancel(task);\n        const newLocation = action.type === '@@router/LOCATION_CHANGE' ? action.payload.location.pathname : '/';\n        task = yield fork(dealWithNewLocation, newLocation);\n    }\n}\n\nfunction* keepLiveChartRefreshing(id) {\n    yield put(actions.getLiveMeasurementsRequest(id, true));\n    while(true) {\n        yield all([\n            take(types.GET_LIVE_MEASUREMENTS_SUCCESS),\n            delay(1000 * 15)\n        ]);\n        yield put(actions.getLiveMeasurementsRequest(id, false));\n    }\n}\n\nfunction* conductLiveChartsUpdates() {\n    const liveCharts = yield select(getLiveChartsAllIds);\n    const tasks = {};\n    for (const id of liveCharts) {\n        tasks[id] = yield fork(keepLiveChartRefreshing, id);\n    }\n    while (true) {\n        const action = yield take([\n            types.CHANGE_ROUTING_CONTEXT,\n            types.ADD_LIVE_CHART,\n            types.REMOVE_LIVE_CHART,\n            types.SET_LIVE_CHART_METRIC,\n            types.ADD_LIVE_CHART_HOST,\n            types.REMOVE_LIVE_CHART_HOST\n        ]);\n        if (action.type === types.CHANGE_ROUTING_CONTEXT && action.payload.pathname !== LIVE_ROUTE) {\n            yield cancel();\n        }\n        if (\n            action.type === types.REMOVE_LIVE_CHART\n            || action.type === types.SET_LIVE_CHART_METRIC\n            || action.type === types.ADD_LIVE_CHART_HOST\n            || action.type === types.REMOVE_LIVE_CHART_HOST\n        ) {\n            yield cancel(tasks[action.meta.id]);\n        }\n        if (action.type === types.ADD_LIVE_CHART) {\n            tasks[action.payload.id] = yield fork(keepLiveChartRefreshing, action.payload.id);\n        }\n        if (\n            action.type === types.SET_LIVE_CHART_METRIC\n            || action.type === types.ADD_LIVE_CHART_HOST\n            || action.type === types.REMOVE_LIVE_CHART_HOST\n        ) {\n            tasks[action.meta.id] = yield fork(keepLiveChartRefreshing, action.meta.id);\n        }\n    }\n}\n\nfunction* watchForLiveChartContext() {\n    let task;\n    const pathname = yield select(getPathname);\n    if (pathname === LIVE_ROUTE) {\n        task = yield fork(conductLiveChartsUpdates);\n    }\n    while (true) {\n        const { payload } = yield take(types.CHANGE_ROUTING_CONTEXT);\n        if (payload.pathname === LIVE_ROUTE) {\n            if (task) {\n                cancel(task);\n            }\n            task = yield fork(conductLiveChartsUpdates);\n        }\n    }\n}\n\nfunction* loginWatcher() {\n    yield take(types.CHANGE_ROUTING_CONTEXT);\n    const token = yield select(getToken);\n    let worker;\n    if (token) {\n        worker = yield fork(authSiteWatcher);\n        yield call(Notification.success, 'Sesja została przywrócona');\n    }\n    while (true) {\n        const { type } = yield take([\n            types.SIGN_IN_SUCCESS,\n            types.SIGN_UP_SUCCESS,\n            types.REMOVE_TOKEN\n        ]);\n        if (worker) {\n            yield cancel(worker);\n        }\n        if (type !== types.REMOVE_TOKEN) {\n            worker = yield fork(authSiteWatcher);\n            yield call(Notification.success, 'Zostałeś zalogowany pomyślnie');\n        }\n        else {\n            yield call(Notification.success, 'Zostałeś wylogowany pomyślnie');\n        }\n    }\n}\n\nfunction* getAllHosts() {\n    const monitors = yield select(getMonitorsAddresses);\n    yield all(monitors.map(monitor => put(actions.getHostsRequest(monitor))));\n}\n\nfunction* watchForHistoricalChartUpdates() {\n    let workers = {};\n    while (true) {\n        const action = yield take([\n            types.SET_HISTORICAL_CHART_RANGE,\n            types.SET_HISTORICAL_CHART_METRIC1,\n            types.SET_HISTORICAL_CHART_METRIC2,\n            types.ADD_HISTORICAL_CHART_HOST1,\n            types.ADD_HISTORICAL_CHART_HOST2,\n            types.REMOVE_HISTORICAL_CHART_HOST1,\n            types.REMOVE_HISTORICAL_CHART_HOST2,\n            types.REMOVE_HISTORICAL_CHART\n        ]);\n        if (workers[action.meta.id]) {\n            yield cancel(action.meta.id);\n        }\n        if (action.type !== types.REMOVE_HISTORICAL_CHART) {\n            yield put(actions.getHistoricalMeasurementsRequest(action.meta.id));\n        }\n    }\n}\n\nfunction* authSiteWatcher() {\n    yield all([\n        fork(watchForLiveChartContext),\n        fork(watchForHistoricalChartUpdates),\n        takeEvery(types.GET_HOSTS, getAllHosts),\n        takeEvery(types.ADD_COMPLEX_METRIC_REQUEST, apiSagas.addComplexMetric),\n        takeEvery(types.REMOVE_COMPLEX_METRIC_REQUEST, apiSagas.removeComplexMetric),\n        takeEvery(types.GET_HOSTS_REQUEST, apiSagas.getHosts),\n        takeEvery(types.GET_LIVE_MEASUREMENTS_REQUEST, apiSagas.getLiveChartMeasurements),\n        takeEvery(types.GET_HISTORICAL_MEASUREMENTS_REQUEST, apiSagas.getHistoricalChartMeasurements),\n        takeLatest([\n            types.ADD_MONITOR,\n            types.SET_MONITOR_ADDRESS,\n            types.SET_MONITOR_DESCRIPTION,\n            types.REMOVE_MONITOR\n        ], storageSagas.monitorsSaver),\n    ]);\n    yield put(actions.getHosts());\n}\n\nfunction* errorThrower() {\n    while (true) {\n        const action = yield take('*');\n        if (action.error) {\n            yield call(Notification.error, action.payload.message + (status ? ' (Kod ' + status + ')' : ''));\n        }\n    }\n}\n\nexport default function* root() {\n    yield all([\n        takeEvery(types.SIGN_UP_REQUEST, apiSagas.signUp),\n        takeEvery(types.SIGN_IN_REQUEST, apiSagas.signIn),\n        takeLatest(types.SIGN_IN_REQUEST, storageSagas.tokenSaver),\n        takeLatest(types.REMOVE_TOKEN, storageSagas.tokenEraser),\n        takeLatest(types.CHANGE_AUTH_SERVER, storageSagas.authServerSaver),\n        fork(watchForLocationChange),\n        fork(loginWatcher),\n        fork(errorThrower)\n    ]);\n}\n",
+    "content": "import { all, fork, select, put, cancel, takeEvery, takeLatest, take, call } from 'redux-saga/effects';\nimport { delay } from 'redux-saga';\nimport { push } from 'connected-react-router';\nimport * as types from '../actions/types';\nimport * as actions from '../actions/sync';\nimport * as apiSagas from './api';\nimport * as storageSagas from './localStorage';\nimport { getToken, getPathname, getLiveChartsAllIds, getMonitorsAddresses } from '../reducers';\nimport { getDefaultRouteByToken, isRouteDefined, isTokenRequired, LIVE_ROUTE } from '../routes';\nimport Notification from '../components/Notification';\n\nfunction* dealWithNewLocation(pathname) {\n    const isTokenSet = Boolean(yield select(getToken));\n    if (pathname === '/') {\n        const newPathname = yield call(getDefaultRouteByToken, isTokenSet);\n        yield put(push(newPathname));\n    }\n    else if (yield call(isRouteDefined, pathname)) {\n        const tokenRequired = yield call(isTokenRequired, pathname);\n        if (tokenRequired === isTokenSet) {\n            yield put(actions.changeRoutingContext({ pathname }));\n        }\n        else {\n            const newPathname = yield call(getDefaultRouteByToken, isTokenSet);\n            yield put(push(newPathname));\n        }\n    }\n    else {\n        yield put(actions.changeRoutingContext({ pathname }));\n    }\n}\n\nfunction* watchForLocationChange() {\n    yield delay(0);\n    const startLocation = yield select(getPathname);\n    let task = yield fork(dealWithNewLocation, startLocation);\n    while (true) {\n        const action = yield take([\n            '@@router/LOCATION_CHANGE',\n            types.SIGN_IN_SUCCESS,\n            types.SIGN_UP_SUCCESS,\n            types.REMOVE_TOKEN\n        ]);\n        yield cancel(task);\n        const newLocation = action.type === '@@router/LOCATION_CHANGE' ? action.payload.location.pathname : '/';\n        task = yield fork(dealWithNewLocation, newLocation);\n    }\n}\n\nfunction* keepLiveChartRefreshing(id) {\n    yield put(actions.getLiveMeasurementsRequest(id, true));\n    while(true) {\n        yield all([\n            take(types.GET_LIVE_MEASUREMENTS_SUCCESS),\n            delay(1000 * 15)\n        ]);\n        yield put(actions.getLiveMeasurementsRequest(id, false));\n    }\n}\n\nfunction* conductLiveChartsUpdates() {\n    const liveCharts = yield select(getLiveChartsAllIds);\n    const tasks = {};\n    for (const id of liveCharts) {\n        tasks[id] = yield fork(keepLiveChartRefreshing, id);\n    }\n    while (true) {\n        const action = yield take([\n            types.CHANGE_ROUTING_CONTEXT,\n            types.ADD_LIVE_CHART,\n            types.REMOVE_LIVE_CHART,\n            types.SET_LIVE_CHART_METRIC,\n            types.ADD_LIVE_CHART_HOST,\n            types.REMOVE_LIVE_CHART_HOST\n        ]);\n        if (action.type === types.CHANGE_ROUTING_CONTEXT && action.payload.pathname !== LIVE_ROUTE) {\n            yield cancel();\n        }\n        if (\n            action.type === types.REMOVE_LIVE_CHART\n            || action.type === types.SET_LIVE_CHART_METRIC\n            || action.type === types.ADD_LIVE_CHART_HOST\n            || action.type === types.REMOVE_LIVE_CHART_HOST\n        ) {\n            yield cancel(tasks[action.meta.id]);\n        }\n        if (action.type === types.ADD_LIVE_CHART) {\n            tasks[action.payload.id] = yield fork(keepLiveChartRefreshing, action.payload.id);\n        }\n        if (\n            action.type === types.SET_LIVE_CHART_METRIC\n            || action.type === types.ADD_LIVE_CHART_HOST\n            || action.type === types.REMOVE_LIVE_CHART_HOST\n        ) {\n            tasks[action.meta.id] = yield fork(keepLiveChartRefreshing, action.meta.id);\n        }\n    }\n}\n\nfunction* watchForLiveChartContext() {\n    let task;\n    const pathname = yield select(getPathname);\n    if (pathname === LIVE_ROUTE) {\n        task = yield fork(conductLiveChartsUpdates);\n    }\n    while (true) {\n        const { payload } = yield take(types.CHANGE_ROUTING_CONTEXT);\n        if (payload.pathname === LIVE_ROUTE) {\n            if (task) {\n                cancel(task);\n            }\n            task = yield fork(conductLiveChartsUpdates);\n        }\n    }\n}\n\nfunction* loginWatcher() {\n    yield take(types.CHANGE_ROUTING_CONTEXT);\n    const token = yield select(getToken);\n    let worker;\n    if (token) {\n        worker = yield fork(authSiteWatcher);\n        yield call(Notification.info, 'Zostałeś zalogowany przy pomocy zapisanych danych uwierzytelniających');\n    }\n    while (true) {\n        const { type } = yield take([\n            types.SIGN_IN_SUCCESS,\n            types.SIGN_UP_SUCCESS,\n            types.REMOVE_TOKEN\n        ]);\n        if (worker) {\n            yield cancel(worker);\n        }\n        if (type !== types.REMOVE_TOKEN) {\n            worker = yield fork(authSiteWatcher);\n            yield call(Notification.success, 'Zostałeś zalogowany pomyślnie');\n        }\n        else {\n            yield call(Notification.success, 'Zostałeś wylogowany pomyślnie');\n        }\n    }\n}\n\nfunction* getAllHosts() {\n    const monitors = yield select(getMonitorsAddresses);\n    yield all(monitors.map(monitor => put(actions.getHostsRequest(monitor))));\n}\n\nfunction* watchForHistoricalChartUpdates() {\n    let workers = {};\n    while (true) {\n        const action = yield take([\n            types.SET_HISTORICAL_CHART_RANGE,\n            types.SET_HISTORICAL_CHART_METRIC1,\n            types.SET_HISTORICAL_CHART_METRIC2,\n            types.ADD_HISTORICAL_CHART_HOST1,\n            types.ADD_HISTORICAL_CHART_HOST2,\n            types.REMOVE_HISTORICAL_CHART_HOST1,\n            types.REMOVE_HISTORICAL_CHART_HOST2,\n            types.REMOVE_HISTORICAL_CHART\n        ]);\n        if (workers[action.meta.id]) {\n            yield cancel(action.meta.id);\n        }\n        if (action.type !== types.REMOVE_HISTORICAL_CHART) {\n            yield put(actions.getHistoricalMeasurementsRequest(action.meta.id));\n        }\n    }\n}\n\nfunction* triggerHostsUpdate() {\n    yield put(actions.getHosts());\n}\n\nfunction* authSiteWatcher() {\n    yield all([\n        fork(watchForLiveChartContext),\n        fork(watchForHistoricalChartUpdates),\n        takeEvery(types.GET_HOSTS, getAllHosts),\n        takeEvery(types.ADD_COMPLEX_METRIC_REQUEST, apiSagas.addComplexMetric),\n        takeEvery(types.REMOVE_COMPLEX_METRIC_REQUEST, apiSagas.removeComplexMetric),\n        takeEvery(types.GET_HOSTS_REQUEST, apiSagas.getHosts),\n        takeEvery(types.GET_LIVE_MEASUREMENTS_REQUEST, apiSagas.getLiveChartMeasurements),\n        takeEvery(types.GET_HISTORICAL_MEASUREMENTS_REQUEST, apiSagas.getHistoricalChartMeasurements),\n        takeLatest([\n            types.ADD_MONITOR,\n            types.SET_MONITOR_ADDRESS,\n            types.SET_MONITOR_DESCRIPTION,\n            types.REMOVE_MONITOR\n        ], storageSagas.monitorsSaver),\n        takeEvery([\n            types.ADD_MONITOR,\n            types.SET_MONITOR_ADDRESS\n        ], triggerHostsUpdate)\n    ]);\n    yield put(actions.getHosts());\n}\n\nfunction* errorThrower() {\n    while (true) {\n        const action = yield take('*');\n        if (action.error) {\n            if (!action.payload.status) {\n                if (action.type === types.SIGN_IN_FAILURE || action.type === types.SIGN_UP_FAILURE) {\n                    yield call(Notification.error, 'Serwer autoryzacyjny jest niedostępny');\n                    continue;\n                }\n                else if (action.meta.monitor) {\n                    yield call(Notification.error, 'Monitor ' + action.meta.monitor + ' jest niedostępny');\n                    continue;\n                }\n            }\n            else {\n                switch (action.payload.status) {\n                    case 422:\n                    case 401:\n                        yield call(\n                            Notification.error,\n                            'Nie udało się pobrać zasobów, gdyż dane uwierzytelniające są błędne (monitor: ' +\n                            action.meta.monitor +\n                            ')'\n                        );\n                        continue;\n                }\n            }\n            yield call(Notification.error, action.payload.message + (status ? ' (Kod ' + status + ')' : ''));\n        }\n    }\n}\n\nexport default function* root() {\n    yield all([\n        takeEvery(types.SIGN_UP_REQUEST, apiSagas.signUp),\n        takeEvery(types.SIGN_IN_REQUEST, apiSagas.signIn),\n        takeLatest(types.SIGN_IN_REQUEST, storageSagas.tokenSaver),\n        takeLatest(types.REMOVE_TOKEN, storageSagas.tokenEraser),\n        takeLatest(types.CHANGE_AUTH_SERVER, storageSagas.authServerSaver),\n        fork(watchForLocationChange),\n        fork(loginWatcher),\n        fork(errorThrower)\n    ]);\n}\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/sagas/index.js",
     "access": "public",
@@ -13286,12 +13286,12 @@
   {
     "__docId__": 647,
     "kind": "function",
-    "name": "authSiteWatcher",
+    "name": "triggerHostsUpdate",
     "memberof": "src/sagas/index.js",
     "generator": true,
     "async": false,
     "static": true,
-    "longname": "src/sagas/index.js~authSiteWatcher",
+    "longname": "src/sagas/index.js~triggerHostsUpdate",
     "access": "public",
     "export": false,
     "importPath": "react-antd-app/src/sagas/index.js",
@@ -13306,6 +13306,26 @@
   {
     "__docId__": 648,
     "kind": "function",
+    "name": "authSiteWatcher",
+    "memberof": "src/sagas/index.js",
+    "generator": true,
+    "async": false,
+    "static": true,
+    "longname": "src/sagas/index.js~authSiteWatcher",
+    "access": "public",
+    "export": false,
+    "importPath": "react-antd-app/src/sagas/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 175,
+    "undocument": true,
+    "params": [],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 649,
+    "kind": "function",
     "name": "errorThrower",
     "memberof": "src/sagas/index.js",
     "generator": true,
@@ -13317,14 +13337,14 @@
     "importPath": "react-antd-app/src/sagas/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 191,
+    "lineNumber": 199,
     "undocument": true,
     "params": [],
     "return": null,
     "ignore": true
   },
   {
-    "__docId__": 649,
+    "__docId__": 650,
     "kind": "function",
     "name": "root",
     "memberof": "src/sagas/index.js",
@@ -13337,13 +13357,13 @@
     "importPath": "react-antd-app/src/sagas/index.js",
     "importStyle": "root",
     "description": null,
-    "lineNumber": 200,
+    "lineNumber": 231,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 650,
+    "__docId__": 651,
     "kind": "file",
     "name": "src/sagas/localStorage.js",
     "content": "import { take, call, select } from 'redux-saga/effects';\nimport * as types from '../actions/types';\nimport { convertMonitorsFromObj } from '../reducers';\nimport * as storage from '../localStorage';\n\nexport function* tokenSaver({ payload }) {\n    if (payload.remember) {\n        const action = yield take(types.SIGN_IN_SUCCESS);\n        yield call(storage.saveToken, action.payload.access_token);\n    }\n}\n\nexport function* tokenEraser() {\n    yield call(storage.clearToken);\n}\n\nexport function* monitorsSaver() {\n    const monitors = yield select(convertMonitorsFromObj);\n    yield call(storage.updateMonitors, monitors);\n}\n\nexport function* authServerSaver({ payload }) {\n    yield call(storage.updateAuthServer, payload.address);\n}\n",
@@ -13354,7 +13374,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 651,
+    "__docId__": 652,
     "kind": "function",
     "name": "tokenSaver",
     "memberof": "src/sagas/localStorage.js",
@@ -13384,7 +13404,7 @@
     "return": null
   },
   {
-    "__docId__": 652,
+    "__docId__": 653,
     "kind": "function",
     "name": "tokenEraser",
     "memberof": "src/sagas/localStorage.js",
@@ -13403,7 +13423,7 @@
     "return": null
   },
   {
-    "__docId__": 653,
+    "__docId__": 654,
     "kind": "function",
     "name": "monitorsSaver",
     "memberof": "src/sagas/localStorage.js",
@@ -13422,7 +13442,7 @@
     "return": null
   },
   {
-    "__docId__": 654,
+    "__docId__": 655,
     "kind": "function",
     "name": "authServerSaver",
     "memberof": "src/sagas/localStorage.js",
@@ -13452,7 +13472,7 @@
     "return": null
   },
   {
-    "__docId__": 655,
+    "__docId__": 656,
     "kind": "file",
     "name": "src/setupTests.js",
     "content": "import { configure } from 'enzyme';\nimport Adapter from 'enzyme-adapter-react-16';\n\nconfigure({ adapter: new Adapter() });\n\nclass LocalStorageMock {\n\n    constructor() {\n        this.store = {};\n    }\n\n    clear() {\n        this.store = {};\n    }\n\n    getItem(key) {\n        return this.store[key] || null;\n    }\n\n    setItem(key, value) {\n        this.store[key] = value;\n    }\n\n    removeItem(key) {\n        delete this.store[key];\n    }\n\n}\n\nglobal.localStorage = new LocalStorageMock();\n",
@@ -13463,7 +13483,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 656,
+    "__docId__": 657,
     "kind": "class",
     "name": "LocalStorageMock",
     "memberof": "src/setupTests.js",
@@ -13480,7 +13500,7 @@
     "ignore": true
   },
   {
-    "__docId__": 657,
+    "__docId__": 658,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13494,7 +13514,7 @@
     "undocument": true
   },
   {
-    "__docId__": 658,
+    "__docId__": 659,
     "kind": "member",
     "name": "store",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13511,7 +13531,7 @@
     }
   },
   {
-    "__docId__": 659,
+    "__docId__": 660,
     "kind": "method",
     "name": "clear",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13527,7 +13547,7 @@
     "return": null
   },
   {
-    "__docId__": 661,
+    "__docId__": 662,
     "kind": "method",
     "name": "getItem",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13554,7 +13574,7 @@
     }
   },
   {
-    "__docId__": 662,
+    "__docId__": 663,
     "kind": "method",
     "name": "setItem",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13583,7 +13603,7 @@
     "return": null
   },
   {
-    "__docId__": 663,
+    "__docId__": 664,
     "kind": "method",
     "name": "removeItem",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13606,7 +13626,7 @@
     "return": null
   },
   {
-    "__docId__": 664,
+    "__docId__": 665,
     "kind": "file",
     "name": "src/times.js",
     "content": "import moment from 'moment';\n\nexport const getStartTimeForLiveCharts = () => moment().subtract(15, 'minutes').toISOString();\nexport const getCurrentTime = () => moment().toISOString();\n",
@@ -13617,7 +13637,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 665,
+    "__docId__": 666,
     "kind": "function",
     "name": "getStartTimeForLiveCharts",
     "memberof": "src/times.js",
@@ -13636,7 +13656,7 @@
     "return": null
   },
   {
-    "__docId__": 666,
+    "__docId__": 667,
     "kind": "function",
     "name": "getCurrentTime",
     "memberof": "src/times.js",
@@ -13655,7 +13675,7 @@
     "return": null
   },
   {
-    "__docId__": 667,
+    "__docId__": 668,
     "kind": "file",
     "name": "src/utils/strToColor.js",
     "content": "const colors = [\n    '#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9',\n    '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'\n];\n\nconst hashCode = (str) => {\n    var hash = 0;\n    if (str.length === 0) return hash;\n    for (let i = 0; i < str.length; i++) {\n        const char = str.charCodeAt(i);\n        hash = ((hash<<5)-hash)+char;\n        hash = hash & hash; // Convert to 32bit integer\n    }\n    return hash;\n};\n\nexport default (str) => colors[Math.abs(hashCode(str)) % colors.length];\n",
@@ -13666,7 +13686,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 668,
+    "__docId__": 669,
     "kind": "variable",
     "name": "colors",
     "memberof": "src/utils/strToColor.js",
@@ -13687,7 +13707,7 @@
     "ignore": true
   },
   {
-    "__docId__": 669,
+    "__docId__": 670,
     "kind": "function",
     "name": "hashCode",
     "memberof": "src/utils/strToColor.js",
@@ -13718,7 +13738,7 @@
     "ignore": true
   },
   {
-    "__docId__": 670,
+    "__docId__": 671,
     "kind": "function",
     "name": "strToColor",
     "memberof": "src/utils/strToColor.js",
@@ -13745,7 +13765,7 @@
   },
   {
     "kind": "index",
-    "content": "# resmon-guiclient\nRepository for a guiclient component, which is part of resmon product.\n\n## Development\n- install npm\n- install yarn globally: `npm install --global yarn`\n- run `yarn` to install dependencies\n- run `yarn test` to test (use `--watch` to run in watch)\n- run `yarn start` to start dev server (with watch)\n- run `yarn lint-check` to start dev server (with watch)\n- you may want to install react and [redux](https://github.com/zalmoxisus/redux-devtools-extension) plugins for browsers\n\n## Structure overview\n- `/src/components` contains pure react components (without redux integration)\n- `/src/containers` contains react components which are connected to redux\n- `/src/pages` contains page-level react components\n- `/src/reducers` contains redux reducers - pure functions transforming store to another state\n- `/src/actions` contains action creators - functions returning actions that could be directly dispatched by redux\n- `/src/api.js` constains functions making api calls and returning promise-like object\n- `/src/index.js` entry file\n\n## CI\n- install npm\n- install yarn globally: `npm install --global yarn`\n- run `yarn` to install dependencies\n- run `yarn test` to test\n- run `yarn lint-check` to start dev server (with watch)\n- run `yarn build` to build GUI client to `/dist` folder - in result we'll have `.htaccess` config file fo apache2 and `index.html` for browsers\n- run `yarn build:separate-js` to build GUI client to `/dist` folder including javascript bundle as separate file - in result we'll have `.htaccess` config file for apache2, `index.html` fo browsers and `main.js` as javascript application script connected to html file\n- run `AUTH_SERVER=bleh1 MONITORS=[{\\\"address\\\":\\\"aaa\\\",\\\"description\\\":\\\"bbb\\\"}] yarn build` to build with different auth server or monitor list \n- run `yarn doc` to generate docs in `/docs`\n",
+    "content": "# resmon-guiclient\n\nRepository for a GUI client component, which is part of ResMon software. It is destinated to web browsers and need to be served by any valid web server such as webpack-dev-server, apache2, nginx and so on...\n\nIt is designed to work along monitors (at least one) with authorization server. All of mentioned addresses could be built into distribution package. Also these values could be changed by users in the client and stored in browser local storage.\n\n## Installation\n\nYou can download the latest version of guiclient (or previous if you want) as a release in github service.\n\nThe package contains 2 files:\n- `index.html` - main file with GUI application,\n- `.htaccess` - configuration file for apache2 web server.\n\nWe assume Apache2 web server is already installed on the machine. You need to create new apache vhost with overriding access (for `.htaccess` file) to serve GUI in order to server GUI correctly. An example configuration is listed below:\n\n```\n<VirtualHost resmon.tbajorek.pl:80>\n    ServerAdmin [enter desired server admin email here]\n    ServerName [enter desired domain here]\n    ServerAlias www.[enter desired domain here]\n    DocumentRoot [enter folder path containing files from release]\n    <Directory \"[enter folder path containing files from release]\">\n        AllowOverride All\n    </Directory>\n</VirtualHost>\n```\n\n## Development\n- install npm\n- install yarn globally: `npm install --global yarn`\n- run `yarn` to install dependencies\n- run `yarn test` to test (use `--watch` to run in watch)\n- run `yarn start` to start dev server (with watch)\n- run `yarn lint-check` to start dev server (with watch)\n- you may want to install react and [redux](https://github.com/zalmoxisus/redux-devtools-extension) plugins for browsers\n\n## Structure overview\n- `/src/components` contains pure react components (without redux integration)\n- `/src/containers` contains react components which are connected to redux\n- `/src/pages` contains page-level react components\n- `/src/reducers` contains redux reducers - pure functions transforming store to another state\n- `/src/actions` contains action creators - functions returning actions that could be directly dispatched by redux\n- `/src/api.js` constains functions making api calls and returning promise-like object\n- `/src/index.js` entry file\n\n## CI\n- install npm\n- install yarn globally: `npm install --global yarn`\n- run `yarn` to install dependencies\n- run `yarn test` to test\n- run `yarn lint-check` to start dev server (with watch)\n- run `yarn build` to build GUI client to `/dist` folder - in result we'll have `.htaccess` config file fo apache2 and `index.html` for browsers\n- run `yarn build:separate-js` to build GUI client to `/dist` folder including javascript bundle as separate file - in result we'll have `.htaccess` config file for apache2, `index.html` fo browsers and `main.js` as javascript application script connected to html file\n- run `AUTH_SERVER=bleh1 MONITORS=[{\\\"address\\\":\\\"aaa\\\",\\\"description\\\":\\\"bbb\\\"}] yarn build` to build with different auth server or monitor list \n- run `yarn doc` to generate docs in `/docs`\n",
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/README.md",
     "name": "./README.md",
     "static": true,

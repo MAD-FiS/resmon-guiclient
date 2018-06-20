@@ -1,6 +1,6 @@
 {
   "coverage": "0.19%",
-  "expectCount": 521,
+  "expectCount": 522,
   "actualCount": 1,
   "files": {
     "src/actions/sync.js": {
@@ -1000,7 +1000,7 @@
       ]
     },
     "src/sagas/index.js": {
-      "expectCount": 11,
+      "expectCount": 12,
       "actualCount": 0,
       "undocumentLines": [
         12,
@@ -1012,8 +1012,9 @@
         144,
         149,
         171,
-        191,
-        200
+        175,
+        199,
+        231
       ]
     },
     "src/sagas/localStorage.js": {

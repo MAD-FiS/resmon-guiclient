@@ -260,8 +260,25 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="resmon-guiclient">resmon-guiclient</h1><p>Repository for a guiclient component, which is part of resmon product.</p>
-<h2 id="development">Development</h2><ul>
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h1 id="resmon-guiclient">resmon-guiclient</h1><p>Repository for a GUI client component, which is part of ResMon software. It is destinated to web browsers and need to be served by any valid web server such as webpack-dev-server, apache2, nginx and so on...</p>
+<p>It is designed to work along monitors (at least one) with authorization server. All of mentioned addresses could be built into distribution package. Also these values could be changed by users in the client and stored in browser local storage.</p>
+<h2 id="installation">Installation</h2><p>You can download the latest version of guiclient (or previous if you want) as a release in github service.</p>
+<p>The package contains 2 files:</p>
+<ul>
+<li><code>index.html</code> - main file with GUI application,</li>
+<li><code>.htaccess</code> - configuration file for apache2 web server.</li>
+</ul>
+<p>We assume Apache2 web server is already installed on the machine. You need to create new apache vhost with overriding access (for <code>.htaccess</code> file) to serve GUI in order to server GUI correctly. An example configuration is listed below:</p>
+<pre><code><code class="source-code prettyprint">&lt;VirtualHost resmon.tbajorek.pl:80&gt;
+    ServerAdmin [enter desired server admin email here]
+    ServerName [enter desired domain here]
+    ServerAlias www.[enter desired domain here]
+    DocumentRoot [enter folder path containing files from release]
+    &lt;Directory &quot;[enter folder path containing files from release]&quot;&gt;
+        AllowOverride All
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code>
+</code></pre><h2 id="development">Development</h2><ul>
 <li>install npm</li>
 <li>install yarn globally: <code>npm install --global yarn</code></li>
 <li>run <code>yarn</code> to install dependencies</li>
