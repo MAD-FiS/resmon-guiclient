@@ -2984,7 +2984,7 @@
     "__docId__": 144,
     "kind": "file",
     "name": "src/components/AddChart/index.js",
-    "content": "import React from 'react';\nimport { Button, Select } from 'antd';\nimport './index.less';\n\nclass AddChart extends React.PureComponent {\n\n    state = {\n        value: undefined\n    };\n\n    onChange = (value) => {\n        this.setState({ value });\n    }\n\n    onButtonClick = () => {\n        this.props.onAdd({ metric: this.state.value });\n        this.setState({ value: undefined });\n    }\n\n    render() {\n        const { metrics } = this.props;\n        const { value } = this.state;\n        return (\n            <div className=\"add-chart\">\n                <Select\n                    className=\"add-chart-select\" placeholder=\"Wybierz metrykę\" allowClear={true}\n                    showSearch={true} value={value} onChange={this.onChange}\n                >\n                    {metrics.map(metric => (\n                        <Select.Option key={metric} value={metric}>{metric}</Select.Option>\n                    ))}\n                </Select>\n                <Button\n                    className=\"add-chart-button\" type=\"primary\"\n                    onClick={this.onButtonClick} disabled={!value}\n                >Dodaj wykres</Button>\n            </div>\n        );\n    }\n\n}\n\nexport default AddChart;\n",
+    "content": "import React from 'react';\nimport { Button, Select, Icon } from 'antd';\nimport './index.less';\n\nclass AddChart extends React.PureComponent {\n\n    state = {\n        value: undefined\n    };\n\n    onChange = (value) => {\n        this.setState({ value });\n    }\n\n    onButtonClick = () => {\n        this.props.onAdd({ metric: this.state.value });\n        this.setState({ value: undefined });\n    }\n\n    render() {\n        const { metrics } = this.props;\n        const { value } = this.state;\n        return (\n            <div className=\"add-chart\">\n                <Select\n                    className=\"add-chart-select\" placeholder=\"Wybierz metrykę\" allowClear={true}\n                    showSearch={true} value={value} onChange={this.onChange}\n                >\n                    {metrics.map(metric => (\n                        <Select.Option key={metric} value={metric}>{metric}</Select.Option>\n                    ))}\n                </Select>\n                <Button\n                    className=\"add-chart-button\" type=\"primary\"\n                    onClick={this.onButtonClick} disabled={!value}\n                >\n                    <Icon type=\"plus\" />\n                    Dodaj wykres\n                </Button>\n            </div>\n        );\n    }\n\n}\n\nexport default AddChart;\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/components/AddChart/index.js",
     "access": "public",
@@ -5162,7 +5162,7 @@
     "__docId__": 258,
     "kind": "file",
     "name": "src/components/EditableTable/ModalAdd/index.js",
-    "content": "import React, { Component } from 'react';\nimport FormAdd from './FormAdd';\nimport { Button, Modal } from 'antd';\n\nclass ModalAdd extends Component\n{\n    constructor(props) {\n        super(props);\n        this.state = {\n            row: {},\n            visible: false\n        };\n        this.columnNames = {};\n        this.required = {};\n        for (const column of this.props.columns) {\n            if (column.type !== 'menu') {\n                this.state.row[column.id] = '';\n                this.columnNames[column.id] = column.name;\n                this.required[column.id] = column.required;\n            }\n        }\n        this.form = null;\n    }\n\n    showModal = () => {\n        this.setState({\n            visible: true\n        });\n    };\n\n    hideModal = () => {\n        this.setState({\n            visible: false\n        });\n    };\n\n    addRow = () => {\n        if(this.form !== null) {\n            this.form.validateFields((err) => {\n                if (!err) {\n                    this.props.onAdd(Object.assign({}, this.state.row));\n                    this.setState({\n                        row: this._getEmptyRow(),\n                        visible: false\n                    });\n                    this.form.setFieldsValue(this._getEmptyRow());\n                }\n            });\n        }\n    };\n\n    onChange = (columnId, value) => {\n        let row = Object.assign({}, this.state.row);\n        row[columnId] = value;\n        this.setState({\n            row\n        });\n    };\n\n    _getEmptyRow() {\n        let newRow = {};\n        Object.entries(this.state.row).forEach(([columnId]) => newRow[columnId] = '');\n        return newRow;\n    }\n\n    setFormRef = (form) => {\n        this.form = form;\n    };\n\n    render() {\n        return (\n            <div className=\"form-add\">\n                <Button className=\"editable-add-btn\" onClick={this.showModal}>{this.props.buttonText}</Button>\n                <Modal\n                    title=\"Dodaj nowy\"\n                    visible={this.state.visible}\n                    onOk={this.addRow}\n                    onCancel={this.hideModal}\n                    okText=\"Dodaj\"\n                    cancelText=\"Anuluj\"\n                >\n                    <FormAdd\n                        row={this.state.row} columnNames={this.columnNames} required={this.required}\n                        onChange={this.onChange} setFormRef={this.setFormRef}\n                    />\n                </Modal>\n            </div>\n        );\n    }\n}\n\nexport default ModalAdd;\n",
+    "content": "import React, { Component } from 'react';\nimport FormAdd from './FormAdd';\nimport { Button, Modal, Icon } from 'antd';\n\nclass ModalAdd extends Component\n{\n    constructor(props) {\n        super(props);\n        this.state = {\n            row: {},\n            visible: false\n        };\n        this.columnNames = {};\n        this.required = {};\n        for (const column of this.props.columns) {\n            if (column.type !== 'menu') {\n                this.state.row[column.id] = '';\n                this.columnNames[column.id] = column.name;\n                this.required[column.id] = column.required;\n            }\n        }\n        this.form = null;\n    }\n\n    showModal = () => {\n        this.setState({\n            visible: true\n        });\n    };\n\n    hideModal = () => {\n        this.setState({\n            visible: false\n        });\n    };\n\n    addRow = () => {\n        if(this.form !== null) {\n            this.form.validateFields((err) => {\n                if (!err) {\n                    this.props.onAdd(Object.assign({}, this.state.row));\n                    this.setState({\n                        row: this._getEmptyRow(),\n                        visible: false\n                    });\n                    this.form.setFieldsValue(this._getEmptyRow());\n                }\n            });\n        }\n    };\n\n    onChange = (columnId, value) => {\n        let row = Object.assign({}, this.state.row);\n        row[columnId] = value;\n        this.setState({\n            row\n        });\n    };\n\n    _getEmptyRow() {\n        let newRow = {};\n        Object.entries(this.state.row).forEach(([columnId]) => newRow[columnId] = '');\n        return newRow;\n    }\n\n    setFormRef = (form) => {\n        this.form = form;\n    };\n\n    render() {\n        return (\n            <div className=\"form-add\">\n                <Button type=\"primary\" className=\"editable-add-btn\" onClick={this.showModal}>\n                    <Icon type=\"plus\" />\n                    {this.props.buttonText}\n                </Button>\n                <Modal\n                    title=\"Dodaj nowy\"\n                    visible={this.state.visible}\n                    onOk={this.addRow}\n                    onCancel={this.hideModal}\n                    okText=\"Dodaj\"\n                    cancelText=\"Anuluj\"\n                >\n                    <FormAdd\n                        row={this.state.row} columnNames={this.columnNames} required={this.required}\n                        onChange={this.onChange} setFormRef={this.setFormRef}\n                    />\n                </Modal>\n            </div>\n        );\n    }\n}\n\nexport default ModalAdd;\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/components/EditableTable/ModalAdd/index.js",
     "access": "public",
@@ -7120,7 +7120,7 @@
     "__docId__": 365,
     "kind": "file",
     "name": "src/components/HostList/MetricCell/SingleMetric/index.js",
-    "content": "import React from 'react';\nimport { Tooltip, Tag } from 'antd';\n\nimport MetricInfo from './MetricInfo';\nimport RemoveMetric from './RemoveMetric';\n\nconst SingleMetric = ({hostname, metric, onRemove, found}) => {\n    //const removable = metric.interval !== null;\n    return (<Tooltip placement=\"bottom\" title={<MetricInfo metric={metric}/>}>\n        <Tag\n            color={found ? 'red' : (metric.interval === null ? '#87d068' : '#2db7f5')}\n        >{metric.id}\n            {\n                <RemoveMetric onConfirm={(e) => {\n                    e.preventDefault();\n                    onRemove(hostname, metric.id);\n                }}/>\n            }\n        </Tag>\n    </Tooltip>);\n};\n\nexport default SingleMetric;\n\n//{/*removable && metric.removable ?*/}\n//{/* : null */}\n",
+    "content": "import React from 'react';\nimport { Tooltip, Tag } from 'antd';\n\nimport MetricInfo from './MetricInfo';\nimport RemoveMetric from './RemoveMetric';\n\nconst SingleMetric = ({hostname, metric, onRemove, found}) => {\n    const removable = metric.parent_id !== null;\n    return (<Tooltip placement=\"bottom\" title={<MetricInfo metric={metric}/>}>\n        <Tag\n            className=\"single-metric\"\n            color={found ? 'red' : (metric.parent_id === null ? '#87d068' : '#2db7f5')}\n        >\n            {metric.id}\n            {removable && metric.removable ? <RemoveMetric onConfirm={(e) => {\n                e.preventDefault();\n                onRemove(hostname, metric.id);\n            }}/> : null}\n        </Tag>\n    </Tooltip>);\n};\n\nexport default SingleMetric;\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/components/HostList/MetricCell/SingleMetric/index.js",
     "access": "public",
@@ -7891,7 +7891,7 @@
     "__docId__": 407,
     "kind": "file",
     "name": "src/components/HostList/index.js",
-    "content": "import React from 'react';\nimport { Table } from 'antd';\nimport NewMetricModal from './NewMetricModal';\nimport MetadataCell from './MetadataCell';\nimport MetricCell from './MetricCell';\nimport MonitorIcon from '../MonitorIcon';\n\nimport {Hostname as HostnameFiltered} from './FilteredTable/Hostname';\nimport {Metrics as MetricsFiltered} from './FilteredTable/Metrics';\nimport {Metadata as MetadataFiltered} from './FilteredTable/Metadata';\n\nimport './index.less';\n\nclass HostList extends React.Component\n{\n    constructor(props) {\n        super(props);\n        this.state = this.getInitialState();\n    }\n\n    getInitialState = () => ({\n        hostToAddMetric: null\n    });\n\n    UNSAFE_componentWillReceiveProps(nextProps) {\n        if(this.props !== nextProps) {\n            this.setState(this.getInitialState());\n        }\n    }\n\n    showModal = (hostname) => {\n        const hostToAddMetric = this.props.hosts.find(host => host.hostname === hostname);\n        if(typeof hostToAddMetric !== 'undefined') {\n            this.setState({\n                hostToAddMetric\n            });\n        }\n    };\n\n    closeModal = () => {\n        this.setState({\n            hostToAddMetric: null\n        });\n    };\n\n    allMetadata = (hosts) => {\n        const metadata = {};\n        hosts.forEach((host) => {\n            host.metadata.forEach((singleMetadata) => {\n                metadata[singleMetadata.id] = singleMetadata;\n            });\n        });\n        return metadata;\n    };\n\n    allMetrics = (hosts) => {\n        const base = {}, complex = {};\n        hosts.forEach((host) => {\n            host.metrics.forEach((metric) => {\n                if(metric.interval === null) {\n                    base[metric.id] = metric.id;\n                } else {\n                    complex[metric.id] = metric.id;\n                }\n            });\n        });\n        return {\n            base,\n            complex\n        };\n    };\n\n    render() {\n        const columns = [{\n            title: 'Host',\n            dataIndex: 'displayName',\n            key: 'hostname',\n            width: '26%',\n            render: (hostname, host) => <span><MonitorIcon>{host.monitor}</MonitorIcon> {hostname}</span>\n        }, {\n            title: 'Metadane',\n            dataIndex: 'metadata',\n            key: 'metadata',\n            width: '37%',\n            render: (metadata) => <MetadataCell metadata={metadata}/>,\n        }, {\n            title: 'Metryki',\n            dataIndex: 'metrics',\n            key: 'metrics',\n            width: '37%',\n            render: (metrics, host) => <MetricCell\n                onShowModal={this.showModal} onRemove={this.props.onRemoveMetric} host={host}\n            />,\n        }];\n\n        const hosts = this.props.hosts.map(host => ({\n            ...host,\n            key: host.hostname,\n            displayName: host.hostname\n        }));\n\n        return (\n            <div className=\"host-list\">\n                <NewMetricModal\n                    host={this.state.hostToAddMetric} onAddMetric={this.props.onAddMetric} onClose={this.closeModal}\n                />\n                <HostnameFiltered dataSource={hosts} columns={columns}>\n                    <MetricsFiltered metrics={this.allMetrics(this.props.hosts)}>\n                        <MetadataFiltered metadata={this.allMetadata(this.props.hosts)}>\n                            <Table size=\"middle\" bordered={true} />\n                        </MetadataFiltered>\n                    </MetricsFiltered>\n                </HostnameFiltered>\n            </div>\n        );\n    }\n}\n\nexport default HostList;\n",
+    "content": "import React from 'react';\nimport { Table } from 'antd';\nimport NewMetricModal from './NewMetricModal';\nimport MetadataCell from './MetadataCell';\nimport MetricCell from './MetricCell';\nimport MonitorIcon from '../MonitorIcon';\n\nimport {Hostname as HostnameFiltered} from './FilteredTable/Hostname';\nimport {Metrics as MetricsFiltered} from './FilteredTable/Metrics';\nimport {Metadata as MetadataFiltered} from './FilteredTable/Metadata';\n\nimport './index.less';\n\nclass HostList extends React.Component\n{\n    constructor(props) {\n        super(props);\n        this.state = this.getInitialState();\n    }\n\n    getInitialState = () => ({\n        hostToAddMetric: null\n    });\n\n    UNSAFE_componentWillReceiveProps(nextProps) {\n        if(this.props !== nextProps) {\n            this.setState(this.getInitialState());\n        }\n    }\n\n    showModal = (hostname) => {\n        const hostToAddMetric = this.props.hosts.find(host => host.hostname === hostname);\n        if(typeof hostToAddMetric !== 'undefined') {\n            this.setState({\n                hostToAddMetric\n            });\n        }\n    };\n\n    closeModal = () => {\n        this.setState({\n            hostToAddMetric: null\n        });\n    };\n\n    allMetadata = (hosts) => {\n        const metadata = {};\n        hosts.forEach((host) => {\n            host.metadata.forEach((singleMetadata) => {\n                metadata[singleMetadata.id] = singleMetadata;\n            });\n        });\n        return metadata;\n    };\n\n    allMetrics = (hosts) => {\n        const base = {}, complex = {};\n        hosts.forEach((host) => {\n            host.metrics.forEach((metric) => {\n                if(metric.parent_id === null) {\n                    base[metric.id] = metric.id;\n                } else {\n                    complex[metric.id] = metric.id;\n                }\n            });\n        });\n        return {\n            base,\n            complex\n        };\n    };\n\n    render() {\n        const columns = [{\n            title: 'Host',\n            dataIndex: 'displayName',\n            key: 'hostname',\n            width: '26%',\n            render: (hostname, host) => <span><MonitorIcon>{host.monitor}</MonitorIcon> {hostname}</span>\n        }, {\n            title: 'Metadane',\n            dataIndex: 'metadata',\n            key: 'metadata',\n            width: '37%',\n            render: (metadata) => <MetadataCell metadata={metadata}/>,\n        }, {\n            title: 'Metryki',\n            dataIndex: 'metrics',\n            key: 'metrics',\n            width: '37%',\n            render: (metrics, host) => <MetricCell\n                onShowModal={this.showModal} onRemove={this.props.onRemoveMetric} host={host}\n            />,\n        }];\n\n        const hosts = this.props.hosts.map(host => ({\n            ...host,\n            key: host.hostname,\n            displayName: host.hostname\n        }));\n\n        return (\n            <div className=\"host-list\">\n                <NewMetricModal\n                    host={this.state.hostToAddMetric} onAddMetric={this.props.onAddMetric} onClose={this.closeModal}\n                />\n                <HostnameFiltered dataSource={hosts} columns={columns}>\n                    <MetricsFiltered metrics={this.allMetrics(this.props.hosts)}>\n                        <MetadataFiltered metadata={this.allMetadata(this.props.hosts)}>\n                            <Table size=\"middle\" bordered={true} />\n                        </MetadataFiltered>\n                    </MetricsFiltered>\n                </HostnameFiltered>\n            </div>\n        );\n    }\n}\n\nexport default HostList;\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/components/HostList/index.js",
     "access": "public",
@@ -8399,7 +8399,7 @@
     "__docId__": 436,
     "kind": "file",
     "name": "src/components/MonitorIcon/index.js",
-    "content": "import React from 'react';\nimport { Icon, Tooltip } from 'antd';\nimport strToColor from '../../utils/strToColor';\n\nconst MonitorIcon = ({ children }) => (\n    <Tooltip title={children}>\n        <Icon className=\"monitor-icon\" type=\"database\" style={{ color: strToColor(children) }} />\n    </Tooltip>\n);\n\nexport default MonitorIcon;\n",
+    "content": "import React from 'react';\nimport { Icon, Tooltip } from 'antd';\nimport strToColor from '../../utils/strToColor';\nimport './index.less';\n\nconst MonitorIcon = ({ children }) => (\n    <Tooltip title={children}>\n        <Icon className=\"monitor-icon\" type=\"database\" style={{ color: strToColor(children) }} />\n    </Tooltip>\n);\n\nexport default MonitorIcon;\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/components/MonitorIcon/index.js",
     "access": "public",
@@ -8420,7 +8420,7 @@
     "importPath": "react-antd-app/src/components/MonitorIcon/index.js",
     "importStyle": "MonitorIcon",
     "description": null,
-    "lineNumber": 5,
+    "lineNumber": 6,
     "undocument": true,
     "params": [
       {
@@ -8505,6 +8505,36 @@
   {
     "__docId__": 441,
     "kind": "file",
+    "name": "src/components/NoCharts/index.js",
+    "content": "import React from 'react';\nimport { Icon } from 'antd';\nimport './index.less';\n\nconst NoCharts = () => (\n    <div className=\"no-charts\">\n        <div className=\"no-charts-inner\">\n            <Icon className=\"no-charts-icon\" type=\"line-chart\" />\n            <p>Brak wykresów</p>\n        </div>\n    </div>\n);\n\nexport default NoCharts;\n",
+    "static": true,
+    "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/components/NoCharts/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 442,
+    "kind": "function",
+    "name": "NoCharts",
+    "memberof": "src/components/NoCharts/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/components/NoCharts/index.js~NoCharts",
+    "access": "public",
+    "export": true,
+    "importPath": "react-antd-app/src/components/NoCharts/index.js",
+    "importStyle": "NoCharts",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 443,
+    "kind": "file",
     "name": "src/components/Notification/index.js",
     "content": "import {notification} from 'antd';\n\n/*\n    Example:\n\n    import Notification from \"/components/Notification\";\n\n    Notification.error(\"Błędny login lub hasło\");\n    Notification.success(\"Metryka zaawansowana została dodana\");\n */\n\nexport default class Notification\n{\n    static success(description) {\n        notification.success({\n            message: 'Sukces',\n            placement: 'bottomLeft',\n            duration: 3,\n            description\n        });\n    }\n\n    static info(description) {\n        notification.info({\n            message: 'Informacja',\n            placement: 'bottomLeft',\n            duration: 3,\n            description\n        });\n    }\n\n    static warning(description) {\n        notification.warning({\n            message: 'Ostrzeżenie',\n            placement: 'bottomLeft',\n            duration: 3,\n            description\n        });\n    }\n\n    static error(description) {\n        notification.error({\n            message: 'Błąd',\n            placement: 'bottomLeft',\n            duration: 3,\n            description\n        });\n    }\n}\n",
     "static": true,
@@ -8514,7 +8544,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 442,
+    "__docId__": 444,
     "kind": "class",
     "name": "Notification",
     "memberof": "src/components/Notification/index.js",
@@ -8530,7 +8560,7 @@
     "interface": false
   },
   {
-    "__docId__": 443,
+    "__docId__": 445,
     "kind": "method",
     "name": "success",
     "memberof": "src/components/Notification/index.js~Notification",
@@ -8553,7 +8583,7 @@
     "return": null
   },
   {
-    "__docId__": 444,
+    "__docId__": 446,
     "kind": "method",
     "name": "info",
     "memberof": "src/components/Notification/index.js~Notification",
@@ -8576,7 +8606,7 @@
     "return": null
   },
   {
-    "__docId__": 445,
+    "__docId__": 447,
     "kind": "method",
     "name": "warning",
     "memberof": "src/components/Notification/index.js~Notification",
@@ -8599,7 +8629,7 @@
     "return": null
   },
   {
-    "__docId__": 446,
+    "__docId__": 448,
     "kind": "method",
     "name": "error",
     "memberof": "src/components/Notification/index.js~Notification",
@@ -8622,7 +8652,7 @@
     "return": null
   },
   {
-    "__docId__": 447,
+    "__docId__": 449,
     "kind": "file",
     "name": "src/components/RefreshHostsButton/index.js",
     "content": "import React from 'react';\nimport { Button, Icon } from 'antd';\nimport './index.less';\n\nconst RefreshHostsButton = ({ invalidated, refresh }) => <Button\n    type=\"primary\"\n    className=\"refresh-hosts-button\"\n    disabled={invalidated}\n    onClick={refresh}\n><Icon type=\"reload\" />Odśwież listę hostów</Button>;\n\nexport default RefreshHostsButton;\n",
@@ -8633,7 +8663,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 448,
+    "__docId__": 450,
     "kind": "function",
     "name": "RefreshHostsButton",
     "memberof": "src/components/RefreshHostsButton/index.js",
@@ -8664,7 +8694,7 @@
     "return": null
   },
   {
-    "__docId__": 449,
+    "__docId__": 451,
     "kind": "file",
     "name": "src/components/RegisterForm/index.js",
     "content": "import React from 'react';\nimport { Form, Icon, Input, Button } from 'antd';\nimport './index.less';\n\nconst FormItem = Form.Item;\n\nconst RegisterForm = ({ form, indeterminate, signUp }) => (\n    <Form onSubmit={e => {\n        e.preventDefault();\n        form.validateFields((err, values) => {\n            if (!err) {\n                const { password2, ...credentials } = values; // eslint-disable-line no-unused-vars\n                signUp(credentials);\n            }\n        });\n    }} className={`login-form ${indeterminate ? 'indeterminate' : ''}`}>\n        <FormItem>\n            {form.getFieldDecorator('username', {\n                rules: [{ required: true, message: 'Nazwa użytkownika musi zostać podana' }],\n            })(\n                <Input prefix={\n                    <Icon type=\"user\" style={{ color: 'rgba(0,0,0,.25)' }} />\n                } placeholder=\"Nazwa użytkownika\" />\n            )}\n        </FormItem>\n        <FormItem>\n            {form.getFieldDecorator('password', {\n                rules: [{ required: true, message: 'Hasło musi zostać podane' }],\n            })(\n                <Input prefix={\n                    <Icon type=\"lock\" style={{ color: 'rgba(0,0,0,.25)' }} />\n                } type=\"password\" placeholder=\"Hasło\" />\n            )}\n        </FormItem>\n        <FormItem>\n            {form.getFieldDecorator('password2', {\n                rules: [{ validator: (rule, password2, callback) => {\n                    const password = form.getFieldValue('password');\n                    if (password2 && password === password2) {\n                        callback();\n                    }\n                    else {\n                        callback(true);\n                    }\n                }, message: 'Hasła muszą być identyczne' }],\n            })(\n                <Input prefix={\n                    <Icon type=\"lock\" style={{ color: 'rgba(0,0,0,.25)' }} />\n                } type=\"password\" placeholder=\"Powtórz hasło\" />\n            )}\n        </FormItem>\n        <FormItem>\n            <Button type=\"primary\" htmlType=\"submit\" className=\"register-form-button\">\n                Zarejestruj się\n            </Button>\n        </FormItem>\n    </Form>\n);\n\nconst WrappedRegisterForm = Form.create()(RegisterForm);\n\nexport default WrappedRegisterForm;\n",
@@ -8675,7 +8705,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 450,
+    "__docId__": 452,
     "kind": "variable",
     "name": "FormItem",
     "memberof": "src/components/RegisterForm/index.js",
@@ -8696,7 +8726,7 @@
     "ignore": true
   },
   {
-    "__docId__": 451,
+    "__docId__": 453,
     "kind": "function",
     "name": "RegisterForm",
     "memberof": "src/components/RegisterForm/index.js",
@@ -8729,7 +8759,7 @@
     "ignore": true
   },
   {
-    "__docId__": 452,
+    "__docId__": 454,
     "kind": "variable",
     "name": "WrappedRegisterForm",
     "memberof": "src/components/RegisterForm/index.js",
@@ -8749,7 +8779,7 @@
     }
   },
   {
-    "__docId__": 453,
+    "__docId__": 455,
     "kind": "file",
     "name": "src/containers/AddHistoricalChart/index.js",
     "content": "import { connect } from 'react-redux';\nimport { getMetricsAll } from '../../reducers';\nimport * as actions from '../../actions/sync';\nimport AddChart from '../../components/AddChart';\n\nconst mapStateToProps = (state) => ({\n    metrics: getMetricsAll(state)\n});\n\nconst mapDispatchToProps = {\n    onAdd: actions.addHistoricalChart\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(AddChart);\n",
@@ -8760,7 +8790,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 454,
+    "__docId__": 456,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/AddHistoricalChart/index.js",
@@ -8787,7 +8817,7 @@
     "ignore": true
   },
   {
-    "__docId__": 455,
+    "__docId__": 457,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/AddHistoricalChart/index.js",
@@ -8808,7 +8838,7 @@
     "ignore": true
   },
   {
-    "__docId__": 456,
+    "__docId__": 458,
     "kind": "file",
     "name": "src/containers/AddLiveChart/index.js",
     "content": "import { connect } from 'react-redux';\nimport { getMetricsAll } from '../../reducers';\nimport * as actions from '../../actions/sync';\nimport AddChart from '../../components/AddChart';\n\nconst mapStateToProps = (state) => ({\n    metrics: getMetricsAll(state)\n});\n\nconst mapDispatchToProps = {\n    onAdd: actions.addLiveChart\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(AddChart);\n",
@@ -8819,7 +8849,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 457,
+    "__docId__": 459,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/AddLiveChart/index.js",
@@ -8846,7 +8876,7 @@
     "ignore": true
   },
   {
-    "__docId__": 458,
+    "__docId__": 460,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/AddLiveChart/index.js",
@@ -8867,7 +8897,7 @@
     "ignore": true
   },
   {
-    "__docId__": 459,
+    "__docId__": 461,
     "kind": "file",
     "name": "src/containers/AppLayout/__tests__/layout.js",
     "content": "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport { Provider } from 'react-redux';\nimport { ConnectedRouter } from 'connected-react-router';\nimport AppLayout from '../index.js';\nimport initStore from '../../../createStore';\n\nit('renders without crashing', () => {\n    const div = document.createElement('div');\n    const { store, history } = initStore();\n    ReactDOM.render((\n        <Provider store={store}>\n            <ConnectedRouter history={history}>\n                <AppLayout>\n                    <p>Junk</p>\n                </AppLayout>\n            </ConnectedRouter>\n        </Provider>\n    ), div);\n    ReactDOM.unmountComponentAtNode(div);\n});\n",
@@ -8878,7 +8908,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 460,
+    "__docId__": 462,
     "kind": "file",
     "name": "src/containers/AppLayout/index.js",
     "content": "import { connect } from 'react-redux';\nimport { getLocation, getToken } from '../../reducers';\nimport * as actions from '../../actions/sync';\nimport AppLayout from '../../components/AppLayout';\n\nconst mapStateToProps = (state) => ({\n    location: getLocation(state),\n    auth: getToken(state)\n});\n\nconst mapDispatchToProps = {\n    signOut: actions.removeToken\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(AppLayout);\n",
@@ -8889,7 +8919,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 461,
+    "__docId__": 463,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/AppLayout/index.js",
@@ -8916,7 +8946,7 @@
     "ignore": true
   },
   {
-    "__docId__": 462,
+    "__docId__": 464,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/AppLayout/index.js",
@@ -8937,7 +8967,7 @@
     "ignore": true
   },
   {
-    "__docId__": 463,
+    "__docId__": 465,
     "kind": "file",
     "name": "src/containers/AuthServer/index.js",
     "content": "import { connect } from 'react-redux';\nimport { getAuthServer } from '../../reducers';\nimport * as actions from '../../actions/sync';\nimport AuthServer from '../../components/AuthServer';\n\nconst mapStateToProps = (state) => ({\n    authServer: getAuthServer(state)\n});\n\nconst mapDispatchToProps = {\n    changeAuthServer: actions.changeAuthServer\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(AuthServer);\n",
@@ -8948,7 +8978,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 464,
+    "__docId__": 466,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/AuthServer/index.js",
@@ -8975,7 +9005,7 @@
     "ignore": true
   },
   {
-    "__docId__": 465,
+    "__docId__": 467,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/AuthServer/index.js",
@@ -8996,7 +9026,7 @@
     "ignore": true
   },
   {
-    "__docId__": 466,
+    "__docId__": 468,
     "kind": "file",
     "name": "src/containers/HostList/index.js",
     "content": "import { connect } from 'react-redux';\nimport { getHostsArray } from '../../reducers';\nimport HostList from '../../components/HostList';\nimport * as actions from '../../actions/sync';\n\nconst mapStateToProps = (state) => ({\n    hosts: getHostsArray(state)\n});\n\nconst mapDispatchToProps = {\n    onAddMetric: (payload, host) => actions.addComplexMetricRequest(host, payload),\n    onRemoveMetric: (host, id) => actions.removeComplexMetricRequest(id, host)\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(HostList);\n",
@@ -9007,7 +9037,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 467,
+    "__docId__": 469,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/HostList/index.js",
@@ -9034,7 +9064,7 @@
     "ignore": true
   },
   {
-    "__docId__": 468,
+    "__docId__": 470,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/HostList/index.js",
@@ -9055,7 +9085,7 @@
     "ignore": true
   },
   {
-    "__docId__": 469,
+    "__docId__": 471,
     "kind": "file",
     "name": "src/containers/LoginForm/index.js",
     "content": "import { connect } from 'react-redux';\nimport * as actions from '../../actions/sync';\nimport { getTokenRequested } from '../../reducers';\nimport LoginForm from '../../components/LoginForm';\n\nconst mapStateToProps = (state) => ({\n    indeterminate: getTokenRequested(state)\n});\n\nconst mapDispatchToProps = {\n    signIn: actions.signInRequest\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(LoginForm);\n",
@@ -9066,7 +9096,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 470,
+    "__docId__": 472,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/LoginForm/index.js",
@@ -9093,7 +9123,7 @@
     "ignore": true
   },
   {
-    "__docId__": 471,
+    "__docId__": 473,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/LoginForm/index.js",
@@ -9114,7 +9144,7 @@
     "ignore": true
   },
   {
-    "__docId__": 472,
+    "__docId__": 474,
     "kind": "file",
     "name": "src/containers/MonitorsTable/index.js",
     "content": "import { connect } from 'react-redux';\nimport { getMonitorsArray } from '../../reducers';\nimport * as actions from '../../actions/sync';\nimport MonitorsTable from '../../components/MonitorsTable';\n\nconst mapStateToProps = (state) => ({\n    dataSource: getMonitorsArray(state)\n});\n\nconst mapDispatchToProps = {\n    changeMonitorAddress: (monitor, address) => actions.setMonitorAddress({ address }, monitor),\n    changeMonitorDescription: (monitor, description) => actions.setMonitorDescription({ description }, monitor),\n    addMonitor: actions.addMonitor,\n    removeMonitor: actions.removeMonitor\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(MonitorsTable);\n",
@@ -9125,7 +9155,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 473,
+    "__docId__": 475,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/MonitorsTable/index.js",
@@ -9152,7 +9182,7 @@
     "ignore": true
   },
   {
-    "__docId__": 474,
+    "__docId__": 476,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/MonitorsTable/index.js",
@@ -9173,7 +9203,7 @@
     "ignore": true
   },
   {
-    "__docId__": 475,
+    "__docId__": 477,
     "kind": "file",
     "name": "src/containers/RefreshHostsButton/index.js",
     "content": "import { connect } from 'react-redux';\nimport { getMonitorsHostsInvalidated } from '../../reducers';\nimport * as actions from '../../actions/sync';\nimport RefreshHostsButton from '../../components/RefreshHostsButton';\n\nconst mapStateToProps = (state) => ({\n    invalidated: getMonitorsHostsInvalidated(state)\n});\n\nconst mapDispatchToProps = {\n    refresh: actions.getHosts\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(RefreshHostsButton);\n",
@@ -9184,7 +9214,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 476,
+    "__docId__": 478,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/RefreshHostsButton/index.js",
@@ -9211,7 +9241,7 @@
     "ignore": true
   },
   {
-    "__docId__": 477,
+    "__docId__": 479,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/RefreshHostsButton/index.js",
@@ -9232,7 +9262,7 @@
     "ignore": true
   },
   {
-    "__docId__": 478,
+    "__docId__": 480,
     "kind": "file",
     "name": "src/containers/RegisterForm/index.js",
     "content": "import { connect } from 'react-redux';\nimport * as actions from '../../actions/sync';\nimport { getTokenRequested } from '../../reducers';\nimport RegisterForm from '../../components/RegisterForm';\n\nconst mapStateToProps = (state) => ({\n    indeterminate: getTokenRequested(state)\n});\n\nconst mapDispatchToProps = {\n    signUp: actions.signUpRequest\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);\n",
@@ -9243,7 +9273,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 479,
+    "__docId__": 481,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/containers/RegisterForm/index.js",
@@ -9270,7 +9300,7 @@
     "ignore": true
   },
   {
-    "__docId__": 480,
+    "__docId__": 482,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/containers/RegisterForm/index.js",
@@ -9291,7 +9321,7 @@
     "ignore": true
   },
   {
-    "__docId__": 481,
+    "__docId__": 483,
     "kind": "file",
     "name": "src/createStore.js",
     "content": "import { createStore, applyMiddleware, compose } from 'redux';\nimport createSagaMiddleware from 'redux-saga';\nimport { createBrowserHistory } from 'history';\nimport { connectRouter, routerMiddleware } from 'connected-react-router';\nimport rootReducer from './reducers';\nimport rootSaga from './sagas';\n\nexport default (initialState) => {\n    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;\n    const sagaMiddleware = createSagaMiddleware();\n    const history = createBrowserHistory();\n    const store = createStore(\n        connectRouter(history)(rootReducer),\n        initialState,\n        composeEnhancers(\n            applyMiddleware(\n                routerMiddleware(history),\n                sagaMiddleware\n            )\n        )\n    );\n    sagaMiddleware.run(rootSaga);\n    return { store, history };\n};\n",
@@ -9302,7 +9332,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 482,
+    "__docId__": 484,
     "kind": "function",
     "name": "createStore",
     "memberof": "src/createStore.js",
@@ -9332,7 +9362,7 @@
     }
   },
   {
-    "__docId__": 483,
+    "__docId__": 485,
     "kind": "file",
     "name": "src/index.js",
     "content": "import 'babel-polyfill';\nimport React from 'react';\nimport ReactDOM from 'react-dom';\nimport { Provider } from 'react-redux';\nimport { ConnectedRouter } from 'connected-react-router';\nimport createStore from './createStore';\nimport { getSavedState } from './localStorage';\nimport AppLayout from './containers/AppLayout';\nimport { getRoutes } from './routes';\n\nconst { store, history } = createStore(getSavedState());\n\nReactDOM.render(\n    <Provider store={store}>\n        <ConnectedRouter history={history}>\n            <AppLayout>\n                {getRoutes()}\n            </AppLayout>\n        </ConnectedRouter>\n    </Provider>,\n    document.getElementById('root')\n);\n",
@@ -9343,7 +9373,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 484,
+    "__docId__": 486,
     "kind": "variable",
     "name": "store",
     "memberof": "src/index.js",
@@ -9364,7 +9394,7 @@
     "ignore": true
   },
   {
-    "__docId__": 485,
+    "__docId__": 487,
     "kind": "file",
     "name": "src/localStorage.js",
     "content": "import { convertMonitorsToObj, convertMonitorsFromObj } from './reducers/monitors';\n\nconst AUTH_SERVER_KEY = 'auth_server';\nconst MONITORS_KEY = 'monitors';\nconst TOKEN_KEY = 'token';\n\nexport const getAuthServer = () => {\n    return localStorage.getItem(AUTH_SERVER_KEY) || undefined;\n};\n\nexport const updateAuthServer = (authServer) => {\n    localStorage.setItem(AUTH_SERVER_KEY, authServer);\n};\n\nexport const getMonitors = () => {\n    const savedValue = localStorage.getItem(MONITORS_KEY);\n    if (savedValue) {\n        try {\n            const parsed = JSON.parse(savedValue);\n            const converted = convertMonitorsToObj(parsed);\n            if (Object.keys(converted) === 0) {\n                return undefined;\n            }\n            return converted;\n        }\n        catch (error) {} // eslint-disable-line no-empty\n    }\n    return undefined;\n};\n\nexport const updateMonitors = (monitors) => {\n    localStorage.setItem(MONITORS_KEY, JSON.stringify(convertMonitorsFromObj(monitors)));\n};\n\nexport const getToken = () => {\n    return localStorage.getItem(TOKEN_KEY) || undefined;\n};\n\nexport const saveToken = token => {\n    localStorage.setItem(TOKEN_KEY, token);\n};\n\nexport const clearToken = () => {\n    localStorage.removeItem(TOKEN_KEY);\n};\n\nexport const getSavedState = () => ({\n    auth: {\n        token: getToken(),\n        authServer: getAuthServer()\n    },\n    monitors: getMonitors()\n});\n",
@@ -9375,7 +9405,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 486,
+    "__docId__": 488,
     "kind": "variable",
     "name": "AUTH_SERVER_KEY",
     "memberof": "src/localStorage.js",
@@ -9396,7 +9426,7 @@
     "ignore": true
   },
   {
-    "__docId__": 487,
+    "__docId__": 489,
     "kind": "variable",
     "name": "MONITORS_KEY",
     "memberof": "src/localStorage.js",
@@ -9417,7 +9447,7 @@
     "ignore": true
   },
   {
-    "__docId__": 488,
+    "__docId__": 490,
     "kind": "variable",
     "name": "TOKEN_KEY",
     "memberof": "src/localStorage.js",
@@ -9438,7 +9468,7 @@
     "ignore": true
   },
   {
-    "__docId__": 489,
+    "__docId__": 491,
     "kind": "function",
     "name": "getAuthServer",
     "memberof": "src/localStorage.js",
@@ -9461,7 +9491,7 @@
     }
   },
   {
-    "__docId__": 490,
+    "__docId__": 492,
     "kind": "function",
     "name": "updateAuthServer",
     "memberof": "src/localStorage.js",
@@ -9487,7 +9517,7 @@
     "return": null
   },
   {
-    "__docId__": 491,
+    "__docId__": 493,
     "kind": "function",
     "name": "getMonitors",
     "memberof": "src/localStorage.js",
@@ -9510,7 +9540,7 @@
     }
   },
   {
-    "__docId__": 492,
+    "__docId__": 494,
     "kind": "function",
     "name": "updateMonitors",
     "memberof": "src/localStorage.js",
@@ -9536,7 +9566,7 @@
     "return": null
   },
   {
-    "__docId__": 493,
+    "__docId__": 495,
     "kind": "function",
     "name": "getToken",
     "memberof": "src/localStorage.js",
@@ -9559,7 +9589,7 @@
     }
   },
   {
-    "__docId__": 494,
+    "__docId__": 496,
     "kind": "function",
     "name": "saveToken",
     "memberof": "src/localStorage.js",
@@ -9585,7 +9615,7 @@
     "return": null
   },
   {
-    "__docId__": 495,
+    "__docId__": 497,
     "kind": "function",
     "name": "clearToken",
     "memberof": "src/localStorage.js",
@@ -9604,7 +9634,7 @@
     "return": null
   },
   {
-    "__docId__": 496,
+    "__docId__": 498,
     "kind": "function",
     "name": "getSavedState",
     "memberof": "src/localStorage.js",
@@ -9623,10 +9653,10 @@
     "return": null
   },
   {
-    "__docId__": 497,
+    "__docId__": 499,
     "kind": "file",
     "name": "src/pages/Historical/index.js",
-    "content": "import React from 'react';\nimport { connect } from 'react-redux';\nimport * as actions from '../../actions/sync';\nimport { getHistoricalChartsArray, getMetrics } from '../../reducers';\nimport AddHistoricalChart from '../../containers/AddHistoricalChart';\nimport { HistoricalChart } from '../../components/Chart';\n\nconst Live = ({\n    addHistoricalChartHost1, addHistoricalChartHost2, removeHistoricalChartHost1,\n    removeHistoricalChartHost2, setHistoricalChartMetric1, setHistoricalChartMetric2,\n    removeHistoricalChart, setHistoricalChartRange, metrics, charts\n}) => (\n    <div className=\"full-page\">\n        <h1>Pomiary historyczne</h1>\n        <AddHistoricalChart />\n        {charts.map(c => (\n            <HistoricalChart\n                key={c.id}\n                onMetric1Changed={(metric) => setHistoricalChartMetric1({ metric }, c.id)}\n                onMetric2Changed={(metric) => setHistoricalChartMetric2({ metric }, c.id)}\n                onHostAddedToMetric1={host => addHistoricalChartHost1({ host }, c.id)}\n                onHostAddedToMetric2={host => addHistoricalChartHost2({ host }, c.id)}\n                onHostDismissedFromMetric1={host => removeHistoricalChartHost1(c.id, host)}\n                onHostDismissedFromMetric2={host => removeHistoricalChartHost2(c.id, host)}\n                onRangeChanged={(start, end) => setHistoricalChartRange({ start, end }, c.id)}\n                onChartClosed={() => removeHistoricalChart(c.id)}\n                metrics={metrics}\n                {...c}\n            />\n        ))}\n    </div>\n);\n\nconst mapStateToProps = (state) => ({\n    charts: getHistoricalChartsArray(state),\n    metrics: getMetrics(state)\n});\n\nconst mapDispatchToProps = {\n    addHistoricalChartHost1: actions.addHistoricalChartHost1,\n    addHistoricalChartHost2: actions.addHistoricalChartHost2,\n    removeHistoricalChartHost1: actions.removeHistoricalChartHost1,\n    removeHistoricalChartHost2: actions.removeHistoricalChartHost2,\n    setHistoricalChartMetric1: actions.setHistoricalChartMetric1,\n    setHistoricalChartMetric2: actions.setHistoricalChartMetric2,\n    removeHistoricalChart: actions.removeHistoricalChart,\n    setHistoricalChartRange: actions.setHistoricalChartRange\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(Live);\n",
+    "content": "import React from 'react';\nimport { connect } from 'react-redux';\nimport * as actions from '../../actions/sync';\nimport { getHistoricalChartsArray, getMetrics } from '../../reducers';\nimport AddHistoricalChart from '../../containers/AddHistoricalChart';\nimport { HistoricalChart } from '../../components/Chart';\nimport NoCharts from '../../components/NoCharts';\n\nconst Live = ({\n    addHistoricalChartHost1, addHistoricalChartHost2, removeHistoricalChartHost1,\n    removeHistoricalChartHost2, setHistoricalChartMetric1, setHistoricalChartMetric2,\n    removeHistoricalChart, setHistoricalChartRange, metrics, charts\n}) => (\n    <div className=\"full-page\">\n        <h1>Pomiary historyczne</h1>\n        <AddHistoricalChart />\n        {charts.length ? charts.map(c => (\n            <HistoricalChart\n                key={c.id}\n                onMetric1Changed={(metric) => setHistoricalChartMetric1({ metric }, c.id)}\n                onMetric2Changed={(metric) => setHistoricalChartMetric2({ metric }, c.id)}\n                onHostAddedToMetric1={host => addHistoricalChartHost1({ host }, c.id)}\n                onHostAddedToMetric2={host => addHistoricalChartHost2({ host }, c.id)}\n                onHostDismissedFromMetric1={host => removeHistoricalChartHost1(c.id, host)}\n                onHostDismissedFromMetric2={host => removeHistoricalChartHost2(c.id, host)}\n                onRangeChanged={(start, end) => setHistoricalChartRange({ start, end }, c.id)}\n                onChartClosed={() => removeHistoricalChart(c.id)}\n                metrics={metrics}\n                {...c}\n            />\n        )) : <NoCharts />}\n    </div>\n);\n\nconst mapStateToProps = (state) => ({\n    charts: getHistoricalChartsArray(state),\n    metrics: getMetrics(state)\n});\n\nconst mapDispatchToProps = {\n    addHistoricalChartHost1: actions.addHistoricalChartHost1,\n    addHistoricalChartHost2: actions.addHistoricalChartHost2,\n    removeHistoricalChartHost1: actions.removeHistoricalChartHost1,\n    removeHistoricalChartHost2: actions.removeHistoricalChartHost2,\n    setHistoricalChartMetric1: actions.setHistoricalChartMetric1,\n    setHistoricalChartMetric2: actions.setHistoricalChartMetric2,\n    removeHistoricalChart: actions.removeHistoricalChart,\n    setHistoricalChartRange: actions.setHistoricalChartRange\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(Live);\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/pages/Historical/index.js",
     "access": "public",
@@ -9634,7 +9664,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 498,
+    "__docId__": 500,
     "kind": "function",
     "name": "Live",
     "memberof": "src/pages/Historical/index.js",
@@ -9647,7 +9677,7 @@
     "importPath": "react-antd-app/src/pages/Historical/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 8,
+    "lineNumber": 9,
     "undocument": true,
     "params": [
       {
@@ -9674,7 +9704,7 @@
     "ignore": true
   },
   {
-    "__docId__": 499,
+    "__docId__": 501,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/pages/Historical/index.js",
@@ -9687,7 +9717,7 @@
     "importPath": "react-antd-app/src/pages/Historical/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 34,
+    "lineNumber": 35,
     "undocument": true,
     "params": [
       {
@@ -9701,7 +9731,7 @@
     "ignore": true
   },
   {
-    "__docId__": 500,
+    "__docId__": 502,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/pages/Historical/index.js",
@@ -9712,7 +9742,7 @@
     "importPath": "react-antd-app/src/pages/Historical/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 39,
+    "lineNumber": 40,
     "undocument": true,
     "type": {
       "types": [
@@ -9722,10 +9752,10 @@
     "ignore": true
   },
   {
-    "__docId__": 501,
+    "__docId__": 503,
     "kind": "file",
     "name": "src/pages/Live/index.js",
-    "content": "import React from 'react';\nimport { connect } from 'react-redux';\nimport * as actions from '../../actions/sync';\nimport { getLiveChartsArray, getMetrics } from '../../reducers';\nimport AddLiveChart from '../../containers/AddLiveChart';\nimport { LiveChart } from '../../components/Chart';\n\nconst Live = ({ removeLiveChart, setLiveChartMetric, addLiveChartHost, removeLiveChartHost, metrics, charts }) => (\n    <div className=\"full-page\">\n        <h1>Pomiary na żywo</h1>\n        <AddLiveChart />\n        {charts.map(c => (\n            <LiveChart\n                key={c.id}\n                onChartClosed={() => removeLiveChart(c.id)}\n                onMetricChanged={metric => setLiveChartMetric({ metric }, c.id)}\n                onHostAdded={host => addLiveChartHost({ host }, c.id)}\n                onHostDismissed={host => removeLiveChartHost(c.id, host)}\n                metrics={metrics}\n                {...c}\n            />\n        ))}\n    </div>\n);\n\nconst mapStateToProps = (state) => ({\n    charts: getLiveChartsArray(state),\n    metrics: getMetrics(state)\n});\n\nconst mapDispatchToProps = {\n    removeLiveChart: actions.removeLiveChart,\n    setLiveChartMetric: actions.setLiveChartMetric,\n    addLiveChartHost: actions.addLiveChartHost,\n    removeLiveChartHost: actions.removeLiveChartHost\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(Live);\n",
+    "content": "import React from 'react';\nimport { connect } from 'react-redux';\nimport * as actions from '../../actions/sync';\nimport { getLiveChartsArray, getMetrics } from '../../reducers';\nimport AddLiveChart from '../../containers/AddLiveChart';\nimport { LiveChart } from '../../components/Chart';\nimport NoCharts from '../../components/NoCharts';\n\nconst Live = ({ removeLiveChart, setLiveChartMetric, addLiveChartHost, removeLiveChartHost, metrics, charts }) => (\n    <div className=\"full-page\">\n        <h1>Pomiary na żywo</h1>\n        <AddLiveChart />\n        {charts.length ? charts.map(c => (\n            <LiveChart\n                key={c.id}\n                onChartClosed={() => removeLiveChart(c.id)}\n                onMetricChanged={metric => setLiveChartMetric({ metric }, c.id)}\n                onHostAdded={host => addLiveChartHost({ host }, c.id)}\n                onHostDismissed={host => removeLiveChartHost(c.id, host)}\n                metrics={metrics}\n                {...c}\n            />\n        )) : <NoCharts />}\n    </div>\n);\n\nconst mapStateToProps = (state) => ({\n    charts: getLiveChartsArray(state),\n    metrics: getMetrics(state)\n});\n\nconst mapDispatchToProps = {\n    removeLiveChart: actions.removeLiveChart,\n    setLiveChartMetric: actions.setLiveChartMetric,\n    addLiveChartHost: actions.addLiveChartHost,\n    removeLiveChartHost: actions.removeLiveChartHost\n};\n\nexport default connect(mapStateToProps, mapDispatchToProps)(Live);\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/pages/Live/index.js",
     "access": "public",
@@ -9733,7 +9763,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 502,
+    "__docId__": 504,
     "kind": "function",
     "name": "Live",
     "memberof": "src/pages/Live/index.js",
@@ -9746,7 +9776,7 @@
     "importPath": "react-antd-app/src/pages/Live/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 8,
+    "lineNumber": 9,
     "undocument": true,
     "params": [
       {
@@ -9769,7 +9799,7 @@
     "ignore": true
   },
   {
-    "__docId__": 503,
+    "__docId__": 505,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/pages/Live/index.js",
@@ -9782,7 +9812,7 @@
     "importPath": "react-antd-app/src/pages/Live/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 26,
+    "lineNumber": 27,
     "undocument": true,
     "params": [
       {
@@ -9796,7 +9826,7 @@
     "ignore": true
   },
   {
-    "__docId__": 504,
+    "__docId__": 506,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/pages/Live/index.js",
@@ -9807,7 +9837,7 @@
     "importPath": "react-antd-app/src/pages/Live/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 31,
+    "lineNumber": 32,
     "undocument": true,
     "type": {
       "types": [
@@ -9817,7 +9847,7 @@
     "ignore": true
   },
   {
-    "__docId__": 505,
+    "__docId__": 507,
     "kind": "file",
     "name": "src/pages/Metrics/index.js",
     "content": "import React from 'react';\nimport HostList from '../../containers/HostList';\nimport RefreshHostsButton from '../../containers/RefreshHostsButton';\n\nconst Metrics = () => (\n    <div className=\"full-page\">\n        <h1>Hosty i Metryki</h1>\n        <HostList />\n        <RefreshHostsButton />\n    </div>\n);\n\nexport default Metrics;\n",
@@ -9828,7 +9858,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 506,
+    "__docId__": 508,
     "kind": "function",
     "name": "Metrics",
     "memberof": "src/pages/Metrics/index.js",
@@ -9847,7 +9877,7 @@
     "return": null
   },
   {
-    "__docId__": 507,
+    "__docId__": 509,
     "kind": "file",
     "name": "src/pages/Monitors/index.js",
     "content": "import React from 'react';\nimport MonitorsTable from '../../containers/MonitorsTable';\n\nconst Monitors = () => (\n    <div className=\"full-page\">\n        <h1>Monitory</h1>\n        <MonitorsTable />\n    </div>\n);\n\nexport default Monitors;\n",
@@ -9858,7 +9888,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 508,
+    "__docId__": 510,
     "kind": "function",
     "name": "Monitors",
     "memberof": "src/pages/Monitors/index.js",
@@ -9877,7 +9907,7 @@
     "return": null
   },
   {
-    "__docId__": 509,
+    "__docId__": 511,
     "kind": "file",
     "name": "src/pages/NotFound/index.js",
     "content": "import React from 'react';\n\nconst NotFound = () => (\n    <div className=\"full-page\">\n        <h1>Strony nie znaleziono</h1>\n    </div>\n);\n\nexport default NotFound;\n",
@@ -9888,7 +9918,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 510,
+    "__docId__": 512,
     "kind": "function",
     "name": "NotFound",
     "memberof": "src/pages/NotFound/index.js",
@@ -9907,7 +9937,7 @@
     "return": null
   },
   {
-    "__docId__": 511,
+    "__docId__": 513,
     "kind": "file",
     "name": "src/pages/SignIn/index.js",
     "content": "import React from 'react';\nimport LoginForm from '../../containers/LoginForm';\nimport AuthServer from '../../containers/AuthServer';\n\nconst SignIn = () => (\n    <div className=\"centered-page\">\n        <h1>Panel logowania</h1>\n        <LoginForm />\n        <AuthServer />\n    </div>\n);\n\nexport default SignIn;\n",
@@ -9918,7 +9948,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 512,
+    "__docId__": 514,
     "kind": "function",
     "name": "SignIn",
     "memberof": "src/pages/SignIn/index.js",
@@ -9937,7 +9967,7 @@
     "return": null
   },
   {
-    "__docId__": 513,
+    "__docId__": 515,
     "kind": "file",
     "name": "src/pages/SignUp/index.js",
     "content": "import React from 'react';\nimport RegisterForm from '../../containers/RegisterForm';\nimport AuthServer from '../../containers/AuthServer';\n\nconst SignUp = () => (\n    <div className=\"centered-page\">\n        <h1>Panel rejestracji</h1>\n        <RegisterForm />\n        <AuthServer />\n    </div>\n);\n\nexport default SignUp;\n",
@@ -9948,7 +9978,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 514,
+    "__docId__": 516,
     "kind": "function",
     "name": "SignUp",
     "memberof": "src/pages/SignUp/index.js",
@@ -9967,7 +9997,7 @@
     "return": null
   },
   {
-    "__docId__": 515,
+    "__docId__": 517,
     "kind": "file",
     "name": "src/reducers/__tests__/auth.js",
     "content": "import reducer from '../index';\nimport * as types from '../../actions/types';\n\nit('reacts to SIGN_IN_REQUEST', () => {\n    let state = {\n        auth: {\n            token: null,\n            tokenRequested: false,\n            authServer: 'junk'\n        }\n    };\n    state = reducer(state, { type: types.SIGN_IN_REQUEST });\n    expect(state.auth).toEqual({\n        token: null,\n        tokenRequested: true,\n        authServer: 'junk'\n    });\n});\n\nit('reacts to SIGN_IN_SUCCESS', () => {\n    let state = {\n        auth: {\n            token: null,\n            tokenRequested: true,\n            authServer: 'junk'\n        }\n    };\n    state = reducer(state, { type: types.SIGN_IN_SUCCESS, payload: { access_token: 'xxx' }});\n    expect(state.auth).toEqual({\n        token: 'xxx',\n        tokenRequested: false,\n        authServer: 'junk'\n    });\n});\n\nit('reacts to SIGN_IN_FAILURE', () => {\n    let state = {\n        auth: {\n            token: null,\n            tokenRequested: true,\n            authServer: 'junk'\n        }\n    };\n    state = reducer(state, { type: types.SIGN_IN_FAILURE });\n    expect(state.auth).toEqual({\n        token: null,\n        tokenRequested: false,\n        authServer: 'junk'\n    });\n});\n\nit('reacts to SIGN_UP_REQUEST', () => {\n    let state = {\n        auth: {\n            token: null,\n            tokenRequested: false,\n            authServer: 'junk'\n        }\n    };\n    state = reducer(state, { type: types.SIGN_UP_REQUEST });\n    expect(state.auth).toEqual({\n        token: null,\n        tokenRequested: true,\n        authServer: 'junk'\n    });\n});\n\nit('reacts to SIGN_UP_SUCCESS', () => {\n    let state = {\n        auth: {\n            token: null,\n            tokenRequested: true,\n            authServer: 'junk'\n        }\n    };\n    state = reducer(state, { type: types.SIGN_UP_SUCCESS, payload: { access_token: 'xxx' }});\n    expect(state.auth).toEqual({\n        token: 'xxx',\n        tokenRequested: false,\n        authServer: 'junk'\n    });\n});\n\nit('reacts to SIGN_UP_FAILURE', () => {\n    let state = {\n        auth: {\n            token: null,\n            tokenRequested: true,\n            authServer: 'junk'\n        }\n    };\n    state = reducer(state, { type: types.SIGN_UP_FAILURE });\n    expect(state.auth).toEqual({\n        token: null,\n        tokenRequested: false,\n        authServer: 'junk'\n    });\n});\n\nit('reacts to REMOVE_TOKEN', () => {\n    let state = {\n        auth: {\n            token: 'xxx',\n            tokenRequested: false,\n            authServer: 'junk'\n        }\n    };\n    state = reducer(state, { type: types.REMOVE_TOKEN });\n    expect(state.auth).toEqual({\n        token: null,\n        tokenRequested: false,\n        authServer: 'junk'\n    });\n});\n\nit('reacts to CHANGE_AUTH_SERVER', () => {\n    let state = {\n        auth: {\n            token: 'xxx',\n            tokenRequested: false,\n            authServer: 'junk'\n        }\n    };\n    state = reducer(state, { type: types.CHANGE_AUTH_SERVER, payload: { address: 'junk2' }});\n    expect(state.auth).toEqual({\n        token: 'xxx',\n        tokenRequested: false,\n        authServer: 'junk2'\n    });\n});\n",
@@ -9978,7 +10008,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 516,
+    "__docId__": 518,
     "kind": "file",
     "name": "src/reducers/__tests__/historicalCharts.js",
     "content": "import moment from 'moment';\nimport reducer from '../index';\nimport * as types from '../../actions/types';\n\nconst chart1 = {\n    id: 'test2_id',\n    metric1: 'test2_metric',\n    metric2: 'test3_metric'\n};\n\nconst chart2 = {\n    id: 'test_id',\n    metric1: 'test1_metric',\n    metric2: null\n};\n\nconst hosts1 = [\n    'host1a',\n    'host1b'\n];\n\nconst hosts2 = [\n    'host1a',\n    'host1b',\n    'host2b'\n];\n\nconst hosts3 = [\n    'host2a',\n    'host2b'\n];\n\nconst chart2Measurements = {\n    'host2a': [\n        {\n            time: '2018-06-09T16:21:30Z',\n            value: 32\n        },\n        {\n            time: '2018-06-09T16:26:30Z',\n            value: 21\n        }\n    ],\n    'host2b': [\n        {\n            time: '2018-06-09T16:21:00Z',\n            value: 12\n        },\n        {\n            time: '2018-06-09T16:26:00Z',\n            value: 63\n        }\n    ]\n};\n\nconst chartStart1 = moment('2018-03-02').toISOString();\nconst chartEnd1 = moment('2018-03-10').toISOString();\nconst chartStart2 = moment('2017-03-02').toISOString();\nconst chartEnd2 = moment('2017-03-10').toISOString();\n\nit('reacts to ADD_HISTORICAL_CHART', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_HISTORICAL_CHART,\n        payload: {\n            id: chart2.id,\n            metric: chart2.metric1,\n            start: chartStart2,\n            end: chartEnd2\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: [],\n                hosts2: null,\n                invalidated: false,\n                measurements1: {},\n                measurements2: null,\n                start: chartStart2,\n                end: chartEnd2\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to REMOVE_HISTORICAL_CHART', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_HISTORICAL_CHART,\n        meta: {\n            id: chart2.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            }\n        },\n        allIds: [\n            chart1.id\n        ]\n    });\n});\n\nit('reacts to SET_HISTORICAL_CHART_RANGE', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.SET_HISTORICAL_CHART_RANGE,\n        payload: {\n            start: chartStart2,\n            end: chartEnd2\n        },\n        meta: {\n            id: chart2.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: hosts3,\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart2,\n                end: chartEnd2\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to SET_HISTORICAL_CHART_METRIC1', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.SET_HISTORICAL_CHART_METRIC1,\n        payload: {\n            metric: 'test_metric'\n        },\n        meta: {\n            id: chart2.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: [],\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart1,\n                end: chartEnd1,\n                metric1: 'test_metric'\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to SET_HISTORICAL_CHART_METRIC2 (remove null)', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.SET_HISTORICAL_CHART_METRIC2,\n        payload: {\n            metric: 'test_metric'\n        },\n        meta: {\n            id: chart2.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: hosts3,\n                hosts2: [],\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1,\n                metric2: 'test_metric'\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to SET_HISTORICAL_CHART_METRIC2 (set null)', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: [],\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1,\n                    metric2: 'test_metric'\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.SET_HISTORICAL_CHART_METRIC2,\n        payload: {\n            metric: null\n        },\n        meta: {\n            id: chart2.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: hosts3,\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart1,\n                end: chartEnd1\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to ADD_HISTORICAL_CHART_HOST1', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_HISTORICAL_CHART_HOST1,\n        payload: {\n            host: 'new_host'\n        },\n        meta: {\n            id: chart2.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: [\n                    ...hosts3,\n                    'new_host'\n                ],\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart1,\n                end: chartEnd1\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to ADD_HISTORICAL_CHART_HOST2', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_HISTORICAL_CHART_HOST2,\n        payload: {\n            host: 'new_host'\n        },\n        meta: {\n            id: chart1.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: [\n                    ...hosts2,\n                    'new_host'\n                ],\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: hosts3,\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart1,\n                end: chartEnd1\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to REMOVE_HISTORICAL_CHART_HOST1', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_HISTORICAL_CHART_HOST1,\n        meta: {\n            id: chart1.id,\n            host: 'host1a'\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1.filter(h => h !== 'host1a'),\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: hosts3,\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart1,\n                end: chartEnd1\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to REMOVE_HISTORICAL_CHART_HOST2', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_HISTORICAL_CHART_HOST2,\n        meta: {\n            id: chart1.id,\n            host: 'host1b'\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2.filter(h => h !== 'host1b'),\n                invalidated: false,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: hosts3,\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart1,\n                end: chartEnd1\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to GET_HISTORICAL_MEASUREMENTS_REQUEST', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: false,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.GET_HISTORICAL_MEASUREMENTS_REQUEST,\n        meta: {\n            id: chart1.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: true,\n                measurements1: {},\n                measurements2: {},\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: hosts3,\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart1,\n                end: chartEnd1\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n\nit('reacts to GET_HISTORICAL_MEASUREMENTS_SUCCESS', () => {\n    let state = {\n        historicalCharts: {\n            byId: {\n                [chart1.id]: {\n                    ...chart1,\n                    hosts1: hosts1,\n                    hosts2: hosts2,\n                    invalidated: true,\n                    measurements1: {},\n                    measurements2: {},\n                    start: chartStart1,\n                    end: chartEnd1\n                },\n                [chart2.id]: {\n                    ...chart2,\n                    hosts1: hosts3,\n                    hosts2: null,\n                    invalidated: false,\n                    measurements1: chart2Measurements,\n                    measurements2: null,\n                    start: chartStart1,\n                    end: chartEnd1\n                }\n            },\n            allIds: [\n                chart1.id,\n                chart2.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.GET_HISTORICAL_MEASUREMENTS_SUCCESS,\n        payload: {\n            measurements1: chart2Measurements,\n            measurements2: chart2Measurements\n        },\n        meta: {\n            id: chart1.id,\n        }\n    });\n    expect(state.historicalCharts).toEqual({\n        byId: {\n            [chart1.id]: {\n                ...chart1,\n                hosts1: hosts1,\n                hosts2: hosts2,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: chart2Measurements,\n                start: chartStart1,\n                end: chartEnd1\n            },\n            [chart2.id]: {\n                ...chart2,\n                hosts1: hosts3,\n                hosts2: null,\n                invalidated: false,\n                measurements1: chart2Measurements,\n                measurements2: null,\n                start: chartStart1,\n                end: chartEnd1\n            }\n        },\n        allIds: [\n            chart1.id,\n            chart2.id\n        ]\n    });\n});\n",
@@ -9989,7 +10019,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 517,
+    "__docId__": 519,
     "kind": "variable",
     "name": "chart1",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10010,7 +10040,7 @@
     "ignore": true
   },
   {
-    "__docId__": 518,
+    "__docId__": 520,
     "kind": "variable",
     "name": "chart2",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10031,7 +10061,7 @@
     "ignore": true
   },
   {
-    "__docId__": 519,
+    "__docId__": 521,
     "kind": "variable",
     "name": "hosts1",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10052,7 +10082,7 @@
     "ignore": true
   },
   {
-    "__docId__": 520,
+    "__docId__": 522,
     "kind": "variable",
     "name": "hosts2",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10073,7 +10103,7 @@
     "ignore": true
   },
   {
-    "__docId__": 521,
+    "__docId__": 523,
     "kind": "variable",
     "name": "hosts3",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10094,7 +10124,7 @@
     "ignore": true
   },
   {
-    "__docId__": 522,
+    "__docId__": 524,
     "kind": "variable",
     "name": "chart2Measurements",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10115,7 +10145,7 @@
     "ignore": true
   },
   {
-    "__docId__": 523,
+    "__docId__": 525,
     "kind": "variable",
     "name": "chartStart1",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10136,7 +10166,7 @@
     "ignore": true
   },
   {
-    "__docId__": 524,
+    "__docId__": 526,
     "kind": "variable",
     "name": "chartEnd1",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10157,7 +10187,7 @@
     "ignore": true
   },
   {
-    "__docId__": 525,
+    "__docId__": 527,
     "kind": "variable",
     "name": "chartStart2",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10178,7 +10208,7 @@
     "ignore": true
   },
   {
-    "__docId__": 526,
+    "__docId__": 528,
     "kind": "variable",
     "name": "chartEnd2",
     "memberof": "src/reducers/__tests__/historicalCharts.js",
@@ -10199,7 +10229,7 @@
     "ignore": true
   },
   {
-    "__docId__": 527,
+    "__docId__": 529,
     "kind": "file",
     "name": "src/reducers/__tests__/hosts.js",
     "content": "import reducer from '../index';\nimport * as types from '../../actions/types';\n\nconst junkMetadata = [\n    {\n        id: 'OS',\n        name: 'Operating System',\n        value: 'Ubuntu 18.04'\n    }\n];\n\nconst metric1Payload = {\n    description: 'RAM usage in percentage',\n    hosts: [\n        'not_used'\n    ],\n    id: 'RAM_USAGE',\n    interval: null,\n    moving_window_duration: null,\n    parent_id: null,\n    removable: null,\n    unit: '%'\n};\n\nconst metric2Payload = {\n    description: 'CPU usage in percentage',\n    hosts: [\n        'not_used'\n    ],\n    id: 'CPU_USAGE',\n    interval: null,\n    moving_window_duration: null,\n    parent_id: null,\n    removable: null,\n    unit: '%'\n};\n\nconst metric1ComplexPayload = {\n    description: 'Complex 1 Description',\n    hosts: [\n        'not_used'\n    ],\n    id: 'cpx_CPU_USAGE_240_120',\n    interval: 120,\n    moving_window_duration: 240,\n    parent_id: 'CPU_USAGE',\n    removable: false,\n    unit: '%'\n};\n\nconst metric2ComplexPayload = {\n    description: 'Complex 2 Description',\n    hosts: [\n        'not_used'\n    ],\n    id: 'cpx_RAM_USAGE_120_60',\n    interval: 60,\n    moving_window_duration: 120,\n    parent_id: 'RAM_USAGE',\n    removable: true,\n    unit: '%'\n};\n\nconst metric3ComplexPayload = {\n    description: 'Complex 3 Description',\n    id: 'cpx_RAM_USAGE_60_60',\n    interval: 60,\n    moving_window_duration: 60,\n    parent_id: 'RAM_USAGE',\n    unit: '%'\n};\n\nconst host1Payload = {\n    hostname: 'host1_address',\n    metadata: junkMetadata,\n    metrics: [\n        metric1Payload,\n        metric2Payload,\n        metric1ComplexPayload\n    ]\n};\n\nconst host2Payload = {\n    hostname: 'host2_address',\n    metadata: junkMetadata,\n    metrics: [\n        metric1Payload,\n        metric2Payload,\n        metric2ComplexPayload\n    ]\n};\n\nconst host3Payload = {\n    hostname: 'host3_address',\n    metadata: junkMetadata,\n    metrics: [\n        metric1Payload,\n        metric2Payload,\n        metric1ComplexPayload,\n        metric2ComplexPayload\n    ]\n};\n\nconst convertMetric = state => {\n    const { hosts, ...rest } = state; // eslint-disable-line no-unused-vars\n    return rest;\n};\n\nconst convertHost = state => {\n    return {\n        metricsInvalidated: false,\n        ...state,\n        metrics: state.metrics.reduce((c, m) => ({\n            ...c,\n            [m.id]: convertMetric(m)\n        }), {})\n    };\n};\n\nit('reacts to SET_MONITOR_ADDRESS', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2'\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.SET_MONITOR_ADDRESS,\n        payload: {\n            address: 'monitor3'\n        },\n        meta: {\n            monitor: 'monitor1'\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor3'\n        }),\n        [host2Payload.hostname]: convertHost({\n            ...host2Payload,\n            monitor: 'monitor2'\n        })\n    });\n});\n\nit('reacts to REMOVE_MONITOR', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2'\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_MONITOR,\n        meta: {\n            monitor: 'monitor2'\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor1'\n        })\n    });\n});\n\nit('reacts to GET_HOSTS_SUCCESS', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2'\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.GET_HOSTS_SUCCESS,\n        payload: [\n            host3Payload\n        ],\n        meta: {\n            monitor: 'monitor2'\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor1'\n        }),\n        [host3Payload.hostname]: convertHost({\n            ...host3Payload,\n            monitor: 'monitor2'\n        })\n    });\n});\n\nit('reacts to REMOVE_TOKEN', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2'\n            })\n        }\n    };\n    state = reducer(state, { type: types.REMOVE_TOKEN });\n    expect(state.hosts).toEqual({});\n});\n\nit('reacts to ADD_COMPLEX_METRIC_REQUEST', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2'\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_COMPLEX_METRIC_REQUEST,\n        meta: {\n            host: host2Payload.hostname\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor1'\n        }),\n        [host2Payload.hostname]: convertHost({\n            ...host2Payload,\n            monitor: 'monitor2',\n            metricsInvalidated: true\n        })\n    });\n});\n\nit('reacts to ADD_COMPLEX_METRIC_SUCCESS', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2',\n                metricsInvalidated: true\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_COMPLEX_METRIC_SUCCESS,\n        payload: metric3ComplexPayload,\n        meta: {\n            host: host2Payload.hostname\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor1'\n        }),\n        [host2Payload.hostname]: convertHost({\n            ...host2Payload,\n            monitor: 'monitor2',\n            metrics: [\n                ...host2Payload.metrics,\n                {\n                    ...metric3ComplexPayload,\n                    removable: true\n                }\n            ]\n        })\n    });\n});\n\nit('reacts to ADD_COMPLEX_METRIC_FAILURE', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2',\n                metricsInvalidated: true\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_COMPLEX_METRIC_FAILURE,\n        payload: {},\n        error: true,\n        meta: {\n            host: host2Payload.hostname\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor1'\n        }),\n        [host2Payload.hostname]: convertHost({\n            ...host2Payload,\n            monitor: 'monitor2'\n        })\n    });\n});\n\nit('reacts to REMOVE_COMPLEX_METRIC_REQUEST', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2'\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_COMPLEX_METRIC_REQUEST,\n        meta: {\n            host: host2Payload.hostname\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor1'\n        }),\n        [host2Payload.hostname]: convertHost({\n            ...host2Payload,\n            monitor: 'monitor2',\n            metricsInvalidated: true\n        })\n    });\n});\n\nit('reacts to REMOVE_COMPLEX_METRIC_SUCCESS', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2',\n                metricsInvalidated: true\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_COMPLEX_METRIC_SUCCESS,\n        meta: {\n            id: metric2ComplexPayload.id,\n            host: host2Payload.hostname\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor1'\n        }),\n        [host2Payload.hostname]: convertHost({\n            ...host2Payload,\n            monitor: 'monitor2',\n            metrics: host2Payload.metrics.filter(m => m !== metric2ComplexPayload)\n        })\n    });\n});\n\nit('reacts to REMOVE_COMPLEX_METRIC_FAILURE', () => {\n    let state = {\n        hosts: {\n            [host1Payload.hostname]: convertHost({\n                ...host1Payload,\n                monitor: 'monitor1'\n            }),\n            [host2Payload.hostname]: convertHost({\n                ...host2Payload,\n                monitor: 'monitor2',\n                metricsInvalidated: true\n            })\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_COMPLEX_METRIC_FAILURE,\n        meta: {\n            host: host2Payload.hostname\n        }\n    });\n    expect(state.hosts).toEqual({\n        [host1Payload.hostname]: convertHost({\n            ...host1Payload,\n            monitor: 'monitor1'\n        }),\n        [host2Payload.hostname]: convertHost({\n            ...host2Payload,\n            monitor: 'monitor2'\n        })\n    });\n});\n",
@@ -10210,7 +10240,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 528,
+    "__docId__": 530,
     "kind": "variable",
     "name": "junkMetadata",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10231,7 +10261,7 @@
     "ignore": true
   },
   {
-    "__docId__": 529,
+    "__docId__": 531,
     "kind": "variable",
     "name": "metric1Payload",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10252,7 +10282,7 @@
     "ignore": true
   },
   {
-    "__docId__": 530,
+    "__docId__": 532,
     "kind": "variable",
     "name": "metric2Payload",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10273,7 +10303,7 @@
     "ignore": true
   },
   {
-    "__docId__": 531,
+    "__docId__": 533,
     "kind": "variable",
     "name": "metric1ComplexPayload",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10294,7 +10324,7 @@
     "ignore": true
   },
   {
-    "__docId__": 532,
+    "__docId__": 534,
     "kind": "variable",
     "name": "metric2ComplexPayload",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10315,7 +10345,7 @@
     "ignore": true
   },
   {
-    "__docId__": 533,
+    "__docId__": 535,
     "kind": "variable",
     "name": "metric3ComplexPayload",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10336,7 +10366,7 @@
     "ignore": true
   },
   {
-    "__docId__": 534,
+    "__docId__": 536,
     "kind": "variable",
     "name": "host1Payload",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10357,7 +10387,7 @@
     "ignore": true
   },
   {
-    "__docId__": 535,
+    "__docId__": 537,
     "kind": "variable",
     "name": "host2Payload",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10378,7 +10408,7 @@
     "ignore": true
   },
   {
-    "__docId__": 536,
+    "__docId__": 538,
     "kind": "variable",
     "name": "host3Payload",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10399,7 +10429,7 @@
     "ignore": true
   },
   {
-    "__docId__": 537,
+    "__docId__": 539,
     "kind": "function",
     "name": "convertMetric",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10430,7 +10460,7 @@
     "ignore": true
   },
   {
-    "__docId__": 538,
+    "__docId__": 540,
     "kind": "function",
     "name": "convertHost",
     "memberof": "src/reducers/__tests__/hosts.js",
@@ -10461,7 +10491,7 @@
     "ignore": true
   },
   {
-    "__docId__": 539,
+    "__docId__": 541,
     "kind": "file",
     "name": "src/reducers/__tests__/index.js",
     "content": "import reducer from '../index';\n\nit('initializes properly', () => {\n    const state = reducer(undefined, {});\n    expect(state).toEqual({\n        auth: {\n            token: null,\n            tokenRequested: false,\n            authServer: ''\n        },\n        monitors: {},\n        hosts: {},\n        liveCharts: {\n            byId: {},\n            allIds: []\n        },\n        historicalCharts: {\n            byId: {},\n            allIds: []\n        }\n    });\n});\n",
@@ -10472,7 +10502,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 540,
+    "__docId__": 542,
     "kind": "file",
     "name": "src/reducers/__tests__/liveCharts.js",
     "content": "import reducer from '../index';\nimport * as types from '../../actions/types';\n\nconst chart1Payload = {\n    id: 'test_id',\n    metric: 'test1_metric'\n};\n\nconst chart2Payload = {\n    id: 'test2_id',\n    metric: 'test2_metric'\n};\n\nconst hosts1Payload = [\n    'host1a',\n    'host1b'\n];\n\nconst hosts2Payload = [\n    'host2a',\n    'host2b'\n];\n\nconst chart1MeasurementsPayload = {\n    'host1a': [\n        {\n            time: '2018-06-09T16:21:30Z',\n            value: 32\n        },\n        {\n            time: '2018-06-09T16:26:30Z',\n            value: 21\n        }\n    ],\n    'host1b': [\n        {\n            time: '2018-06-09T16:21:00Z',\n            value: 12\n        },\n        {\n            time: '2018-06-09T16:26:00Z',\n            value: 63\n        }\n    ]\n};\n\nit('reacts to ADD_LIVE_CHART', () => {\n    let state = {\n        liveCharts: {\n            byId: {\n                [chart1Payload.id]: {\n                    ...chart1Payload,\n                    hosts: [],\n                    invalidated: false,\n                    measurements: {}\n                }\n            },\n            allIds: [\n                chart1Payload.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_LIVE_CHART,\n        payload: chart2Payload\n    });\n    expect(state.liveCharts).toEqual({\n        byId: {\n            [chart1Payload.id]: {\n                ...chart1Payload,\n                hosts: [],\n                invalidated: false,\n                measurements: {}\n            },\n            [chart2Payload.id]: {\n                ...chart2Payload,\n                hosts: [],\n                invalidated: false,\n                measurements: {}\n            }\n        },\n        allIds: [\n            chart1Payload.id,\n            chart2Payload.id\n        ]\n    });\n});\n\nit('reacts to REMOVE_LIVE_CHART', () => {\n    let state = {\n        liveCharts: {\n            byId: {\n                [chart1Payload.id]: {\n                    ...chart1Payload,\n                    hosts: [],\n                    invalidated: false,\n                    measurements: {}\n                },\n                [chart2Payload.id]: {\n                    ...chart2Payload,\n                    hosts: [],\n                    invalidated: false,\n                    measurements: {}\n                }\n            },\n            allIds: [\n                chart1Payload.id,\n                chart2Payload.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_LIVE_CHART,\n        meta: {\n            id: chart1Payload.id\n        }\n    });\n    expect(state.liveCharts).toEqual({\n        byId: {\n            [chart2Payload.id]: {\n                ...chart2Payload,\n                hosts: [],\n                invalidated: false,\n                measurements: {}\n            }\n        },\n        allIds: [\n            chart2Payload.id\n        ]\n    });\n});\n\nit('reacts to SET_LIVE_CHART_METRIC', () => {\n    let state = {\n        liveCharts: {\n            byId: {\n                [chart1Payload.id]: {\n                    ...chart1Payload,\n                    hosts: hosts1Payload,\n                    invalidated: false,\n                    measurements: {}\n                },\n                [chart2Payload.id]: {\n                    ...chart2Payload,\n                    hosts: hosts2Payload,\n                    invalidated: false,\n                    measurements: {}\n                }\n            },\n            allIds: [\n                chart1Payload.id,\n                chart2Payload.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.SET_LIVE_CHART_METRIC,\n        payload: {\n            metric: 'test3_metric'\n        },\n        meta: {\n            id: chart1Payload.id\n        }\n    });\n    expect(state.liveCharts).toEqual({\n        byId: {\n            [chart1Payload.id]: {\n                ...chart1Payload,\n                metric: 'test3_metric',\n                hosts: [],\n                invalidated: false,\n                measurements: {}\n            },\n            [chart2Payload.id]: {\n                ...chart2Payload,\n                hosts: hosts2Payload,\n                invalidated: false,\n                measurements: {},\n            }\n        },\n        allIds: [\n            chart1Payload.id,\n            chart2Payload.id\n        ]\n    });\n});\n\nit('reacts to ADD_LIVE_CHART_HOST', () => {\n    let state = {\n        liveCharts: {\n            byId: {\n                [chart1Payload.id]: {\n                    ...chart1Payload,\n                    hosts: hosts1Payload,\n                    invalidated: false,\n                    measurements: {}\n                },\n                [chart2Payload.id]: {\n                    ...chart2Payload,\n                    hosts: hosts2Payload,\n                    invalidated: false,\n                    measurements: {}\n                }\n            },\n            allIds: [\n                chart1Payload.id,\n                chart2Payload.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_LIVE_CHART_HOST,\n        payload: {\n            host: 'host3'\n        },\n        meta: {\n            id: chart1Payload.id\n        }\n    });\n    expect(state.liveCharts).toEqual({\n        byId: {\n            [chart1Payload.id]: {\n                ...chart1Payload,\n                hosts: [\n                    ...hosts1Payload,\n                    'host3'\n                ],\n                invalidated: false,\n                measurements: {}\n            },\n            [chart2Payload.id]: {\n                ...chart2Payload,\n                hosts: hosts2Payload,\n                invalidated: false,\n                measurements: {}\n            }\n        },\n        allIds: [\n            chart1Payload.id,\n            chart2Payload.id\n        ]\n    });\n});\n\nit('reacts to REMOVE_LIVE_CHART_HOST', () => {\n    let state = {\n        liveCharts: {\n            byId: {\n                [chart1Payload.id]: {\n                    ...chart1Payload,\n                    hosts: hosts1Payload,\n                    invalidated: false,\n                    measurements: {}\n                },\n                [chart2Payload.id]: {\n                    ...chart2Payload,\n                    hosts: hosts2Payload,\n                    invalidated: false,\n                    measurements: {}\n                }\n            },\n            allIds: [\n                chart1Payload.id,\n                chart2Payload.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_LIVE_CHART_HOST,\n        meta: {\n            id: chart1Payload.id,\n            host: 'host1b'\n        }\n    });\n    expect(state.liveCharts).toEqual({\n        byId: {\n            [chart1Payload.id]: {\n                ...chart1Payload,\n                hosts: hosts1Payload.filter(h => h !== 'host1b'),\n                invalidated: false,\n                measurements: {}\n            },\n            [chart2Payload.id]: {\n                ...chart2Payload,\n                hosts: hosts2Payload,\n                invalidated: false,\n                measurements: {}\n            }\n        },\n        allIds: [\n            chart1Payload.id,\n            chart2Payload.id\n        ]\n    });\n});\n\nit('reacts to GET_LIVE_MEASUREMENTS_REQUEST', () => {\n    let state = {\n        liveCharts: {\n            byId: {\n                [chart1Payload.id]: {\n                    ...chart1Payload,\n                    hosts: hosts1Payload,\n                    invalidated: false,\n                    measurements: {}\n                },\n                [chart2Payload.id]: {\n                    ...chart2Payload,\n                    hosts: hosts2Payload,\n                    invalidated: false,\n                    measurements: {}\n                }\n            },\n            allIds: [\n                chart1Payload.id,\n                chart2Payload.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.GET_LIVE_MEASUREMENTS_REQUEST,\n        meta: {\n            id: chart1Payload.id\n        }\n    });\n    expect(state.liveCharts).toEqual({\n        byId: {\n            [chart1Payload.id]: {\n                ...chart1Payload,\n                hosts: hosts1Payload,\n                invalidated: true,\n                measurements: {}\n            },\n            [chart2Payload.id]: {\n                ...chart2Payload,\n                hosts: hosts2Payload,\n                invalidated: false,\n                measurements: {}\n            }\n        },\n        allIds: [\n            chart1Payload.id,\n            chart2Payload.id\n        ]\n    });\n});\n\nit('reacts to GET_LIVE_MEASUREMENTS_SUCCESS', () => {\n    let state = {\n        liveCharts: {\n            byId: {\n                [chart1Payload.id]: {\n                    ...chart1Payload,\n                    hosts: hosts1Payload,\n                    invalidated: true,\n                    measurements: {}\n                },\n                [chart2Payload.id]: {\n                    ...chart2Payload,\n                    hosts: hosts2Payload,\n                    invalidated: false,\n                    measurements: {}\n                }\n            },\n            allIds: [\n                chart1Payload.id,\n                chart2Payload.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.GET_LIVE_MEASUREMENTS_SUCCESS,\n        payload: {\n            measurements: chart1MeasurementsPayload\n        },\n        meta: {\n            id: chart1Payload.id\n        }\n    });\n    expect(state.liveCharts).toEqual({\n        byId: {\n            [chart1Payload.id]: {\n                ...chart1Payload,\n                hosts: hosts1Payload,\n                invalidated: false,\n                measurements: chart1MeasurementsPayload\n            },\n            [chart2Payload.id]: {\n                ...chart2Payload,\n                hosts: hosts2Payload,\n                invalidated: false,\n                measurements: {}\n            }\n        },\n        allIds: [\n            chart1Payload.id,\n            chart2Payload.id\n        ]\n    });\n});\n\nit('reacts to REMOVE_TOKEN', () => {\n    let state = {\n        liveCharts: {\n            byId: {\n                [chart1Payload.id]: {\n                    ...chart1Payload,\n                    hosts: hosts1Payload,\n                    invalidated: true,\n                    measurements: chart1MeasurementsPayload\n                },\n                [chart2Payload.id]: {\n                    ...chart2Payload,\n                    hosts: hosts2Payload,\n                    invalidated: false,\n                    measurements: {}\n                }\n            },\n            allIds: [\n                chart1Payload.id,\n                chart2Payload.id\n            ]\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_TOKEN,\n    });\n    expect(state.liveCharts).toEqual({\n        byId: {},\n        allIds: []\n    });\n});\n",
@@ -10483,7 +10513,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 541,
+    "__docId__": 543,
     "kind": "variable",
     "name": "chart1Payload",
     "memberof": "src/reducers/__tests__/liveCharts.js",
@@ -10504,7 +10534,7 @@
     "ignore": true
   },
   {
-    "__docId__": 542,
+    "__docId__": 544,
     "kind": "variable",
     "name": "chart2Payload",
     "memberof": "src/reducers/__tests__/liveCharts.js",
@@ -10525,7 +10555,7 @@
     "ignore": true
   },
   {
-    "__docId__": 543,
+    "__docId__": 545,
     "kind": "variable",
     "name": "hosts1Payload",
     "memberof": "src/reducers/__tests__/liveCharts.js",
@@ -10546,7 +10576,7 @@
     "ignore": true
   },
   {
-    "__docId__": 544,
+    "__docId__": 546,
     "kind": "variable",
     "name": "hosts2Payload",
     "memberof": "src/reducers/__tests__/liveCharts.js",
@@ -10567,7 +10597,7 @@
     "ignore": true
   },
   {
-    "__docId__": 545,
+    "__docId__": 547,
     "kind": "variable",
     "name": "chart1MeasurementsPayload",
     "memberof": "src/reducers/__tests__/liveCharts.js",
@@ -10588,7 +10618,7 @@
     "ignore": true
   },
   {
-    "__docId__": 546,
+    "__docId__": 548,
     "kind": "file",
     "name": "src/reducers/__tests__/monitors.js",
     "content": "import reducer from '../index';\nimport * as types from '../../actions/types';\n\nconst monitor1Payload = {\n    address: 'moitor1_address',\n    description: 'monitor1_description'\n};\n\nconst monitor2Payload = {\n    address: 'moitor2_address',\n    description: 'monitor2_description'\n};\n\nit('reacts to ADD_MONITOR', () => {\n    let state = {\n        monitors: {\n            [monitor1Payload.address]: {\n                ...monitor1Payload,\n                hostsRequested: false\n            }\n        }\n    };\n    state = reducer(state, {\n        type: types.ADD_MONITOR,\n        payload: monitor2Payload\n    });\n    expect(state.monitors).toEqual({\n        [monitor1Payload.address]: {\n            ...monitor1Payload,\n            hostsRequested: false\n        },\n        [monitor2Payload.address]: {\n            ...monitor2Payload,\n            hostsRequested: false\n        }\n    });\n});\n\nit('reacts to SET_MONITOR_ADDRESS', () => {\n    let state = {\n        monitors: {\n            [monitor1Payload.address]: {\n                ...monitor1Payload,\n                hostsRequested: false\n            },\n            [monitor2Payload.address]: {\n                ...monitor2Payload,\n                hostsRequested: false\n            }\n        }\n    };\n    state = reducer(state, {\n        type: types.SET_MONITOR_ADDRESS,\n        payload: {\n            address: 'changed!'\n        },\n        meta: {\n            monitor: monitor2Payload.address\n        }\n    });\n    expect(state.monitors).toEqual({\n        [monitor1Payload.address]: {\n            ...monitor1Payload,\n            hostsRequested: false\n        },\n        'changed!': {\n            ...monitor2Payload,\n            hostsRequested: false,\n            address: 'changed!'\n        }\n    });\n});\n\nit('reacts to SET_MONITOR_DESCRIPTION', () => {\n    let state = {\n        monitors: {\n            [monitor1Payload.address]: {\n                ...monitor1Payload,\n                hostsRequested: false\n            },\n            [monitor2Payload.address]: {\n                ...monitor2Payload,\n                hostsRequested: false\n            }\n        }\n    };\n    state = reducer(state, {\n        type: types.SET_MONITOR_DESCRIPTION,\n        payload: {\n            description: 'bbbb'\n        },\n        meta: {\n            monitor: monitor2Payload.address\n        }\n    });\n    expect(state.monitors).toEqual({\n        [monitor1Payload.address]: {\n            ...monitor1Payload,\n            hostsRequested: false\n        },\n        [monitor2Payload.address]: {\n            ...monitor2Payload,\n            hostsRequested: false,\n            description: 'bbbb'\n        }\n    });\n});\n\nit('reacts to REMOVE_MONITOR', () => {\n    let state = {\n        monitors: {\n            [monitor1Payload.address]: {\n                ...monitor1Payload,\n                hostsRequested: false\n            },\n            [monitor2Payload.address]: {\n                ...monitor2Payload,\n                hostsRequested: false\n            }\n        }\n    };\n    state = reducer(state, {\n        type: types.REMOVE_MONITOR,\n        meta: {\n            monitor: monitor2Payload.address\n        }\n    });\n    expect(state.monitors).toEqual({\n        [monitor1Payload.address]: {\n            ...monitor1Payload,\n            hostsRequested: false\n        }\n    });\n});\n\nit('reacts to GET_HOSTS_REQUEST', () => {\n    let state = {\n        monitors: {\n            [monitor1Payload.address]: {\n                ...monitor1Payload,\n                hostsRequested: false\n            },\n            [monitor2Payload.address]: {\n                ...monitor2Payload,\n                hostsRequested: false\n            }\n        }\n    };\n    state = reducer(state, {\n        type: types.GET_HOSTS_REQUEST,\n        meta: {\n            monitor: monitor2Payload.address\n        }\n    });\n    expect(state.monitors).toEqual({\n        [monitor1Payload.address]: {\n            ...monitor1Payload,\n            hostsRequested: false\n        },\n        [monitor2Payload.address]: {\n            ...monitor2Payload,\n            hostsRequested: true\n        }\n    });\n});\n\nit('reacts to GET_HOSTS_SUCCESS', () => {\n    let state = {\n        monitors: {\n            [monitor1Payload.address]: {\n                ...monitor1Payload,\n                hostsRequested: false\n            },\n            [monitor2Payload.address]: {\n                ...monitor2Payload,\n                hostsRequested: true\n            }\n        }\n    };\n    state = reducer(state, {\n        type: types.GET_HOSTS_SUCCESS,\n        payload: [],\n        meta: {\n            monitor: monitor2Payload.address\n        }\n    });\n    expect(state.monitors).toEqual({\n        [monitor1Payload.address]: {\n            ...monitor1Payload,\n            hostsRequested: false\n        },\n        [monitor2Payload.address]: {\n            ...monitor2Payload,\n            hostsRequested: false\n        }\n    });\n});\n\nit('reacts to GET_HOSTS_FAILURE', () => {\n    let state = {\n        monitors: {\n            [monitor1Payload.address]: {\n                ...monitor1Payload,\n                hostsRequested: false\n            },\n            [monitor2Payload.address]: {\n                ...monitor2Payload,\n                hostsRequested: true\n            }\n        }\n    };\n    state = reducer(state, {\n        type: types.GET_HOSTS_FAILURE,\n        payload: {},\n        error: true,\n        meta: {\n            monitor: monitor2Payload.address\n        }\n    });\n    expect(state.monitors).toEqual({\n        [monitor1Payload.address]: {\n            ...monitor1Payload,\n            hostsRequested: false\n        },\n        [monitor2Payload.address]: {\n            ...monitor2Payload,\n            hostsRequested: false\n        }\n    });\n});\n\nit('reacts to REMOVE_TOKEN', () => {\n    let state = {\n        monitors: {\n            [monitor1Payload.address]: {\n                ...monitor1Payload,\n                hostsRequested: true\n            },\n            [monitor2Payload.address]: {\n                ...monitor2Payload,\n                hostsRequested: false\n            }\n        }\n    };\n    state = reducer(state, { type: types.REMOVE_TOKEN });\n    expect(state.monitors).toEqual({\n        [monitor1Payload.address]: {\n            ...monitor1Payload,\n            hostsRequested: false\n        },\n        [monitor2Payload.address]: {\n            ...monitor2Payload,\n            hostsRequested: false\n        }\n    });\n});\n",
@@ -10599,7 +10629,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 547,
+    "__docId__": 549,
     "kind": "variable",
     "name": "monitor1Payload",
     "memberof": "src/reducers/__tests__/monitors.js",
@@ -10620,7 +10650,7 @@
     "ignore": true
   },
   {
-    "__docId__": 548,
+    "__docId__": 550,
     "kind": "variable",
     "name": "monitor2Payload",
     "memberof": "src/reducers/__tests__/monitors.js",
@@ -10641,7 +10671,7 @@
     "ignore": true
   },
   {
-    "__docId__": 549,
+    "__docId__": 551,
     "kind": "file",
     "name": "src/reducers/auth.js",
     "content": "import { combineReducers } from 'redux';\nimport * as types from '../actions/types';\n\nexport const getAuthServer = state => state.authServer;\nexport const getToken = state => state.token;\nexport const getTokenRequested = state => state.tokenRequested;\n\nconst token = (state = null, action) => {\n    switch (action.type) {\n        case types.SIGN_IN_SUCCESS:\n        case types.SIGN_UP_SUCCESS:\n            return action.payload.access_token;\n        case types.REMOVE_TOKEN:\n            return null;\n        default:\n            return state;\n    }\n};\n\nconst tokenRequested = (state = false, action) => {\n    switch (action.type) {\n        case types.SIGN_IN_REQUEST:\n        case types.SIGN_UP_REQUEST:\n            return true;\n        case types.SIGN_IN_SUCCESS:\n        case types.SIGN_UP_SUCCESS:\n        case types.SIGN_IN_FAILURE:\n        case types.SIGN_UP_FAILURE:\n            return false;\n        default:\n            return state;\n    }\n};\n\nconst authServer = (state = DEFAULT_AUTH_SERVER, action) => {\n    switch (action.type) {\n        case types.CHANGE_AUTH_SERVER:\n            return action.payload.address || DEFAULT_AUTH_SERVER;\n        default:\n            return state;\n    }\n};\n\nexport default combineReducers({ token, tokenRequested, authServer });\n",
@@ -10652,7 +10682,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 550,
+    "__docId__": 552,
     "kind": "function",
     "name": "getAuthServer",
     "memberof": "src/reducers/auth.js",
@@ -10678,7 +10708,7 @@
     "return": null
   },
   {
-    "__docId__": 551,
+    "__docId__": 553,
     "kind": "function",
     "name": "getToken",
     "memberof": "src/reducers/auth.js",
@@ -10704,7 +10734,7 @@
     "return": null
   },
   {
-    "__docId__": 552,
+    "__docId__": 554,
     "kind": "function",
     "name": "getTokenRequested",
     "memberof": "src/reducers/auth.js",
@@ -10730,7 +10760,7 @@
     "return": null
   },
   {
-    "__docId__": 553,
+    "__docId__": 555,
     "kind": "function",
     "name": "token",
     "memberof": "src/reducers/auth.js",
@@ -10769,7 +10799,7 @@
     "ignore": true
   },
   {
-    "__docId__": 554,
+    "__docId__": 556,
     "kind": "function",
     "name": "tokenRequested",
     "memberof": "src/reducers/auth.js",
@@ -10809,7 +10839,7 @@
     "ignore": true
   },
   {
-    "__docId__": 555,
+    "__docId__": 557,
     "kind": "function",
     "name": "authServer",
     "memberof": "src/reducers/auth.js",
@@ -10849,7 +10879,7 @@
     "ignore": true
   },
   {
-    "__docId__": 556,
+    "__docId__": 558,
     "kind": "file",
     "name": "src/reducers/historicalCharts.js",
     "content": "import { combineReducers } from 'redux';\nimport * as types from '../actions/types';\n\nexport const getHistoricalChartById = (state, id) => state.byId[id];\nexport const getHistoricalChartsArray = state => state.allIds.map(id => state.byId[id]);\n\nconst chart = (state, action) => {\n    switch (action.type) {\n        case types.ADD_HISTORICAL_CHART:\n            return {\n                id: action.payload.id,\n                metric1: action.payload.metric,\n                metric2: null,\n                hosts1: [],\n                hosts2: null,\n                invalidated: false,\n                measurements1: {},\n                measurements2: null,\n                start: action.payload.start,\n                end: action.payload.end\n            };\n        case types.SET_HISTORICAL_CHART_RANGE:\n            return {\n                ...state,\n                ...action.payload\n            };\n        case types.SET_HISTORICAL_CHART_METRIC1:\n            return {\n                ...state,\n                hosts1: [],\n                metric1: action.payload.metric\n            };\n        case types.SET_HISTORICAL_CHART_METRIC2:\n            return {\n                ...state,\n                metric2: action.payload.metric,\n                hosts2: action.payload.metric ? [] : null,\n                measurements2: action.payload.metric ? {} : null\n            };\n        case types.ADD_HISTORICAL_CHART_HOST1:\n            return {\n                ...state,\n                hosts1: [\n                    ...state.hosts1,\n                    action.payload.host\n                ]\n            };\n        case types.ADD_HISTORICAL_CHART_HOST2:\n            return {\n                ...state,\n                hosts2: [\n                    ...state.hosts2,\n                    action.payload.host\n                ]\n            };\n        case types.REMOVE_HISTORICAL_CHART_HOST1: {\n            const hostIdx = state.hosts1.indexOf(action.meta.host);\n            return {\n                ...state,\n                hosts1: [\n                    ...state.hosts1.slice(0, hostIdx),\n                    ...state.hosts1.slice(hostIdx + 1)\n                ]\n            };\n        }\n        case types.REMOVE_HISTORICAL_CHART_HOST2: {\n            const hostIdx = state.hosts2.indexOf(action.meta.host);\n            return {\n                ...state,\n                hosts2: [\n                    ...state.hosts2.slice(0, hostIdx),\n                    ...state.hosts2.slice(hostIdx + 1)\n                ]\n            };\n        }\n        case types.GET_HISTORICAL_MEASUREMENTS_REQUEST:\n            return {\n                ...state,\n                invalidated: true\n            };\n        case types.GET_HISTORICAL_MEASUREMENTS_SUCCESS:\n            return {\n                ...state,\n                invalidated: false,\n                ...action.payload\n            };\n        default:\n            return state;\n    }\n};\n\nconst byId = (state = {}, action) => {\n    switch (action.type) {\n        case types.ADD_HISTORICAL_CHART:\n            return {\n                ...state,\n                [action.payload.id]: chart(undefined, action)\n            };\n        case types.REMOVE_HISTORICAL_CHART: {\n            const { [action.meta.id]: target, ...rest } = state; // eslint-disable-line no-unused-vars\n            return rest;\n        }\n        case types.SET_HISTORICAL_CHART_RANGE:\n        case types.SET_HISTORICAL_CHART_METRIC1:\n        case types.SET_HISTORICAL_CHART_METRIC2:\n        case types.ADD_HISTORICAL_CHART_HOST1:\n        case types.ADD_HISTORICAL_CHART_HOST2:\n        case types.REMOVE_HISTORICAL_CHART_HOST1:\n        case types.REMOVE_HISTORICAL_CHART_HOST2:\n        case types.GET_HISTORICAL_MEASUREMENTS_REQUEST:\n        case types.GET_HISTORICAL_MEASUREMENTS_SUCCESS:\n            return {\n                ...state,\n                [action.meta.id]: chart(state[action.meta.id], action)\n            };\n        default:\n            return state;\n    }\n};\n\nconst allIds = (state = [], action) => {\n    switch (action.type) {\n        case types.ADD_HISTORICAL_CHART:\n            return [\n                ...state,\n                action.payload.id\n            ];\n        case types.REMOVE_HISTORICAL_CHART: {\n            const targetIdx = state.indexOf(action.meta.id);\n            return [\n                ...state.slice(0, targetIdx),\n                ...state.slice(targetIdx + 1)\n            ];\n        }\n        default:\n            return state;\n    }\n};\n\nexport default combineReducers({ byId, allIds });\n",
@@ -10860,7 +10890,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 557,
+    "__docId__": 559,
     "kind": "function",
     "name": "getHistoricalChartById",
     "memberof": "src/reducers/historicalCharts.js",
@@ -10892,7 +10922,7 @@
     "return": null
   },
   {
-    "__docId__": 558,
+    "__docId__": 560,
     "kind": "function",
     "name": "getHistoricalChartsArray",
     "memberof": "src/reducers/historicalCharts.js",
@@ -10918,7 +10948,7 @@
     "return": null
   },
   {
-    "__docId__": 559,
+    "__docId__": 561,
     "kind": "function",
     "name": "chart",
     "memberof": "src/reducers/historicalCharts.js",
@@ -10955,7 +10985,7 @@
     "ignore": true
   },
   {
-    "__docId__": 560,
+    "__docId__": 562,
     "kind": "function",
     "name": "byId",
     "memberof": "src/reducers/historicalCharts.js",
@@ -10995,7 +11025,7 @@
     "ignore": true
   },
   {
-    "__docId__": 561,
+    "__docId__": 563,
     "kind": "function",
     "name": "allIds",
     "memberof": "src/reducers/historicalCharts.js",
@@ -11035,7 +11065,7 @@
     "ignore": true
   },
   {
-    "__docId__": 562,
+    "__docId__": 564,
     "kind": "file",
     "name": "src/reducers/hosts.js",
     "content": "import * as types from '../actions/types';\n\nexport const getMonitorByHost = (state, host) => state[host] ? state[host].monitor : null;\nexport const getHostsArray = state => Object.values(state).map(h => ({ ...h, metrics: Object.values(h.metrics) }));\n\nexport const getMetricsAll = state => Array.from(Object.values(state).reduce((set, h) => {\n    Object.keys(h.metrics).forEach(m => set.add(m));\n    return set;\n}, new Set()));\n\nexport const getMetrics = state => {\n    const built = {};\n    for (const host of Object.values(state)) {\n        for (const metric of Object.values(host.metrics)) {\n            if (!built[metric.id]) {\n                built[metric.id] = {};\n            }\n            built[metric.id][host.hostname] = metric;\n        }\n    }\n    return built;\n};\n\nconst extractHosts = (state, monitor) => Object.entries(state)\n    .reduce(\n        (c, [ key, obj ]) => {\n            const type = obj.monitor === monitor ? 'found' : 'rest';\n            return {\n                ...c,\n                [type]: {\n                    ...c[type],\n                    [key]: obj\n                }\n            };\n        },\n        {\n            found: {},\n            rest: {}\n        }\n    );\n\nconst setMonitor = (state, monitor) => Object.entries(state)\n    .map(([ key, obj ]) => [ key, { ...obj, monitor } ])\n    .reduce((c, [ key, obj ]) => ({ ...c, [key]: obj }), {});\n\nconst convertMetric = state => {\n    const { hosts, ...rest } = state; // eslint-disable-line no-unused-vars\n    return rest;\n};\n\nconst normalize = state => state.reduce((c, obj) => ({\n    ...c,\n    [obj.hostname]: {\n        ...obj,\n        metrics: obj.metrics.reduce((d, metric) => ({\n            ...d,\n            [metric.id]: convertMetric(metric)\n        }), {}),\n        metricsInvalidated: false\n    }\n}), {});\n\nconst host = (state, action) => {\n    switch (action.type) {\n        case types.ADD_COMPLEX_METRIC_REQUEST:\n        case types.REMOVE_COMPLEX_METRIC_REQUEST:\n            return {\n                ...state,\n                metricsInvalidated: true\n            };\n        case types.ADD_COMPLEX_METRIC_SUCCESS:\n            return {\n                ...state,\n                metricsInvalidated: false,\n                metrics: {\n                    ...state.metrics,\n                    [action.payload.id]: {\n                        ...action.payload,\n                        removable: true\n                    }\n                }\n            };\n        case types.ADD_COMPLEX_METRIC_FAILURE:\n        case types.REMOVE_COMPLEX_METRIC_FAILURE:\n            return {\n                ...state,\n                metricsInvalidated: false\n            };\n        case types.REMOVE_COMPLEX_METRIC_SUCCESS: {\n            const {\n                [action.meta.id]: metricToRemove, // eslint-disable-line no-unused-vars\n                ...metricsToLeave\n            } = state.metrics;\n            return {\n                ...state,\n                metricsInvalidated: false,\n                metrics: metricsToLeave\n            };\n        }\n        default:\n            return state;\n    }\n};\n\nexport default (state = {}, action) => {\n    switch (action.type) {\n        case types.GET_HOSTS_SUCCESS:\n            return {\n                ...extractHosts(state, action.meta.monitor).rest,\n                ...setMonitor(normalize(action.payload), action.meta.monitor)\n            };\n        case types.SET_MONITOR_ADDRESS: {\n            const hostsExtracted = extractHosts(state, action.meta.monitor);\n            return {\n                ...hostsExtracted.rest,\n                ...setMonitor(hostsExtracted.found, action.payload.address)\n            };\n        }\n        case types.REMOVE_MONITOR:\n            return extractHosts(state, action.meta.monitor).rest;\n        case types.REMOVE_TOKEN:\n            return {};\n        case types.ADD_COMPLEX_METRIC_REQUEST:\n        case types.ADD_COMPLEX_METRIC_SUCCESS:\n        case types.ADD_COMPLEX_METRIC_FAILURE:\n        case types.REMOVE_COMPLEX_METRIC_REQUEST:\n        case types.REMOVE_COMPLEX_METRIC_SUCCESS:\n        case types.REMOVE_COMPLEX_METRIC_FAILURE: {\n            const { [action.meta.host]: target, ...rest } = state;\n            return {\n                ...rest,\n                [action.meta.host]: host(target, action)\n            };\n        }\n        default:\n            return state;\n    }\n};\n",
@@ -11046,7 +11076,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 563,
+    "__docId__": 565,
     "kind": "function",
     "name": "getMonitorByHost",
     "memberof": "src/reducers/hosts.js",
@@ -11078,7 +11108,7 @@
     "return": null
   },
   {
-    "__docId__": 564,
+    "__docId__": 566,
     "kind": "function",
     "name": "getHostsArray",
     "memberof": "src/reducers/hosts.js",
@@ -11104,7 +11134,7 @@
     "return": null
   },
   {
-    "__docId__": 565,
+    "__docId__": 567,
     "kind": "function",
     "name": "getMetricsAll",
     "memberof": "src/reducers/hosts.js",
@@ -11130,7 +11160,7 @@
     "return": null
   },
   {
-    "__docId__": 566,
+    "__docId__": 568,
     "kind": "function",
     "name": "getMetrics",
     "memberof": "src/reducers/hosts.js",
@@ -11160,7 +11190,7 @@
     }
   },
   {
-    "__docId__": 567,
+    "__docId__": 569,
     "kind": "function",
     "name": "extractHosts",
     "memberof": "src/reducers/hosts.js",
@@ -11193,7 +11223,7 @@
     "ignore": true
   },
   {
-    "__docId__": 568,
+    "__docId__": 570,
     "kind": "function",
     "name": "setMonitor",
     "memberof": "src/reducers/hosts.js",
@@ -11226,7 +11256,7 @@
     "ignore": true
   },
   {
-    "__docId__": 569,
+    "__docId__": 571,
     "kind": "function",
     "name": "convertMetric",
     "memberof": "src/reducers/hosts.js",
@@ -11257,7 +11287,7 @@
     "ignore": true
   },
   {
-    "__docId__": 570,
+    "__docId__": 572,
     "kind": "function",
     "name": "normalize",
     "memberof": "src/reducers/hosts.js",
@@ -11284,7 +11314,7 @@
     "ignore": true
   },
   {
-    "__docId__": 571,
+    "__docId__": 573,
     "kind": "function",
     "name": "host",
     "memberof": "src/reducers/hosts.js",
@@ -11321,7 +11351,7 @@
     "ignore": true
   },
   {
-    "__docId__": 572,
+    "__docId__": 574,
     "kind": "function",
     "name": "hosts",
     "memberof": "src/reducers/hosts.js",
@@ -11360,7 +11390,7 @@
     }
   },
   {
-    "__docId__": 573,
+    "__docId__": 575,
     "kind": "file",
     "name": "src/reducers/index.js",
     "content": "import moment from 'moment';\nimport { combineReducers } from 'redux';\nimport auth, * as fromAuth from './auth';\nimport monitors, * as fromMonitors from './monitors';\nimport hosts, * as fromHosts from './hosts';\nimport liveCharts, * as fromLiveCharts from './liveCharts';\nimport historicalCharts, * as fromHistoricalCharts from './historicalCharts';\n\nexport const getAuthServer = state => fromAuth.getAuthServer(state.auth);\nexport const getToken = state => fromAuth.getToken(state.auth);\nexport const getTokenRequested = state => fromAuth.getTokenRequested(state.auth);\n\nexport const convertMonitorsFromObj = state => fromMonitors.convertMonitorsFromObj(state.monitors);\nexport const getMonitorsAddresses = state => fromMonitors.getMonitorsAddresses(state.monitors);\nexport const getMonitorsArray = state => fromMonitors.getMonitorsArray(state.monitors);\nexport const getMonitorsHostsInvalidated = state => fromMonitors.getMonitorsHostsInvalidated(state.monitors);\n\nexport const getMonitorByHost = (state, host) => fromHosts.getMonitorByHost(state.hosts, host);\nexport const getHostsArray = state => fromHosts.getHostsArray(state.hosts);\nexport const getMetricsAll = state => fromHosts.getMetricsAll(state.hosts);\nexport const getMetrics = state => fromHosts.getMetrics(state.hosts);\n\nexport const getLiveChartById = (state, id) => fromLiveCharts.getLiveChartById(state.liveCharts, id);\nexport const getLiveChartsAllIds = state => fromLiveCharts.getLiveChartsAllIds(state.liveCharts);\nexport const getLiveChartsArray = state => fromLiveCharts.getLiveChartsArray(state.liveCharts);\n\nexport const getHistoricalChartById = (state, id) => (\n    fromHistoricalCharts.getHistoricalChartById(state.historicalCharts, id)\n);\nexport const getHistoricalChartsArray = state => fromHistoricalCharts.getHistoricalChartsArray(state.historicalCharts);\n\nexport const getPathname = state => state.router.location.pathname;\nexport const getLocation = state => state.router.location;\n\nexport const getLiveChartByMonitors = (state, id) => {\n    const chart = getLiveChartById(state, id);\n    const hostsByMonitors = {};\n    for (const host of chart.hosts) {\n        const monitor = getMonitorByHost(state, host);\n        if (monitor) {\n            if (!hostsByMonitors[monitor]) {\n                hostsByMonitors[monitor] = [];\n            }\n            hostsByMonitors[monitor].push(host);\n        }\n    }\n    return {\n        measurements: chart.measurements,\n        hostsByMonitors\n    };\n};\n\nexport const getHistoricalChartsByMonitors = (state, id) => {\n    const chart = getHistoricalChartById(state, id);\n    const hostsByMetricsAndMonitors = {};\n    for (const host of chart.hosts1) {\n        const monitor = getMonitorByHost(state, host);\n        if (!hostsByMetricsAndMonitors[monitor]) {\n            hostsByMetricsAndMonitors[monitor] = { hosts1: [] };\n        }\n        hostsByMetricsAndMonitors[monitor].hosts1.push(host);\n    }\n    if (chart.metric2) {\n        for (const host of chart.hosts2) {\n            const monitor = getMonitorByHost(state, host);\n            if (!hostsByMetricsAndMonitors[monitor]) {\n                hostsByMetricsAndMonitors[monitor] = { hosts2: [] };\n            }\n            else if (!hostsByMetricsAndMonitors[monitor].hosts2) {\n                hostsByMetricsAndMonitors[monitor].hosts2 = [];\n            }\n            hostsByMetricsAndMonitors[monitor].hosts2.push(host);\n        }\n    }\n    return hostsByMetricsAndMonitors;\n};\n\nexport const getLiveChartLastTime = (state, id, monitor) => {\n    const chart = getLiveChartById(state, id);\n    const monitorHosts = Object.values(chart.hosts).filter(host => state.hosts[host].monitor === monitor);\n    return monitorHosts.reduce((c, host) => {\n        const data = chart.measurements[host];\n        if (!data || !data.length) {\n            return c;\n        }\n        const lastPoint = data.slice(-1).pop();\n        return c && moment(c).isAfter(lastPoint.time) ? c : lastPoint.time;\n    }, null);\n};\n\nexport default combineReducers({ auth, monitors, hosts, liveCharts, historicalCharts });\n",
@@ -11371,7 +11401,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 574,
+    "__docId__": 576,
     "kind": "function",
     "name": "getAuthServer",
     "memberof": "src/reducers/index.js",
@@ -11397,7 +11427,7 @@
     "return": null
   },
   {
-    "__docId__": 575,
+    "__docId__": 577,
     "kind": "function",
     "name": "getToken",
     "memberof": "src/reducers/index.js",
@@ -11423,7 +11453,7 @@
     "return": null
   },
   {
-    "__docId__": 576,
+    "__docId__": 578,
     "kind": "function",
     "name": "getTokenRequested",
     "memberof": "src/reducers/index.js",
@@ -11449,7 +11479,7 @@
     "return": null
   },
   {
-    "__docId__": 577,
+    "__docId__": 579,
     "kind": "function",
     "name": "convertMonitorsFromObj",
     "memberof": "src/reducers/index.js",
@@ -11475,7 +11505,7 @@
     "return": null
   },
   {
-    "__docId__": 578,
+    "__docId__": 580,
     "kind": "function",
     "name": "getMonitorsAddresses",
     "memberof": "src/reducers/index.js",
@@ -11501,7 +11531,7 @@
     "return": null
   },
   {
-    "__docId__": 579,
+    "__docId__": 581,
     "kind": "function",
     "name": "getMonitorsArray",
     "memberof": "src/reducers/index.js",
@@ -11527,7 +11557,7 @@
     "return": null
   },
   {
-    "__docId__": 580,
+    "__docId__": 582,
     "kind": "function",
     "name": "getMonitorsHostsInvalidated",
     "memberof": "src/reducers/index.js",
@@ -11553,7 +11583,7 @@
     "return": null
   },
   {
-    "__docId__": 581,
+    "__docId__": 583,
     "kind": "function",
     "name": "getMonitorByHost",
     "memberof": "src/reducers/index.js",
@@ -11585,7 +11615,7 @@
     "return": null
   },
   {
-    "__docId__": 582,
+    "__docId__": 584,
     "kind": "function",
     "name": "getHostsArray",
     "memberof": "src/reducers/index.js",
@@ -11611,7 +11641,7 @@
     "return": null
   },
   {
-    "__docId__": 583,
+    "__docId__": 585,
     "kind": "function",
     "name": "getMetricsAll",
     "memberof": "src/reducers/index.js",
@@ -11637,7 +11667,7 @@
     "return": null
   },
   {
-    "__docId__": 584,
+    "__docId__": 586,
     "kind": "function",
     "name": "getMetrics",
     "memberof": "src/reducers/index.js",
@@ -11663,7 +11693,7 @@
     "return": null
   },
   {
-    "__docId__": 585,
+    "__docId__": 587,
     "kind": "function",
     "name": "getLiveChartById",
     "memberof": "src/reducers/index.js",
@@ -11695,7 +11725,7 @@
     "return": null
   },
   {
-    "__docId__": 586,
+    "__docId__": 588,
     "kind": "function",
     "name": "getLiveChartsAllIds",
     "memberof": "src/reducers/index.js",
@@ -11721,7 +11751,7 @@
     "return": null
   },
   {
-    "__docId__": 587,
+    "__docId__": 589,
     "kind": "function",
     "name": "getLiveChartsArray",
     "memberof": "src/reducers/index.js",
@@ -11747,7 +11777,7 @@
     "return": null
   },
   {
-    "__docId__": 588,
+    "__docId__": 590,
     "kind": "function",
     "name": "getHistoricalChartById",
     "memberof": "src/reducers/index.js",
@@ -11779,7 +11809,7 @@
     "return": null
   },
   {
-    "__docId__": 589,
+    "__docId__": 591,
     "kind": "function",
     "name": "getHistoricalChartsArray",
     "memberof": "src/reducers/index.js",
@@ -11805,7 +11835,7 @@
     "return": null
   },
   {
-    "__docId__": 590,
+    "__docId__": 592,
     "kind": "function",
     "name": "getPathname",
     "memberof": "src/reducers/index.js",
@@ -11831,7 +11861,7 @@
     "return": null
   },
   {
-    "__docId__": 591,
+    "__docId__": 593,
     "kind": "function",
     "name": "getLocation",
     "memberof": "src/reducers/index.js",
@@ -11857,7 +11887,7 @@
     "return": null
   },
   {
-    "__docId__": 592,
+    "__docId__": 594,
     "kind": "function",
     "name": "getLiveChartByMonitors",
     "memberof": "src/reducers/index.js",
@@ -11893,7 +11923,7 @@
     }
   },
   {
-    "__docId__": 593,
+    "__docId__": 595,
     "kind": "function",
     "name": "getHistoricalChartsByMonitors",
     "memberof": "src/reducers/index.js",
@@ -11929,7 +11959,7 @@
     }
   },
   {
-    "__docId__": 594,
+    "__docId__": 596,
     "kind": "function",
     "name": "getLiveChartLastTime",
     "memberof": "src/reducers/index.js",
@@ -11971,7 +12001,7 @@
     }
   },
   {
-    "__docId__": 595,
+    "__docId__": 597,
     "kind": "file",
     "name": "src/reducers/liveCharts.js",
     "content": "import { combineReducers } from 'redux';\nimport * as types from '../actions/types';\n\nexport const getLiveChartsAllIds = state => state.allIds;\nexport const getLiveChartById = (state, id) => state.byId[id];\nexport const getLiveChartsArray = state => state.allIds.map(id => state.byId[id]);\n\nconst chart = (state, action) => {\n    switch (action.type) {\n        case types.ADD_LIVE_CHART:\n            return {\n                ...action.payload,\n                hosts: [],\n                invalidated: false,\n                measurements: {}\n            };\n        case types.SET_LIVE_CHART_METRIC:\n            return {\n                ...state,\n                hosts: [],\n                metric: action.payload.metric\n            };\n        case types.ADD_LIVE_CHART_HOST:\n            return {\n                ...state,\n                hosts: [\n                    ...state.hosts,\n                    action.payload.host\n                ]\n            };\n        case types.REMOVE_LIVE_CHART_HOST: {\n            const hostIdx = state.hosts.indexOf(action.meta.host);\n            return {\n                ...state,\n                hosts: [\n                    ...state.hosts.slice(0, hostIdx),\n                    ...state.hosts.slice(hostIdx + 1)\n                ]\n            };\n        }\n        case types.GET_LIVE_MEASUREMENTS_REQUEST:\n            return {\n                ...state,\n                invalidated: true\n            };\n        case types.GET_LIVE_MEASUREMENTS_SUCCESS:\n            return {\n                ...state,\n                invalidated: false,\n                measurements: action.payload.measurements\n            };\n        default:\n            return state;\n    }\n};\n\nconst byId = (state = {}, action) => {\n    switch (action.type) {\n        case types.ADD_LIVE_CHART:\n            return {\n                ...state,\n                [action.payload.id]: chart(undefined, action)\n            };\n        case types.REMOVE_LIVE_CHART: {\n            const { [action.meta.id]: toRemove, ...rest } = state; // eslint-disable-line no-unused-vars\n            return rest;\n        }\n        case types.SET_LIVE_CHART_METRIC:\n        case types.ADD_LIVE_CHART_HOST:\n        case types.REMOVE_LIVE_CHART_HOST:\n        case types.GET_LIVE_MEASUREMENTS_REQUEST:\n        case types.GET_LIVE_MEASUREMENTS_SUCCESS:\n            return {\n                ...state,\n                [action.meta.id]: chart(state[action.meta.id], action)\n            };\n        case types.REMOVE_TOKEN:\n            return {};\n        default:\n            return state;\n    }\n};\n\nconst allIds = (state = [], action) => {\n    switch (action.type) {\n        case types.ADD_LIVE_CHART:\n            return [\n                ...state,\n                action.payload.id\n            ];\n        case types.REMOVE_LIVE_CHART: {\n            const toRemoveIdx = state.indexOf(action.meta.id);\n            return [\n                ...state.slice(0, toRemoveIdx),\n                ...state.slice(toRemoveIdx + 1)\n            ];\n        }\n        case types.REMOVE_TOKEN:\n            return [];\n        default:\n            return state;\n    }\n};\n\nexport default combineReducers({ byId, allIds });\n",
@@ -11982,7 +12012,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 596,
+    "__docId__": 598,
     "kind": "function",
     "name": "getLiveChartsAllIds",
     "memberof": "src/reducers/liveCharts.js",
@@ -12008,7 +12038,7 @@
     "return": null
   },
   {
-    "__docId__": 597,
+    "__docId__": 599,
     "kind": "function",
     "name": "getLiveChartById",
     "memberof": "src/reducers/liveCharts.js",
@@ -12040,7 +12070,7 @@
     "return": null
   },
   {
-    "__docId__": 598,
+    "__docId__": 600,
     "kind": "function",
     "name": "getLiveChartsArray",
     "memberof": "src/reducers/liveCharts.js",
@@ -12066,7 +12096,7 @@
     "return": null
   },
   {
-    "__docId__": 599,
+    "__docId__": 601,
     "kind": "function",
     "name": "chart",
     "memberof": "src/reducers/liveCharts.js",
@@ -12103,7 +12133,7 @@
     "ignore": true
   },
   {
-    "__docId__": 600,
+    "__docId__": 602,
     "kind": "function",
     "name": "byId",
     "memberof": "src/reducers/liveCharts.js",
@@ -12143,7 +12173,7 @@
     "ignore": true
   },
   {
-    "__docId__": 601,
+    "__docId__": 603,
     "kind": "function",
     "name": "allIds",
     "memberof": "src/reducers/liveCharts.js",
@@ -12183,7 +12213,7 @@
     "ignore": true
   },
   {
-    "__docId__": 602,
+    "__docId__": 604,
     "kind": "file",
     "name": "src/reducers/monitors.js",
     "content": "import * as types from '../actions/types';\n\nexport const convertMonitorsToObj = state => {\n    try {\n        return state.reduce((c, m) => ({\n            ...c,\n            [m.address]: {\n                ...m,\n                hostsRequested: false\n            }\n        }), {});\n    }\n    catch (error) {\n        return {};\n    }\n};\n\nexport const convertMonitorsFromObj = state => Object.values(state)\n    .map(({ address, description }) => ({ address, description }));\n\nexport const getMonitorsAddresses = state => Object.keys(state);\nexport const getMonitorsArray = state => Object.values(state);\nexport const getMonitorsHostsInvalidated = state => Object.values(state).some(m => m.hostsRequested);\n\nconst defaultMonitorsObj = convertMonitorsToObj(DEFAULT_MONITORS);\n\nconst monitor = (state = {}, action) => {\n    switch (action.type) {\n        case types.ADD_MONITOR:\n            return {\n                ...action.payload,\n                hostsRequested: false\n            };\n        case types.SET_MONITOR_ADDRESS:\n            return {\n                ...state,\n                address: action.payload.address\n            };\n        case types.SET_MONITOR_DESCRIPTION:\n            return {\n                ...state,\n                description: action.payload.description\n            };\n        case types.GET_HOSTS_REQUEST:\n            return {\n                ...state,\n                hostsRequested: true\n            };\n        case types.GET_HOSTS_SUCCESS:\n        case types.GET_HOSTS_FAILURE:\n        case types.REMOVE_TOKEN:\n            return {\n                ...state,\n                hostsRequested: false\n            };\n        default:\n            return state;\n    }\n};\n\nexport default (state = defaultMonitorsObj, action) => {\n    switch (action.type) {\n        case types.ADD_MONITOR:\n            return {\n                ...state,\n                [action.payload.address]: monitor(undefined, action)\n            };\n        case types.SET_MONITOR_ADDRESS: {\n            const { [action.meta.monitor]: target, ...rest } = state;\n            return {\n                ...rest,\n                [action.payload.address]: monitor(target, action)\n            };\n        }\n        case types.SET_MONITOR_DESCRIPTION:\n        case types.GET_HOSTS_REQUEST:\n        case types.GET_HOSTS_SUCCESS:\n        case types.GET_HOSTS_FAILURE:\n            return {\n                ...state,\n                [action.meta.monitor]: monitor(state[action.meta.monitor], action)\n            };\n        case types.REMOVE_TOKEN:\n            return Object.entries(state).reduce((c, [ k, v ]) => ({\n                ...c,\n                [k]: monitor(v, action)\n            }), {});\n        case types.REMOVE_MONITOR: {\n            const { [action.meta.monitor]: toRemove, ...notRemoved } = state; // eslint-disable-line no-unused-vars\n            return notRemoved;\n        }\n        default:\n            return state;\n    }\n};\n",
@@ -12194,7 +12224,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 603,
+    "__docId__": 605,
     "kind": "function",
     "name": "convertMonitorsToObj",
     "memberof": "src/reducers/monitors.js",
@@ -12224,7 +12254,7 @@
     }
   },
   {
-    "__docId__": 604,
+    "__docId__": 606,
     "kind": "function",
     "name": "convertMonitorsFromObj",
     "memberof": "src/reducers/monitors.js",
@@ -12250,7 +12280,7 @@
     "return": null
   },
   {
-    "__docId__": 605,
+    "__docId__": 607,
     "kind": "function",
     "name": "getMonitorsAddresses",
     "memberof": "src/reducers/monitors.js",
@@ -12276,7 +12306,7 @@
     "return": null
   },
   {
-    "__docId__": 606,
+    "__docId__": 608,
     "kind": "function",
     "name": "getMonitorsArray",
     "memberof": "src/reducers/monitors.js",
@@ -12302,7 +12332,7 @@
     "return": null
   },
   {
-    "__docId__": 607,
+    "__docId__": 609,
     "kind": "function",
     "name": "getMonitorsHostsInvalidated",
     "memberof": "src/reducers/monitors.js",
@@ -12328,7 +12358,7 @@
     "return": null
   },
   {
-    "__docId__": 608,
+    "__docId__": 610,
     "kind": "variable",
     "name": "defaultMonitorsObj",
     "memberof": "src/reducers/monitors.js",
@@ -12349,7 +12379,7 @@
     "ignore": true
   },
   {
-    "__docId__": 609,
+    "__docId__": 611,
     "kind": "function",
     "name": "monitor",
     "memberof": "src/reducers/monitors.js",
@@ -12389,7 +12419,7 @@
     "ignore": true
   },
   {
-    "__docId__": 610,
+    "__docId__": 612,
     "kind": "function",
     "name": "monitors",
     "memberof": "src/reducers/monitors.js",
@@ -12428,7 +12458,7 @@
     }
   },
   {
-    "__docId__": 611,
+    "__docId__": 613,
     "kind": "file",
     "name": "src/routes.js",
     "content": "import React from 'react';\nimport { connect } from 'react-redux';\nimport { Switch, Route } from 'react-router';\nimport Historical from './pages/Historical';\nimport Live from './pages/Live';\nimport Metrics from './pages/Metrics';\nimport Monitors from './pages/Monitors';\nimport NotFound from './pages/NotFound';\nimport SignIn from './pages/SignIn';\nimport SignUp from './pages/SignUp';\nimport { getToken } from './reducers';\n\nexport const LIVE_ROUTE = '/live';\nexport const HISTORICAL_ROUTE = '/historical';\nexport const MONITORS_ROUTE = '/monitors';\nexport const HOSTS_ROUTE = '/hosts';\nexport const LOGIN_ROUTE = '/login';\nexport const REGISTRATION_ROUTE = '/registration';\n\nexport const routes = {\n    [LIVE_ROUTE]: {\n        tokenRequired: true,\n        component: Live\n    },\n    [HISTORICAL_ROUTE]: {\n        tokenRequired: true,\n        component: Historical\n    },\n    [MONITORS_ROUTE]: {\n        tokenRequired: true,\n        component: Monitors\n    },\n    [HOSTS_ROUTE]: {\n        tokenRequired: true,\n        component: Metrics\n    },\n    [LOGIN_ROUTE]: {\n        tokenRequired: false,\n        component: SignIn\n    },\n    [REGISTRATION_ROUTE]: {\n        tokenRequired: false,\n        component: SignUp\n    }\n};\n\nexport const isRouteDefined = route => Boolean(routes[route]);\n\nexport const getDefaultRouteByToken = token => token ? LIVE_ROUTE : LOGIN_ROUTE;\n\nexport const isTokenRequired = route => routes[route].tokenRequired;\n\nconst mapStateToProps = state => ({\n    token: getToken(state)\n});\n\nconst mapDispatchToProps = {};\n\nconst wrapWithAuth = tokenRequired => Component => connect(mapStateToProps, mapDispatchToProps)(\n\n    function WithAuth({ token, ...rest }) {\n        if (Boolean(tokenRequired) === Boolean(token)) {\n            return React.createElement(Component, rest);\n        }\n        else {\n            return null;\n        }\n    }\n\n);\n\nexport const getRoutes = () => (\n    <Switch>\n        {Object.entries(routes).map(([ path, r ]) => (\n            <Route key={path} path={path} component={wrapWithAuth(r.tokenRequired)(r.component)} />\n        ))}\n        <Route component={NotFound} />\n    </Switch>\n);\n",
@@ -12439,7 +12469,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 612,
+    "__docId__": 614,
     "kind": "variable",
     "name": "LIVE_ROUTE",
     "memberof": "src/routes.js",
@@ -12459,7 +12489,7 @@
     }
   },
   {
-    "__docId__": 613,
+    "__docId__": 615,
     "kind": "variable",
     "name": "HISTORICAL_ROUTE",
     "memberof": "src/routes.js",
@@ -12479,7 +12509,7 @@
     }
   },
   {
-    "__docId__": 614,
+    "__docId__": 616,
     "kind": "variable",
     "name": "MONITORS_ROUTE",
     "memberof": "src/routes.js",
@@ -12499,7 +12529,7 @@
     }
   },
   {
-    "__docId__": 615,
+    "__docId__": 617,
     "kind": "variable",
     "name": "HOSTS_ROUTE",
     "memberof": "src/routes.js",
@@ -12519,7 +12549,7 @@
     }
   },
   {
-    "__docId__": 616,
+    "__docId__": 618,
     "kind": "variable",
     "name": "LOGIN_ROUTE",
     "memberof": "src/routes.js",
@@ -12539,7 +12569,7 @@
     }
   },
   {
-    "__docId__": 617,
+    "__docId__": 619,
     "kind": "variable",
     "name": "REGISTRATION_ROUTE",
     "memberof": "src/routes.js",
@@ -12559,7 +12589,7 @@
     }
   },
   {
-    "__docId__": 618,
+    "__docId__": 620,
     "kind": "variable",
     "name": "routes",
     "memberof": "src/routes.js",
@@ -12579,7 +12609,7 @@
     }
   },
   {
-    "__docId__": 619,
+    "__docId__": 621,
     "kind": "function",
     "name": "isRouteDefined",
     "memberof": "src/routes.js",
@@ -12605,7 +12635,7 @@
     "return": null
   },
   {
-    "__docId__": 620,
+    "__docId__": 622,
     "kind": "function",
     "name": "getDefaultRouteByToken",
     "memberof": "src/routes.js",
@@ -12631,7 +12661,7 @@
     "return": null
   },
   {
-    "__docId__": 621,
+    "__docId__": 623,
     "kind": "function",
     "name": "isTokenRequired",
     "memberof": "src/routes.js",
@@ -12657,7 +12687,7 @@
     "return": null
   },
   {
-    "__docId__": 622,
+    "__docId__": 624,
     "kind": "function",
     "name": "mapStateToProps",
     "memberof": "src/routes.js",
@@ -12684,7 +12714,7 @@
     "ignore": true
   },
   {
-    "__docId__": 623,
+    "__docId__": 625,
     "kind": "variable",
     "name": "mapDispatchToProps",
     "memberof": "src/routes.js",
@@ -12705,7 +12735,7 @@
     "ignore": true
   },
   {
-    "__docId__": 624,
+    "__docId__": 626,
     "kind": "function",
     "name": "wrapWithAuth",
     "memberof": "src/routes.js",
@@ -12732,7 +12762,7 @@
     "ignore": true
   },
   {
-    "__docId__": 625,
+    "__docId__": 627,
     "kind": "function",
     "name": "getRoutes",
     "memberof": "src/routes.js",
@@ -12751,7 +12781,7 @@
     "return": null
   },
   {
-    "__docId__": 626,
+    "__docId__": 628,
     "kind": "file",
     "name": "src/sagas/api.js",
     "content": "import moment from 'moment';\nimport escapeStringRegexp from 'escape-string-regexp';\nimport { select, call, put, all } from 'redux-saga/effects';\nimport { getAuthServer, getToken, getMonitorByHost, getLiveChartByMonitors, getLiveChartLastTime,\n    getHistoricalChartsByMonitors, getLiveChartById, getHistoricalChartById } from '../reducers';\nimport * as actions from '../actions/sync';\nimport * as api from '../api';\nimport { getStartTimeForLiveCharts } from '../times';\n\nexport function* signUp({ payload }) {\n    const server = yield select(getAuthServer);\n    try {\n        const result = yield call(api.registration, server, payload);\n        yield put(actions.signUpSuccess(result));\n    }\n    catch (error) {\n        yield put(actions.signUpFailure(error));\n    }\n}\n\nexport function* signIn({ payload }) {\n    const server = yield select(getAuthServer);\n    try {\n        const result = yield call(api.login, server, payload);\n        yield put(actions.signInSuccess(result));\n    }\n    catch (error) {\n        yield put(actions.signInFailure(error));\n    }\n}\n\nexport function* addComplexMetric({ payload, meta }) {\n    const token = yield select(getToken);\n    const monitor = yield select(getMonitorByHost, meta.host);\n    try {\n        const result = yield call(api.postComplexMetric, monitor, token, meta.host, payload);\n        yield put(actions.addComplexMetricSuccess({ ...payload, ...result }, meta.host));\n    }\n    catch (error) {\n        yield put(actions.addComplexMetricFailure(error, meta.host));\n    }\n}\n\nexport function* removeComplexMetric({ meta }) {\n    const token = yield select(getToken);\n    const monitor = yield select(getMonitorByHost, meta.host);\n    try {\n        yield call(api.deleteComplexMetric, monitor, token, meta.host, meta.id);\n        yield put(actions.removeComplexMetricSucces(meta.id, meta.host));\n    }\n    catch (error) {\n        yield put(actions.removeComplexMetricFailure(error, meta.host));\n    }\n}\n\nexport function* getHosts({ meta }) {\n    const token = yield select(getToken);\n    try {\n        const result = yield call(api.getHosts, meta.monitor, token);\n        yield put(actions.getHostsSuccess(result, meta.monitor));\n    }\n    catch (error) {\n        yield put(actions.getHostsFailure(error, meta.monitor));\n    }\n}\n\nexport function* getLiveChartMeasurementsForSingleMonitor(initialFetch, id, monitor, hosts) {\n    const token = yield select(getToken);\n    const { metric } = yield select(getLiveChartById, id);\n    let start;\n    if (!initialFetch) {\n        start = yield select(getLiveChartLastTime, id, monitor);\n    }\n    if (!start) {\n        start = yield call(getStartTimeForLiveCharts);\n    }\n    try {\n        const q = `metric_id:${metric},hostname:/(${hosts.map(escapeStringRegexp).join('|')})/`;\n        const data = yield call(api.getMeasurements, monitor, token, { start, q });\n        return { data };\n    }\n    catch (error) {\n        return error;\n    }\n}\n\nexport function* getLiveChartMeasurements({ meta }) {\n    let { measurements, hostsByMonitors } = yield select(getLiveChartByMonitors, meta.id);\n    if (meta.initialFetch) {\n        measurements = {};\n    }\n    if (Object.keys(hostsByMonitors).length) {\n        const results = yield all(\n            Object.entries(hostsByMonitors).reduce((c, [ monitor, hosts ]) => ({\n                ...c,\n                [monitor]: call(\n                    getLiveChartMeasurementsForSingleMonitor,\n                    meta.initialFetch,\n                    meta.id,\n                    monitor,\n                    hosts\n                )\n            }), {})\n        );\n        for (const monitor of Object.keys(results)) {\n            const result = results[monitor];\n            if (!result.data) {\n                yield put(actions.getLiveMeasurementsFailure(result, meta.id, monitor));\n            }\n            else {\n                for (const measurement of result.data) {\n                    if (meta.initialFetch) {\n                        measurements[measurement.hostname] = measurement.data;\n                    }\n                    else {\n                        const hostMeas = measurements[measurement.hostname];\n                        const start = yield call(getStartTimeForLiveCharts);\n                        const startMom = moment(start);\n                        let i = 0;\n                        while (i < hostMeas.length && startMom.isAfter(hostMeas[i].time)) {\n                            ++i;\n                        }\n                        measurements[measurement.hostname] = [\n                            ...hostMeas.slice(i),\n                            ...measurement.data\n                        ];\n                    }\n                }\n            }\n        }\n    }\n    yield put(actions.getLiveMeasurementsSuccess({ measurements }, meta.id));\n}\n\nexport function* getHistoricalChartMeasurementsForSingleMonitor(id, monitor, hosts1, hosts2) {\n    const token = yield select(getToken);\n    const { metric1, metric2, start, end } = yield select(getHistoricalChartById, id);\n    try {\n        let q = [];\n        if (hosts1) {\n            q.push(`metric_id:${metric1},hostname:/(${hosts1.map(escapeStringRegexp).join('|')})/`);\n        }\n        if (hosts2) {\n            q.push(`metric_id:${metric2},hostname:/(${hosts2.map(escapeStringRegexp).join('|')})/`);\n        }\n        q = q.join(';');\n        const data = yield call(api.getMeasurements, monitor, token, { start, end, q });\n        return { data };\n    }\n    catch (error) {\n        return error;\n    }\n}\n\nexport function* getHistoricalChartMeasurements({ meta }) {\n    const { metric2 } = yield select(getHistoricalChartById, meta.id);\n    let measurements1 = {};\n    let measurements2 = metric2 ? {} : null;\n    const hostsByMetricsAndMonitors = yield select(getHistoricalChartsByMonitors, meta.id);\n    if (Object.keys(hostsByMetricsAndMonitors).length) {\n        const results = yield all(\n            Object.entries(hostsByMetricsAndMonitors).reduce((c, [ monitor, { hosts1, hosts2 }]) => ({\n                ...c,\n                [monitor]: call(\n                    getHistoricalChartMeasurementsForSingleMonitor,\n                    meta.id,\n                    monitor,\n                    hosts1,\n                    hosts2\n                )\n            }), {})\n        );\n        for (const monitor of Object.keys(results)) {\n            const result = results[monitor];\n            if (!result.data) {\n                yield put(actions.getHistoricalMeasurementsFailure(result, meta.id, monitor));\n            }\n            else {\n                for (const measurement of result.data) {\n                    if (measurement.metric_id === metric2) {\n                        measurements2[measurement.hostname] = measurement.data;\n                    }\n                    else {\n                        measurements1[measurement.hostname] = measurement.data;\n                    }\n                }\n            }\n        }\n    }\n    yield put(actions.getHistoricalMeasurementsSuccess({ measurements1, measurements2 }, meta.id));\n}\n",
@@ -12762,7 +12792,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 627,
+    "__docId__": 629,
     "kind": "function",
     "name": "signUp",
     "memberof": "src/sagas/api.js",
@@ -12792,7 +12822,7 @@
     "return": null
   },
   {
-    "__docId__": 628,
+    "__docId__": 630,
     "kind": "function",
     "name": "signIn",
     "memberof": "src/sagas/api.js",
@@ -12822,7 +12852,7 @@
     "return": null
   },
   {
-    "__docId__": 629,
+    "__docId__": 631,
     "kind": "function",
     "name": "addComplexMetric",
     "memberof": "src/sagas/api.js",
@@ -12853,7 +12883,7 @@
     "return": null
   },
   {
-    "__docId__": 630,
+    "__docId__": 632,
     "kind": "function",
     "name": "removeComplexMetric",
     "memberof": "src/sagas/api.js",
@@ -12883,7 +12913,7 @@
     "return": null
   },
   {
-    "__docId__": 631,
+    "__docId__": 633,
     "kind": "function",
     "name": "getHosts",
     "memberof": "src/sagas/api.js",
@@ -12913,7 +12943,7 @@
     "return": null
   },
   {
-    "__docId__": 632,
+    "__docId__": 634,
     "kind": "function",
     "name": "getLiveChartMeasurementsForSingleMonitor",
     "memberof": "src/sagas/api.js",
@@ -12961,7 +12991,7 @@
     }
   },
   {
-    "__docId__": 633,
+    "__docId__": 635,
     "kind": "function",
     "name": "getLiveChartMeasurements",
     "memberof": "src/sagas/api.js",
@@ -12991,7 +13021,7 @@
     "return": null
   },
   {
-    "__docId__": 634,
+    "__docId__": 636,
     "kind": "function",
     "name": "getHistoricalChartMeasurementsForSingleMonitor",
     "memberof": "src/sagas/api.js",
@@ -13039,7 +13069,7 @@
     }
   },
   {
-    "__docId__": 635,
+    "__docId__": 637,
     "kind": "function",
     "name": "getHistoricalChartMeasurements",
     "memberof": "src/sagas/api.js",
@@ -13069,7 +13099,7 @@
     "return": null
   },
   {
-    "__docId__": 636,
+    "__docId__": 638,
     "kind": "file",
     "name": "src/sagas/index.js",
     "content": "import { all, fork, select, put, cancel, takeEvery, takeLatest, take, call } from 'redux-saga/effects';\nimport { delay } from 'redux-saga';\nimport { push } from 'connected-react-router';\nimport * as types from '../actions/types';\nimport * as actions from '../actions/sync';\nimport * as apiSagas from './api';\nimport * as storageSagas from './localStorage';\nimport { getToken, getPathname, getLiveChartsAllIds, getMonitorsAddresses } from '../reducers';\nimport { getDefaultRouteByToken, isRouteDefined, isTokenRequired, LIVE_ROUTE } from '../routes';\nimport Notification from '../components/Notification';\n\nfunction* dealWithNewLocation(pathname) {\n    const isTokenSet = Boolean(yield select(getToken));\n    if (pathname === '/') {\n        const newPathname = yield call(getDefaultRouteByToken, isTokenSet);\n        yield put(push(newPathname));\n    }\n    else if (yield call(isRouteDefined, pathname)) {\n        const tokenRequired = yield call(isTokenRequired, pathname);\n        if (tokenRequired === isTokenSet) {\n            yield put(actions.changeRoutingContext({ pathname }));\n        }\n        else {\n            const newPathname = yield call(getDefaultRouteByToken, isTokenSet);\n            yield put(push(newPathname));\n        }\n    }\n    else {\n        yield put(actions.changeRoutingContext({ pathname }));\n    }\n}\n\nfunction* watchForLocationChange() {\n    yield delay(0);\n    const startLocation = yield select(getPathname);\n    let task = yield fork(dealWithNewLocation, startLocation);\n    while (true) {\n        const action = yield take([\n            '@@router/LOCATION_CHANGE',\n            types.SIGN_IN_SUCCESS,\n            types.SIGN_UP_SUCCESS,\n            types.REMOVE_TOKEN\n        ]);\n        yield cancel(task);\n        const newLocation = action.type === '@@router/LOCATION_CHANGE' ? action.payload.location.pathname : '/';\n        task = yield fork(dealWithNewLocation, newLocation);\n    }\n}\n\nfunction* keepLiveChartRefreshing(id) {\n    yield put(actions.getLiveMeasurementsRequest(id, true));\n    while(true) {\n        yield all([\n            take(types.GET_LIVE_MEASUREMENTS_SUCCESS),\n            delay(1000 * 15)\n        ]);\n        yield put(actions.getLiveMeasurementsRequest(id, false));\n    }\n}\n\nfunction* conductLiveChartsUpdates() {\n    const liveCharts = yield select(getLiveChartsAllIds);\n    const tasks = {};\n    for (const id of liveCharts) {\n        tasks[id] = yield fork(keepLiveChartRefreshing, id);\n    }\n    while (true) {\n        const action = yield take([\n            types.CHANGE_ROUTING_CONTEXT,\n            types.ADD_LIVE_CHART,\n            types.REMOVE_LIVE_CHART,\n            types.SET_LIVE_CHART_METRIC,\n            types.ADD_LIVE_CHART_HOST,\n            types.REMOVE_LIVE_CHART_HOST\n        ]);\n        if (action.type === types.CHANGE_ROUTING_CONTEXT && action.payload.pathname !== LIVE_ROUTE) {\n            yield cancel();\n        }\n        if (\n            action.type === types.REMOVE_LIVE_CHART\n            || action.type === types.SET_LIVE_CHART_METRIC\n            || action.type === types.ADD_LIVE_CHART_HOST\n            || action.type === types.REMOVE_LIVE_CHART_HOST\n        ) {\n            yield cancel(tasks[action.meta.id]);\n        }\n        if (action.type === types.ADD_LIVE_CHART) {\n            tasks[action.payload.id] = yield fork(keepLiveChartRefreshing, action.payload.id);\n        }\n        if (\n            action.type === types.SET_LIVE_CHART_METRIC\n            || action.type === types.ADD_LIVE_CHART_HOST\n            || action.type === types.REMOVE_LIVE_CHART_HOST\n        ) {\n            tasks[action.meta.id] = yield fork(keepLiveChartRefreshing, action.meta.id);\n        }\n    }\n}\n\nfunction* watchForLiveChartContext() {\n    let task;\n    const pathname = yield select(getPathname);\n    if (pathname === LIVE_ROUTE) {\n        task = yield fork(conductLiveChartsUpdates);\n    }\n    while (true) {\n        const { payload } = yield take(types.CHANGE_ROUTING_CONTEXT);\n        if (payload.pathname === LIVE_ROUTE) {\n            if (task) {\n                cancel(task);\n            }\n            task = yield fork(conductLiveChartsUpdates);\n        }\n    }\n}\n\nfunction* loginWatcher() {\n    yield take(types.CHANGE_ROUTING_CONTEXT);\n    const token = yield select(getToken);\n    let worker;\n    if (token) {\n        worker = yield fork(authSiteWatcher);\n        yield call(Notification.success, 'Sesja została przywrócona');\n    }\n    while (true) {\n        const { type } = yield take([\n            types.SIGN_IN_SUCCESS,\n            types.SIGN_UP_SUCCESS,\n            types.REMOVE_TOKEN\n        ]);\n        if (worker) {\n            yield cancel(worker);\n        }\n        if (type !== types.REMOVE_TOKEN) {\n            worker = yield fork(authSiteWatcher);\n            yield call(Notification.success, 'Zostałeś zalogowany pomyślnie');\n        }\n        else {\n            yield call(Notification.success, 'Zostałeś wylogowany pomyślnie');\n        }\n    }\n}\n\nfunction* getAllHosts() {\n    const monitors = yield select(getMonitorsAddresses);\n    yield all(monitors.map(monitor => put(actions.getHostsRequest(monitor))));\n}\n\nfunction* watchForHistoricalChartUpdates() {\n    let workers = {};\n    while (true) {\n        const action = yield take([\n            types.SET_HISTORICAL_CHART_RANGE,\n            types.SET_HISTORICAL_CHART_METRIC1,\n            types.SET_HISTORICAL_CHART_METRIC2,\n            types.ADD_HISTORICAL_CHART_HOST1,\n            types.ADD_HISTORICAL_CHART_HOST2,\n            types.REMOVE_HISTORICAL_CHART_HOST1,\n            types.REMOVE_HISTORICAL_CHART_HOST2,\n            types.REMOVE_HISTORICAL_CHART\n        ]);\n        if (workers[action.meta.id]) {\n            yield cancel(action.meta.id);\n        }\n        if (action.type !== types.REMOVE_HISTORICAL_CHART) {\n            yield put(actions.getHistoricalMeasurementsRequest(action.meta.id));\n        }\n    }\n}\n\nfunction* authSiteWatcher() {\n    yield all([\n        fork(watchForLiveChartContext),\n        fork(watchForHistoricalChartUpdates),\n        takeEvery(types.GET_HOSTS, getAllHosts),\n        takeEvery(types.ADD_COMPLEX_METRIC_REQUEST, apiSagas.addComplexMetric),\n        takeEvery(types.REMOVE_COMPLEX_METRIC_REQUEST, apiSagas.removeComplexMetric),\n        takeEvery(types.GET_HOSTS_REQUEST, apiSagas.getHosts),\n        takeEvery(types.GET_LIVE_MEASUREMENTS_REQUEST, apiSagas.getLiveChartMeasurements),\n        takeEvery(types.GET_HISTORICAL_MEASUREMENTS_REQUEST, apiSagas.getHistoricalChartMeasurements),\n        takeLatest([\n            types.ADD_MONITOR,\n            types.SET_MONITOR_ADDRESS,\n            types.SET_MONITOR_DESCRIPTION,\n            types.REMOVE_MONITOR\n        ], storageSagas.monitorsSaver),\n    ]);\n    yield put(actions.getHosts());\n}\n\nfunction* errorThrower() {\n    while (true) {\n        const action = yield take('*');\n        if (action.error) {\n            yield call(Notification.error, action.payload.message + (status ? ' (Kod ' + status + ')' : ''));\n        }\n    }\n}\n\nexport default function* root() {\n    yield all([\n        takeEvery(types.SIGN_UP_REQUEST, apiSagas.signUp),\n        takeEvery(types.SIGN_IN_REQUEST, apiSagas.signIn),\n        takeLatest(types.SIGN_IN_REQUEST, storageSagas.tokenSaver),\n        takeLatest(types.REMOVE_TOKEN, storageSagas.tokenEraser),\n        takeLatest(types.CHANGE_AUTH_SERVER, storageSagas.authServerSaver),\n        fork(watchForLocationChange),\n        fork(loginWatcher),\n        fork(errorThrower)\n    ]);\n}\n",
@@ -13080,7 +13110,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 637,
+    "__docId__": 639,
     "kind": "function",
     "name": "dealWithNewLocation",
     "memberof": "src/sagas/index.js",
@@ -13107,7 +13137,7 @@
     "ignore": true
   },
   {
-    "__docId__": 638,
+    "__docId__": 640,
     "kind": "function",
     "name": "watchForLocationChange",
     "memberof": "src/sagas/index.js",
@@ -13127,7 +13157,7 @@
     "ignore": true
   },
   {
-    "__docId__": 639,
+    "__docId__": 641,
     "kind": "function",
     "name": "keepLiveChartRefreshing",
     "memberof": "src/sagas/index.js",
@@ -13154,7 +13184,7 @@
     "ignore": true
   },
   {
-    "__docId__": 640,
+    "__docId__": 642,
     "kind": "function",
     "name": "conductLiveChartsUpdates",
     "memberof": "src/sagas/index.js",
@@ -13174,7 +13204,7 @@
     "ignore": true
   },
   {
-    "__docId__": 641,
+    "__docId__": 643,
     "kind": "function",
     "name": "watchForLiveChartContext",
     "memberof": "src/sagas/index.js",
@@ -13194,7 +13224,7 @@
     "ignore": true
   },
   {
-    "__docId__": 642,
+    "__docId__": 644,
     "kind": "function",
     "name": "loginWatcher",
     "memberof": "src/sagas/index.js",
@@ -13214,7 +13244,7 @@
     "ignore": true
   },
   {
-    "__docId__": 643,
+    "__docId__": 645,
     "kind": "function",
     "name": "getAllHosts",
     "memberof": "src/sagas/index.js",
@@ -13234,7 +13264,7 @@
     "ignore": true
   },
   {
-    "__docId__": 644,
+    "__docId__": 646,
     "kind": "function",
     "name": "watchForHistoricalChartUpdates",
     "memberof": "src/sagas/index.js",
@@ -13254,7 +13284,7 @@
     "ignore": true
   },
   {
-    "__docId__": 645,
+    "__docId__": 647,
     "kind": "function",
     "name": "authSiteWatcher",
     "memberof": "src/sagas/index.js",
@@ -13274,7 +13304,7 @@
     "ignore": true
   },
   {
-    "__docId__": 646,
+    "__docId__": 648,
     "kind": "function",
     "name": "errorThrower",
     "memberof": "src/sagas/index.js",
@@ -13294,7 +13324,7 @@
     "ignore": true
   },
   {
-    "__docId__": 647,
+    "__docId__": 649,
     "kind": "function",
     "name": "root",
     "memberof": "src/sagas/index.js",
@@ -13313,7 +13343,7 @@
     "return": null
   },
   {
-    "__docId__": 648,
+    "__docId__": 650,
     "kind": "file",
     "name": "src/sagas/localStorage.js",
     "content": "import { take, call, select } from 'redux-saga/effects';\nimport * as types from '../actions/types';\nimport { convertMonitorsFromObj } from '../reducers';\nimport * as storage from '../localStorage';\n\nexport function* tokenSaver({ payload }) {\n    if (payload.remember) {\n        const action = yield take(types.SIGN_IN_SUCCESS);\n        yield call(storage.saveToken, action.payload.access_token);\n    }\n}\n\nexport function* tokenEraser() {\n    yield call(storage.clearToken);\n}\n\nexport function* monitorsSaver() {\n    const monitors = yield select(convertMonitorsFromObj);\n    yield call(storage.updateMonitors, monitors);\n}\n\nexport function* authServerSaver({ payload }) {\n    yield call(storage.updateAuthServer, payload.address);\n}\n",
@@ -13324,7 +13354,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 649,
+    "__docId__": 651,
     "kind": "function",
     "name": "tokenSaver",
     "memberof": "src/sagas/localStorage.js",
@@ -13354,7 +13384,7 @@
     "return": null
   },
   {
-    "__docId__": 650,
+    "__docId__": 652,
     "kind": "function",
     "name": "tokenEraser",
     "memberof": "src/sagas/localStorage.js",
@@ -13373,7 +13403,7 @@
     "return": null
   },
   {
-    "__docId__": 651,
+    "__docId__": 653,
     "kind": "function",
     "name": "monitorsSaver",
     "memberof": "src/sagas/localStorage.js",
@@ -13392,7 +13422,7 @@
     "return": null
   },
   {
-    "__docId__": 652,
+    "__docId__": 654,
     "kind": "function",
     "name": "authServerSaver",
     "memberof": "src/sagas/localStorage.js",
@@ -13422,7 +13452,7 @@
     "return": null
   },
   {
-    "__docId__": 653,
+    "__docId__": 655,
     "kind": "file",
     "name": "src/setupTests.js",
     "content": "import { configure } from 'enzyme';\nimport Adapter from 'enzyme-adapter-react-16';\n\nconfigure({ adapter: new Adapter() });\n\nclass LocalStorageMock {\n\n    constructor() {\n        this.store = {};\n    }\n\n    clear() {\n        this.store = {};\n    }\n\n    getItem(key) {\n        return this.store[key] || null;\n    }\n\n    setItem(key, value) {\n        this.store[key] = value;\n    }\n\n    removeItem(key) {\n        delete this.store[key];\n    }\n\n}\n\nglobal.localStorage = new LocalStorageMock();\n",
@@ -13433,7 +13463,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 654,
+    "__docId__": 656,
     "kind": "class",
     "name": "LocalStorageMock",
     "memberof": "src/setupTests.js",
@@ -13450,7 +13480,7 @@
     "ignore": true
   },
   {
-    "__docId__": 655,
+    "__docId__": 657,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13464,7 +13494,7 @@
     "undocument": true
   },
   {
-    "__docId__": 656,
+    "__docId__": 658,
     "kind": "member",
     "name": "store",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13481,7 +13511,7 @@
     }
   },
   {
-    "__docId__": 657,
+    "__docId__": 659,
     "kind": "method",
     "name": "clear",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13497,7 +13527,7 @@
     "return": null
   },
   {
-    "__docId__": 659,
+    "__docId__": 661,
     "kind": "method",
     "name": "getItem",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13524,7 +13554,7 @@
     }
   },
   {
-    "__docId__": 660,
+    "__docId__": 662,
     "kind": "method",
     "name": "setItem",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13553,7 +13583,7 @@
     "return": null
   },
   {
-    "__docId__": 661,
+    "__docId__": 663,
     "kind": "method",
     "name": "removeItem",
     "memberof": "src/setupTests.js~LocalStorageMock",
@@ -13576,7 +13606,7 @@
     "return": null
   },
   {
-    "__docId__": 662,
+    "__docId__": 664,
     "kind": "file",
     "name": "src/times.js",
     "content": "import moment from 'moment';\n\nexport const getStartTimeForLiveCharts = () => moment().subtract(15, 'minutes').toISOString();\nexport const getCurrentTime = () => moment().toISOString();\n",
@@ -13587,7 +13617,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 663,
+    "__docId__": 665,
     "kind": "function",
     "name": "getStartTimeForLiveCharts",
     "memberof": "src/times.js",
@@ -13606,7 +13636,7 @@
     "return": null
   },
   {
-    "__docId__": 664,
+    "__docId__": 666,
     "kind": "function",
     "name": "getCurrentTime",
     "memberof": "src/times.js",
@@ -13625,7 +13655,7 @@
     "return": null
   },
   {
-    "__docId__": 665,
+    "__docId__": 667,
     "kind": "file",
     "name": "src/utils/strToColor.js",
     "content": "const colors = [\n    '#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9',\n    '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1'\n];\n\nconst hashCode = (str) => {\n    var hash = 0;\n    if (str.length === 0) return hash;\n    for (let i = 0; i < str.length; i++) {\n        const char = str.charCodeAt(i);\n        hash = ((hash<<5)-hash)+char;\n        hash = hash & hash; // Convert to 32bit integer\n    }\n    return hash;\n};\n\nexport default (str) => colors[Math.abs(hashCode(str)) % colors.length];\n",
@@ -13636,7 +13666,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 666,
+    "__docId__": 668,
     "kind": "variable",
     "name": "colors",
     "memberof": "src/utils/strToColor.js",
@@ -13657,7 +13687,7 @@
     "ignore": true
   },
   {
-    "__docId__": 667,
+    "__docId__": 669,
     "kind": "function",
     "name": "hashCode",
     "memberof": "src/utils/strToColor.js",
@@ -13688,7 +13718,7 @@
     "ignore": true
   },
   {
-    "__docId__": 668,
+    "__docId__": 670,
     "kind": "function",
     "name": "strToColor",
     "memberof": "src/utils/strToColor.js",
@@ -13715,7 +13745,7 @@
   },
   {
     "kind": "index",
-    "content": "# resmon-guiclient\nRepository for a guiclient component, which is part of resmon product.\n\n## Development\n- install npm\n- install yarn globally: `npm install --global yarn`\n- run `yarn` to install dependencies\n- run `yarn test` to test (use `--watch` to run in watch)\n- run `yarn start` to start dev server (with watch)\n- run `yarn lint-check` to start dev server (with watch)\n- you may want to install react and [redux](https://github.com/zalmoxisus/redux-devtools-extension) plugins for browsers\n\n## Structure overview\n- `/src/components` contains pure react components (without redux integration)\n- `/src/containers` contains react components which are connected to redux\n- `/src/pages` contains page-level react components\n- `/src/reducers` contains redux reducers - pure functions transforming store to another state\n- `/src/actions` contains action creators - functions returning actions that could be directly dispatched by redux\n- `/src/api.js` constains functions making api calls and returning promise-like object\n- `/src/index.js` entry file\n\n## CI\n- install npm\n- install yarn globally: `npm install --global yarn`\n- run `yarn` to install dependencies\n- run `yarn test` to test\n- run `yarn lint-check` to start dev server (with watch)\n- run `yarn build` to build GUI client to `/dist` folder - in result we'll have `.htaccess` config file fo apache2 and `index.html` fo browsers\n- run `AUTH_SERVER=bleh1 MONITORS=[{\\\"address\\\":\\\"aaa\\\",\\\"description\\\":\\\"bbb\\\"}] yarn build` to build with different aut hserver or monitor list \n- run `yarn doc` to generate docs in `/docs`\n",
+    "content": "# resmon-guiclient\nRepository for a guiclient component, which is part of resmon product.\n\n## Development\n- install npm\n- install yarn globally: `npm install --global yarn`\n- run `yarn` to install dependencies\n- run `yarn test` to test (use `--watch` to run in watch)\n- run `yarn start` to start dev server (with watch)\n- run `yarn lint-check` to start dev server (with watch)\n- you may want to install react and [redux](https://github.com/zalmoxisus/redux-devtools-extension) plugins for browsers\n\n## Structure overview\n- `/src/components` contains pure react components (without redux integration)\n- `/src/containers` contains react components which are connected to redux\n- `/src/pages` contains page-level react components\n- `/src/reducers` contains redux reducers - pure functions transforming store to another state\n- `/src/actions` contains action creators - functions returning actions that could be directly dispatched by redux\n- `/src/api.js` constains functions making api calls and returning promise-like object\n- `/src/index.js` entry file\n\n## CI\n- install npm\n- install yarn globally: `npm install --global yarn`\n- run `yarn` to install dependencies\n- run `yarn test` to test\n- run `yarn lint-check` to start dev server (with watch)\n- run `yarn build` to build GUI client to `/dist` folder - in result we'll have `.htaccess` config file fo apache2 and `index.html` fo browsers\n- run `AUTH_SERVER=bleh1 MONITORS=[{\\\"address\\\":\\\"aaa\\\",\\\"description\\\":\\\"bbb\\\"}] yarn build` to build with different auth server or monitor list \n- run `yarn doc` to generate docs in `/docs`\n",
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/README.md",
     "name": "./README.md",
     "static": true,

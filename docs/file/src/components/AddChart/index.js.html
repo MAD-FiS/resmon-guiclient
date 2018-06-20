@@ -192,6 +192,7 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-loginform">components/LoginForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedLoginForm">WrappedLoginForm</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-monitoricon">components/MonitorIcon</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MonitorIcon">MonitorIcon</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-monitorstable">components/MonitorsTable</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-MonitorsTable">MonitorsTable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-nocharts">components/NoCharts</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-NoCharts">NoCharts</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-notification">components/Notification</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/Notification/index.js~Notification.html">Notification</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-refreshhostsbutton">components/RefreshHostsButton</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-RefreshHostsButton">RefreshHostsButton</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components-registerform">components/RegisterForm</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-WrappedRegisterForm">WrappedRegisterForm</a></span></span></li>
@@ -261,7 +262,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/components/AddChart/index.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
-import { Button, Select } from &apos;antd&apos;;
+import { Button, Select, Icon } from &apos;antd&apos;;
 import &apos;./index.less&apos;;
 
 class AddChart extends React.PureComponent {
@@ -295,7 +296,10 @@ class AddChart extends React.PureComponent {
                 &lt;Button
                     className=&quot;add-chart-button&quot; type=&quot;primary&quot;
                     onClick={this.onButtonClick} disabled={!value}
-                &gt;Dodaj wykres&lt;/Button&gt;
+                &gt;
+                    &lt;Icon type=&quot;plus&quot; /&gt;
+                    Dodaj wykres
+                &lt;/Button&gt;
             &lt;/div&gt;
         );
     }

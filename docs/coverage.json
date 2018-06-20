@@ -1,6 +1,6 @@
 {
   "coverage": "0.19%",
-  "expectCount": 520,
+  "expectCount": 521,
   "actualCount": 1,
   "files": {
     "src/actions/sync.js": {
@@ -619,7 +619,7 @@
       "expectCount": 1,
       "actualCount": 0,
       "undocumentLines": [
-        5
+        6
       ]
     },
     "src/components/MonitorsTable/index.js": {
@@ -628,6 +628,13 @@
       "undocumentLines": [
         6,
         40
+      ]
+    },
+    "src/components/NoCharts/index.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        5
       ]
     },
     "src/components/Notification/index.js": {
@@ -764,18 +771,18 @@
       "expectCount": 3,
       "actualCount": 0,
       "undocumentLines": [
-        8,
-        34,
-        39
+        9,
+        35,
+        40
       ]
     },
     "src/pages/Live/index.js": {
       "expectCount": 3,
       "actualCount": 0,
       "undocumentLines": [
-        8,
-        26,
-        31
+        9,
+        27,
+        32
       ]
     },
     "src/pages/Metrics/index.js": {
