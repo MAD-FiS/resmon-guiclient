@@ -463,28 +463,33 @@ function* errorThrower() {
     while (true) {
         const action = yield take(&apos;*&apos;);
         if (action.error) {
-            if (!action.payload.status) {
-                if (action.type === types.SIGN_IN_FAILURE || action.type === types.SIGN_UP_FAILURE) {
-                    yield call(Notification.error, &apos;Serwer autoryzacyjny jest niedost&#x119;pny&apos;);
-                    continue;
-                }
-                else if (action.meta.monitor) {
-                    yield call(Notification.error, &apos;Monitor &apos; + action.meta.monitor + &apos; jest niedost&#x119;pny&apos;);
-                    continue;
-                }
+            if (
+                !action.payload.status &amp;&amp;
+                (action.type === types.SIGN_IN_FAILURE || action.type === types.SIGN_UP_FAILURE)
+            ) {
+                yield call(Notification.error, &apos;Serwer autoryzacyjny jest niedost&#x119;pny&apos;);
+                continue;
             }
-            else {
-                switch (action.payload.status) {
-                    case 422:
-                    case 401:
-                        yield call(
-                            Notification.error,
-                            &apos;Nie uda&#x142;o si&#x119; pobra&#x107; zasob&#xF3;w, gdy&#x17C; dane uwierzytelniaj&#x105;ce s&#x105; b&#x142;&#x119;dne (monitor: &apos; +
-                            action.meta.monitor +
-                            &apos;)&apos;
-                        );
-                        continue;
-                }
+            if (!action.payload.status &amp;&amp; action.meta &amp;&amp; action.meta.monitor) {
+                yield call(Notification.error, &apos;Monitor &apos; + action.meta.monitor + &apos; jest niedost&#x119;pny&apos;);
+                continue;
+            }
+            if (action.payload.status === 422 &amp;&amp; action.meta &amp;&amp; action.meta.monitor) {
+                yield call(
+                    Notification.error,
+                    &apos;Nie uda&#x142;o si&#x119; pobra&#x107; zasob&#xF3;w, gdy&#x17C; dane uwierzytelniaj&#x105;ce s&#x105; b&#x142;&#x119;dne (monitor: &apos; +
+                    action.meta.monitor +
+                    &apos;)&apos;
+                );
+                continue;
+            }
+            if (action.type === types.SIGN_IN_FAILURE &amp;&amp; action.payload.status === 401) {
+                yield call(Notification.error, &apos;B&#x142;&#x119;dny login lub has&#x142;o!&apos;);
+                continue;
+            }
+            if (action.type === types.SIGN_UP_FAILURE &amp;&amp; action.payload.status === 409) {
+                yield call(Notification.error, &apos;U&#x17C;ytkownik o podanym adresie email juz istnieje!&apos;);
+                continue;
             }
             yield call(Notification.error, action.payload.message + (status ? &apos; (Kod &apos; + status + &apos;)&apos; : &apos;&apos;));
         }
