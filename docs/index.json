@@ -7648,7 +7648,7 @@
     "__docId__": 392,
     "kind": "file",
     "name": "src/components/HostList/NewMetricModal/index.js",
-    "content": "import React from 'react';\nimport { Modal } from 'antd';\n\nimport MetricForm from './MetricForm';\n\nclass NewMetricModal extends React.Component\n{\n    constructor(props) {\n        super(props);\n        this.state = {\n            validated: true,\n            loading: false,\n            newMetric: this.getNewMetricValues(),\n            baseMetrics: this.getBaseMetrics(props)\n        };\n        this.form = null;\n    }\n\n    UNSAFE_componentWillReceiveProps(nextProps) {\n        if(this.props.host !== nextProps.host) {\n            this.setState({\n                baseMetrics: this.getBaseMetrics(nextProps),\n                newMetric: this.getNewMetricValues()\n            });\n        }\n    }\n\n    getNewMetricValues() {\n        return {\n            description: '',\n            parent_id: null,\n            moving_window_duration: '',\n            interval: ''\n        };\n    }\n\n    getBaseMetrics = (props) => {\n        let baseMetrics = [];\n        if(props.host !== null) {\n            const { metrics } = props.host;\n            if(typeof metrics !== 'undefined') {\n                metrics.forEach(metric => {\n                    if(metric.parent_id === null) {\n                        baseMetrics.push({\n                            name: `${metric.id} (${metric.description})`,\n                            value: metric.id\n                        });\n                    }\n                });\n            }\n        }\n        return baseMetrics;\n    };\n\n    onChange = (key, value) => {\n        let newMetric = Object.assign({}, this.state.newMetric);\n        newMetric[key] = value;\n        this.setState({\n            newMetric\n        });\n    };\n\n    onClear = (key) => {\n        let newMetric = Object.assign({}, this.state.newMetric);\n        newMetric[key] = '';\n        this.setState({\n            newMetric\n        });\n    };\n\n    clearModal = () => {\n        this.setState({\n            newMetric: this.getNewMetricValues(),\n        });\n        this.props.onClose();\n    };\n\n    addMetric = () => {\n        if(this.form !== null) {\n            this.form.validateFields(err => {\n                if (!err) {\n                    this.props.onAddMetric(this.props.host.hostname, this.state.newMetric);\n                    this.setState({\n                        loading: true\n                    });\n                    this.form.setFieldsValue(this.getNewMetricValues());\n                }\n            });\n        }\n    };\n\n    setFormRef = (form) => {\n        this.form = form;\n    };\n\n    render() {\n        const {host} = this.props;\n        return (\n            <Modal\n                title=\"Nowa metryka złożona\"\n                visible={this.props.host !== null}\n                onOk={this.addMetric}\n                onCancel={this.clearModal}\n                okText=\"Dodaj metrykę\"\n                cancelText=\"Anuluj\"\n                confirmLoading={this.state.loading}\n            >\n                <MetricForm\n                    host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric}\n                    setFormRef={this.setFormRef} onChange={this.onChange} onClear={this.onClear}\n                />\n            </Modal>\n        );\n    }\n}\n\nexport default NewMetricModal;\n",
+    "content": "import React from 'react';\nimport { Modal } from 'antd';\n\nimport MetricForm from './MetricForm';\n\nclass NewMetricModal extends React.Component\n{\n    constructor(props) {\n        super(props);\n        this.state = {\n            validated: true,\n            newMetric: this.getNewMetricValues(),\n            baseMetrics: this.getBaseMetrics(props)\n        };\n        this.form = null;\n    }\n\n    UNSAFE_componentWillReceiveProps(nextProps) {\n        if(this.props.host !== nextProps.host) {\n            this.setState({\n                baseMetrics: this.getBaseMetrics(nextProps),\n                newMetric: this.getNewMetricValues()\n            });\n        }\n    }\n\n    getNewMetricValues() {\n        return {\n            description: '',\n            parent_id: null,\n            moving_window_duration: '',\n            interval: ''\n        };\n    }\n\n    getBaseMetrics = (props) => {\n        let baseMetrics = [];\n        if(props.host !== null) {\n            const { metrics } = props.host;\n            if(typeof metrics !== 'undefined') {\n                metrics.forEach(metric => {\n                    if(metric.parent_id === null) {\n                        baseMetrics.push({\n                            name: `${metric.id} (${metric.description})`,\n                            value: metric.id\n                        });\n                    }\n                });\n            }\n        }\n        return baseMetrics;\n    };\n\n    onChange = (key, value) => {\n        let newMetric = Object.assign({}, this.state.newMetric);\n        newMetric[key] = value;\n        this.setState({\n            newMetric\n        });\n    };\n\n    onClear = (key) => {\n        let newMetric = Object.assign({}, this.state.newMetric);\n        newMetric[key] = '';\n        this.setState({\n            newMetric\n        });\n    };\n\n    clearModal = () => {\n        this.setState({\n            newMetric: this.getNewMetricValues(),\n        });\n        this.props.onClose();\n    };\n\n    addMetric = () => {\n        if(this.form !== null) {\n            this.form.validateFields(err => {\n                if (!err) {\n                    this.props.onAddMetric(this.props.host.hostname, this.state.newMetric);\n                    this.form.setFieldsValue(this.getNewMetricValues());\n                }\n            });\n        }\n    };\n\n    setFormRef = (form) => {\n        this.form = form;\n    };\n\n    render() {\n        const {host} = this.props;\n        return (\n            <Modal\n                title=\"Nowa metryka złożona\"\n                visible={this.props.host !== null}\n                onOk={this.addMetric}\n                onCancel={this.clearModal}\n                okText=\"Dodaj metrykę\"\n                cancelText=\"Anuluj\"\n                confirmLoading={this.props.host && this.props.host.metricsInvalidated}\n            >\n                <MetricForm\n                    host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric}\n                    setFormRef={this.setFormRef} onChange={this.onChange} onClear={this.onClear}\n                />\n            </Modal>\n        );\n    }\n}\n\nexport default NewMetricModal;\n",
     "static": true,
     "longname": "/var/lib/jenkins/workspace/resmon_guiclient_doc/src/components/HostList/NewMetricModal/index.js",
     "access": "public",
@@ -7701,7 +7701,7 @@
     "undocument": true,
     "type": {
       "types": [
-        "{\"validated\": boolean, \"loading\": *, \"newMetric\": *, \"baseMetrics\": *}"
+        "{\"validated\": boolean, \"newMetric\": *, \"baseMetrics\": *}"
       ]
     }
   },
@@ -7714,7 +7714,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#form",
     "access": "public",
     "description": null,
-    "lineNumber": 16,
+    "lineNumber": 15,
     "undocument": true,
     "type": {
       "types": [
@@ -7733,7 +7733,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#UNSAFE_componentWillReceiveProps",
     "access": "public",
     "description": null,
-    "lineNumber": 19,
+    "lineNumber": 18,
     "undocument": true,
     "params": [
       {
@@ -7756,7 +7756,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#getNewMetricValues",
     "access": "public",
     "description": null,
-    "lineNumber": 28,
+    "lineNumber": 27,
     "undocument": true,
     "params": [],
     "return": {
@@ -7774,7 +7774,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#getBaseMetrics",
     "access": "public",
     "description": null,
-    "lineNumber": 37,
+    "lineNumber": 36,
     "undocument": true,
     "type": {
       "types": [
@@ -7791,7 +7791,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#onChange",
     "access": "public",
     "description": null,
-    "lineNumber": 55,
+    "lineNumber": 54,
     "undocument": true,
     "type": {
       "types": [
@@ -7808,7 +7808,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#onClear",
     "access": "public",
     "description": null,
-    "lineNumber": 63,
+    "lineNumber": 62,
     "undocument": true,
     "type": {
       "types": [
@@ -7825,7 +7825,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#clearModal",
     "access": "public",
     "description": null,
-    "lineNumber": 71,
+    "lineNumber": 70,
     "undocument": true,
     "type": {
       "types": [
@@ -7842,7 +7842,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#addMetric",
     "access": "public",
     "description": null,
-    "lineNumber": 78,
+    "lineNumber": 77,
     "undocument": true,
     "type": {
       "types": [
@@ -7859,7 +7859,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#setFormRef",
     "access": "public",
     "description": null,
-    "lineNumber": 92,
+    "lineNumber": 88,
     "undocument": true,
     "type": {
       "types": [
@@ -7878,7 +7878,7 @@
     "longname": "src/components/HostList/NewMetricModal/index.js~NewMetricModal#render",
     "access": "public",
     "description": null,
-    "lineNumber": 96,
+    "lineNumber": 92,
     "undocument": true,
     "params": [],
     "return": {
