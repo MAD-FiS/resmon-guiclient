@@ -9,7 +9,6 @@ class NewMetricModal extends React.Component
         super(props);
         this.state = {
             validated: true,
-            loading: false,
             newMetric: this.getNewMetricValues(),
             baseMetrics: this.getBaseMetrics(props)
         };
@@ -80,9 +79,6 @@ class NewMetricModal extends React.Component
             this.form.validateFields(err => {
                 if (!err) {
                     this.props.onAddMetric(this.props.host.hostname, this.state.newMetric);
-                    this.setState({
-                        loading: true
-                    });
                     this.form.setFieldsValue(this.getNewMetricValues());
                 }
             });
@@ -103,7 +99,7 @@ class NewMetricModal extends React.Component
                 onCancel={this.clearModal}
                 okText="Dodaj metrykę"
                 cancelText="Anuluj"
-                confirmLoading={this.state.loading}
+                confirmLoading={this.props.host && this.props.host.metricsInvalidated}
             >
                 <MetricForm
                     host={host} metrics={this.state.baseMetrics} newMetric={this.state.newMetric}
